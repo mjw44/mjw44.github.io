@@ -1,3 +1,9 @@
-# Engineering Portfolio
+# Julian | Mechanical Engineering Portfolio
 
-This repository contains my mechanical engineering portfolio website.
+Live Site: https://yourusername.github.io
+
+This portfolio showcases projects in:
+- Thermal system design
+- Finite element modeling
+- Structural analysis
+- Fluid mechanics
