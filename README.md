@@ -1,6 +1,6 @@
 # Julian | Mechanical Engineering Portfolio
 
-Live Site: https://julianwhiteley.github.io
+Live Site: https://mjw44.github.io
 
 This portfolio showcases projects in:
 - Thermal system design
