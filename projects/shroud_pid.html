@@ -1,0 +1,217 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Closed-Loop Thermal Regulation System | Julian</title>
+    <meta name="description" content="PID-controlled thermal regulation system with convective heat transfer optimization and MATLAB validation.">
+
+    <!-- MathJax for equations -->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #ffffff;
+            color: #222;
+            line-height: 1.6;
+        }
+
+        header {
+            padding: 50px 20px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        section {
+            max-width: 900px;
+            margin: auto;
+            padding: 40px 20px;
+        }
+
+        h2 {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+        img {
+            width: 100%;
+            max-width: 800px;
+            display: block;
+            margin: 20px auto;
+        }
+
+        .equation {
+            margin: 20px 0;
+        }
+
+        .back {
+            text-align: center;
+            padding: 40px;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Closed-Loop Thermal Regulation System</h1>
+    <p>PID-Controlled 18W Heat Load with Convective Optimization</p>
+</header>
+
+<section>
+    <h2>Engineering Objective</h2>
+    <p>
+        Design and experimentally validate a closed-loop thermal regulation system
+        capable of controlling an 18 W resistive heat load using forced convection
+        and PID feedback control.
+    </p>
+</section>
+
+<section>
+    <h2>System Architecture</h2>
+    <ul>
+        <li>Arduino-based PID controller</li>
+        <li>18 W resistive heat source</li>
+        <li>Custom ducted fan shroud</li>
+        <li>Thermistor-based temperature sensing</li>
+        <li>Custom PCB (KiCad)</li>
+        <li>MATLAB data processing suite</li>
+    </ul>
+
+    <img src="../assets/images/system_overview.jpg" alt="System overview">
+</section>
+
+<section>
+    <h2>Convective Heat Transfer Analysis</h2>
+
+    <p>
+        The initial cooling performance was limited by low convective heat transfer.
+        The governing heat transfer relationship:
+    </p>
+
+    <div class="equation">
+        $$ q = h A (T_s - T_\infty) $$
+    </div>
+
+    <p>
+        The heat transfer coefficient \( h \) depends on the Nusselt number:
+    </p>
+
+    <div class="equation">
+        $$ Nu = \frac{h L}{k} $$
+    </div>
+
+    <p>
+        For forced convection:
+    </p>
+
+    <div class="equation">
+        $$ Nu = f(Re, Pr) $$
+    </div>
+
+    <p>
+        To increase \( Nu \), the duct geometry was redesigned with a converging
+        cross-sectional area to increase local air velocity and Reynolds number:
+    </p>
+
+    <div class="equation">
+        $$ Re = \frac{\rho V L}{\mu} $$
+    </div>
+
+    <p>
+        Increasing Reynolds number increased convective heat transfer capability.
+    </p>
+</section>
+
+<section>
+    <h2>Control System Implementation</h2>
+
+    <p>
+        A PID controller was implemented to regulate temperature:
+    </p>
+
+    <div class="equation">
+        $$ u(t) = K_p e(t) + K_i \int e(t)\,dt + K_d \frac{de(t)}{dt} $$
+    </div>
+
+    <p>
+        Key challenges:
+    </p>
+
+    <ul>
+        <li>Thermal lag in system response</li>
+        <li>Motor stiction at low PWM values</li>
+        <li>Overshoot during transient heating</li>
+    </ul>
+
+    <p>
+        Mitigation strategies:
+    </p>
+
+    <ul>
+        <li>Implemented minimum PWM floor (85/255) to overcome stiction</li>
+        <li>Tuned derivative gain to compensate for thermal inertia</li>
+        <li>Reduced heater PWM to 11/255 based on thermal modeling</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Experimental Validation</h2>
+
+    <p>
+        Temperature data was collected and processed using MATLAB.
+        Differential temperature change was computed:
+    </p>
+
+    <div class="equation">
+        $$ \frac{dT}{dt} \approx \frac{T_{i+1} - T_i}{\Delta t} $$
+    </div>
+
+    <img src="../assets/images/raw_temperature_plot.jpg" alt="Temperature vs Time">
+    <img src="../assets/images/differential_plot.jpg" alt="Differential Temperature">
+
+    <p>
+        Initial testing revealed insufficient convective interaction between airflow
+        and heat sink fins, resulting in low effective heat removal.
+    </p>
+</section>
+
+<section>
+    <h2>Design Iteration</h2>
+
+    <p>
+        The second iteration reduced fan-to-heat-sink distance and redirected airflow
+        through fin channels rather than across the surface.
+    </p>
+
+    <img src="../assets/images/second_iteration.jpg" alt="Second iteration design">
+
+    <p>
+        This improved airflow alignment and increased effective convective performance.
+    </p>
+</section>
+
+<section>
+    <h2>Engineering Takeaways</h2>
+
+    <ul>
+        <li>Convective geometry dominated system performance more than control tuning.</li>
+        <li>Control optimization cannot compensate for poor fluid mechanics.</li>
+        <li>Iterative prototyping revealed flow inefficiencies not captured analytically.</li>
+        <li>Experimental validation was essential for model refinement.</li>
+    </ul>
+</section>
+
+<div class="back">
+    <a href="../index.html">← Back to Portfolio</a>
+</div>
+
+</body>
+</html>
