@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Closed-Loop Thermal Regulation System | Julian</title>
+    <title>Closed-Loop Thermal Regulation System </title>
     <meta name="description" content="PID-controlled thermal regulation system with convective heat transfer optimization and MATLAB validation.">
 
     <!-- MathJax for equations -->
@@ -13,7 +13,7 @@
 
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: verdana, verdana;
             margin: 0;
             background-color: #ffffff;
             color: #222;
@@ -89,49 +89,9 @@
     </ul>
 
     <img src="../assets/images/shroud_cut_solidworks.png" alt="System overview">
+     <img src="../assets/images/pid_first_iteration.png" alt="System overview">
 </section>
 
-<section>
-    <h2>Convective Heat Transfer Analysis</h2>
-
-    <p>
-        The initial cooling performance was limited by low convective heat transfer.
-        The governing heat transfer relationship:
-    </p>
-
-    <div class="equation">
-        $$ q = h A (T_s - T_\infty) $$
-    </div>
-
-    <p>
-        The heat transfer coefficient \( h \) depends on the Nusselt number:
-    </p>
-
-    <div class="equation">
-        $$ Nu = \frac{h L}{k} $$
-    </div>
-
-    <p>
-        For forced convection:
-    </p>
-
-    <div class="equation">
-        $$ Nu = f(Re, Pr) $$
-    </div>
-
-    <p>
-        To increase \( Nu \), the duct geometry was redesigned with a converging
-        cross-sectional area to increase local air velocity and Reynolds number:
-    </p>
-
-    <div class="equation">
-        $$ Re = \frac{\rho V L}{\mu} $$
-    </div>
-
-    <p>
-        Increasing Reynolds number increased convective heat transfer capability.
-    </p>
-</section>
 
 <section>
     <h2>Control System Implementation</h2>
@@ -185,7 +145,7 @@
         and heat sink fins, resulting in low effective heat removal.
     </p>
 </section>
-
+    
 <section>
     <h2>Design Iteration</h2>
 
@@ -200,7 +160,47 @@
         This improved airflow alignment and increased effective convective performance.
     </p>
 </section>
+<section>
+    <h2>Convective Heat Transfer Analysis</h2>
 
+    <p>
+        The initial cooling performance was limited by low convective heat transfer.
+        The governing heat transfer relationship:
+    </p>
+
+    <div class="equation">
+        $$ q = h A (T_s - T_\infty) $$
+    </div>
+
+    <p>
+        The heat transfer coefficient \( h \) depends on the Nusselt number:
+    </p>
+
+    <div class="equation">
+        $$ Nu = \frac{h L}{k} $$
+    </div>
+
+    <p>
+        For forced convection:
+    </p>
+
+    <div class="equation">
+        $$ Nu = f(Re, Pr) $$
+    </div>
+
+    <p>
+        To increase \( Nu \), the duct geometry was redesigned with a converging
+        cross-sectional area to increase local air velocity and Reynolds number:
+    </p>
+
+    <div class="equation">
+        $$ Re = \frac{\rho V L}{\mu} $$
+    </div>
+
+    <p>
+        Increasing Reynolds number increased convective heat transfer capability.
+    </p>
+</section>
 <section>
     <h2>Engineering Takeaways</h2>
 
