@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | MJW Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            background-color: #f8f9fa; /* Light grey background makes white cards pop */
+            color: #333;
+        }
+
+        nav {
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            border-bottom: 1px solid #eaeaea;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #666;
+            font-weight: 600;
+            margin-left: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            font-weight: 800;
+        }
+
+        /* THE GRID SYSTEM */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        /* THE PROJECT CARD (Filleted Edges) */
+        .project-card {
+            background: white;
+            border-radius: 12px; /* This is your "fillet" */
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border: 1px solid #eaeaea;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Hover Effect */
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            border-color: #333;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 200px;
+            background-color: #eee;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .card-content h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.25rem;
+        }
+
+        .card-content p {
+            font-size: 0.95rem;
+            color: #666;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #eee;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div style="font-weight: 800; font-size: 1.2rem;">MJW</div>
+    <div>
+        <a href="index.html">Home</a>
+        <a href="projects.html" style="color: black;">Projects</a>
+    </div>
+</nav>
+
+<div class="container">
+    <h1>Projects</h1>
+
+    <div class="project-grid">
+
+        <a href="projects/shroud_pid.html" class="project-card">
+            <img src="assets/images/pid_first_iteration.png" class="card-image" alt="PID Project">
+            <div class="card-content">
+                <span class="tag">Thermal / Controls</span>
+                <h3>Thermal Regulation System</h3>
+                <p>Developing a closed-loop PID control system with 3D-printed shroud optimization for heat dissipation.</p>
+            </div>
+        </a>
+
+        <a href="#" class="project-card">
+            <div class="card-image" style="background: #ddd; display: flex; align-items: center; justify-content: center;">
+                <span style="color: #999;">Image Coming Soon</span>
+            </div>
+            <div class="card-content">
+                <span class="tag">Structural</span>
+                <h3>Acrylic Fatigue Analysis</h3>
+                <p>Utilizing the Goodman Criterion to analyze lifecycle and stress risers in acrylic mounting plates.</p>
+            </div>
+        </a>
+
+    </div>
+</div>
+
+</body>
+</html>
