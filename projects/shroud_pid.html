@@ -208,19 +208,19 @@
 </section>
     <hr style="border: 0; height: 2px; background: #333; margin: 60px 0;">
 
-<h1 style="text-align: center; text-transform: uppercase; letter-spacing: 2px;">Iteration Two</h1>
+<h1 style="text-align: center; text-transform: uppercase; letter-spacing: 2px;">MARK Two</h1>
 <section>
     <h2>Design Iteration</h2>
 
     <p>
-        The second iteration reduced fan-to-heat-sink distance and redirected airflow
-        through fin channels rather than across the surface.
+        The second iteration changes the orientation of the heat sink, increases the contact area 
+        with the heat sink, creates a direct placement of the thermistor, and optimizes the length of the shroud. 
     </p>
 
-    <img src="../assets/images/second_iteration.jpg" alt="Second iteration design">
+    <img src="../assets/images/shroud_2_cut_solidworks.png" alt="Second iteration design">
 
     <p>
-        This improved airflow alignment and increased effective convective performance.
+        Testing will be done soon to evaluate changes.
     </p>
 </section>
 <section>
@@ -263,13 +263,22 @@
     <p>
         Increasing Reynolds number increased convective heat transfer capability.
     </p>
+    <div class="image-row">
+    <div class="image-column">
+        <img src="../assets/images/shroud_opti.png" alt="MATLAB Script">
+        <p class="caption">Figure 5: Differential MATLAB script to obtain the optimal shroud length.</p>
+    </div>
+    <div class="image-column">
+        <img src="../assets/images/matlab_ht_results.png" alt="MATLAB H.T. Results">
+        <p class="caption">Figure 6: Results of MATLAB script above .</p>
+    </div>
+        
 </section>
 <section>
     <h2>Engineering Takeaways</h2>
 
     <ul>
         <li>Convective geometry dominated system performance more than control tuning.</li>
-        <li>Control optimization cannot compensate for poor fluid mechanics.</li>
         <li>Iterative prototyping revealed flow inefficiencies not captured analytically.</li>
         <li>Experimental validation was essential for model refinement.</li>
     </ul>
