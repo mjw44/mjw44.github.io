@@ -1,99 +1,155 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Julian Whiteley | Mechanical Engineering Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: verdana, verdana;
+            font-family: 'Inter', sans-serif;
             margin: 0;
             background-color: #ffffff;
-            color: #222;
+            color: #1a1a1a;
+            line-height: 1.6;
         }
+
+        /* NAVIGATION */
+        nav {
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #666;
+            font-weight: 600;
+            margin-left: 20px;
+            transition: color 0.2s;
+        }
+
+        nav a:hover { color: #000; }
+
+        /* HERO SECTION */
         header {
-            padding: 60px 20px;
+            padding: 100px 20px;
+            text-align: center;
+            background-color: #fafafa;
+            border-bottom: 1px solid #eee;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin: 0;
+            letter-spacing: -0.03em;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: #666;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 25px;
+            background-color: #000;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+
+        .cta-button:hover { transform: scale(1.05); }
+
+        /* ABOUT SECTION */
+        section {
+            max-width: 800px;
+            margin: auto;
+            padding: 80px 20px;
+        }
+
+        h2 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            margin-bottom: 30px;
+            border-left: 4px solid #000;
+            padding-left: 15px;
+        }
+
+        p { margin-bottom: 20px; font-size: 1.1rem; color: #444; }
+
+        .experience-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .exp-item {
+            background: #f4f4f4;
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 0.9rem;
             text-align: center;
         }
-        section {
-            max-width: 900px;
-            margin: auto;
-            padding: 40px 20px;
-        }
-        h2 {
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 10px;
-        }
-        .project {
-            margin-bottom: 30px;
-        }
-        a {
-            text-decoration: none;
-            color: black;
-            font-weight: bold;
-        }
+
+        .exp-item strong { display: block; margin-bottom: 5px; color: #000; }
+
     </style>
 </head>
 
 <body>
 
+<nav>
+    <div style="font-weight: 800; font-size: 1.2rem;">JW</div>
+    <div>
+        <a href="index.html">About</a>
+        <a href="projects.html">Projects</a>
+    </a>
+</nav>
+
 <header>
     <h1>Julian Whiteley</h1>
-    <p>Junior Mechanical Engineering Honors Student</p>
+    <p class="subtitle">Mechanical Engineering Honors @ UT Austin</p>
+    <p style="color: #888;">Thermal-Fluid Systems | Structural Mechanics | Mechatronics</p>
+    <a href="projects.html" class="cta-button">View Engineering Projects</a>
 </header>
 
 <section>
-    <h2>About</h2>
-
+    <h2>Engineering Approach</h2>
     <p>
-        Hi! My name is Julian, and I'm a Mechanical Engineering Honors student at UT Austin.
-        I've been focusing on thermal-fluid systems, structural mechanics, and integrated system design.
-        My main projects combine first principles and engineering analysis from Heat Transfer,
-        Materials, Fluid Mechanics, and Mechanics of Solids.
+        I focus on problems where fluid mechanics, heat transfer, and structural mechanics intersect with practical product implementation. 
+        My work combines first principles from Heat Transfer and Fluid Mechanics with computational validation in MATLAB and SolidWorks.
     </p>
 
-    <p>
-        The application of these fundamentals spans structural buckling, fatigue analysis,
-        convective heat transfer optimization, and closed-loop control systems.
-    </p>
-
-    <p>
-        My internship at the Center for Electromechanics, leadership role in Longhorn Baja Racing,
-        and active membership in Texas Marine Robotics have given me exposure to end-to-end
-        mechanical design projects with real constraints, budgets, and performance consequences.
-    </p>
-
-    <p>
-        I am particularly interested in problems where fluid mechanics, heat transfer,
-        and structural mechanics intersect with practical product implementation.
-    </p>
-
-</section>
-
-<section>
-    <h2>Projects</h2>
-
-    <div class="project">
-        <h3>
-            <a href="projects/shroud_pid.html">
-                Modular Active Cooling System
-            </a>
-        </h3>
-        <p>
-            PID-controlled 18W thermal regulation system with convective
-            shroud optimization and MATLAB validation.
-        </p>
+    <div class="experience-grid">
+        <div class="exp-item">
+            <strong>Longhorn Baja</strong>
+            Lead Roles
+        </div>
+        <div class="exp-item">
+            <strong>CEM</strong>
+            Engineering Internship
+        </div>
+        <div class="exp-item">
+            <strong>Marine Robotics</strong>
+            Structural Optimization
+        </div>
     </div>
 
-    <div class="project">
-        <h3>
-            <a href="projects/texas_marine_robotics.html">
-                Texas Marine Robotics
-            </a>
-        </h3>
-        <p>
-            Propulsion system design, fatigue analysis, and structural
-            optimization for an autonomous surface vessel.
-        </p>
-    </div>
-
+    <p style="margin-top: 40px;">
+        My background includes hands-on leadership in <strong>Longhorn Baja Racing</strong> and technical contributions to <strong>Texas Marine Robotics</strong>, 
+        managing projects with real-world constraints, budgets, and performance consequences.
+    </p>
 </section>
+
+</body>
+</html>
