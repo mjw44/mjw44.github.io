@@ -171,40 +171,39 @@
     <h2>Experimental Validation</h2>
 
     <p>
-        Temperature data was collected and processed using MATLAB.
-        The derivative of temperature with respect to time was computed using a MATLAB script. 
+        Temperature data was collected and processed using MATLAB. 
+        The derivative of temperature with respect to time was computed using a MATLAB script to analyze cooling rates.
     </p>
 
     <div class="equation">
         $$ \frac{dT}{dt} \approx \frac{T_{i+1} - T_i}{\Delta t} $$
     </div>
 
-<div class="image-row">
-    <div class="image-column">
-        <img src="../assets/images/pid_rawdata.png" alt="Raw Data">
-        <p class="caption">Figure 3: Raw data from Thermistor graphed with PWM of Fan.</p>
+    <div class="image-row">
+        <div class="image-column">
+            <img src="../assets/images/pid_rawdata.png" alt="Raw Data">
+            <p class="caption">Figure 3: Raw data from Thermistor graphed with PWM of Fan.</p>
+        </div>
+        <div class="image-column">
+            <img src="../assets/images/pid_dT.png" alt="dT/dt">
+            <p class="caption">Figure 4: Differential temperature change w.r.t. time.</p>
+        </div>
     </div>
-    <div class="image-column">
-        <img src="../assets/images/pid_dT.png" alt="dT/dt">
-        <p class="caption">Figure 4: Differential temperature change w.r.t. time. .</p>
+
+    <div class="analysis-text">
+        <p>
+            Analysis of the MATLAB data confirmed that the fan provided negligible cooling work due to poor airflow integration. 
+            Running the resistor at maximum heat generation and conducting a 1D transient heat transfer analysis revealed 
+            that the fan did not provide sufficient forced convection to facilitate cooling.
+        </p>
+
+        <p>
+            To correct this, the second iteration will focus on optimizing the fan-to-heatsink distance and ensuring 
+            direct airflow impingement on the fins. Additionally, the resistor mounting will be optimized to prioritize 
+            conductive heat transfer to the aluminum sink rather than the plastic housing, and the power output will 
+            be adjusted so the fan can effectively mitigate heat generation.
+        </p>
     </div>
-    <p>
-        Analysis of the MATLAB data confirmed that the fan provided negligible cooling work 
-        due to poor airflow integration. To correct this, the second iteration will focus on
-        optimizing the fan-to-heatsink distance, ensuring direct airflow impingement on the fins, 
-        and optimizing the resistor mounting to prioritize conductive heat transfer to the aluminum 
-        sink rather than the plastic housing.
-    <p>
-            
-        Running the resistor at maximum heat generation and conducting
-        a 1D transient heat transfer analysis reveals that the fan doesn't provide sufficient forced convection
-        to facilitate cooling.
-
-    </p>
-        The second iteration will reduce the power output to the power resistor so that the fan can mitigate 
-    heat generation. 
-
-    </p>
 </section>
     <hr style="border: 0; height: 2px; background: #333; margin: 60px 0;">
 
@@ -270,7 +269,8 @@
     </div>
     <div class="image-column">
         <img src="../assets/images/matlab_ht_results.png" alt="MATLAB H.T. Results">
-        <p class="caption">Figure 6: Results of MATLAB script above .</p>
+        <p class="caption">Figure 6: Results of MATLAB script. Provides maximum amount of power the 
+        fan can support given the specs.</p>
     </div>
         
 </section>
@@ -288,5 +288,16 @@
     <a href="../index.html">← Back to Portfolio</a>
 </div>
 
+<section>
+
+<h2>Next Steps</h2>
+
+    <ul>
+<li> Manufacture the new shroud design.</li>
+<li> Test the new shroud and validate.</li>
+        
+    </ul>
+</section>
+    
 </body>
 </html>
