@@ -9,7 +9,7 @@
         body {
             font-family: 'Inter', sans-serif;
             margin: 0;
-            background-color: #f8f9fa; /* Light grey background makes white cards pop */
+            background-color: #f8f9fa;
             color: #333;
         }
 
@@ -36,9 +36,36 @@
         }
 
         h1 {
-            font-size: 2.5rem;
-            margin-bottom: 40px;
+            font-size: 2.8rem;
+            margin-bottom: 50px;
             font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        /* CATEGORY HEADERS */
+        .category-header {
+            margin: 40px 0 20px 0;
+        }
+
+        .category-header h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 5px;
+            color: #1a1a1a;
+        }
+
+        .category-header p {
+            font-size: 1rem;
+            color: #666;
+            margin: 0;
+        }
+
+        /* SEPARATOR LINE */
+        hr {
+            border: 0;
+            height: 1px;
+            background: #ddd;
+            margin: 50px 0;
         }
 
         /* THE GRID SYSTEM */
@@ -48,10 +75,10 @@
             gap: 30px;
         }
 
-        /* THE PROJECT CARD (Filleted Edges) */
+        /* THE PROJECT CARD */
         .project-card {
             background: white;
-            border-radius: 12px; /* This is your "fillet" */
+            border-radius: 12px;
             overflow: hidden;
             text-decoration: none;
             color: inherit;
@@ -61,7 +88,6 @@
             flex-direction: column;
         }
 
-        /* Hover Effect */
         .project-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0,0,0,0.05);
@@ -82,11 +108,12 @@
         .card-content h3 {
             margin: 0 0 10px 0;
             font-size: 1.25rem;
+            font-weight: 700;
         }
 
         .card-content p {
             font-size: 0.95rem;
-            color: #666;
+            color: #555;
             margin: 0;
             line-height: 1.5;
         }
@@ -116,29 +143,41 @@
 <div class="container">
     <h1>Projects</h1>
 
-    <div class="project-grid">
+    <div class="category-header">
+        <h2>Texas Marine Robotics (TMR)</h2>
+        <p>Design and analysis for autonomous maritime surface vessels.</p>
+    </div>
 
+    <div class="project-grid">
+        <a href="projects/tmr_fatigue.html" class="project-card">
+            <div class="card-image" style="background: #ddd; display: flex; align-items: center; justify-content: center;">
+                <span style="color: #999;">[Fatigue Plot Image]</span>
+            </div>
+            <div class="card-content">
+                <span class="tag">Structural</span>
+                <h3>Acrylic Fatigue Analysis</h3>
+                <p>Utilizing the Goodman Criterion to analyze lifecycle and stress risers in autonomous vessel mounting plates.</p>
+            </div>
+        </a>
+        
+        </div>
+
+    <hr> <div class="category-header">
+        <h2>Thermal & Control Systems</h2>
+        <p>Fundamental engineering analysis applied to active cooling and heat dissipation.</p>
+    </div>
+
+    <div class="project-grid">
         <a href="projects/shroud_pid.html" class="project-card">
             <img src="assets/images/pid_first_iteration.png" class="card-image" alt="PID Project">
             <div class="card-content">
                 <span class="tag">Thermal / Controls</span>
                 <h3>Thermal Regulation System</h3>
-                <p>Developing a closed-loop PID control system with 3D-printed shroud optimization for heat dissipation.</p>
+                <p>Developing a closed-loop PID control system with 3D-printed shroud optimization for convective heat transfer.</p>
             </div>
         </a>
-
-        <a href="#" class="project-card">
-            <div class="card-image" style="background: #ddd; display: flex; align-items: center; justify-content: center;">
-                <span style="color: #999;">Image Coming Soon</span>
-            </div>
-            <div class="card-content">
-                <span class="tag">Structural</span>
-                <h3>Acrylic Fatigue Analysis</h3>
-                <p>Utilizing the Goodman Criterion to analyze lifecycle and stress risers in acrylic mounting plates.</p>
-            </div>
-        </a>
-
     </div>
+
 </div>
 
 </body>
