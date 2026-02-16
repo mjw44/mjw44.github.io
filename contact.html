@@ -1,1 +1,184 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Julian Whiteley</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: 'Inter', sans-serif;
+            background-color: #ff4d00;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        /* The 3D Wave Layer - Matching your Index */
+        .gradient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 1;
+            background: radial-gradient(
+                600px circle at var(--mouse-x) var(--mouse-y), 
+                rgba(128, 0, 128, 0.8) 0%,   
+                rgba(255, 69, 0, 0.4) 40%,   
+                rgba(255, 0, 0, 0) 80%       
+            ),
+            linear-gradient(135deg, #ff8200 0%, #ff4d00 100%);
+        }
+
+        /* NAVIGATION - Identical to Index */
+        nav {
+            padding: 30px 50px;
+            display: flex;
+            justify-content: flex-end;
+            position: relative;
+            z-index: 10;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: 700;
+            margin-left: 30px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* CONTACT CONTENT */
+        .contact-container {
+            position: relative;
+            z-index: 5;
+            max-width: 600px;
+            margin: 10vh auto;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            margin-bottom: 10px;
+        }
+
+        .chill-text {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 40px;
+        }
+
+        .contact-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .contact-link {
+            display: block;
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 20px 0;
+            transition: opacity 0.2s, transform 0.2s;
+        }
+
+        .contact-link:hover {
+            opacity: 0.7;
+            transform: translateX(5px);
+        }
+
+        .label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(255, 255, 255, 0.5);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+            margin: 20px 0;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="gradient-bg" id="bg"></div>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="projects.html">Projects</a>
+    <a href="resume.html">Resume</a>
+    <a href="contact.html" style="border-bottom: 2px solid #fff;">Contact</a>
+</nav>
+
+<div class="contact-container">
+    <h1>Get in touch.</h1>
+    <p class="chill-text">Whether it's a project inquiry or just a quick engineering chat, feel free to reach out.</p>
+
+    <div class="contact-card">
+        <div>
+            <span class="label">LinkedIn</span>
+            <a href="https://www.linkedin.com/in/mjwhiteleyutexas/" target="_blank" class="contact-link">mjwhiteleyutexas</a>
+        </div>
+        
+        <hr>
+
+        <div>
+            <span class="label">Personal Email</span>
+            <a href="mailto:mjd.whiteley@gmail.com" class="contact-link">mjd.whiteley@gmail.com</a>
+        </div>
+
+        <hr>
+
+        <div>
+            <span class="label">Institutional Email</span>
+            <a href="mailto:mj.whiteley@utexas.edu" class="contact-link">mj.whiteley@utexas.edu</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    const bg = document.getElementById('bg');
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let currentX = mouseX;
+    let currentY = mouseY;
+
+    window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+
+    function animate() {
+        currentX += (mouseX - currentX) * 0.1;
+        currentY += (mouseY - currentY) * 0.1;
+        bg.style.setProperty('--mouse-x', currentX + 'px');
+        bg.style.setProperty('--mouse-y', currentY + 'px');
+        requestAnimationFrame(animate);
+    }
+    animate();
+</script>
+
+</body>
+</html>
