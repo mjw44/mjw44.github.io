@@ -35,7 +35,7 @@
 
         /* HERO SECTION */
         header {
-            padding: 100px 20px;
+            padding: 80px 20px;
             text-align: center;
             background-color: #fafafa;
             border-bottom: 1px solid #eee;
@@ -52,57 +52,67 @@
             font-size: 1.25rem;
             color: #666;
             max-width: 600px;
-            margin: 20px auto;
+            margin: 15px auto;
         }
 
-        .cta-button {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 12px 25px;
-            background-color: #000;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: transform 0.2s;
-        }
-
-        .cta-button:hover { transform: scale(1.05); }
-
-        /* ABOUT SECTION */
+        /* MAIN NAVIGATION GRID */
         section {
-            max-width: 800px;
+            max-width: 900px;
             margin: auto;
-            padding: 80px 20px;
+            padding: 60px 20px;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* 2x2 Grid */
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .menu-box {
+            background: #ffffff;
+            border: 1px solid #eaeaea;
+            padding: 40px 20px;
+            border-radius: 12px;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .menu-box strong {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #000;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .menu-box span {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* Hover Effects */
+        .menu-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.06);
+            border-color: #000;
         }
 
         h2 {
             font-size: 1.75rem;
             font-weight: 800;
-            margin-bottom: 30px;
-            border-left: 4px solid #000;
-            padding-left: 15px;
-        }
-
-        p { margin-bottom: 20px; font-size: 1.1rem; color: #444; }
-
-        .experience-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 20px;
-            margin-top: 40px;
-        }
-
-        .exp-item {
-            background: #f4f4f4;
-            padding: 20px;
-            border-radius: 10px;
-            font-size: 0.9rem;
+            margin-bottom: 20px;
             text-align: center;
         }
 
-        .exp-item strong { display: block; margin-bottom: 5px; color: #000; }
-
+        @media (max-width: 600px) {
+            .menu-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 
@@ -113,42 +123,39 @@
     <div>
         <a href="index.html">Home</a>
         <a href="projects.html">Projects</a>
-    </a>
+    </div>
 </nav>
 
 <header>
     <h1>Julian Whiteley</h1>
     <p class="subtitle">Mechanical Engineering Honors @ UT Austin</p>
-    <p style="color: #888;">Thermal-Fluid Systems | Structural Mechanics | Mechatronics</p>
-    <a href="projects.html" class="cta-button">View Engineering Projects</a>
+    <p style="color: #888; font-weight: 500;">Thermal-Fluid Systems | Structural Mechanics | Mechatronics</p>
 </header>
 
 <section>
-    <h2>Engineering Approach</h2>
-    <p>
-        I focus on problems where fluid mechanics, heat transfer, and structural mechanics intersect with practical product implementation. 
-        My work combines first principles from Heat Transfer and Fluid Mechanics with computational validation in MATLAB and SolidWorks.
-    </p>
+    <h2>Explore My Work</h2>
+    
+    <div class="menu-grid">
+        <a href="projects.html" class="menu-box">
+            <strong>Projects</strong>
+            <span>Engineering portfolio & technical builds</span>
+        </a>
 
-    <div class="experience-grid">
-        <div class="exp-item">
-            <strong>Longhorn Baja</strong>
-            Lead Roles
-        </div>
-        <div class="exp-item">
-            <strong>CEM</strong>
-            Engineering Internship
-        </div>
-        <div class="exp-item">
-            <strong>Marine Robotics</strong>
-            Structural Optimization
-        </div>
+        <a href="resume.html" class="menu-box">
+            <strong>Resume</strong>
+            <span>Experience, skills, and education</span>
+        </a>
+
+        <a href="about.html" class="menu-box">
+            <strong>About</strong>
+            <span>Bio, interests, and engineering approach</span>
+        </a>
+
+        <a href="contact.html" class="menu-box">
+            <strong>Contact</strong>
+            <span>Get in touch for opportunities</span>
+        </a>
     </div>
-
-    <p style="margin-top: 40px;">
-        My background includes hands-on leadership in <strong>Longhorn Baja Racing</strong> and technical contributions to <strong>Texas Marine Robotics</strong>, 
-        managing projects with real-world constraints, budgets, and performance consequences.
-    </p>
 </section>
 
 </body>
