@@ -79,6 +79,7 @@
             border: 1px solid #e0e0e0;
             display: flex;
             flex-direction: column;
+            position: relative; /* Required for the WIP tape */
         }
 
         .project-card:hover {
@@ -87,11 +88,28 @@
             border-color: #000;
         }
 
-        /* IMAGE HANDLING: Simply change the 'src' in the HTML below to update images */
+        /* CAUTION TAPE EFFECT */
+        .wip-badge {
+            position: absolute;
+            top: 15px;
+            right: -30px;
+            background: #ffd700; /* Caution Yellow */
+            color: #000;
+            font-weight: 800;
+            font-size: 0.6rem;
+            padding: 5px 40px;
+            transform: rotate(45deg);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 10;
+            border: 1px solid #000;
+        }
+
         .card-image { 
             width: 100%; 
             height: 180px; 
-            background-color: #f0f0f0; /* Default color if image is missing */
+            background-color: #f0f0f0; 
             object-fit: cover; 
             border-bottom: 1px solid #eee;
         }
@@ -139,12 +157,13 @@
         <a href="hytec.html" class="project-card">
             <img src="assets/images/exxon_project.jpg" class="card-image" alt="ExxonMobil">
             <div class="card-content">
-                <span class="tag">Fluid Systems</span>
+                <span class="tag">Structural Analysis</span>
                 <h3>Hydrogen Release for ExxonMobil</h3>
-                <p>Analysis of high-pressure hydrogen release and safety containment systems.</p>
+                <p>Structure development and system integration.</p>
             </div>
         </a>
         <a href="mcp.html" class="project-card">
+            <div class="wip-badge">In Progress</div>
             <img src="assets/images/mcp_turbine.jpg" class="card-image" alt="MCP">
             <div class="card-content">
                 <span class="tag">Power Gen</span>
@@ -166,7 +185,7 @@
             <div class="card-content">
                 <span class="tag">Structural Analysis</span>
                 <h3>Acrylic Fatigue Analysis</h3>
-                <p>Utilizing the Goodman Criterion to analyze lifecycle and stress risers in vessel mounting plates.</p>
+                <p>Utilizing the Goodman Criterion to analyze lifecycle and stress risers in mounting plates.</p>
             </div>
         </a>
         <a href="systems_tmr.html" class="project-card">
@@ -189,12 +208,13 @@
         <a href="shroud_pid.html" class="project-card">
             <img src="assets/images/pid_first_iteration.png" class="card-image" alt="PID Project">
             <div class="card-content">
-                <span class="tag">Thermal / Controls</span>
+                <span class="tag">Thermal Fluids / Controls</span>
                 <h3>PID Control System</h3>
                 <p>Closed-loop regulation for thermal management using optimized 3D-printed shrouds.</p>
             </div>
         </a>
         <a href="windturbine.html" class="project-card">
+            <div class="wip-badge">In Progress</div>
             <img src="assets/images/wind_turbine.jpg" class="card-image" alt="Wind Turbine">
             <div class="card-content">
                 <span class="tag">Aero / Energy</span>
@@ -237,6 +257,7 @@
     </div>
     <div class="project-grid">
         <a href="ret.html" class="project-card">
+            <div class="wip-badge">In Progress</div>
             <img src="assets/images/renewable.jpg" class="card-image" alt="Renewable Energy">
             <div class="card-content">
                 <span class="tag">Sustainability</span>
@@ -245,6 +266,7 @@
             </div>
         </a>
         <a href="failureanalysis.html" class="project-card">
+            <div class="wip-badge">In Progress</div>
             <img src="assets/images/failure_analysis.jpg" class="card-image" alt="Fractography">
             <div class="card-content">
                 <span class="tag">Materials Science</span>
@@ -291,6 +313,7 @@
 </div>
 
 <script>
+    /* Smoke script logic remains identical */
     const canvas = document.getElementById('smoke-canvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
