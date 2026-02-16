@@ -7,37 +7,24 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
+            margin: 0; padding: 0;
+            width: 100%; height: 100%;
             font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
-            /* The Base "Surface" color */
-            background-color: #ff4d00; 
-            color: #1a1a1a;
+            background-color: #ff4d00;
+            overflow: hidden;
+            color: white;
         }
 
-        /* The 3D Wave/Sinking Layer */
-        .gradient-bg {
+        /* The Canvas for the Fluid Simulation */
+        #fluid-canvas {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            pointer-events: none;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             z-index: 1;
-            /* Localized "Sinkhole" effect using radial gradient */
-            background: radial-gradient(
-                600px circle at var(--mouse-x) var(--mouse-y), 
-                rgba(128, 0, 128, 0.8) 0%,   /* Deep Purple at center */
-                rgba(255, 69, 0, 0.4) 40%,   /* Transition to Orange */
-                rgba(255, 0, 0, 0) 80%       /* Fade to transparent */
-            ),
-            linear-gradient(135deg, #ff8200 0%, #ff4d00 100%);
+            filter: url(#metaball); /* Apply the fluid/dripping filter */
         }
 
-        /* NAVIGATION - Top Right */
+        /* NAVIGATION */
         nav {
             padding: 30px 50px;
             display: flex;
@@ -48,83 +35,64 @@
 
         nav a {
             text-decoration: none;
-            color: #fff;
+            color: white;
             font-weight: 700;
             margin-left: 30px;
             font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        /* CONTENT WRAPPER */
         .content {
             position: relative;
             z-index: 5;
             text-align: center;
             margin-top: 5vh;
+            pointer-events: none; /* Let clicks pass through to the background if needed */
         }
 
-        h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin: 0;
-            letter-spacing: -0.04em;
-            color: #fff;
-            text-shadow: 0 10px 30px rgba(0,0,0,0.15);
-        }
+        .content a { pointer-events: auto; } /* Re-enable clicks for links */
 
-        .subtitle {
-            font-size: 1.1rem;
-            color: rgba(255, 255, 255, 0.9);
-            margin: 10px auto;
-            font-weight: 600;
-        }
+        h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -0.04em; margin: 0; }
+        .subtitle { font-size: 1.1rem; opacity: 0.9; margin: 10px 0; }
 
-        /* SMALLER MENU BLOCKS */
         .menu-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 15px;
             max-width: 500px;
             margin: 40px auto;
-            padding: 20px;
         }
 
         .menu-box {
             background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
+            backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
             padding: 20px;
             border-radius: 12px;
             text-decoration: none;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            transition: 0.3s ease;
         }
 
-        .menu-box strong {
-            font-size: 1rem;
-            font-weight: 800;
-            color: #fff;
-            display: block;
-        }
+        .menu-box:hover { background: rgba(255, 255, 255, 0.25); transform: translateY(-3px); }
+        .menu-box strong { display: block; color: white; }
+        .menu-box span { font-size: 0.75rem; color: rgba(255,255,255,0.7); }
 
-        .menu-box span {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.75rem;
-        }
-
-        .menu-box:hover {
-            transform: scale(1.05) translateY(-5px);
-            background: rgba(255, 255, 255, 0.2);
-            border-color: #fff;
-        }
     </style>
 </head>
 <body>
 
-<div class="gradient-bg" id="bg"></div>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;">
+    <defs>
+        <filter id="metaball">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="15" result="blur" />
+            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 25 -10" result="metaball" />
+            <feComposite in="SourceGraphic" in2="metaball" operator="atop" />
+        </filter>
+    </defs>
+</svg>
+
+<canvas id="fluid-canvas"></canvas>
 
 <nav>
     <a href="index.html">Home</a>
@@ -135,57 +103,96 @@
 </nav>
 
 <div class="content">
-    <header>
-        <h1>Julian Whiteley</h1>
-        <p class="subtitle">Mechanical Engineering @ UT Austin</p>
-    </header>
+    <h1>Julian Whiteley</h1>
+    <p class="subtitle">Mechanical Engineering @ UT Austin</p>
 
     <div class="menu-grid">
-        <a href="projects.html" class="menu-box">
-            <strong>Projects</strong>
-            <span>Technical Portfolio</span>
-        </a>
-        <a href="resume.html" class="menu-box">
-            <strong>Resume</strong>
-            <span>Experience</span>
-        </a>
-        <a href="about.html" class="menu-box">
-            <strong>About</strong>
-            <span>Bio & Approach</span>
-        </a>
-        <a href="contact.html" class="menu-box">
-            <strong>Contact</strong>
-            <span>Get in Touch</span>
-        </a>
+        <a href="projects.html" class="menu-box"><strong>Projects</strong><span>Technical Portfolio</span></a>
+        <a href="resume.html" class="menu-box"><strong>Resume</strong><span>Experience</span></a>
+        <a href="about.html" class="menu-box"><strong>About</strong><span>Bio & Approach</span></a>
+        <a href="contact.html" class="menu-box"><strong>Contact</strong><span>Get in Touch</span></a>
     </div>
 </div>
 
 <script>
-    const bg = document.getElementById('bg');
-    let mouseX = window.innerWidth / 2;
-    let mouseY = window.innerHeight / 2;
-    let currentX = mouseX;
-    let currentY = mouseY;
+    const canvas = document.getElementById('fluid-canvas');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let mouse = { x: 0, y: 0, lastX: 0, lastY: 0, vx: 0, vy: 0 };
+    let points = [];
 
-    // Capture Mouse Position
-    window.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-    });
-
-    function animate() {
-        // Easing/Smoothing: (Target - Current) * Speed
-        currentX += (mouseX - currentX) * 0.1;
-        currentY += (mouseY - currentY) * 0.1;
-
-        // Update CSS Variables
-        bg.style.setProperty('--mouse-x', currentX + 'px');
-        bg.style.setProperty('--mouse-y', currentY + 'px');
-
-        requestAnimationFrame(animate);
+    function resize() {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
     }
 
-    animate();
+    window.addEventListener('resize', resize);
+    window.addEventListener('mousemove', e => {
+        mouse.vx = e.clientX - mouse.x;
+        mouse.vy = e.clientY - mouse.y;
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+    });
+
+    resize();
+
+    function draw() {
+        ctx.clearRect(0, 0, width, height);
+        
+        // Background Gradient
+        const bgGrad = ctx.createLinearGradient(0, 0, width, height);
+        bgGrad.addColorStop(0, '#ff8200');
+        bgGrad.addColorStop(1, '#ff4d00');
+        ctx.fillStyle = bgGrad;
+        ctx.fillRect(0, 0, width, height);
+
+        // Calculate Airfoil orientation
+        const speed = Math.sqrt(mouse.vx**2 + mouse.vy**2);
+        const angle = Math.atan2(mouse.vy, mouse.vx);
+        
+        // The "Leading Edge" (Main Core)
+        ctx.save();
+        ctx.translate(mouse.x, mouse.y);
+        ctx.rotate(angle);
+        
+        ctx.fillStyle = 'rgba(80, 0, 120, 0.9)'; // Deep Purple Sink
+        
+        // Draw the dynamic airfoil body
+        ctx.beginPath();
+        // Leading edge (round)
+        ctx.arc(0, 0, 45, Math.PI * 0.5, Math.PI * 1.5);
+        // Trailing edge (stretched airfoil tail based on speed)
+        const tailLength = Math.min(speed * 8, 250);
+        ctx.bezierCurveTo(-tailLength, -40, -tailLength, 40, 0, 45);
+        ctx.fill();
+        ctx.restore();
+
+        // Dripping logic (Small blobs that spawn at cursor)
+        if (Math.random() > 0.8) {
+            points.push({
+                x: mouse.x + (Math.random() - 0.5) * 50,
+                y: mouse.y,
+                size: 10 + Math.random() * 20,
+                vy: 1 + Math.random() * 3,
+                life: 1
+            });
+        }
+
+        // Update and draw drips
+        points.forEach((p, i) => {
+            p.y += p.vy;
+            p.life -= 0.005;
+            ctx.fillStyle = `rgba(80, 0, 120, ${p.life})`;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fill();
+            if (p.life <= 0) points.splice(i, 1);
+        });
+
+        requestAnimationFrame(draw);
+    }
+
+    draw();
 </script>
 
 </body>
