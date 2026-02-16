@@ -10,21 +10,19 @@
             margin: 0; padding: 0;
             width: 100%; height: 100%;
             font-family: 'Inter', sans-serif;
-            background-color: #ff4d00;
+            background: linear-gradient(135deg, #ff8200 0%, #ff4d00 100%);
             overflow: hidden;
             color: white;
         }
 
-        /* The Canvas for the Fluid Simulation */
-        #fluid-canvas {
+        #smoke-canvas {
             position: fixed;
             top: 0; left: 0;
-            width: 100%; height: 100%;
             z-index: 1;
-            filter: url(#metaball); /* Apply the fluid/dripping filter */
+            pointer-events: none;
         }
 
-        /* NAVIGATION */
+        /* NAVIGATION - Top Right */
         nav {
             padding: 30px 50px;
             display: flex;
@@ -47,13 +45,10 @@
             position: relative;
             z-index: 5;
             text-align: center;
-            margin-top: 5vh;
-            pointer-events: none; /* Let clicks pass through to the background if needed */
+            margin-top: 8vh;
         }
 
-        .content a { pointer-events: auto; } /* Re-enable clicks for links */
-
-        h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -0.04em; margin: 0; }
+        h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -0.04em; margin: 0; text-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         .subtitle { font-size: 1.1rem; opacity: 0.9; margin: 10px 0; }
 
         .menu-grid {
@@ -74,25 +69,14 @@
             transition: 0.3s ease;
         }
 
-        .menu-box:hover { background: rgba(255, 255, 255, 0.25); transform: translateY(-3px); }
-        .menu-box strong { display: block; color: white; }
+        .menu-box:hover { background: rgba(255, 255, 255, 0.2); transform: translateY(-3px); border-color: white; }
+        .menu-box strong { display: block; color: white; font-size: 1rem; }
         .menu-box span { font-size: 0.75rem; color: rgba(255,255,255,0.7); }
-
     </style>
 </head>
 <body>
 
-<svg xmlns="http://www.w3.org/2000/svg" style="display:none;">
-    <defs>
-        <filter id="metaball">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="15" result="blur" />
-            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 25 -10" result="metaball" />
-            <feComposite in="SourceGraphic" in2="metaball" operator="atop" />
-        </filter>
-    </defs>
-</svg>
-
-<canvas id="fluid-canvas"></canvas>
+<canvas id="smoke-canvas"></canvas>
 
 <nav>
     <a href="index.html">Home</a>
@@ -115,84 +99,67 @@
 </div>
 
 <script>
-    const canvas = document.getElementById('fluid-canvas');
+    const canvas = document.getElementById('smoke-canvas');
     const ctx = canvas.getContext('2d');
-    let width, height;
-    let mouse = { x: 0, y: 0, lastX: 0, lastY: 0, vx: 0, vy: 0 };
-    let points = [];
+    let particles = [];
 
     function resize() {
-        width = canvas.width = window.innerWidth;
-        height = canvas.height = window.innerHeight;
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
     }
 
     window.addEventListener('resize', resize);
-    window.addEventListener('mousemove', e => {
-        mouse.vx = e.clientX - mouse.x;
-        mouse.vy = e.clientY - mouse.y;
-        mouse.x = e.clientX;
-        mouse.y = e.clientY;
-    });
-
     resize();
 
-    function draw() {
-        ctx.clearRect(0, 0, width, height);
-        
-        // Background Gradient
-        const bgGrad = ctx.createLinearGradient(0, 0, width, height);
-        bgGrad.addColorStop(0, '#ff8200');
-        bgGrad.addColorStop(1, '#ff4d00');
-        ctx.fillStyle = bgGrad;
-        ctx.fillRect(0, 0, width, height);
-
-        // Calculate Airfoil orientation
-        const speed = Math.sqrt(mouse.vx**2 + mouse.vy**2);
-        const angle = Math.atan2(mouse.vy, mouse.vx);
-        
-        // The "Leading Edge" (Main Core)
-        ctx.save();
-        ctx.translate(mouse.x, mouse.y);
-        ctx.rotate(angle);
-        
-        ctx.fillStyle = 'rgba(80, 0, 120, 0.9)'; // Deep Purple Sink
-        
-        // Draw the dynamic airfoil body
-        ctx.beginPath();
-        // Leading edge (round)
-        ctx.arc(0, 0, 45, Math.PI * 0.5, Math.PI * 1.5);
-        // Trailing edge (stretched airfoil tail based on speed)
-        const tailLength = Math.min(speed * 8, 250);
-        ctx.bezierCurveTo(-tailLength, -40, -tailLength, 40, 0, 45);
-        ctx.fill();
-        ctx.restore();
-
-        // Dripping logic (Small blobs that spawn at cursor)
-        if (Math.random() > 0.8) {
-            points.push({
-                x: mouse.x + (Math.random() - 0.5) * 50,
-                y: mouse.y,
-                size: 10 + Math.random() * 20,
-                vy: 1 + Math.random() * 3,
-                life: 1
-            });
+    class Particle {
+        constructor(x, y) {
+            this.x = x;
+            this.y = y;
+            this.size = Math.random() * 20 + 10;
+            this.speedX = (Math.random() - 0.5) * 1.5;
+            this.speedY = (Math.random() - 0.5) * 1.5;
+            this.color = 'rgba(80, 0, 120,'; // Purple smoke base
+            this.alpha = 0.5;
+            this.decay = Math.random() * 0.01 + 0.005;
         }
 
-        // Update and draw drips
-        points.forEach((p, i) => {
-            p.y += p.vy;
-            p.life -= 0.005;
-            ctx.fillStyle = `rgba(80, 0, 120, ${p.life})`;
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-            ctx.fill();
-            if (p.life <= 0) points.splice(i, 1);
-        });
+        update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+            this.size += 1.2; // Smoke expands as it rises/settles
+            this.alpha -= this.decay;
+        }
 
-        requestAnimationFrame(draw);
+        draw() {
+            ctx.fillStyle = this.color + this.alpha + ')';
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
     }
 
-    draw();
+    window.addEventListener('mousemove', (e) => {
+        // Create 3 particles per move for a thicker trail
+        for (let i = 0; i < 3; i++) {
+            particles.push(new Particle(e.clientX, e.clientY));
+        }
+    });
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < particles.length; i++) {
+            particles[i].update();
+            particles[i].draw();
+
+            if (particles[i].alpha <= 0) {
+                particles.splice(i, 1);
+                i--;
+            }
+        }
+        requestAnimationFrame(animate);
+    }
+
+    animate();
 </script>
 
 </body>
