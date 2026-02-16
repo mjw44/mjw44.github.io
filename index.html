@@ -10,9 +10,10 @@
             margin: 0; padding: 0;
             width: 100%; height: 100%;
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #ff8200 0%, #ff4d00 100%);
+            /* Neutral, chill background */
+            background-color: #fcfcfc; 
             overflow: hidden;
-            color: white;
+            color: #1a1a1a;
         }
 
         #smoke-canvas {
@@ -33,45 +34,66 @@
 
         nav a {
             text-decoration: none;
-            color: white;
+            color: #666;
             font-weight: 700;
             margin-left: 30px;
             font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 0.05em;
+            transition: color 0.2s;
         }
+
+        nav a:hover { color: #000; }
 
         .content {
             position: relative;
             z-index: 5;
             text-align: center;
-            margin-top: 8vh;
+            margin-top: 10vh;
         }
 
-        h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -0.04em; margin: 0; text-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .subtitle { font-size: 1.1rem; opacity: 0.9; margin: 10px 0; }
+        h1 { 
+            font-size: 3.5rem; 
+            font-weight: 800; 
+            letter-spacing: -0.04em; 
+            margin: 0; 
+            color: #1a1a1a;
+        }
+
+        .subtitle { 
+            font-size: 1.1rem; 
+            color: #666; 
+            margin: 10px 0; 
+            font-weight: 500;
+        }
 
         .menu-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 15px;
-            max-width: 500px;
+            max-width: 460px; /* Slightly tighter */
             margin: 40px auto;
         }
 
         .menu-box {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 20px;
-            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(5px);
+            border: 1px solid #e0e0e0;
+            padding: 22px;
+            border-radius: 8px; /* Sharper corners */
             text-decoration: none;
-            transition: 0.3s ease;
+            transition: all 0.3s ease;
         }
 
-        .menu-box:hover { background: rgba(255, 255, 255, 0.2); transform: translateY(-3px); border-color: white; }
-        .menu-box strong { display: block; color: white; font-size: 1rem; }
-        .menu-box span { font-size: 0.75rem; color: rgba(255,255,255,0.7); }
+        .menu-box:hover { 
+            background: #fff; 
+            transform: translateY(-2px); 
+            border-color: #000;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        .menu-box strong { display: block; color: #1a1a1a; font-size: 0.95rem; }
+        .menu-box span { font-size: 0.7rem; color: #999; text-transform: uppercase; letter-spacing: 0.02em; }
     </style>
 </head>
 <body>
@@ -93,7 +115,7 @@
     <div class="menu-grid">
         <a href="projects.html" class="menu-box"><strong>Projects</strong><span>Technical Portfolio</span></a>
         <a href="resume.html" class="menu-box"><strong>Resume</strong><span>Experience</span></a>
-        <a href="about.html" class="menu-box"><strong>About</strong><span>Bio & Approach</span></a>
+        <a href="about.html" class="menu-box"><strong>About</strong><span>Bio & Philosophy</span></a>
         <a href="contact.html" class="menu-box"><strong>Contact</strong><span>Get in Touch</span></a>
     </div>
 </div>
@@ -115,18 +137,18 @@
         constructor(x, y) {
             this.x = x;
             this.y = y;
-            this.size = Math.random() * 20 + 10;
-            this.speedX = (Math.random() - 0.5) * 1.5;
-            this.speedY = (Math.random() - 0.5) * 1.5;
-            this.color = 'rgba(80, 0, 120,'; // Purple smoke base
-            this.alpha = 0.5;
-            this.decay = Math.random() * 0.01 + 0.005;
+            this.size = Math.random() * 5 + 2; // Much smaller
+            this.speedX = (Math.random() - 0.5) * 0.8;
+            this.speedY = (Math.random() - 0.5) * 0.8;
+            this.color = 'rgba(0, 0, 0,'; // Pure Black
+            this.alpha = 0.3; // Subtle starting transparency
+            this.decay = Math.random() * 0.015 + 0.01; // Fades faster
         }
 
         update() {
             this.x += this.speedX;
             this.y += this.speedY;
-            this.size += 1.2; // Smoke expands as it rises/settles
+            if (this.size > 0.2) this.size -= 0.05; // Shrinks as it fades
             this.alpha -= this.decay;
         }
 
@@ -139,10 +161,8 @@
     }
 
     window.addEventListener('mousemove', (e) => {
-        // Create 3 particles per move for a thicker trail
-        for (let i = 0; i < 3; i++) {
-            particles.push(new Particle(e.clientX, e.clientY));
-        }
+        // Just one particle per move for a finer, sharper trail
+        particles.push(new Particle(e.clientX, e.clientY));
     });
 
     function animate() {
