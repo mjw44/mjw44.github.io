@@ -40,31 +40,70 @@
             margin-bottom: 50px;
             font-weight: 800;
             letter-spacing: -0.02em;
-        }
-
-        .category-header {
-            margin: 40px 0 20px 0;
-        }
-
-        .category-header h2 {
-            font-size: 1.6rem;
-            font-weight: 800;
-            margin-bottom: 5px;
+        }<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | Julian Whiteley</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0; padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #fcfcfc;
             color: #1a1a1a;
         }
 
-        .category-header p {
-            font-size: 1rem;
-            color: #666;
-            margin: 0;
+        #smoke-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            z-index: 1;
+            pointer-events: none;
         }
 
-        hr {
-            border: 0;
-            height: 1px;
-            background: #ddd;
-            margin: 50px 0;
+        nav {
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            border-bottom: 1px solid #eaeaea;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
+
+        .nav-logo { font-weight: 800; font-size: 1.2rem; text-decoration: none; color: #1a1a1a; }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #666;
+            font-weight: 600;
+            margin-left: 25px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: #000; }
+
+        .container {
+            max-width: 1100px;
+            margin: 60px auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 5;
+        }
+
+        h1 { font-size: 2.8rem; margin-bottom: 50px; font-weight: 800; letter-spacing: -0.02em; }
+
+        .category-header { margin: 40px 0 20px 0; }
+        .category-header h2 { font-size: 1.6rem; font-weight: 800; margin-bottom: 5px; color: #1a1a1a; }
+        .category-header p { font-size: 1rem; color: #666; margin: 0; }
+
+        hr { border: 0; height: 1px; background: #eee; margin: 50px 0; }
 
         .project-grid {
             display: grid;
@@ -74,12 +113,12 @@
 
         .project-card {
             background: white;
-            border-radius: 12px;
+            border-radius: 8px;
             overflow: hidden;
             text-decoration: none;
             color: inherit;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            border: 1px solid #eaeaea;
+            transition: all 0.3s ease;
+            border: 1px solid #e0e0e0;
             display: flex;
             flex-direction: column;
         }
@@ -87,53 +126,39 @@
         .project-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-            border-color: #333;
+            border-color: #000;
         }
 
-        .card-image {
-            width: 100%;
-            height: 180px;
-            background-color: #eee;
-            object-fit: cover;
-        }
-
-        .card-content {
-            padding: 20px;
-        }
-
-        .card-content h3 {
-            margin: 0 0 10px 0;
-            font-size: 1.2rem;
-            font-weight: 700;
-        }
-
-        .card-content p {
-            font-size: 0.9rem;
-            color: #555;
-            margin: 0;
-            line-height: 1.5;
-        }
+        .card-image { width: 100%; height: 180px; background-color: #f0f0f0; object-fit: cover; }
+        .card-content { padding: 20px; }
+        .card-content h3 { margin: 0 0 10px 0; font-size: 1.2rem; font-weight: 700; }
+        .card-content p { font-size: 0.9rem; color: #555; margin: 0; line-height: 1.5; }
 
         .tag {
             display: inline-block;
-            background: #f0f0f0;
+            background: #1a1a1a;
+            color: #fff;
             padding: 4px 8px;
             border-radius: 4px;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             font-weight: 700;
             margin-bottom: 10px;
             text-transform: uppercase;
-            color: #444;
         }
     </style>
 </head>
 <body>
 
+<canvas id="smoke-canvas"></canvas>
+
 <nav>
-    <div style="font-weight: 800; font-size: 1.2rem;">MJW</div>
-    <div>
+    <a href="index.html" class="nav-logo">MJW</a>
+    <div class="nav-links">
         <a href="index.html">Home</a>
+        <a href="about.html">About</a>
         <a href="projects.html" style="color: black;">Projects</a>
+        <a href="resume.html">Resume</a>
+        <a href="contact.html">Contact</a>
     </div>
 </nav>
 
@@ -146,7 +171,7 @@
     </div>
     <div class="project-grid">
         <a href="#" class="project-card">
-            <div class="card-image" style="background: #dee2e6;"></div>
+            <div class="card-image"></div>
             <div class="card-content">
                 <span class="tag">Fluid Systems</span>
                 <h3>Hydrogen Release for ExxonMobil</h3>
@@ -163,12 +188,11 @@
     </div>
     <div class="project-grid">
         <a href="projects/tmr_fatigue.html" class="project-card">
-            <div class="card-image" style="background: #dee2e6;"></div>
+            <div class="card-image"></div>
             <div class="card-content">
                 <span class="tag">Structural Analysis</span>
                 <h3>Acrylic Fatigue Analysis</h3>
                 <p>Utilizing the Goodman Criterion to analyze lifecycle and stress risers in vessel mounting plates.</p>
-                
             </div>
         </a>
     </div>
@@ -189,7 +213,7 @@
             </div>
         </a>
         <a href="#" class="project-card">
-            <div class="card-image" style="background: #e9ecef;"></div>
+            <div class="card-image"></div>
             <div class="card-content">
                 <span class="tag">Aero / Energy</span>
                 <h3>Wind Turbine Design</h3>
@@ -206,7 +230,7 @@
     </div>
     <div class="project-grid">
         <a href="#" class="project-card">
-            <div class="card-image" style="background: #e9ecef;"></div>
+            <div class="card-image"></div>
             <div class="card-content">
                 <span class="tag">Systems Engineering</span>
                 <h3>Research & Design Lead Projects</h3>
@@ -214,7 +238,7 @@
             </div>
         </a>
         <a href="#" class="project-card">
-            <div class="card-image" style="background: #e9ecef;"></div>
+            <div class="card-image"></div>
             <div class="card-content">
                 <span class="tag">Mechanical Design</span>
                 <h3>Powertrain System</h3>
@@ -231,7 +255,7 @@
     </div>
     <div class="project-grid">
         <a href="#" class="project-card">
-            <div class="card-image" style="background: #dee2e6;"></div>
+            <div class="card-image"></div>
             <div class="card-content">
                 <span class="tag">Sustainability</span>
                 <h3>Renewable Energy Technology</h3>
@@ -239,7 +263,7 @@
             </div>
         </a>
         <a href="#" class="project-card">
-            <div class="card-image" style="background: #e9ecef;"></div>
+            <div class="card-image"></div>
             <div class="card-content">
                 <span class="tag">Materials Science</span>
                 <h3>Failure Analysis</h3>
@@ -256,7 +280,7 @@
     </div>
     <div class="project-grid">
         <a href="#" class="project-card">
-            <div class="card-image" style="background: #e9ecef;"></div>
+            <div class="card-image"></div>
             <div class="card-content">
                 <span class="tag">Optimization</span>
                 <h3>Coasting Profile Optimization</h3>
@@ -273,7 +297,7 @@
     </div>
     <div class="project-grid">
         <a href="#" class="project-card">
-            <div class="card-image" style="background: #dee2e6;"></div>
+            <div class="card-image"></div>
             <div class="card-content">
                 <span class="tag">Aerospace</span>
                 <h3>Mission Concept Design</h3>
@@ -283,6 +307,39 @@
     </div>
 
 </div>
+
+<script>
+    /* Smoke trail logic - identical to index.html for perfect consistency */
+    const canvas = document.getElementById('smoke-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    window.addEventListener('resize', resize);
+    resize();
+    class Particle {
+        constructor(x, y) {
+            this.x = x; this.y = y;
+            this.size = Math.random() * 5 + 2;
+            this.speedX = (Math.random() - 0.5) * 0.8;
+            this.speedY = (Math.random() - 0.5) * 0.8;
+            this.color = 'rgba(0, 0, 0,';
+            this.alpha = 0.2;
+            this.decay = Math.random() * 0.015 + 0.01;
+        }
+        update() { this.x += this.speedX; this.y += this.speedY; if (this.size > 0.2) this.size -= 0.05; this.alpha -= this.decay; }
+        draw() { ctx.fillStyle = this.color + this.alpha + ')'; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
+    }
+    window.addEventListener('mousemove', (e) => { particles.push(new Particle(e.clientX, e.clientY)); });
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < particles.length; i++) {
+            particles[i].update(); particles[i].draw();
+            if (particles[i].alpha <= 0) { particles.splice(i, 1); i--; }
+        }
+        requestAnimationFrame(animate);
+    }
+    animate();
+</script>
 
 </body>
 </html>
