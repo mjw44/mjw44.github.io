@@ -30,7 +30,7 @@
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 60px auto;
             padding: 0 20px;
         }
@@ -42,13 +42,12 @@
             letter-spacing: -0.02em;
         }
 
-        /* CATEGORY HEADERS */
         .category-header {
             margin: 40px 0 20px 0;
         }
 
         .category-header h2 {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 800;
             margin-bottom: 5px;
             color: #1a1a1a;
@@ -60,7 +59,6 @@
             margin: 0;
         }
 
-        /* SEPARATOR LINE */
         hr {
             border: 0;
             height: 1px;
@@ -68,14 +66,12 @@
             margin: 50px 0;
         }
 
-        /* THE GRID SYSTEM */
         .project-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 30px;
         }
 
-        /* THE PROJECT CARD */
         .project-card {
             background: white;
             border-radius: 12px;
@@ -96,7 +92,7 @@
 
         .card-image {
             width: 100%;
-            height: 200px;
+            height: 180px;
             background-color: #eee;
             object-fit: cover;
         }
@@ -107,12 +103,12 @@
 
         .card-content h3 {
             margin: 0 0 10px 0;
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             font-weight: 700;
         }
 
         .card-content p {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: #555;
             margin: 0;
             line-height: 1.5;
@@ -120,13 +116,14 @@
 
         .tag {
             display: inline-block;
-            background: #eee;
+            background: #f0f0f0;
             padding: 4px 8px;
             border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: 600;
+            font-size: 0.7rem;
+            font-weight: 700;
             margin-bottom: 10px;
             text-transform: uppercase;
+            color: #444;
         }
     </style>
 </head>
@@ -141,39 +138,103 @@
 </nav>
 
 <div class="container">
-    <h1>Projects</h1>
+    <h1>Engineering Projects</h1>
+
+    <div class="category-header">
+        <h2>Longhorn Baja Racing</h2>
+        <p>Design, manufacturing, and validation for off-road racing vehicles.</p>
+    </div>
+    <div class="project-grid">
+        <a href="#" class="project-card">
+            <div class="card-image" style="background: #e9ecef;"></div>
+            <div class="card-content">
+                <span class="tag">Systems Engineering</span>
+                <h3>Research & Design Lead Projects</h3>
+                <p>Overseeing high-level design iterations and data-driven R&D for vehicle performance.</p>
+            </div>
+        </a>
+        <a href="#" class="project-card">
+            <div class="card-image" style="background: #e9ecef;"></div>
+            <div class="card-content">
+                <span class="tag">Mechanical Design</span>
+                <h3>Powertrain System</h3>
+                <p>Integration and optimization of drivetrain components for torque delivery and reliability.</p>
+            </div>
+        </a>
+    </div>
+
+    <hr>
 
     <div class="category-header">
         <h2>Texas Marine Robotics (TMR)</h2>
-        <p>Design and analysis for autonomous maritime surface vessels.</p>
+        <p>Autonomous maritime surface vessel engineering.</p>
     </div>
-
     <div class="project-grid">
         <a href="projects/tmr_fatigue.html" class="project-card">
-            <div class="card-image" style="background: #ddd; display: flex; align-items: center; justify-content: center;">
-                <span style="color: #999;">[Fatigue Plot Image]</span>
-            </div>
+            <div class="card-image" style="background: #dee2e6;"></div>
             <div class="card-content">
-                <span class="tag">Structural</span>
+                <span class="tag">Structural Analysis</span>
                 <h3>Acrylic Fatigue Analysis</h3>
-                <p>Utilizing the Goodman Criterion to analyze lifecycle and stress risers in autonomous vessel mounting plates.</p>
+                <p>Utilizing the Goodman Criterion to analyze lifecycle and stress risers in vessel mounting plates.</p>
             </div>
         </a>
-        
-        </div>
-
-    <hr> <div class="category-header">
-        <h2>Thermal & Control Systems</h2>
-        <p>Fundamental engineering analysis applied to active cooling and heat dissipation.</p>
     </div>
 
+    <hr>
+
+    <div class="category-header">
+        <h2>ECOCAR: EV Challenge</h2>
+        <p>Advanced propulsion and energy management for electric vehicles.</p>
+    </div>
+    <div class="project-grid">
+        <a href="#" class="project-card">
+            <div class="card-image" style="background: #e9ecef;"></div>
+            <div class="card-content">
+                <span class="tag">Optimization</span>
+                <h3>Coasting Profile Optimization</h3>
+                <p>Improving EV range through regenerative braking and coasting trajectory analysis.</p>
+            </div>
+        </a>
+    </div>
+
+    <hr>
+
+    <div class="category-header">
+        <h2>Center for Electromechanics (CEM)</h2>
+        <p>Energy research and industrial mechanical projects.</p>
+    </div>
+    <div class="project-grid">
+        <a href="#" class="project-card">
+            <div class="card-image" style="background: #dee2e6;"></div>
+            <div class="card-content">
+                <span class="tag">Fluid Systems</span>
+                <h3>Hydrogen Release for ExxonMobil</h3>
+                <p>Analysis of high-pressure hydrogen release and safety containment systems.</p>
+            </div>
+        </a>
+    </div>
+
+    <hr>
+
+    <div class="category-header">
+        <h2>Academic & Class Projects</h2>
+        <p>Application of engineering fundamentals to complex analytical problems.</p>
+    </div>
     <div class="project-grid">
         <a href="projects/shroud_pid.html" class="project-card">
             <img src="assets/images/pid_first_iteration.png" class="card-image" alt="PID Project">
             <div class="card-content">
                 <span class="tag">Thermal / Controls</span>
-                <h3>Thermal Regulation System</h3>
-                <p>Developing a closed-loop PID control system with 3D-printed shroud optimization for convective heat transfer.</p>
+                <h3>Renewable Energy Technology</h3>
+                <p>System-level analysis of energy conversion and sustainable power integration.</p>
+            </div>
+        </a>
+        <a href="#" class="project-card">
+            <div class="card-image" style="background: #e9ecef;"></div>
+            <div class="card-content">
+                <span class="tag">Materials Science</span>
+                <h3>Failure Analysis</h3>
+                <p>Root cause analysis of structural failures through fractography and stress modeling.</p>
             </div>
         </a>
     </div>
