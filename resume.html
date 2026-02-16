@@ -11,9 +11,9 @@
             margin: 0; padding: 0;
             width: 100%; height: 100%;
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #ff8200 0%, #ff4d00 100%);
+            background-color: #fcfcfc;
             overflow: hidden;
-            color: white;
+            color: #1a1a1a;
         }
 
         #smoke-canvas {
@@ -34,21 +34,24 @@
 
         nav a {
             text-decoration: none;
-            color: white;
+            color: #666;
             font-weight: 700;
             margin-left: 30px;
             font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 0.05em;
+            transition: color 0.2s;
         }
+
+        nav a:hover { color: #000; }
 
         /* RESUME CONTAINER */
         .resume-container {
             position: relative;
             z-index: 5;
-            max-width: 900px;
-            height: 75vh;
-            margin: 2vh auto;
+            max-width: 1000px;
+            height: 78vh;
+            margin: 0 auto;
             text-align: center;
         }
 
@@ -56,18 +59,17 @@
             margin-bottom: 20px;
         }
 
-        h1 { font-size: 2.5rem; font-weight: 800; margin: 0; letter-spacing: -0.04em; }
+        h1 { font-size: 2.2rem; font-weight: 800; margin: 0; letter-spacing: -0.04em; color: #1a1a1a; }
 
-        /* GOOGLE DRIVE EMBED */
+        /* VIEWER BOX */
         .resume-viewer {
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
 
         iframe {
@@ -79,17 +81,17 @@
         .cta-button {
             display: inline-block;
             margin-top: 15px;
-            padding: 10px 20px;
-            background: white;
-            color: #ff4d00;
+            padding: 8px 18px;
+            background: #1a1a1a;
+            color: #fff;
             text-decoration: none;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 0.9rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.85rem;
             transition: transform 0.2s ease;
         }
 
-        .cta-button:hover { transform: scale(1.05); }
+        .cta-button:hover { transform: scale(1.03); background: #000; }
 
     </style>
 </head>
@@ -108,16 +110,16 @@
 <div class="resume-container">
     <div class="header-area">
         <h1>Curriculum Vitae</h1>
-        <a href="YOUR_GOOGLE_DRIVE_LINK_HERE" target="_blank" class="cta-button">Open in Google Drive</a>
+        <a href="https://docs.google.com/document/d/17PmqW3bWh0yHhcJy_bkhuZpTg7y4KTYsAd66SAEX-3Y/edit?usp=sharing" target="_blank" class="cta-button">View in Google Drive</a>
     </div>
 
     <div class="resume-viewer">
-        <iframe src="https://docs.google.com/viewer?srcid=YOUR_FILE_ID_HERE&pid=explorer&efb=false&a=v&chrome=false&embedded=true"></iframe>
+        <iframe src="https://docs.google.com/viewer?srcid=17PmqW3bWh0yHhcJy_bkhuZpTg7y4KTYsAd66SAEX-3Y&pid=explorer&efb=false&a=v&chrome=false&embedded=true"></iframe>
     </div>
 </div>
 
 <script>
-    /* SMOKE EFFECT SCRIPT (Identical to Index for consistency) */
+    /* MINIMALIST SMOKE SCRIPT */
     const canvas = document.getElementById('smoke-canvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
@@ -128,18 +130,25 @@
     class Particle {
         constructor(x, y) {
             this.x = x; this.y = y;
-            this.size = Math.random() * 20 + 10;
-            this.speedX = (Math.random() - 0.5) * 1.5;
-            this.speedY = (Math.random() - 0.5) * 1.5;
-            this.color = 'rgba(80, 0, 120,';
-            this.alpha = 0.5;
-            this.decay = Math.random() * 0.01 + 0.005;
+            this.size = Math.random() * 5 + 2; 
+            this.speedX = (Math.random() - 0.5) * 0.8;
+            this.speedY = (Math.random() - 0.5) * 0.8;
+            this.color = 'rgba(0, 0, 0,'; 
+            this.alpha = 0.2; 
+            this.decay = Math.random() * 0.015 + 0.01; 
         }
-        update() { this.x += this.speedX; this.y += this.speedY; this.size += 1.2; this.alpha -= this.decay; }
-        draw() { ctx.fillStyle = this.color + this.alpha + ')'; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
+        update() { 
+            this.x += this.speedX; this.y += this.speedY; 
+            if (this.size > 0.2) this.size -= 0.05;
+            this.alpha -= this.decay; 
+        }
+        draw() { 
+            ctx.fillStyle = this.color + this.alpha + ')'; 
+            ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); 
+        }
     }
 
-    window.addEventListener('mousemove', (e) => { for (let i = 0; i < 3; i++) { particles.push(new Particle(e.clientX, e.clientY)); } });
+    window.addEventListener('mousemove', (e) => { particles.push(new Particle(e.clientX, e.clientY)); });
 
     function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
