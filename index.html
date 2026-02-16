@@ -3,31 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Julian Whiteley | Mechanical Engineering Portfolio</title>
+    <title>Julian Whiteley | Mechanical Engineering</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --hue: 15; /* Starts at Red/Orange (approx 15-30) */
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             margin: 0;
-            background-color: #ffffff;
+            padding: 0;
+            overflow-x: hidden;
             color: #1a1a1a;
-            line-height: 1.6;
+            min-height: 100vh;
+            /* Animated background layer */
+            background: linear-gradient(135deg, hsl(var(--hue), 90%, 60%), hsl(calc(var(--hue) + 40), 90%, 60%));
+            transition: background 0.4s ease;
         }
 
-        /* NAVIGATION */
+        /* NAVIGATION - Top Right Alignment */
         nav {
-            padding: 20px 40px;
+            padding: 30px 50px;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end; /* Pushes links to the top right */
             align-items: center;
-            border-bottom: 1px solid #eee;
+            position: relative;
+            z-index: 10;
         }
 
         nav a {
             text-decoration: none;
-            color: #666;
-            font-weight: 600;
-            margin-left: 20px;
+            color: rgba(0,0,0,0.7);
+            font-weight: 700;
+            margin-left: 30px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
             transition: color 0.2s;
         }
 
@@ -35,128 +47,142 @@
 
         /* HERO SECTION */
         header {
-            padding: 80px 20px;
+            padding: 40px 20px;
             text-align: center;
-            background-color: #fafafa;
-            border-bottom: 1px solid #eee;
+            position: relative;
+            z-index: 5;
         }
 
         h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 800;
             margin: 0;
-            letter-spacing: -0.03em;
+            letter-spacing: -0.04em;
         }
 
         .subtitle {
-            font-size: 1.25rem;
-            color: #666;
-            max-width: 600px;
-            margin: 15px auto;
+            font-size: 1.1rem;
+            color: rgba(0,0,0,0.6);
+            margin: 10px auto;
+            font-weight: 600;
         }
 
-        /* MAIN NAVIGATION GRID */
+        /* NAVIGATION GRID - Smaller Blocks */
         section {
-            max-width: 900px;
+            max-width: 600px; /* Constrained width makes blocks feel smaller */
             margin: auto;
-            padding: 60px 20px;
+            padding: 20px;
+            position: relative;
+            z-index: 5;
         }
 
         .menu-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr; /* 2x2 Grid */
-            gap: 25px;
-            margin-top: 20px;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px; /* Tighter gap */
         }
 
         .menu-box {
-            background: #ffffff;
-            border: 1px solid #eaeaea;
-            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.15); /* Glassmorphism effect */
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 25px 15px; /* Smaller padding */
             border-radius: 12px;
             text-decoration: none;
             text-align: center;
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
         .menu-box strong {
-            font-size: 1.5rem;
+            font-size: 1.1rem; /* Smaller text */
             font-weight: 800;
             color: #000;
             display: block;
-            margin-bottom: 5px;
         }
 
         .menu-box span {
-            color: #666;
-            font-size: 0.95rem;
+            color: rgba(0,0,0,0.6);
+            font-size: 0.8rem;
         }
 
-        /* Hover Effects */
         .menu-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 24px rgba(0,0,0,0.06);
-            border-color: #000;
+            background: rgba(255, 255, 255, 0.9);
+            transform: scale(1.03);
+            border-color: #fff;
         }
 
-        h2 {
-            font-size: 1.75rem;
-            font-weight: 800;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        @media (max-width: 600px) {
-            .menu-grid { grid-template-columns: 1fr; }
-        }
     </style>
 </head>
-
 <body>
 
 <nav>
-    <div style="font-weight: 800; font-size: 1.2rem;">JW</div>
-    <div>
-        <a href="index.html">Home</a>
-        <a href="projects.html">Projects</a>
-    </div>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="projects.html">Projects</a>
+    <a href="resume.html">Resume</a>
+    <a href="contact.html">Contact</a>
 </nav>
 
 <header>
     <h1>Julian Whiteley</h1>
-    <p class="subtitle">Mechanical Engineering Honors @ UT Austin</p>
-    <p style="color: #888; font-weight: 500;">Thermal-Fluid Systems | Structural Mechanics | Mechatronics</p>
+    <p class="subtitle">Mechanical Engineering @ UT Austin</p>
 </header>
 
 <section>
-    <h2>Explore My Work</h2>
-    
     <div class="menu-grid">
         <a href="projects.html" class="menu-box">
             <strong>Projects</strong>
-            <span>Engineering portfolio & technical builds</span>
+            <span>Technical Portfolio</span>
         </a>
-
         <a href="resume.html" class="menu-box">
             <strong>Resume</strong>
-            <span>Experience, skills, and education</span>
+            <span>Experience</span>
         </a>
-
         <a href="about.html" class="menu-box">
             <strong>About</strong>
-            <span>Bio, interests, and engineering approach</span>
+            <span>Bio & Approach</span>
         </a>
-
         <a href="contact.html" class="menu-box">
             <strong>Contact</strong>
-            <span>Get in touch for opportunities</span>
+            <span>Get in Touch</span>
         </a>
     </div>
 </section>
+
+<script>
+    let currentHue = 15; // Starting Orange/Red
+    let targetHue = 15;
+    let time = 0;
+
+    // Change hue based on cursor horizontal position
+    window.addEventListener('mousemove', (e) => {
+        // Map mouse X position to a Hue range (15 = Red/Orange, 280 = Purple)
+        const percent = e.clientX / window.innerWidth;
+        targetHue = 15 + (percent * 265); 
+    });
+
+    // Smooth transition & Time-based oscillation
+    function updateBackground() {
+        time += 0.01;
+        // Linear interpolation for smooth mouse following
+        currentHue += (targetHue - currentHue) * 0.05;
+        
+        // Add a slight time-based wave so it feels alive even if mouse is still
+        const wave = Math.sin(time) * 5;
+        const finalHue = currentHue + wave;
+
+        document.documentElement.style.setProperty('--hue', finalHue);
+        
+        // Update background gradient
+        document.body.style.background = `linear-gradient(135deg, 
+            hsl(${finalHue}, 85%, 70%), 
+            hsl(${finalHue + 40}, 85%, 60%))`;
+
+        requestAnimationFrame(updateBackground);
+    }
+
+    updateBackground();
+</script>
 
 </body>
 </html>
