@@ -107,10 +107,18 @@
 
         .card-image { 
             width: 100%; 
-            height: 180px; 
-            background-color: #f0f0f0; 
-            object-fit: cover; 
-            border-bottom: 1px solid #eee;
+    height: 180px; 
+    background-color: #f0f0f0; 
+    
+    /* CHANGE THIS: 'cover' crops the image to fill the box */
+    /* 'contain' ensures the whole image is visible inside the box */
+    object-fit: contain; 
+    
+    /* Optional: adds some padding so the image doesn't touch the edges */
+    padding: 10px;
+    box-sizing: border-box;
+    
+    border-bottom: 1px solid #eee;
         }
         
         .card-content { padding: 20px; }
