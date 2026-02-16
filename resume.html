@@ -1,1 +1,156 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume | Julian Whiteley</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0; padding: 0;
+            width: 100%; height: 100%;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #ff8200 0%, #ff4d00 100%);
+            overflow: hidden;
+            color: white;
+        }
+
+        #smoke-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* NAVIGATION */
+        nav {
+            padding: 30px 50px;
+            display: flex;
+            justify-content: flex-end;
+            position: relative;
+            z-index: 10;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-weight: 700;
+            margin-left: 30px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* RESUME CONTAINER */
+        .resume-container {
+            position: relative;
+            z-index: 5;
+            max-width: 900px;
+            height: 75vh;
+            margin: 2vh auto;
+            text-align: center;
+        }
+
+        .header-area {
+            margin-bottom: 20px;
+        }
+
+        h1 { font-size: 2.5rem; font-weight: 800; margin: 0; letter-spacing: -0.04em; }
+
+        /* GOOGLE DRIVE EMBED */
+        .resume-viewer {
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .cta-button {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: white;
+            color: #ff4d00;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: transform 0.2s ease;
+        }
+
+        .cta-button:hover { transform: scale(1.05); }
+
+    </style>
+</head>
+<body>
+
+<canvas id="smoke-canvas"></canvas>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="projects.html">Projects</a>
+    <a href="resume.html">Resume</a>
+    <a href="contact.html">Contact</a>
+</nav>
+
+<div class="resume-container">
+    <div class="header-area">
+        <h1>Curriculum Vitae</h1>
+        <a href="YOUR_GOOGLE_DRIVE_LINK_HERE" target="_blank" class="cta-button">Open in Google Drive</a>
+    </div>
+
+    <div class="resume-viewer">
+        <iframe src="https://docs.google.com/viewer?srcid=YOUR_FILE_ID_HERE&pid=explorer&efb=false&a=v&chrome=false&embedded=true"></iframe>
+    </div>
+</div>
+
+<script>
+    /* SMOKE EFFECT SCRIPT (Identical to Index for consistency) */
+    const canvas = document.getElementById('smoke-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    window.addEventListener('resize', resize);
+    resize();
+
+    class Particle {
+        constructor(x, y) {
+            this.x = x; this.y = y;
+            this.size = Math.random() * 20 + 10;
+            this.speedX = (Math.random() - 0.5) * 1.5;
+            this.speedY = (Math.random() - 0.5) * 1.5;
+            this.color = 'rgba(80, 0, 120,';
+            this.alpha = 0.5;
+            this.decay = Math.random() * 0.01 + 0.005;
+        }
+        update() { this.x += this.speedX; this.y += this.speedY; this.size += 1.2; this.alpha -= this.decay; }
+        draw() { ctx.fillStyle = this.color + this.alpha + ')'; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
+    }
+
+    window.addEventListener('mousemove', (e) => { for (let i = 0; i < 3; i++) { particles.push(new Particle(e.clientX, e.clientY)); } });
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < particles.length; i++) {
+            particles[i].update(); particles[i].draw();
+            if (particles[i].alpha <= 0) { particles.splice(i, 1); i--; }
+        }
+        requestAnimationFrame(animate);
+    }
+    animate();
+</script>
+
+</body>
+</html>
