@@ -3,48 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects | MJW Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            background-color: #f8f9fa;
-            color: #333;
-        }
-
-        nav {
-            padding: 20px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: white;
-            border-bottom: 1px solid #eaeaea;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: #666;
-            font-weight: 600;
-            margin-left: 20px;
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: 60px auto;
-            padding: 0 20px;
-        }
-
-        h1 {
-            font-size: 2.8rem;
-            margin-bottom: 50px;
-            font-weight: 800;
-            letter-spacing: -0.02em;
-        }<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects | Julian Whiteley</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
@@ -129,7 +87,15 @@
             border-color: #000;
         }
 
-        .card-image { width: 100%; height: 180px; background-color: #f0f0f0; object-fit: cover; }
+        /* IMAGE HANDLING: Simply change the 'src' in the HTML below to update images */
+        .card-image { 
+            width: 100%; 
+            height: 180px; 
+            background-color: #f0f0f0; /* Default color if image is missing */
+            object-fit: cover; 
+            border-bottom: 1px solid #eee;
+        }
+        
         .card-content { padding: 20px; }
         .card-content h3 { margin: 0 0 10px 0; font-size: 1.2rem; font-weight: 700; }
         .card-content p { font-size: 0.9rem; color: #555; margin: 0; line-height: 1.5; }
@@ -170,12 +136,20 @@
         <p>Energy research and industrial mechanical engineering.</p>
     </div>
     <div class="project-grid">
-        <a href="#" class="project-card">
-            <div class="card-image"></div>
+        <a href="hytec.html" class="project-card">
+            <img src="assets/images/exxon_project.jpg" class="card-image" alt="ExxonMobil">
             <div class="card-content">
                 <span class="tag">Fluid Systems</span>
                 <h3>Hydrogen Release for ExxonMobil</h3>
                 <p>Analysis of high-pressure hydrogen release and safety containment systems.</p>
+            </div>
+        </a>
+        <a href="mcp.html" class="project-card">
+            <img src="assets/images/mcp_turbine.jpg" class="card-image" alt="MCP">
+            <div class="card-content">
+                <span class="tag">Power Gen</span>
+                <h3>MCP</h3>
+                <p>Researching hydrogen mixing in natural gas turbines for decarbonized energy.</p>
             </div>
         </a>
     </div>
@@ -187,12 +161,20 @@
         <p>Autonomous maritime surface vessel engineering.</p>
     </div>
     <div class="project-grid">
-        <a href="projects/tmr_fatigue.html" class="project-card">
-            <div class="card-image"></div>
+        <a href="tmr_baseplate.html" class="project-card">
+            <img src="assets/images/acrylic_fatigue.jpg" class="card-image" alt="Fatigue Analysis">
             <div class="card-content">
                 <span class="tag">Structural Analysis</span>
                 <h3>Acrylic Fatigue Analysis</h3>
                 <p>Utilizing the Goodman Criterion to analyze lifecycle and stress risers in vessel mounting plates.</p>
+            </div>
+        </a>
+        <a href="systems_tmr.html" class="project-card">
+            <img src="assets/images/tmr_systems.jpg" class="card-image" alt="TMR Systems">
+            <div class="card-content">
+                <span class="tag">Validation</span>
+                <h3>Systems</h3>
+                <p>Comprehensive engineering from light towers to thermal validation protocols.</p>
             </div>
         </a>
     </div>
@@ -204,7 +186,7 @@
         <p>Independent engineering explorations and technical builds.</p>
     </div>
     <div class="project-grid">
-        <a href="projects/shroud_pid.html" class="project-card">
+        <a href="shroud_pid.html" class="project-card">
             <img src="assets/images/pid_first_iteration.png" class="card-image" alt="PID Project">
             <div class="card-content">
                 <span class="tag">Thermal / Controls</span>
@@ -212,8 +194,8 @@
                 <p>Closed-loop regulation for thermal management using optimized 3D-printed shrouds.</p>
             </div>
         </a>
-        <a href="#" class="project-card">
-            <div class="card-image"></div>
+        <a href="windturbine.html" class="project-card">
+            <img src="assets/images/wind_turbine.jpg" class="card-image" alt="Wind Turbine">
             <div class="card-content">
                 <span class="tag">Aero / Energy</span>
                 <h3>Wind Turbine Design</h3>
@@ -229,16 +211,16 @@
         <p>Design, manufacturing, and validation for off-road racing vehicles.</p>
     </div>
     <div class="project-grid">
-        <a href="#" class="project-card">
-            <div class="card-image"></div>
+        <a href="rd.html" class="project-card">
+            <img src="assets/images/baja_rd.jpg" class="card-image" alt="Baja R&D">
             <div class="card-content">
                 <span class="tag">Systems Engineering</span>
                 <h3>Research & Design Lead Projects</h3>
                 <p>Overseeing high-level design iterations and data-driven R&D for vehicle performance.</p>
             </div>
         </a>
-        <a href="#" class="project-card">
-            <div class="card-image"></div>
+        <a href="pwt_lbr.html" class="project-card">
+            <img src="assets/images/baja_pwt.jpg" class="card-image" alt="Baja Drivetrain">
             <div class="card-content">
                 <span class="tag">Mechanical Design</span>
                 <h3>Powertrain System</h3>
@@ -254,16 +236,16 @@
         <p>Application of engineering fundamentals to complex analytical problems.</p>
     </div>
     <div class="project-grid">
-        <a href="#" class="project-card">
-            <div class="card-image"></div>
+        <a href="ret.html" class="project-card">
+            <img src="assets/images/renewable.jpg" class="card-image" alt="Renewable Energy">
             <div class="card-content">
                 <span class="tag">Sustainability</span>
                 <h3>Renewable Energy Technology</h3>
                 <p>System-level analysis of energy conversion and sustainable power integration.</p>
             </div>
         </a>
-        <a href="#" class="project-card">
-            <div class="card-image"></div>
+        <a href="failureanalysis.html" class="project-card">
+            <img src="assets/images/failure_analysis.jpg" class="card-image" alt="Fractography">
             <div class="card-content">
                 <span class="tag">Materials Science</span>
                 <h3>Failure Analysis</h3>
@@ -279,8 +261,8 @@
         <p>Advanced propulsion and energy management for electric vehicles.</p>
     </div>
     <div class="project-grid">
-        <a href="#" class="project-card">
-            <div class="card-image"></div>
+        <a href="coastingprofile.html" class="project-card">
+            <img src="assets/images/ecocar_coasting.jpg" class="card-image" alt="EV Coasting">
             <div class="card-content">
                 <span class="tag">Optimization</span>
                 <h3>Coasting Profile Optimization</h3>
@@ -296,8 +278,8 @@
         <p>Mission concept development and aerospace systems engineering.</p>
     </div>
     <div class="project-grid">
-        <a href="#" class="project-card">
-            <div class="card-image"></div>
+        <a href="lspace.html" class="project-card">
+            <img src="assets/images/nasa_lspace.jpg" class="card-image" alt="NASA Mission">
             <div class="card-content">
                 <span class="tag">Aerospace</span>
                 <h3>Mission Concept Design</h3>
@@ -309,7 +291,6 @@
 </div>
 
 <script>
-    /* Smoke trail logic - identical to index.html for perfect consistency */
     const canvas = document.getElementById('smoke-canvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
