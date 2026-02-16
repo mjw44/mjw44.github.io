@@ -1,299 +1,310 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Closed-Loop Thermal Regulation System </title>
-    <meta name="description" content="PID-controlled thermal regulation system with convective heat transfer optimization and MATLAB validation.">
-
-    <!-- MathJax for equations -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PID Control System | Julian Whiteley</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
     <style>
-        body {
-            font-family: verdana, verdana;
-            margin: 0;
-            background-color: #ffffff;
-            color: #222;
+        body, html {
+            margin: 0; padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #fcfcfc;
+            color: #1a1a1a;
             line-height: 1.6;
         }
 
-        header {
-            padding: 50px 20px;
-            text-align: center;
-            border-bottom: 1px solid #ddd;
+        #smoke-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            z-index: 1;
+            pointer-events: none;
         }
 
-        section {
-            max-width: 900px;
-            margin: auto;
-            padding: 40px 20px;
+        nav {
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            border-bottom: 1px solid #eaeaea;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
-        h2 {
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 10px;
+        .nav-logo { font-weight: 800; font-size: 1.2rem; text-decoration: none; color: #1a1a1a; }
+        .nav-links a {
+            text-decoration: none;
+            color: #666;
+            font-weight: 600;
+            margin-left: 25px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
-        img {
-            width: 100%;
-            max-width: 800px;
+        .container {
+            max-width: 850px;
+            margin: 80px auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 5;
+        }
+
+        header { margin-bottom: 60px; }
+        .project-tag { 
+            text-transform: uppercase; 
+            font-weight: 800; 
+            font-size: 0.75rem; 
+            letter-spacing: 0.1em; 
+            color: #bbb;
+            margin-bottom: 10px;
             display: block;
-            margin: 20px auto;
         }
+        h1 { font-size: 3rem; font-weight: 800; letter-spacing: -0.04em; margin: 0 0 20px 0; line-height: 1.1; }
+        .subtitle { font-size: 1.2rem; color: #666; font-weight: 400; }
+
+        section { margin-bottom: 80px; }
+        h2 { font-size: 1.6rem; font-weight: 800; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 30px; }
+        
+        p { margin-bottom: 20px; font-size: 1.05rem; color: #333; }
+        ul { margin-bottom: 20px; }
+        li { margin-bottom: 10px; }
 
         .equation {
-            margin: 20px 0;
-        }
-
-        .back {
+            background: #f8f8f8;
+            padding: 30px;
+            border-radius: 8px;
+            margin: 30px 0;
             text-align: center;
-            padding: 40px;
         }
 
-        a {
-            text-decoration: none;
-            color: black;
-            font-weight: bold;
-        }
-
+        /* IMAGE GRID */
         .image-row {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    margin: 30px 0;
-}
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 40px 0;
+        }
+        .image-column img {
+            width: 100%;
+            height: auto;
+            border-radius: 6px;
+            border: 1px solid #eee;
+        }
+        .caption {
+            font-size: 0.85rem;
+            color: #888;
+            margin-top: 10px;
+            text-align: center;
+            font-style: italic;
+        }
 
-.image-column {
-    flex: 1; /* Makes both columns equal width */
-    text-align: center;
-}
+        .hero-img {
+            width: 100%;
+            border-radius: 12px;
+            margin-bottom: 40px;
+        }
 
-.image-column img {
-    width: 100%; /* Scales image to fit the column */
-    height: auto;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
+        .iteration-header {
+            text-align: center;
+            padding: 40px 0;
+            background: #000;
+            color: #fff;
+            border-radius: 8px;
+            margin: 60px 0;
+        }
 
-.caption {
-    font-size: 0.9em;
-    color: #666;
-    margin-top: 10px;
-    font-style: italic;
-}
+        .back-link {
+            display: inline-block;
+            margin-top: 40px;
+            text-decoration: none;
+            font-weight: 800;
+            color: #000;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            border-bottom: 2px solid #000;
+            padding-bottom: 4px;
+            transition: opacity 0.2s;
+        }
+        .back-link:hover { opacity: 0.6; }
 
-/* On small screens (phones), stack them vertically */
-@media (max-width: 600px) {
-    .image-row {
-        flex-direction: column;
-    }
-}
+        @media (max-width: 600px) {
+            .image-row { grid-template-columns: 1fr; }
+            h1 { font-size: 2.2rem; }
+        }
     </style>
 </head>
-
 <body>
 
-<header>
-    <h1>Closed-Loop Thermal Regulation System</h1>
-    <p>PID-Controlled 18W Heat Load with Convective Optimization</p>
-</header>
+<canvas id="smoke-canvas"></canvas>
 
-<section>
-    <h2>Engineering Objective</h2>
-    <p>
-        Design and experimentally validate a closed-loop thermal regulation system
-        capable of controlling an 18 W resistive heat load using forced convection
-        and PID feedback control.
-    </p>
-</section>
-
-<section>
-   
-</div>
-    
-    <h2>System Architecture</h2>
-    <ul>
-        <li>Arduino-based PID controller</li>
-        <li>18 W resistive heat source</li>
-        <li>Custom ducted fan shroud</li>
-        <li>Thermistor-based temperature sensing</li>
-        <li>Custom PCB (KiCad)</li>
-        <li>MATLAB data processing suite</li>
-    </ul>
-
-     <div class="image-row">
-    <div class="image-column">
-        <img src="../assets/images/shroud_cut_solidworks.png" alt="First iteration prototype">
-        <p class="caption">Figure 1: Design in Solidworks.</p>
+<nav>
+    <a href="../index.html" class="nav-logo">MJW</a>
+    <div class="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="../about.html">About</a>
+        <a href="../projects.html">Projects</a>
+        <a href="../resume.html">Resume</a>
+        <a href="../contact.html">Contact</a>
     </div>
-    <div class="image-column">
-        <img src="../assets/images/pid_first_iteration.png" alt="3D Printed and Integrated System">
-        <p class="caption">Figure 2: Electrical and mechanical system integrated with a thermistor.</p>
-    </div>
-         
-</section>
+</nav>
 
+<div class="container">
+    <header>
+        <span class="project-tag">Thermal Fluids / Controls</span>
+        <h1>Closed-Loop Thermal Regulation</h1>
+        <p class="subtitle">PID-Controlled 18W Heat Load with Convective Optimization</p>
+    </header>
 
-<section>
-    <h2>Control System Implementation</h2>
-
-    <p>
-        A PID controller was implemented to regulate temperature:
-    </p>
-
-    <div class="equation">
-        $$ u(t) = K_p e(t) + K_i \int e(t)\,dt + K_d \frac{de(t)}{dt} $$
-    </div>
-
-    <p>
-        Key challenges:
-    </p>
-
-    <ul>
-        <li>Thermal lag in system response</li>
-        <li>Fan stiction at low PWM values</li>
-    </ul>
-
-    <p>
-        Mitigation strategies:
-    </p>
-
-    <ul>
-        <li>Implemented minimum PWM floor (85/255) to overcome stiction</li>
-        <li>Tuned derivative gain to compensate for thermal inertia</li>
-    </ul>
-</section>
-
-<section>
-    <h2>Experimental Validation</h2>
-
-    <p>
-        Temperature data was collected and processed using MATLAB. 
-        The derivative of temperature with respect to time was computed using a MATLAB script to analyze cooling rates.
-    </p>
-
-    <div class="equation">
-        $$ \frac{dT}{dt} \approx \frac{T_{i+1} - T_i}{\Delta t} $$
-    </div>
-
-    <div class="image-row">
-        <div class="image-column">
-            <img src="../assets/images/pid_rawdata.png" alt="Raw Data">
-            <p class="caption">Figure 3: Raw data from Thermistor graphed with PWM of Fan.</p>
-        </div>
-        <div class="image-column">
-            <img src="../assets/images/pid_dT.png" alt="dT/dt">
-            <p class="caption">Figure 4: Differential temperature change w.r.t. time.</p>
-        </div>
-    </div>
-
-    <div class="analysis-text">
+    <section>
+        <h2>Engineering Objective</h2>
         <p>
-            Analysis of the MATLAB data confirmed that the fan provided negligible cooling work due to poor airflow integration. 
-            Running the resistor at maximum heat generation and conducting a 1D transient heat transfer analysis revealed 
-            that the fan did not provide sufficient forced convection to facilitate cooling.
+            The goal was to design and experimentally validate a closed-loop thermal regulation system 
+            capable of controlling an 18 W resistive heat load using forced convection 
+            and PID feedback control.
         </p>
+    </section>
+
+    <section>
+        <h2>System Architecture</h2>
+        <ul>
+            <li>Arduino-based PID controller</li>
+            <li>18 W resistive heat source</li>
+            <li>Custom ducted fan shroud</li>
+            <li>Thermistor-based temperature sensing</li>
+            <li>Custom PCB (KiCad) & MATLAB data suite</li>
+        </ul>
+
+        <div class="image-row">
+            <div class="image-column">
+                <img src="../assets/images/shroud_cut_solidworks.png" alt="Solidworks Design">
+                <p class="caption">Figure 1: Design in Solidworks.</p>
+            </div>
+            <div class="image-column">
+                <img src="../assets/images/pid_first_iteration.png" alt="Integrated System">
+                <p class="caption">Figure 2: Electrical and mechanical integration.</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Control System Implementation</h2>
+        <p>A PID controller was implemented to regulate temperature based on real-time feedback:</p>
+
+        <div class="equation">
+            $$ u(t) = K_p e(t) + K_i \int e(t)\,dt + K_d \frac{de(t)}{dt} $$
+        </div>
+
+        <p><strong>Key Challenges:</strong> Thermal lag in system response and fan stiction at low PWM values. I mitigated these by implementing a minimum PWM floor (85/255) and tuning derivative gain to compensate for thermal inertia.</p>
+    </section>
+
+    <section>
+        <h2>Experimental Validation</h2>
+        <p>Data was processed using MATLAB, computing the derivative of temperature to analyze real-time cooling rates.</p>
+
+        <div class="equation">
+            $$ \frac{dT}{dt} \approx \frac{T_{i+1} - T_i}{\Delta t} $$
+        </div>
+
+        <div class="image-row">
+            <div class="image-column">
+                <img src="../assets/images/pid_rawdata.png" alt="Raw Data">
+                <p class="caption">Figure 3: Thermistor data vs PWM.</p>
+            </div>
+            <div class="image-column">
+                <img src="../assets/images/pid_dT.png" alt="dT/dt">
+                <p class="caption">Figure 4: Differential temperature change.</p>
+            </div>
+        </div>
 
         <p>
-            To correct this, the second iteration will focus on optimizing the fan-to-heatsink distance and ensuring 
-            direct airflow impingement on the fins. Additionally, the resistor mounting will be optimized to prioritize 
-            conductive heat transfer to the aluminum sink rather than the plastic housing, and the power output will 
-            be adjusted so the fan can effectively mitigate heat generation.
+            Analysis revealed the first iteration had poor airflow integration. To correct this, the second iteration optimizes fan-to-heatsink distance and ensures direct airflow impingement on the fins.
         </p>
-    </div>
-</section>
-    <hr style="border: 0; height: 2px; background: #333; margin: 60px 0;">
+    </section>
 
-<h1 style="text-align: center; text-transform: uppercase; letter-spacing: 2px;">MARK Two</h1>
-<section>
-    <h2>Design Iteration</h2>
-
-    <p>
-        The second iteration changes the orientation of the heat sink, increases the contact area 
-        with the heat sink, creates a direct placement of the thermistor, and optimizes the length of the shroud. 
-    </p>
-
-    <img src="../assets/images/shroud_2_cut_solidworks.png" alt="Second iteration design">
-
-    <p>
-        Testing will be done soon to evaluate changes.
-    </p>
-</section>
-<section>
-    <h2>Convective Heat Transfer Analysis</h2>
-
-    <p>
-        The initial cooling performance was limited by low convective heat transfer.
-        The governing heat transfer relationship:
-    </p>
-
-    <div class="equation">
-        $$ q = h A (T_s - T_\infty) $$
+    <div class="iteration-header">
+        <h2 style="border:0; margin:0; color:#fff;">MARK TWO</h2>
+        <p style="margin:5px 0 0 0; font-size:0.9rem; opacity:0.8;">Iterative Design Refinement</p>
     </div>
 
-    <p>
-        The heat transfer coefficient \( h \) depends on the Nusselt number:
-    </p>
-
-    <div class="equation">
-        $$ Nu = \frac{h L}{k} $$
-    </div>
-
-    <p>
-        For forced convection:
-    </p>
-
-    <div class="equation">
-        $$ Nu = f(Re, Pr) $$
-    </div>
-
-    <p>
-        To increase \( Nu \), the duct geometry was redesigned with a converging
-        cross-sectional area to increase local air velocity and Reynolds number:
-    </p>
-
-    <div class="equation">
-        $$ Re = \frac{\rho V L}{\mu} $$
-    </div>
-
-    <p>
-        Increasing Reynolds number increased convective heat transfer capability.
-    </p>
-    <div class="image-row">
-    <div class="image-column">
-        <img src="../assets/images/shroud_opti.png" alt="MATLAB Script">
-        <p class="caption">Figure 5: Differential MATLAB script to obtain the optimal shroud length.</p>
-    </div>
-    <div class="image-column">
-        <img src="../assets/images/matlab_ht_results.png" alt="MATLAB H.T. Results">
-        <p class="caption">Figure 6: Results of MATLAB script. Provides maximum amount of power the 
-        fan can support given the specs.</p>
-    </div>
+    <section>
+        <h2>Design Iteration</h2>
+        <p>The second iteration changes heatsink orientation, increases contact area, and optimizes shroud length based on MATLAB heat transfer models.</p>
         
-</section>
-<section>
-    <h2>Engineering Takeaways</h2>
+        <img src="../assets/images/shroud_2_cut_solidworks.png" class="hero-img" alt="Mark Two Design">
+    </section>
 
-    <ul>
-        <li>Convective geometry dominated system performance more than control tuning.</li>
-        <li>Iterative prototyping revealed flow inefficiencies not captured analytically.</li>
-        <li>Experimental validation was essential for model refinement.</li>
-    </ul>
-</section>
-<section>
+    <section>
+        <h2>Convective Heat Transfer Analysis</h2>
+        <p>I utilized the Nusselt number and Reynolds relationship to redesign the duct geometry with a converging cross-sectional area to increase local air velocity:</p>
 
-<h2>Next Steps</h2>
+        <div class="equation">
+            $$ Nu = \frac{h L}{k} \quad \text{and} \quad Re = \frac{\rho V L}{\mu} $$
+        </div>
 
-    <ul>
-<li> Manufacture the new shroud design.</li>
-<li> Test the new shroud and validate.</li>
-        
-    </ul>
-</section>
-    
-<div class="back">
-    <a href="../index.html">← Back to Portfolio</a>
+        <div class="image-row">
+            <div class="image-column">
+                <img src="../assets/images/shroud_opti.png" alt="Optimization Script">
+                <p class="caption">Figure 5: Shroud length optimization script.</p>
+            </div>
+            <div class="image-column">
+                <img src="../assets/images/matlab_ht_results.png" alt="Results">
+                <p class="caption">Figure 6: Maximum supported power output specs.</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Engineering Takeaways</h2>
+        <ul>
+            <li><strong>Geometry Matters:</strong> Convective geometry dominated system performance more than control tuning.</li>
+            <li><strong>Model Refinement:</strong> Iterative prototyping revealed flow inefficiencies not captured analytically.</li>
+            <li><strong>Validation:</strong> Experimental data was the only true way to confirm heat transfer coefficients.</li>
+        </ul>
+    </section>
+
+    <a href="../projects.html" class="back-link">← Back to Projects</a>
 </div>
 
+<script>
+    /* Black Smoke Trail Script */
+    const canvas = document.getElementById('smoke-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    window.addEventListener('resize', resize);
+    resize();
+    class Particle {
+        constructor(x, y) {
+            this.x = x; this.y = y;
+            this.size = Math.random() * 5 + 2;
+            this.speedX = (Math.random() - 0.5) * 0.8;
+            this.speedY = (Math.random() - 0.5) * 0.8;
+            this.color = 'rgba(0, 0, 0,';
+            this.alpha = 0.2;
+            this.decay = Math.random() * 0.015 + 0.01;
+        }
+        update() { this.x += this.speedX; this.y += this.speedY; if (this.size > 0.2) this.size -= 0.05; this.alpha -= this.decay; }
+        draw() { ctx.fillStyle = this.color + this.alpha + ')'; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
+    }
+    window.addEventListener('mousemove', (e) => { 
+        for(let i=0; i<2; i++) particles.push(new Particle(e.clientX, e.clientY)); 
+    });
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < particles.length; i++) {
+            particles[i].update(); particles[i].draw();
+            if (particles[i].alpha <= 0) { particles.splice(i, 1); i--; }
+        }
+        requestAnimationFrame(animate);
+    }
+    animate();
+</script>
 
 </body>
 </html>
