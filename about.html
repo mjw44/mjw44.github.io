@@ -1,1 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Julian Whiteley</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0; padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #fcfcfc;
+            color: #1a1a1a;
+            overflow-x: hidden;
+        }
 
+        #smoke-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        nav {
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            border-bottom: 1px solid #eaeaea;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-logo { font-weight: 800; font-size: 1.2rem; text-decoration: none; color: #1a1a1a; }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #666;
+            font-weight: 600;
+            margin-left: 25px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 80px auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 5;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 60px;
+        }
+
+        @media (max-width: 768px) {
+            .container { grid-template-columns: 1fr; }
+        }
+
+        h1 { font-size: 3rem; font-weight: 800; letter-spacing: -0.04em; margin-bottom: 20px; }
+        
+        .bio-text {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            color: #444;
+            margin-bottom: 30px;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #999;
+            font-weight: 800;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .info-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            transition: border-color 0.3s ease;
+        }
+
+        .info-card:hover { border-color: #000; }
+
+        .info-card h3 { margin-top: 0; font-size: 1.1rem; font-weight: 700; }
+
+        .list-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .list-item span:first-child { color: #888; }
+        .list-item span:last-child { font-weight: 600; text-align: right; }
+
+        .philosophy-quote {
+            font-style: italic;
+            border-left: 3px solid #1a1a1a;
+            padding-left: 20px;
+            margin: 20px 0;
+            color: #555;
+        }
+
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            background: #f0f0f0;
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="smoke-canvas"></canvas>
+
+<nav>
+    <a href="index.html" class="nav-logo">MJW</a>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html" style="color: black;">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="resume.html">Resume</a>
+        <a href="contact.html">Contact</a>
+    </div>
+</nav>
+
+<div class="container">
+    <div>
+        <span class="section-label">Background</span>
+        <h1>Engineering with Intent.</h1>
+        <p class="bio-text">
+            I am a motivated Mechanical Engineering student at UT Austin with a deep focus on the intersection of education and technical innovation. Driven by a desire to help people, I am currently preparing for advanced research through a Master's or PhD program. My work is defined by a commitment to rigorous learning and the belief that engineering is most valuable when it directly improves human lives.
+        </p>
+
+        <span class="section-label">Core Philosophy</span>
+        <div class="philosophy-quote">
+            "Keep moving forward."
+        </div>
+        <p class="bio-text" style="font-size: 1rem;">
+            My mindset is rooted in the principles of <strong>Stoicism</strong> and the relentless drive of <strong>Eren Yeager</strong>—to persist regardless of obstacles. Influenced by the discipline of <strong>David Laid</strong>, I believe in constant growth, the necessity of making mistakes, and the resilience required to learn from them.
+        </p>
+
+        <span class="section-label">Fun Fact</span>
+        <div class="info-card">
+            <p style="margin:0; font-weight: 700;">Eagle Scout</p>
+            <p style="margin:5px 0 0 0; font-size: 0.9rem; color: #666;">Demonstrated leadership and commitment through the highest rank in the BSA.</p>
+        </div>
+    </div>
+
+    <div>
+        <span class="section-label">Hobbies & Interests</span>
+        <div class="info-card">
+            <div class="tag-cloud">
+                <div class="tag">Bodybuilding</div>
+                <div class="tag">Cooking</div>
+                <div class="tag">Music</div>
+                <div class="tag">Marvel</div>
+                <div class="tag">Outdoors</div>
+            </div>
+        </div>
+
+        <span class="section-label">The Favorites</span>
+        <div class="info-card">
+            <div class="list-item">
+                <span>Song</span>
+                <span>Pork Soda — Glass Animals</span>
+            </div>
+            <div class="list-item">
+                <span>Movie</span>
+                <span>10 Things I Hate About You</span>
+            </div>
+            <div class="list-item">
+                <span>Food</span>
+                <span>Cabo Bob's (Steak Burrito)</span>
+            </div>
+        </div>
+
+        <span class="section-label">Academic Path</span>
+        <div class="info-card">
+            <h3>Focus Areas</h3>
+            <p style="font-size: 0.9rem; color: #555; line-height: 1.5;">
+                Seeking opportunities in higher education to develop sustainable solutions and mentorship frameworks within the mechanical engineering domain.
+            </p>
+        </div>
+    </div>
+</div>
+
+<script>
+    /* Smoke trail logic - identical to other pages */
+    const canvas = document.getElementById('smoke-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    window.addEventListener('resize', resize);
+    resize();
+    class Particle {
+        constructor(x, y) {
+            this.x = x; this.y = y;
+            this.size = Math.random() * 5 + 2;
+            this.speedX = (Math.random() - 0.5) * 0.8;
+            this.speedY = (Math.random() - 0.5) * 0.8;
+            this.color = 'rgba(0, 0, 0,';
+            this.alpha = 0.2;
+            this.decay = Math.random() * 0.015 + 0.01;
+        }
+        update() { this.x += this.speedX; this.y += this.speedY; if (this.size > 0.2) this.size -= 0.05; this.alpha -= this.decay; }
+        draw() { ctx.fillStyle = this.color + this.alpha + ')'; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
+    }
+    window.addEventListener('mousemove', (e) => { particles.push(new Particle(e.clientX, e.clientY)); });
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < particles.length; i++) {
+            particles[i].update(); particles[i].draw();
+            if (particles[i].alpha <= 0) { particles.splice(i, 1); i--; }
+        }
+        requestAnimationFrame(animate);
+    }
+    animate();
+</script>
+
+</body>
+</html>
