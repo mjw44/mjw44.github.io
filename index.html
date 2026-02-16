@@ -6,51 +6,63 @@
     <title>Julian Whiteley | Mechanical Engineering</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --hue: 15; /* Starts at Red/Orange (approx 15-30) */
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
+        body, html {
             margin: 0;
             padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: 'Inter', sans-serif;
             overflow-x: hidden;
+            /* The Base "Surface" color */
+            background-color: #ff4d00; 
             color: #1a1a1a;
-            min-height: 100vh;
-            /* Animated background layer */
-            background: linear-gradient(135deg, hsl(var(--hue), 90%, 60%), hsl(calc(var(--hue) + 40), 90%, 60%));
-            transition: background 0.4s ease;
         }
 
-        /* NAVIGATION - Top Right Alignment */
+        /* The 3D Wave/Sinking Layer */
+        .gradient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 1;
+            /* Localized "Sinkhole" effect using radial gradient */
+            background: radial-gradient(
+                600px circle at var(--mouse-x) var(--mouse-y), 
+                rgba(128, 0, 128, 0.8) 0%,   /* Deep Purple at center */
+                rgba(255, 69, 0, 0.4) 40%,   /* Transition to Orange */
+                rgba(255, 0, 0, 0) 80%       /* Fade to transparent */
+            ),
+            linear-gradient(135deg, #ff8200 0%, #ff4d00 100%);
+        }
+
+        /* NAVIGATION - Top Right */
         nav {
             padding: 30px 50px;
             display: flex;
-            justify-content: flex-end; /* Pushes links to the top right */
-            align-items: center;
+            justify-content: flex-end;
             position: relative;
             z-index: 10;
         }
 
         nav a {
             text-decoration: none;
-            color: rgba(0,0,0,0.7);
+            color: #fff;
             font-weight: 700;
             margin-left: 30px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            transition: color 0.2s;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        nav a:hover { color: #000; }
-
-        /* HERO SECTION */
-        header {
-            padding: 40px 20px;
-            text-align: center;
+        /* CONTENT WRAPPER */
+        .content {
             position: relative;
             z-index: 5;
+            text-align: center;
+            margin-top: 5vh;
         }
 
         h1 {
@@ -58,62 +70,61 @@
             font-weight: 800;
             margin: 0;
             letter-spacing: -0.04em;
+            color: #fff;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.15);
         }
 
         .subtitle {
             font-size: 1.1rem;
-            color: rgba(0,0,0,0.6);
+            color: rgba(255, 255, 255, 0.9);
             margin: 10px auto;
             font-weight: 600;
         }
 
-        /* NAVIGATION GRID - Smaller Blocks */
-        section {
-            max-width: 600px; /* Constrained width makes blocks feel smaller */
-            margin: auto;
-            padding: 20px;
-            position: relative;
-            z-index: 5;
-        }
-
+        /* SMALLER MENU BLOCKS */
         .menu-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 15px; /* Tighter gap */
+            gap: 15px;
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 20px;
         }
 
         .menu-box {
-            background: rgba(255, 255, 255, 0.15); /* Glassmorphism effect */
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 25px 15px; /* Smaller padding */
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 20px;
             border-radius: 12px;
             text-decoration: none;
-            text-align: center;
-            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
         }
 
         .menu-box strong {
-            font-size: 1.1rem; /* Smaller text */
+            font-size: 1rem;
             font-weight: 800;
-            color: #000;
+            color: #fff;
             display: block;
         }
 
         .menu-box span {
-            color: rgba(0,0,0,0.6);
-            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.75rem;
         }
 
         .menu-box:hover {
-            background: rgba(255, 255, 255, 0.9);
-            transform: scale(1.03);
+            transform: scale(1.05) translateY(-5px);
+            background: rgba(255, 255, 255, 0.2);
             border-color: #fff;
         }
-
     </style>
 </head>
 <body>
+
+<div class="gradient-bg" id="bg"></div>
 
 <nav>
     <a href="index.html">Home</a>
@@ -123,12 +134,12 @@
     <a href="contact.html">Contact</a>
 </nav>
 
-<header>
-    <h1>Julian Whiteley</h1>
-    <p class="subtitle">Mechanical Engineering @ UT Austin</p>
-</header>
+<div class="content">
+    <header>
+        <h1>Julian Whiteley</h1>
+        <p class="subtitle">Mechanical Engineering @ UT Austin</p>
+    </header>
 
-<section>
     <div class="menu-grid">
         <a href="projects.html" class="menu-box">
             <strong>Projects</strong>
@@ -147,41 +158,34 @@
             <span>Get in Touch</span>
         </a>
     </div>
-</section>
+</div>
 
 <script>
-    let currentHue = 15; // Starting Orange/Red
-    let targetHue = 15;
-    let time = 0;
+    const bg = document.getElementById('bg');
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let currentX = mouseX;
+    let currentY = mouseY;
 
-    // Change hue based on cursor horizontal position
+    // Capture Mouse Position
     window.addEventListener('mousemove', (e) => {
-        // Map mouse X position to a Hue range (15 = Red/Orange, 280 = Purple)
-        const percent = e.clientX / window.innerWidth;
-        targetHue = 15 + (percent * 265); 
+        mouseX = e.clientX;
+        mouseY = e.clientY;
     });
 
-    // Smooth transition & Time-based oscillation
-    function updateBackground() {
-        time += 0.01;
-        // Linear interpolation for smooth mouse following
-        currentHue += (targetHue - currentHue) * 0.05;
-        
-        // Add a slight time-based wave so it feels alive even if mouse is still
-        const wave = Math.sin(time) * 5;
-        const finalHue = currentHue + wave;
+    function animate() {
+        // Easing/Smoothing: (Target - Current) * Speed
+        currentX += (mouseX - currentX) * 0.1;
+        currentY += (mouseY - currentY) * 0.1;
 
-        document.documentElement.style.setProperty('--hue', finalHue);
-        
-        // Update background gradient
-        document.body.style.background = `linear-gradient(135deg, 
-            hsl(${finalHue}, 85%, 70%), 
-            hsl(${finalHue + 40}, 85%, 60%))`;
+        // Update CSS Variables
+        bg.style.setProperty('--mouse-x', currentX + 'px');
+        bg.style.setProperty('--mouse-y', currentY + 'px');
 
-        requestAnimationFrame(updateBackground);
+        requestAnimationFrame(animate);
     }
 
-    updateBackground();
+    animate();
 </script>
 
 </body>
