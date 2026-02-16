@@ -53,7 +53,13 @@
             z-index: 5;
         }
 
-        h1 { font-size: 2.5rem; font-weight: 800; letter-spacing: -0.04em; margin-bottom: 40px; }
+        h1 { 
+            font-size: 1.5rem; 
+            font-weight: 800; 
+            letter-spacing: -0.02em; 
+            margin-bottom: 25px; 
+            color: #1a1a1a;
+        }
         
         section { margin-bottom: 60px; }
 
@@ -85,11 +91,12 @@
         .item strong { color: #1a1a1a; display: block; margin-bottom: 2px; }
 
         .quote {
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: #1a1a1a;
-            margin: 40px 0;
-            letter-spacing: -0.02em;
+            font-size: 3.2rem;
+            font-weight: 800;
+            color: #000;
+            margin: 50px 0;
+            letter-spacing: -0.05em;
+            line-height: 1;
         }
 
         hr { border: 0; border-top: 1px solid #eee; margin: 40px 0; }
@@ -113,10 +120,10 @@
 <div class="container">
     
     <section>
-        <span class="label">The Gist</span>
         <h1>Julian Whiteley.</h1>
-        <p>Mechanical engineering at UT Austin. Currently aiming for a Master's or PhD. I like building things that actually help people, staying curious, and learning from the inevitable mistakes.</p>
-        <div class="quote">"Keep moving forward."</div>
+        <p>Mechanical engineering at UT Austin. Currently aiming for a Master's or PhD. I like building things that actually help people, staying curious, and spending my time <strong>tutoring others</strong> through the fundamentals of engineering.</p>
+        
+        <div class="quote">Keep moving forward.</div>
     </section>
 
     <hr>
@@ -130,6 +137,7 @@
         <span class="label">Extras</span>
         <div class="grid-simple">
             <div class="item"><strong>Eagle Scout</strong> Rank attained.</div>
+            <div class="item"><strong>Tutoring</strong> Solids, Statics, Dynamics.</div>
             <div class="item"><strong>Class</strong> Favorite: Mechanics of Solids.</div>
             <div class="item"><strong>Hobbies</strong> Bodybuilding, cooking, outdoors.</div>
             <div class="item"><strong>Music</strong> Glass Animals — Pork Soda.</div>
@@ -142,6 +150,7 @@
 </div>
 
 <script>
+    /* Smoke trail script logic */
     const canvas = document.getElementById('smoke-canvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
