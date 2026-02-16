@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +11,7 @@
             width: 100%; height: 100%;
             font-family: 'Inter', sans-serif;
             background-color: #fcfcfc;
-            overflow: hidden; /* Keeps the smoke effect contained */
+            overflow: hidden; 
             color: #1a1a1a;
         }
 
@@ -23,7 +22,6 @@
             pointer-events: none;
         }
 
-        /* NAVIGATION - Standardized across all pages */
         nav {
             padding: 20px 40px;
             display: flex;
@@ -45,26 +43,22 @@
             font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            transition: color 0.2s;
         }
 
-        .nav-links a:hover { color: #000; }
-
-        /* RESUME CONTENT AREA */
         .resume-container {
             position: relative;
             z-index: 5;
             max-width: 1000px;
-            height: 78vh;
-            margin: 2vh auto;
+            height: 75vh;
+            margin: 3vh auto;
             text-align: center;
             padding: 0 20px;
         }
 
-        .header-area { margin-bottom: 20px; }
-        h1 { font-size: 2.2rem; font-weight: 800; margin: 0; letter-spacing: -0.04em; color: #1a1a1a; }
+        .header-area { margin-bottom: 15px; }
+        h1 { font-size: 2.2rem; font-weight: 800; margin: 0; letter-spacing: -0.04em; }
 
-        /* VIEWER BOX */
+        /* This box holds the iframe */
         .resume-viewer {
             width: 100%;
             height: 100%;
@@ -75,11 +69,15 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.03);
         }
 
-        iframe { width: 100%; height: 100%; border: none; }
+        iframe { 
+            width: 100%; 
+            height: 100%; 
+            border: none; 
+        }
 
         .cta-button {
             display: inline-block;
-            margin-top: 15px;
+            margin-top: 10px;
             padding: 10px 20px;
             background: #1a1a1a;
             color: #fff;
@@ -87,11 +85,7 @@
             border-radius: 6px;
             font-weight: 600;
             font-size: 0.85rem;
-            transition: transform 0.2s ease;
         }
-
-        .cta-button:hover { transform: scale(1.03); background: #000; }
-
     </style>
 </head>
 <body>
@@ -112,23 +106,22 @@
 <div class="resume-container">
     <div class="header-area">
         <h1>Curriculum Vitae</h1>
-        <a href="https://docs.google.com/document/d/17PmqW3bWh0yHhcJy_bkhuZpTg7y4KTYsAd66SAEX-3Y/edit?usp=sharing" target="_blank" class="cta-button">Open in Google Drive</a>
+        <a href="https://docs.google.com/document/d/17PmqW3bWh0yHhcJy_bkhuZpTg7y4KTYsAd66SAEX-3Y/export?format=pdf" class="cta-button">Download PDF</a>
     </div>
 
     <div class="resume-viewer">
-        <iframe src="https://docs.google.com/viewer?srcid=17PmqW3bWh0yHhcJy_bkhuZpTg7y4KTYsAd66SAEX-3Y&pid=explorer&efb=false&a=v&chrome=false&embedded=true"></iframe>
+        <iframe src="https://docs.google.com/document/d/17PmqW3bWh0yHhcJy_bkhuZpTg7y4KTYsAd66SAEX-3Y/preview"></iframe>
     </div>
 </div>
 
 <script>
-    /* MINIMALIST BLACK INK TRAIL - Perfectly synced with other pages */
+    /* Smoke trail script remains the same to keep the ink effect */
     const canvas = document.getElementById('smoke-canvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
     function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
     window.addEventListener('resize', resize);
     resize();
-
     class Particle {
         constructor(x, y) {
             this.x = x; this.y = y;
@@ -149,9 +142,7 @@
             ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); 
         }
     }
-
     window.addEventListener('mousemove', (e) => { particles.push(new Particle(e.clientX, e.clientY)); });
-
     function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         for (let i = 0; i < particles.length; i++) {
