@@ -46,20 +46,21 @@
     <header>
         <span class="project-tag">Optimization / Simulink</span>
         <h1>Cadillac LYRIQ Coasting Profile</h1>
-        <p class="subtitle">Predictive Modeling of Vehicle Kinematic Decay for ECOCAR V2X</p>
+        <p class="subtitle">Predictive Modeling for ECOCAR V2X</p>
     </header>
 
     <section>
         <h2>Project Overview</h2>
         <p>
-            As part of the ECOCAR V2X challenge, I developed a high-fidelity model designed to predict the coasting profile of the Cadillac LYRIQ. By translating vehicle dynamics into a computational loop, I solved differential equations that account for aerodynamic drag, rolling friction, and gravitational forces. This tool allows for the precise estimation of vehicle deceleration, providing a critical foundation for optimizing regenerative braking strategies.
+            As part of the ECOCAR V2X challenge, I developed a model designed to predict the coasting profile of the Cadillac LYRIQ. By translating vehicle dynamics into a computational loop in SIMULINK, I solved differential equations that account for aerodynamic drag, rolling friction, and gravitational forces. 
+            This allowed braking optimization and timing enhancements. 
         </p>
     </section>
 
     <section>
         <h2>Mathematical Modeling</h2>
         <p>
-            The core of the project involved modeling the vehicle as a dynamic system governed by Newton’s Second Law. To achieve predictive accuracy, the model accounts for the non-linear nature of aerodynamic drag alongside gravitational components determined by road gradients.
+            The core of the project involved modeling the vehicle as a dynamic system governed by Newton’s Second Law. To achieve predictive accuracy, the model accounts for the non-linear nature of aerodynamic drag alongside gravitational components determined by road geoemetry. 
         </p>
         
         
@@ -101,16 +102,27 @@
         </div>
         
         <p>
-            By comparing the resulting profiles, I successfully refined the model’s coefficients, demonstrating a robust ability to simulate the kinematic decay of a heavy-chassis EV under passive coasting scenarios.
+            By comparing the resulting profiles, I refined the model’s coefficients, demonstrating a robust ability to simulate the velocity reduction without breaking.
         </p>
     </section>
 
     <section>
         <h2>Engineering Takeaways</h2>
         <ul>
-            <li><strong>Recursive Solving:</strong> Utilized iterative loops to solve differential equations regarding drag, friction, and gravity.</li>
-            <li><strong>Component Isolation:</strong> Isolated drag and friction forces to verify the sensitivity of the Cadillac LYRIQ’s coasting distance to specific environmental variables.</li>
-            <li><strong>V2X Application:</strong> This model serves as a prerequisite for predictive "Green Wave" driving, where the vehicle calculates optimal coasting to minimize energy loss at upcoming intersections.</li>
+            <li><strong>Recursive Solving:</strong> Developed an iterative loop in Simulink to solve second-order differential equations based on real-time feedback of drag and friction forces.</li>
+            <li><strong>Parameter Sensitivity:</strong> By isolating air drag ($v^2$ dependence) from rolling resistance (constant $\mu$), I determined that aerodynamic efficiency is the dominant factor in LYRIQ range at speeds exceeding 45 mph.</li>
+            <li><strong>V2X Application:</strong> This kinematic model allows the vehicle to approximate when to lift off the accelerator to arrive at a green light without braking.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Retrospective: Engineering Growth</h2>
+        <p style="font-style: italic; color: #555;">Looking back on the development cycle, there are several architectural and procedural changes I would implement for a higher quality result:</p>
+        
+        <ul>
+            <li><strong>Non-Linear Friction Coefficients:</strong> I utilized a constant coefficient for rolling resistance. However, tire deformation and heat build-up make $\mu$ non-linear. </li>
+            <li><strong>Data Version Control (Git):</strong> I lost the final iteration of this project. This event calls for a better organization of data and information. </li>
+            <li><strong>Experimental Cross-Referencing:</strong> Given more time, I would have liked to cross-reference these Simulink results with actual CAN bus data from a Cadillac LYRIQ test track run to tune coefficients. </li>
         </ul>
     </section>
 
@@ -119,6 +131,35 @@
 
 <script>
     /* Insert the same smoke trail script here as used in previous pages */
+     const canvas = document.getElementById('smoke-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    window.addEventListener('resize', resize);
+    resize();
+    class Particle {
+        constructor(x, y) {
+            this.x = x; this.y = y;
+            this.size = Math.random() * 5 + 2;
+            this.speedX = (Math.random() - 0.5) * 0.8;
+            this.speedY = (Math.random() - 0.5) * 0.8;
+            this.color = 'rgba(0, 0, 0,';
+            this.alpha = 0.2;
+            this.decay = Math.random() * 0.015 + 0.01;
+        }
+        update() { this.x += this.speedX; this.y += this.speedY; if (this.size > 0.2) this.size -= 0.05; this.alpha -= this.decay; }
+        draw() { ctx.fillStyle = this.color + this.alpha + ')'; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
+    }
+    window.addEventListener('mousemove', (e) => { particles.push(new Particle(e.clientX, e.clientY)); });
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < particles.length; i++) {
+            particles[i].update(); particles[i].draw();
+            if (particles[i].alpha <= 0) { particles.splice(i, 1); i--; }
+        }
+        requestAnimationFrame(animate);
+    }
+    animate();
 </script>
 
 </body>
