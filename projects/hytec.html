@@ -9,11 +9,11 @@
         :root { --bg: #fdfdfd; --text: #1a1a1a; --muted: #888; --accent: #eee; }
         body { margin: 0; font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
         
-        .container { max-width: 1000px; margin: 0 auto; padding: 100px 40px; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 100px 40px; }
         
         /* Typography */
         .hero-tag { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.25em; color: var(--muted); }
-        h1 { font-size: 4rem; font-weight: 800; letter-spacing: -0.05em; margin: 15px 0 60px 0; line-height: 1; }
+        h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -0.05em; margin: 15px 0 60px 0; line-height: 1.1; }
         h2 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.3em; color: #bbb; margin-bottom: 20px; border-bottom: 1px solid var(--accent); padding-bottom: 10px; }
         h3 { font-size: 1.8rem; font-weight: 800; margin-top: 0; letter-spacing: -0.02em; }
         p { color: #444; font-size: 1.05rem; margin-bottom: 30px; }
@@ -21,19 +21,26 @@
         /* The "Seamless" Model Viewer Box */
         .model-viewer {
             width: 100%;
-            height: 500px;
+            min-height: 500px;
             background: radial-gradient(circle at center, #ffffff 0%, #f4f4f2 100%);
             border-radius: 12px;
-            display: flex; align-items: center; justify-content: center;
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Two models side-by-side */
+            align-items: center;
+            justify-items: center;
             border: 1px solid rgba(0,0,0,0.05);
             margin-bottom: 80px;
             position: relative;
+            padding: 40px;
+            box-sizing: border-box;
+            gap: 20px;
         }
         .model-viewer img { 
-            max-width: 75%; max-height: 80%; 
+            max-width: 90%; 
+            max-height: 400px; 
             object-fit: contain; 
-            mix-blend-mode: multiply; /* SEAMLESS EFFECT */
-            filter: drop-shadow(0 30px 50px rgba(0,0,0,0.1));
+            mix-blend-mode: multiply;
+            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.08));
         }
 
         /* Project Specs Bar */
@@ -48,17 +55,21 @@
         /* Content Sections */
         .process-section { display: grid; grid-template-columns: 1.2fr 1fr; gap: 80px; margin-bottom: 120px; align-items: start; }
         .calc-box { 
-            background: #fff; border: 1px solid #eee; padding: 30px; border-radius: 8px;
+            background: #fff; border: 1px solid #eee; padding: 25px; border-radius: 8px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.02);
         }
-        .calc-box img { width: 100%; height: auto; border-radius: 4px; }
+        .calc-box img { width: 100%; height: auto; border-radius: 4px; margin-bottom: 15px; }
 
         /* Embed Section */
-        .drive-container { margin-top: 60px; }
-        .drive-embed { width: 100%; height: 700px; border: 1px solid #eee; border-radius: 12px; }
+        .drive-embed { 
+            width: 100%; 
+            height: 500px; 
+            border: none; 
+            border-radius: 6px;
+        }
 
         @media (max-width: 800px) {
-            .process-section, .specs-bar { grid-template-columns: 1fr; }
+            .process-section, .specs-bar, .model-viewer { grid-template-columns: 1fr; }
             h1 { font-size: 2.8rem; }
         }
     </style>
@@ -72,8 +83,8 @@
     </header>
 
     <div class="model-viewer">
-        <img src="assets/images/hytec2.png" alt="SolidWorks Assembly of 30ft Structure">
-      <img src="assets/images/hytec.png" alt="Full Integration of 30ft Structure">
+        <img src="assets/images/hytec2.png" alt="SolidWorks Assembly Side Profile">
+        <img src="assets/images/hytec.png" alt="Full Integration Top View">
         <div style="position: absolute; bottom: 20px; right: 20px; font-size: 0.6rem; color: #ccc; letter-spacing: 0.1em; text-transform: uppercase;">SolidWorks 2023 Assembly</div>
     </div>
 
@@ -95,19 +106,19 @@
             <h2>Calculation Focus</h2>
             <h3>Thrust & Control Volumes</h3>
             <p>One critical validation was the <strong>Thrust Calculation</strong>. Using a Control Volume analysis (FBD), I proved that the force exerted by the escaping hydrogen gas at high pressure was negligible relative to the structural rigidity.</p>
-            <img src="assets/images/thrust1.png" alt="Thrust validation hand calculations">
-                 <img src="assets/images/thrust2.png" alt="Thrust validation hand calculations">
+            <img src="assets/images/thrust1.png" alt="Thrust FBD Part 1">
+            <img src="assets/images/thrust2.png" alt="Thrust FBD Part 2">
         </div>
     </section>
 
     <section class="process-section">
         <div class="calc-box">
-               <iframe class="drive-embed" src="https://docs.google.com/spreadsheets/d/1K6oVTNjNhzGb5lsOnSByf6RhRiQGVNh3CQIiusCvfsA/edit?usp=sharing"></iframe>
+            <iframe class="drive-embed" src="https://docs.google.com/spreadsheets/d/1K6oVTNjNhzGb5lsOnSByf6RhRiQGVNh3CQIiusCvfsA/edit?rm=minimal"></iframe>
         </div>
         <div>
             <h2>Structural Integrity</h2>
             <h3>Buckling Validation</h3>
-            <p>Ensuring the structure could withstand environmental and operational loads meant calculating the Critical Buckling Load for the single-beam members. I performed iterative Second Moment of Inertia calculations to select the absolute minimum material required to safely support the span while meeting the "low cost" requirement.</p>
+            <p>Ensuring the structure could withstand environmental and operational loads meant calculating the <strong>Critical Buckling Load</strong> for the single-beam members. I performed iterative Second Moment of Inertia calculations to select the absolute minimum material required to safely support the span while meeting the "low cost" requirement.</p>
         </div>
     </section>
 
