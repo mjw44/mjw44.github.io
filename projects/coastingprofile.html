@@ -110,7 +110,7 @@
         <h2>Engineering Takeaways</h2>
         <ul>
             <li><strong>Recursive Solving:</strong> Developed an iterative loop in Simulink to solve second-order differential equations based on real-time feedback of drag and friction forces.</li>
-            <li><strong>Parameter Sensitivity:</strong> By isolating air drag ($v^2$ dependence) from rolling resistance (constant $\mu$), I determined that aerodynamic efficiency is the dominant factor in LYRIQ range at speeds exceeding 45 mph.</li>
+            <li><strong>Parameter Sensitivity:</strong> By isolating air drag from rolling resistance, I determined that aerodynamic efficiency is the dominant factor in LYRIQ range at speeds exceeding 45 mph.</li>
             <li><strong>V2X Application:</strong> This kinematic model allows the vehicle to approximate when to lift off the accelerator to arrive at a green light without braking.</li>
         </ul>
     </section>
@@ -120,9 +120,9 @@
         <p style="font-style: italic; color: #555;">Looking back on the development cycle, there are several architectural and procedural changes I would implement for a higher quality result:</p>
         
         <ul>
-            <li><strong>Non-Linear Friction Coefficients:</strong> I utilized a constant coefficient for rolling resistance. However, tire deformation and heat build-up make $\mu$ non-linear. </li>
+            <li><strong>Non-Linear Friction Coefficients:</strong> Tire deformation and heat build-up make friction non-linear. </li>
             <li><strong>Data Version Control (Git):</strong> I lost the final iteration of this project. This event calls for a better organization of data and information. </li>
-            <li><strong>Experimental Cross-Referencing:</strong> Given more time, I would have liked to cross-reference these Simulink results with actual CAN bus data from a Cadillac LYRIQ test track run to tune coefficients. </li>
+            <li><strong>Experimental Cross-Referencing:</strong> I would have liked to cross-reference these Simulink results with actual CAN bus data from the LYRIQ to tune coefficients. </li>
         </ul>
     </section>
 
