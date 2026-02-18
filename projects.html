@@ -71,11 +71,11 @@
 
         .project-card {
             background: white;
-            border-radius: 8px;
+            border-radius: 12px;
             overflow: hidden;
             text-decoration: none;
             color: inherit;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             border: 1px solid #e0e0e0;
             display: flex;
             flex-direction: column;
@@ -83,9 +83,46 @@
         }
 
         .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-            border-color: #000;
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+            border-color: #1a1a1a;
+        }
+
+        /* NEW IMAGE CONTAINER LOGIC */
+        .card-image-container {
+            width: 100%;
+            height: 200px;
+            background-color: #f9f9f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-bottom: 1px solid #eee;
+            padding: 15px;
+            box-sizing: border-box;
+        }
+
+        .card-image { 
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05));
+        }
+        
+        .card-content { padding: 24px; }
+        .card-content h3 { margin: 0 0 10px 0; font-size: 1.25rem; font-weight: 800; }
+        .card-content p { font-size: 0.95rem; color: #555; margin: 0; line-height: 1.6; }
+
+        .tag {
+            display: inline-block;
+            background: #1a1a1a;
+            color: #fff;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-transform: uppercase;
         }
 
         .wip-badge {
@@ -103,30 +140,6 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             z-index: 10;
             border: 1px solid #000;
-        }
-
-        .card-image { 
-            width: 100%; 
-            height: 180px; 
-            background-color: #f0f0f0; 
-            object-fit: cover; /* Edge-to-edge fill */
-            border-bottom: 1px solid #eee;
-        }
-        
-        .card-content { padding: 20px; }
-        .card-content h3 { margin: 0 0 10px 0; font-size: 1.2rem; font-weight: 700; }
-        .card-content p { font-size: 0.9rem; color: #555; margin: 0; line-height: 1.5; }
-
-        .tag {
-            display: inline-block;
-            background: #1a1a1a;
-            color: #fff;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 0.65rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            text-transform: uppercase;
         }
     </style>
 </head>
@@ -154,7 +167,9 @@
     </div>
     <div class="project-grid">
         <a href="projects/hytec.html" class="project-card">
-            <img src="assets/images/hytec2.png" class="card-image" alt="ExxonMobil">
+            <div class="card-image-container">
+                <img src="assets/images/hytec2.png" class="card-image" alt="ExxonMobil">
+            </div>
             <div class="card-content">
                 <span class="tag">Structural Analysis</span>
                 <h3>Hydrogen Release for ExxonMobil</h3>
@@ -163,7 +178,9 @@
         </a>
         <a href="projects/mcp.html" class="project-card">
             <div class="wip-badge">In Progress</div>
-            <img src="assets/images/turbine1.png" class="card-image" alt="MCP">
+            <div class="card-image-container">
+                <img src="assets/images/turbine1.png" class="card-image" alt="MCP">
+            </div>
             <div class="card-content">
                 <span class="tag">Power Gen</span>
                 <h3>MCP</h3>
@@ -180,7 +197,9 @@
     </div>
     <div class="project-grid">
         <a href="projects/tmr_baseplate.html" class="project-card">
-            <img src="assets/images/fea_tmr.png" class="card-image" alt="Fatigue Analysis">
+            <div class="card-image-container">
+                <img src="assets/images/fea_tmr.png" class="card-image" alt="Fatigue Analysis">
+            </div>
             <div class="card-content">
                 <span class="tag">Structural Analysis</span>
                 <h3>Acrylic Fatigue Analysis</h3>
@@ -188,7 +207,9 @@
             </div>
         </a>
         <a href="projects/systems_tmr.html" class="project-card">
-            <img src="assets/images/uttower.png" class="card-image" alt="TMR Systems">
+            <div class="card-image-container">
+                <img src="assets/images/uttower.png" class="card-image" alt="TMR Systems">
+            </div>
             <div class="card-content">
                 <span class="tag">Validation</span>
                 <h3>Systems</h3>
@@ -205,7 +226,9 @@
     </div>
     <div class="project-grid">
         <a href="projects/shroud_pid.html" class="project-card">
-            <img src="../assets/images/shroud_2_cut_solidworks.png" class="card-image" alt="PID Project">
+            <div class="card-image-container">
+                <img src="assets/images/shroud_2_cut_solidworks.png" class="card-image" alt="PID Project">
+            </div>
             <div class="card-content">
                 <span class="tag">Thermal Fluids / Controls</span>
                 <h3>PID Control System</h3>
@@ -214,7 +237,9 @@
         </a>
         <a href="projects/windturbine.html" class="project-card">
             <div class="wip-badge">In Progress</div>
-            <img src="assets/images/windturbine.png" class="card-image" alt="Wind Turbine">
+            <div class="card-image-container">
+                <img src="assets/images/windturbine.png" class="card-image" alt="Wind Turbine">
+            </div>
             <div class="card-content">
                 <span class="tag">Aero / Energy</span>
                 <h3>Wind Turbine Design</h3>
@@ -231,7 +256,9 @@
     </div>
     <div class="project-grid">
         <a href="projects/rd.html" class="project-card">
-            <img src="assets/images/baja_rd.jpg" class="card-image" alt="Baja R&D">
+            <div class="card-image-container">
+                <img src="assets/images/baja_rd.jpg" class="card-image" alt="Baja R&D">
+            </div>
             <div class="card-content">
                 <span class="tag">Systems Engineering</span>
                 <h3>Research & Design Lead Projects</h3>
@@ -239,7 +266,9 @@
             </div>
         </a>
         <a href="projects/pwt_lbr.html" class="project-card">
-            <img src="assets/images/system_lbr.png" class="card-image" alt="Baja Drivetrain">
+            <div class="card-image-container">
+                <img src="assets/images/system_lbr.png" class="card-image" alt="Baja Drivetrain">
+            </div>
             <div class="card-content">
                 <span class="tag">Mechanical Design</span>
                 <h3>Powertrain System</h3>
@@ -257,7 +286,9 @@
     <div class="project-grid">
         <a href="projects/ret.html" class="project-card">
             <div class="wip-badge">In Progress</div>
-            <img src="assets/images/renewable.jpg" class="card-image" alt="Renewable Energy">
+            <div class="card-image-container">
+                <img src="assets/images/renewable.jpg" class="card-image" alt="Renewable Energy">
+            </div>
             <div class="card-content">
                 <span class="tag">Sustainability</span>
                 <h3>Renewable Energy Technology</h3>
@@ -266,7 +297,9 @@
         </a>
         <a href="projects/failureanalysis.html" class="project-card">
             <div class="wip-badge">In Progress</div>
-            <img src="assets/images/failureanalysis1.png" class="card-image" alt="Fractography">
+            <div class="card-image-container">
+                <img src="assets/images/failureanalysis1.png" class="card-image" alt="Fractography">
+            </div>
             <div class="card-content">
                 <span class="tag">Materials Science</span>
                 <h3>Failure Analysis</h3>
@@ -283,7 +316,9 @@
     </div>
     <div class="project-grid">
         <a href="projects/coastingprofile.html" class="project-card">
-            <img src="assets/images/acc2.png" class="card-image" alt="EV Coasting">
+            <div class="card-image-container">
+                <img src="assets/images/acc2.png" class="card-image" alt="EV Coasting">
+            </div>
             <div class="card-content">
                 <span class="tag">Optimization</span>
                 <h3>Coasting Profile Optimization</h3>
@@ -300,11 +335,13 @@
     </div>
     <div class="project-grid">
         <a href="projects/lspace.html" class="project-card">
-            <img src="assets/images/systemlspace.png" class="card-image" alt="NASA Mission">
+            <div class="card-image-container">
+                <img src="assets/images/systemlspace.png" class="card-image" alt="NASA Mission">
+            </div>
             <div class="card-content">
                 <span class="tag">Thermal Validation</span>
                 <h3>Mission Concept Design</h3>
-                <p>Collaborative engineering for planetary exploration with a focus on thermal validation.</p>
+                <p>Collaborative engineering for planetary exploration.</p>
             </div>
         </a>
     </div>
@@ -312,7 +349,6 @@
 </div>
 
 <script>
-    /* Smoke trail logic remains identical */
     const canvas = document.getElementById('smoke-canvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
