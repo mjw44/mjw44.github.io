@@ -3,143 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects | Julian Whiteley</title>
+    <title>Engineering Projects | Julian Whiteley</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --accent: #000;
+            --glass: rgba(255, 255, 255, 0.8);
+            --border: rgba(0, 0, 0, 0.08);
+        }
+
         body, html {
             margin: 0; padding: 0;
             font-family: 'Inter', sans-serif;
-            background-color: #fcfcfc;
+            background-color: #f8f8f8;
             color: #1a1a1a;
+            scroll-behavior: smooth;
         }
 
-        #smoke-canvas {
-            position: fixed;
-            top: 0; left: 0;
-            z-index: 1;
-            pointer-events: none;
-        }
+        #smoke-canvas { position: fixed; top: 0; left: 0; z-index: 1; pointer-events: none; }
 
         nav {
             padding: 20px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: white;
-            border-bottom: 1px solid #eaeaea;
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
             position: sticky;
             top: 0;
             z-index: 100;
         }
 
-        .nav-logo { font-weight: 800; font-size: 1.2rem; text-decoration: none; color: #1a1a1a; }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #666;
-            font-weight: 600;
-            margin-left: 25px;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            transition: color 0.2s;
-        }
-
+        .nav-logo { font-weight: 800; font-size: 1.2rem; text-decoration: none; color: #000; }
+        .nav-links a { text-decoration: none; color: #666; font-weight: 600; margin-left: 25px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; transition: 0.2s; }
         .nav-links a:hover { color: #000; }
 
         .container {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 60px auto;
-            padding: 0 20px;
+            padding: 0 40px;
             position: relative;
             z-index: 5;
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            gap: 60px;
         }
 
-        h1 { font-size: 2.8rem; margin-bottom: 50px; font-weight: 800; letter-spacing: -0.02em; }
+        /* SIDEBAR FILTERS */
+        .sidebar { position: sticky; top: 120px; height: fit-content; }
+        .sidebar h3 { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.2em; color: #aaa; margin-bottom: 25px; }
+        
+        .filter-btn {
+            display: block;
+            background: none;
+            border: none;
+            font-family: 'Inter';
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #888;
+            padding: 12px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            width: 100%;
+        }
 
-        .category-header { margin: 40px 0 20px 0; }
-        .category-header h2 { font-size: 1.6rem; font-weight: 800; margin-bottom: 5px; color: #1a1a1a; }
-        .category-header p { font-size: 1rem; color: #666; margin: 0; }
+        .filter-btn:hover { color: #000; transform: translateX(5px); }
+        .filter-btn.active { color: #000; border-left: 2px solid #000; padding-left: 15px; }
 
-        hr { border: 0; height: 1px; background: #eee; margin: 50px 0; }
+        h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -0.04em; margin-bottom: 60px; grid-column: 2; }
 
+        /* PROJECT CARDS */
+        .project-section { margin-bottom: 80px; transition: opacity 0.4s ease; }
+        
         .project-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
             gap: 30px;
         }
 
         .project-card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
+            background: #fff;
+            border-radius: 16px;
             text-decoration: none;
             color: inherit;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid #e0e0e0;
+            border: 1px solid var(--border);
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
             display: flex;
             flex-direction: column;
+            overflow: hidden;
             position: relative;
         }
 
         .project-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 24px rgba(0,0,0,0.08);
-            border-color: #1a1a1a;
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+            border-color: #000;
         }
 
-        /* NEW IMAGE CONTAINER LOGIC */
         .card-image-container {
             width: 100%;
-            height: 200px;
-            background-color: #f9f9f9;
+            height: 220px;
+            background: #fdfdfd;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
-            border-bottom: 1px solid #eee;
-            padding: 15px;
+            padding: 25px;
             box-sizing: border-box;
+            border-bottom: 1px solid var(--border);
         }
 
         .card-image { 
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05));
+            max-width: 100%; 
+            max-height: 100%; 
+            object-fit: contain; 
+            transition: transform 0.5s ease;
         }
-        
-        .card-content { padding: 24px; }
-        .card-content h3 { margin: 0 0 10px 0; font-size: 1.25rem; font-weight: 800; }
-        .card-content p { font-size: 0.95rem; color: #555; margin: 0; line-height: 1.6; }
 
-        .tag {
-            display: inline-block;
-            background: #1a1a1a;
-            color: #fff;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 0.65rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
+        .project-card:hover .card-image { transform: scale(1.08); }
+
+        .card-content { padding: 30px; }
+        .tag { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: #999; margin-bottom: 12px; display: block; }
+        .card-content h3 { margin: 0 0 10px 0; font-size: 1.4rem; font-weight: 800; }
+        .card-content p { font-size: 0.95rem; color: #555; line-height: 1.6; margin: 0; }
 
         .wip-badge {
             position: absolute;
-            top: 15px;
-            right: -30px;
-            background: #ffd700;
-            color: #000;
-            font-weight: 800;
-            font-size: 0.6rem;
-            padding: 5px 40px;
-            transform: rotate(45deg);
+            top: 20px; right: 20px;
+            background: #ffd700; color: #000;
+            font-size: 0.65rem; font-weight: 800;
+            padding: 5px 12px; border-radius: 20px;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            z-index: 10;
-            border: 1px solid #000;
+        }
+
+        @media (max-width: 950px) {
+            .container { grid-template-columns: 1fr; }
+            .sidebar { display: none; }
+            h1 { font-size: 2.5rem; grid-column: 1; }
         }
     </style>
 </head>
@@ -159,196 +160,133 @@
 </nav>
 
 <div class="container">
-    <h1>Engineering Projects</h1>
+    <aside class="sidebar">
+        <h3>Filter by Category</h3>
+        <button class="filter-btn active" onclick="filterProjects('all')">All Disciplines</button>
+        <button class="filter-btn" onclick="filterProjects('structural')">Structural / FEA</button>
+        <button class="filter-btn" onclick="filterProjects('thermal')">Thermal / Fluids</button>
+        <button class="filter-btn" onclick="filterProjects('systems')">Systems Engineering</button>
+        <button class="filter-btn" onclick="filterProjects('aerospace')">Aerospace</button>
+    </aside>
 
-    <div class="category-header">
-        <h2>Center for Electromechanics (CEM)</h2>
-        <p>Energy research and industrial mechanical engineering.</p>
-    </div>
-    <div class="project-grid">
-        <a href="projects/hytec.html" class="project-card">
-            <div class="card-image-container">
-                <img src="assets/images/hytec2.png" class="card-image" alt="ExxonMobil">
-            </div>
-            <div class="card-content">
-                <span class="tag">Structural Analysis</span>
-                <h3>Hydrogen Release for ExxonMobil</h3>
-                <p>Structure development and system integration.</p>
-            </div>
-        </a>
-        <a href="projects/mcp.html" class="project-card">
-            <div class="wip-badge">In Progress</div>
-            <div class="card-image-container">
-                <img src="assets/images/turbine1.png" class="card-image" alt="MCP">
-            </div>
-            <div class="card-content">
-                <span class="tag">Power Gen</span>
-                <h3>MCP</h3>
-                <p>Researching hydrogen mixing in natural gas turbines.</p>
-            </div>
-        </a>
-    </div>
+    <main id="project-main">
+        <h1>Engineering Projects</h1>
 
-    <hr>
+        <section class="project-section" data-category="structural systems">
+            <div class="project-grid">
+                <a href="projects/hytec.html" class="project-card">
+                    <div class="card-image-container"><img src="assets/images/hytec2.png" class="card-image"></div>
+                    <div class="card-content">
+                        <span class="tag">ExxonMobil / CEM</span>
+                        <h3>Hydrogen Release Systems</h3>
+                        <p>Structural integration for cryogenic hydrogen release infrastructure.</p>
+                    </div>
+                </a>
+                
+                <a href="projects/mcp.html" class="project-card">
+                    <div class="wip-badge">WIP</div>
+                    <div class="card-image-container"><img src="assets/images/turbine1.png" class="card-image"></div>
+                    <div class="card-content">
+                        <span class="tag">Thermal / Fluids</span>
+                        <h3>MCP Turbine Research</h3>
+                        <p>Analyzing hydrogen/natural gas mixing profiles in power turbines.</p>
+                    </div>
+                </a>
+            </div>
+        </section>
 
-    <div class="category-header">
-        <h2>Texas Marine Robotics (TMR)</h2>
-        <p>Autonomous maritime surface vessel engineering.</p>
-    </div>
-    <div class="project-grid">
-        <a href="projects/tmr_baseplate.html" class="project-card">
-            <div class="card-image-container">
-                <img src="assets/images/fea_tmr.png" class="card-image" alt="Fatigue Analysis">
-            </div>
-            <div class="card-content">
-                <span class="tag">Structural Analysis</span>
-                <h3>Acrylic Fatigue Analysis</h3>
-                <p>Goodman Criterion lifecycle analysis on mounting plates.</p>
-            </div>
-        </a>
-        <a href="projects/systems_tmr.html" class="project-card">
-            <div class="card-image-container">
-                <img src="assets/images/uttower.png" class="card-image" alt="TMR Systems">
-            </div>
-            <div class="card-content">
-                <span class="tag">Validation</span>
-                <h3>Systems</h3>
-                <p>Light towers and thermal validation protocols.</p>
-            </div>
-        </a>
-    </div>
+        <section class="project-section" data-category="aerospace thermal">
+            <div class="project-grid">
+                <a href="projects/lspace.html" class="project-card">
+                    <div class="card-image-container"><img src="assets/images/systemlspace.png" class="card-image"></div>
+                    <div class="card-content">
+                        <span class="tag">NASA L'SPACE</span>
+                        <h3>Mars Rover WALL-E</h3>
+                        <p>Thermal Control System lead for Mars subsurface exploration concept.</p>
+                    </div>
+                </a>
 
-    <hr>
+                <a href="projects/shroud_pid.html" class="project-card">
+                    <div class="card-image-container"><img src="assets/images/shroud_2_cut_solidworks.png" class="card-image"></div>
+                    <div class="card-content">
+                        <span class="tag">Thermal / Fluids</span>
+                        <h3>PID Control Shroud</h3>
+                        <p>3D-printed convective cooling system with closed-loop regulation.</p>
+                    </div>
+                </a>
+            </div>
+        </section>
 
-    <div class="category-header">
-        <h2>Personal Projects</h2>
-        <p>Independent engineering explorations.</p>
-    </div>
-    <div class="project-grid">
-        <a href="projects/shroud_pid.html" class="project-card">
-            <div class="card-image-container">
-                <img src="assets/images/shroud_2_cut_solidworks.png" class="card-image" alt="PID Project">
-            </div>
-            <div class="card-content">
-                <span class="tag">Thermal Fluids / Controls</span>
-                <h3>PID Control System</h3>
-                <p>Closed-loop regulation using 3D-printed shrouds.</p>
-            </div>
-        </a>
-        <a href="projects/windturbine.html" class="project-card">
-            <div class="wip-badge">In Progress</div>
-            <div class="card-image-container">
-                <img src="assets/images/windturbine.png" class="card-image" alt="Wind Turbine">
-            </div>
-            <div class="card-content">
-                <span class="tag">Aero / Energy</span>
-                <h3>Wind Turbine Design</h3>
-                <p>Small-scale turbine optimization for urban energy.</p>
-            </div>
-        </a>
-    </div>
+        <section class="project-section" data-category="systems thermal">
+            <div class="project-grid">
+                <a href="projects/coastingprofile.html" class="project-card">
+                    <div class="card-image-container"><img src="assets/images/acc2.png" class="card-image"></div>
+                    <div class="card-content">
+                        <span class="tag">ECOCAR / Simulink</span>
+                        <h3>EV Coasting Optimization</h3>
+                        <p>Predictive modeling of the Cadillac LYRIQ kinematic decay profile.</p>
+                    </div>
+                </a>
 
-    <hr>
+                <a href="projects/tmr_baseplate.html" class="project-card">
+                    <div class="card-image-container"><img src="assets/images/fea_tmr.png" class="card-image"></div>
+                    <div class="card-content">
+                        <span class="tag">Structural / FEA</span>
+                        <h3>Acrylic Fatigue Analysis</h3>
+                        <p>Lifecycle stress analysis for maritime surface vessel mounting plates.</p>
+                    </div>
+                </a>
+            </div>
+        </section>
 
-    <div class="category-header">
-        <h2>Longhorn Baja Racing</h2>
-        <p>Design and manufacturing for off-road racing.</p>
-    </div>
-    <div class="project-grid">
-        <a href="projects/rd.html" class="project-card">
-            <div class="card-image-container">
-                <img src="assets/images/baja_rd.jpg" class="card-image" alt="Baja R&D">
-            </div>
-            <div class="card-content">
-                <span class="tag">Systems Engineering</span>
-                <h3>Research & Design Lead Projects</h3>
-                <p>Overseeing high-level iterations and data-driven R&D.</p>
-            </div>
-        </a>
-        <a href="projects/pwt_lbr.html" class="project-card">
-            <div class="card-image-container">
-                <img src="assets/images/system_lbr.png" class="card-image" alt="Baja Drivetrain">
-            </div>
-            <div class="card-content">
-                <span class="tag">Mechanical Design</span>
-                <h3>Powertrain System</h3>
-                <p>Integration of drivetrain components for reliability.</p>
-            </div>
-        </a>
-    </div>
+        <section class="project-section" data-category="systems structural">
+            <div class="project-grid">
+                <a href="projects/rd.html" class="project-card">
+                    <div class="card-image-container"><img src="assets/images/baja_rd.jpg" class="card-image"></div>
+                    <div class="card-content">
+                        <span class="tag">Baja Racing</span>
+                        <h3>R&D Lead Projects</h3>
+                        <p>Data-driven chassis iterations and powertrain integration.</p>
+                    </div>
+                </a>
 
-    <hr>
-
-    <div class="category-header">
-        <h2>Academic & Class Projects</h2>
-        <p>Fundamental engineering applications.</p>
-    </div>
-    <div class="project-grid">
-        <a href="projects/ret.html" class="project-card">
-            <div class="wip-badge">In Progress</div>
-            <div class="card-image-container">
-                <img src="assets/images/renewable.jpg" class="card-image" alt="Renewable Energy">
+                <a href="projects/failureanalysis.html" class="project-card">
+                    <div class="wip-badge">WIP</div>
+                    <div class="card-image-container"><img src="assets/images/failureanalysis1.png" class="card-image"></div>
+                    <div class="card-content">
+                        <span class="tag">Structural / Materials</span>
+                        <h3>Failure Analysis</h3>
+                        <p>Root-cause investigation via SEM fractography and stress modeling.</p>
+                    </div>
+                </a>
             </div>
-            <div class="card-content">
-                <span class="tag">Sustainability</span>
-                <h3>Renewable Energy Technology</h3>
-                <p>System-level analysis of energy conversion.</p>
-            </div>
-        </a>
-        <a href="projects/failureanalysis.html" class="project-card">
-            <div class="wip-badge">In Progress</div>
-            <div class="card-image-container">
-                <img src="assets/images/failureanalysis1.png" class="card-image" alt="Fractography">
-            </div>
-            <div class="card-content">
-                <span class="tag">Materials Science</span>
-                <h3>Failure Analysis</h3>
-                <p>Root cause analysis through fractography.</p>
-            </div>
-        </a>
-    </div>
-
-    <hr>
-
-    <div class="category-header">
-        <h2>ECOCAR: EV Challenge</h2>
-        <p>Electric vehicle propulsion and management.</p>
-    </div>
-    <div class="project-grid">
-        <a href="projects/coastingprofile.html" class="project-card">
-            <div class="card-image-container">
-                <img src="assets/images/acc2.png" class="card-image" alt="EV Coasting">
-            </div>
-            <div class="card-content">
-                <span class="tag">Optimization</span>
-                <h3>Coasting Profile Optimization</h3>
-                <p>Improving EV range through trajectory analysis.</p>
-            </div>
-        </a>
-    </div>
-
-    <hr>
-
-    <div class="category-header">
-        <h2>NASA L'SPACE Academy</h2>
-        <p>Aerospace systems engineering.</p>
-    </div>
-    <div class="project-grid">
-        <a href="projects/lspace.html" class="project-card">
-            <div class="card-image-container">
-                <img src="assets/images/systemlspace.png" class="card-image" alt="NASA Mission">
-            </div>
-            <div class="card-content">
-                <span class="tag">Thermal Validation</span>
-                <h3>Mission Concept Design</h3>
-                <p>Collaborative engineering for planetary exploration.</p>
-            </div>
-        </a>
-    </div>
-
+        </section>
+    </main>
 </div>
 
 <script>
+    /* 1. FILTER LOGIC */
+    function filterProjects(category) {
+        // Update Buttons
+        const buttons = document.querySelectorAll('.filter-btn');
+        buttons.forEach(btn => btn.classList.remove('active'));
+        event.currentTarget.classList.add('active');
+
+        // Filter Sections
+        const sections = document.querySelectorAll('.project-section');
+        sections.forEach(section => {
+            const categories = section.getAttribute('data-category');
+            if (category === 'all' || categories.includes(category)) {
+                section.style.display = 'block';
+                setTimeout(() => section.style.opacity = '1', 10);
+            } else {
+                section.style.opacity = '0';
+                setTimeout(() => section.style.display = 'none', 400);
+            }
+        });
+    }
+
+    /* 2. SMOKE TRAIL SCRIPT */
     const canvas = document.getElementById('smoke-canvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
@@ -362,13 +300,15 @@
             this.speedX = (Math.random() - 0.5) * 0.8;
             this.speedY = (Math.random() - 0.5) * 0.8;
             this.color = 'rgba(0, 0, 0,';
-            this.alpha = 0.2;
-            this.decay = Math.random() * 0.015 + 0.01;
+            this.alpha = 0.15;
+            this.decay = Math.random() * 0.01 + 0.005;
         }
         update() { this.x += this.speedX; this.y += this.speedY; if (this.size > 0.2) this.size -= 0.05; this.alpha -= this.decay; }
         draw() { ctx.fillStyle = this.color + this.alpha + ')'; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
     }
-    window.addEventListener('mousemove', (e) => { particles.push(new Particle(e.clientX, e.clientY)); });
+    window.addEventListener('mousemove', (e) => { 
+        for(let i=0; i<2; i++) particles.push(new Particle(e.clientX, e.clientY)); 
+    });
     function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         for (let i = 0; i < particles.length; i++) {
