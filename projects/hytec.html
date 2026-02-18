@@ -1,1 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hydrogen Release System | Julian Whiteley</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg: #fdfdfd; --text: #1a1a1a; --muted: #888; --accent: #eee; }
+        body { margin: 0; font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+        
+        .container { max-width: 1000px; margin: 0 auto; padding: 100px 40px; }
+        
+        /* Typography */
+        .hero-tag { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.25em; color: var(--muted); }
+        h1 { font-size: 4rem; font-weight: 800; letter-spacing: -0.05em; margin: 15px 0 60px 0; line-height: 1; }
+        h2 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.3em; color: #bbb; margin-bottom: 20px; border-bottom: 1px solid var(--accent); padding-bottom: 10px; }
+        h3 { font-size: 1.8rem; font-weight: 800; margin-top: 0; letter-spacing: -0.02em; }
+        p { color: #444; font-size: 1.05rem; margin-bottom: 30px; }
 
+        /* The "Seamless" Model Viewer Box */
+        .model-viewer {
+            width: 100%;
+            height: 500px;
+            background: radial-gradient(circle at center, #ffffff 0%, #f4f4f2 100%);
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            border: 1px solid rgba(0,0,0,0.05);
+            margin-bottom: 80px;
+            position: relative;
+        }
+        .model-viewer img { 
+            max-width: 75%; max-height: 80%; 
+            object-fit: contain; 
+            mix-blend-mode: multiply; /* SEAMLESS EFFECT */
+            filter: drop-shadow(0 30px 50px rgba(0,0,0,0.1));
+        }
+
+        /* Project Specs Bar */
+        .specs-bar {
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 20px; margin-bottom: 80px;
+            padding: 30px 0; border-top: 1px solid var(--accent); border-bottom: 1px solid var(--accent);
+        }
+        .spec-item label { display: block; font-size: 0.65rem; text-transform: uppercase; color: #aaa; font-weight: 800; margin-bottom: 5px; }
+        .spec-item span { font-weight: 600; font-size: 0.9rem; }
+
+        /* Content Sections */
+        .process-section { display: grid; grid-template-columns: 1.2fr 1fr; gap: 80px; margin-bottom: 120px; align-items: start; }
+        .calc-box { 
+            background: #fff; border: 1px solid #eee; padding: 30px; border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+        }
+        .calc-box img { width: 100%; height: auto; border-radius: 4px; }
+
+        /* Embed Section */
+        .drive-container { margin-top: 60px; }
+        .drive-embed { width: 100%; height: 700px; border: 1px solid #eee; border-radius: 12px; }
+
+        @media (max-width: 800px) {
+            .process-section, .specs-bar { grid-template-columns: 1fr; }
+            h1 { font-size: 2.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <span class="hero-tag">ExxonMobil & Center for Electromechanics</span>
+        <h1>Hydrogen Release System</h1>
+    </header>
+
+    <div class="model-viewer">
+        <img src="assets/images/hytec2.png" alt="SolidWorks Assembly of 30ft Structure">
+      <img src="assets/images/hytec.png" alt="Full Integration of 30ft Structure">
+        <div style="position: absolute; bottom: 20px; right: 20px; font-size: 0.6rem; color: #ccc; letter-spacing: 0.1em; text-transform: uppercase;">SolidWorks 2023 Assembly</div>
+    </div>
+
+    <div class="specs-bar">
+        <div class="spec-item"><label>Role</label><span>Lead Design & Integration</span></div>
+        <div class="spec-item"><label>Mentor</label><span>Neill G. (Director)</span></div>
+        <div class="spec-item"><label>Scale</label><span>30-Foot Vertical Span</span></div>
+        <div class="spec-item"><label>Budget</label><span>Low-Cost Industrial Optimization</span></div>
+    </div>
+
+    <section class="process-section">
+        <div>
+            <h2>The Process</h2>
+            <h3>From Conceptualization to Design Review</h3>
+            <p>The goal was to create a variable-height structure for testing hydrogen detection sensors to ensure safety during drill operations. The process involved rigorous <strong>Internal Design Reviews</strong> with the CEM director, Neill, where we balanced technical capability against strict budget constraints.</p>
+            <p>I managed the <strong>Bill of Materials (BOM)</strong> and coordinated with the electrical team to negotiate space for sensors and wiring within the structural footprint without compromising the 30-foot integrity.</p>
+        </div>
+        <div class="calc-box">
+            <h2>Calculation Focus</h2>
+            <h3>Thrust & Control Volumes</h3>
+            <p>One critical validation was the <strong>Thrust Calculation</strong>. Using a Control Volume analysis (FBD), I proved that the force exerted by the escaping hydrogen gas at high pressure was negligible relative to the structural rigidity.</p>
+            <img src="assets/images/thrust1.png" alt="Thrust validation hand calculations">
+                 <img src="assets/images/thrust2.png" alt="Thrust validation hand calculations">
+        </div>
+    </section>
+
+    <section class="process-section">
+        <div class="calc-box">
+               <iframe class="drive-embed" src="https://docs.google.com/spreadsheets/d/1K6oVTNjNhzGb5lsOnSByf6RhRiQGVNh3CQIiusCvfsA/edit?usp=sharing"></iframe>
+        </div>
+        <div>
+            <h2>Structural Integrity</h2>
+            <h3>Buckling Validation</h3>
+            <p>Ensuring the structure could withstand environmental and operational loads meant calculating the Critical Buckling Load for the single-beam members. I performed iterative Second Moment of Inertia calculations to select the absolute minimum material required to safely support the span while meeting the "low cost" requirement.</p>
+        </div>
+    </section>
+
+    <footer style="margin-top: 100px; border-top: 1px solid #eee; padding-top: 40px;">
+        <a href="../projects.html" style="text-decoration: none; color: black; font-weight: 800; font-size: 0.75rem; letter-spacing: 0.1em;">← BACK TO SELECTED WORK</a>
+    </footer>
+</div>
+
+</body>
+</html>
