@@ -3,20 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Engineering Projects | Julian Whiteley</title>
+    <title>Projects | Julian Whiteley</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --accent: #000;
-            --glass: rgba(255, 255, 255, 0.9);
-            --border: rgba(0, 0, 0, 0.06);
-            --bg: #fcfcfc;
+            --glass: rgba(255, 255, 255, 0.92);
+            --border: rgba(0, 0, 0, 0.08);
+            /* Engineering Gradient for images */
+            --img-grad: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%);
         }
 
         body, html {
             margin: 0; padding: 0;
             font-family: 'Inter', sans-serif;
-            background-color: var(--bg);
+            background-color: #fcfcfc;
             color: #1a1a1a;
             scroll-behavior: smooth;
         }
@@ -32,16 +33,14 @@
             backdrop-filter: blur(15px);
             border-bottom: 1px solid var(--border);
             position: sticky;
-            top: 0;
-            z-index: 100;
+            top: 0; z-index: 100;
         }
 
         .nav-logo { font-weight: 800; font-size: 1.2rem; text-decoration: none; color: #000; }
-        .nav-links a { text-decoration: none; color: #666; font-weight: 600; margin-left: 25px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; transition: 0.2s; }
-        .nav-links a:hover { color: #000; }
+        .nav-links a { text-decoration: none; color: #666; font-weight: 600; margin-left: 25px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; }
 
         .container {
-            max-width: 1300px;
+            max-width: 1400px;
             margin: 60px auto;
             padding: 0 40px;
             position: relative;
@@ -51,32 +50,31 @@
             gap: 60px;
         }
 
-        /* SIDEBAR */
+        /* SIDEBAR NAVIGATION */
         .sidebar { position: sticky; top: 120px; height: fit-content; }
         .sidebar h3 { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.2em; color: #aaa; margin-bottom: 25px; }
-        
         .filter-btn {
-            display: block;
-            background: none;
-            border: none;
-            font-family: 'Inter';
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: #888;
-            padding: 12px 0;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: left;
-            width: 100%;
+            display: block; width: 100%; background: none; border: none;
+            font-family: 'Inter'; font-weight: 600; font-size: 0.85rem;
+            color: #888; padding: 12px 0; cursor: pointer; text-align: left;
+            transition: 0.3s;
         }
+        .filter-btn:hover { color: #000; transform: translateX(5px); }
+        .filter-btn.active { color: #000; border-left: 3px solid #000; padding-left: 15px; font-weight: 800; }
 
-        .filter-btn:hover { color: #000; transform: translateX(8px); }
-        .filter-btn.active { color: #000; font-weight: 800; border-left: 3px solid #000; padding-left: 20px; }
+        /* STRUCTURED HEADINGS */
+        h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -0.04em; margin-bottom: 40px; grid-column: 2; }
+        
+        .category-group { margin-bottom: 100px; grid-column: 2; }
+        .category-header {
+            margin-bottom: 30px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+        .category-header h2 { font-size: 1.4rem; font-weight: 800; margin: 0; text-transform: uppercase; letter-spacing: 0.05em; }
+        .category-header p { color: #888; margin: 5px 0 0 0; font-size: 0.95rem; }
 
-        h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -0.05em; margin-bottom: 60px; grid-column: 2; }
-
-        /* GRID LOGIC */
-        .project-section { margin-bottom: 60px; display: block; }
+        /* GRID & CARDS */
         .project-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
@@ -85,69 +83,63 @@
 
         .project-card {
             background: white;
-            border-radius: 20px;
-            text-decoration: none;
-            color: inherit;
+            border-radius: 12px;
+            text-decoration: none; color: inherit;
             border: 1px solid var(--border);
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            position: relative;
+            display: flex; flex-direction: column;
+            overflow: hidden; position: relative;
         }
 
         .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.08);
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.06);
             border-color: #000;
         }
 
+        /* THE GRADIENT IMAGE FIX */
         .card-image-container {
             width: 100%;
             height: 240px;
-            background: #f9f9f9;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
+            background: var(--img-grad); /* Subtle gradient backplate */
+            display: flex; align-items: center; justify-content: center;
             position: relative;
+        }
+        
+        .card-image-container::after {
+            content: "";
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at center, transparent 30%, rgba(0,0,0,0.02) 100%);
         }
 
         .card-image { 
-            max-width: 90%;
-            max-height: 85%;
-            object-fit: contain;
+            max-width: 85%; max-height: 80%; 
+            object-fit: contain; z-index: 2;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1));
             transition: transform 0.6s ease;
         }
 
-        .project-card:hover .card-image { transform: scale(1.05); }
+        .project-card:hover .card-image { transform: scale(1.04); }
 
-        .card-content { padding: 30px; flex-grow: 1; }
-        .tag { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.15em; color: #bbb; margin-bottom: 12px; display: block; }
-        .card-content h3 { margin: 0 0 10px 0; font-size: 1.4rem; font-weight: 800; }
-        .card-content p { font-size: 0.95rem; color: #555; line-height: 1.6; margin: 0; }
+        .card-content { padding: 30px; border-top: 1px solid #f9f9f9; }
+        .tag-row { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+        .tag { font-size: 0.6rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: #999; }
+        .card-content h3 { margin: 0 0 8px 0; font-size: 1.3rem; font-weight: 800; }
+        .card-content p { font-size: 0.95rem; color: #666; line-height: 1.5; margin: 0; }
 
-        /* FIXED WIP BADGE */
+        /* WIP BADGE */
         .wip-badge {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(4px);
-            color: #fff;
-            font-size: 0.6rem;
-            font-weight: 800;
-            padding: 4px 12px;
-            border-radius: 20px;
-            text-transform: uppercase;
-            z-index: 5;
-            letter-spacing: 0.05em;
+            position: absolute; top: 15px; right: 15px;
+            background: #000; color: #fff;
+            font-size: 0.6rem; font-weight: 800;
+            padding: 5px 12px; border-radius: 4px;
+            z-index: 10; text-transform: uppercase;
         }
 
-        @media (max-width: 1000px) {
+        @media (max-width: 1100px) {
             .container { grid-template-columns: 1fr; }
             .sidebar { display: none; }
-            h1 { font-size: 2.8rem; grid-column: 1; }
+            h1, .category-group { grid-column: 1; }
         }
     </style>
 </head>
@@ -168,129 +160,142 @@
 
 <div class="container">
     <aside class="sidebar">
-        <h3>Discipline</h3>
+        <h3>Filter Discipline</h3>
         <button class="filter-btn active" onclick="filterProjects('all')">All Projects</button>
         <button class="filter-btn" onclick="filterProjects('structural')">Structural / FEA</button>
         <button class="filter-btn" onclick="filterProjects('thermal')">Thermal / Fluids</button>
         <button class="filter-btn" onclick="filterProjects('systems')">Systems Engineering</button>
-        <button class="filter-btn" onclick="filterProjects('aerospace')">Aerospace / Energy</button>
     </aside>
 
     <main id="project-main">
         <h1>Engineering Projects</h1>
 
-        <div class="project-grid">
-            <a href="projects/hytec.html" class="project-card" data-category="structural systems">
-                <div class="card-image-container"><img src="assets/images/hytec2.png" class="card-image"></div>
-                <div class="card-content">
-                    <span class="tag">ExxonMobil / CEM</span>
-                    <h3>Hydrogen Release System</h3>
-                    <p>Structural development and integration for industrial hydrogen infrastructure.</p>
-                </div>
-            </a>
+        <div class="category-group" data-category-group="CEM">
+            <div class="category-header">
+                <h2>Center for Electromechanics</h2>
+                <p>Industrial research & energy infrastructure.</p>
+            </div>
+            <div class="project-grid">
+                <a href="projects/hytec.html" class="project-card" data-category="structural systems">
+                    <div class="card-image-container"><img src="assets/images/hytec2.png" class="card-image"></div>
+                    <div class="card-content">
+                        <div class="tag-row"><span class="tag">Structural</span><span class="tag">ExxonMobil</span></div>
+                        <h3>Hydrogen Release Systems</h3>
+                        <p>Structural integration for cryogenic release systems.</p>
+                    </div>
+                </a>
+                <a href="projects/mcp.html" class="project-card" data-category="thermal">
+                    <div class="wip-badge">In Progress</div>
+                    <div class="card-image-container"><img src="assets/images/turbine1.png" class="card-image"></div>
+                    <div class="card-content">
+                        <div class="tag-row"><span class="tag">Fluids</span><span class="tag">Energy</span></div>
+                        <h3>MCP Turbine Research</h3>
+                        <p>Hydrogen/Natural Gas mixing profiles in power generation.</p>
+                    </div>
+                </a>
+            </div>
+        </div>
 
-            <a href="projects/mcp.html" class="project-card" data-category="thermal aerospace">
-                <div class="wip-badge">In Progress</div>
-                <div class="card-image-container"><img src="assets/images/turbine1.png" class="card-image"></div>
-                <div class="card-content">
-                    <span class="tag">Energy Research</span>
-                    <h3>MCP</h3>
-                    <p>Hydrogen mixing profiles within natural gas power turbines.</p>
-                </div>
-            </a>
+        <div class="category-group" data-category-group="TMR">
+            <div class="category-header">
+                <h2>Texas Marine Robotics</h2>
+                <p>Autonomous maritime surface vessel development.</p>
+            </div>
+            <div class="project-grid">
+                <a href="projects/tmr_baseplate.html" class="project-card" data-category="structural">
+                    <div class="card-image-container"><img src="assets/images/fea_tmr.png" class="card-image"></div>
+                    <div class="card-content">
+                        <div class="tag-row"><span class="tag">FEA</span><span class="tag">Fatigue</span></div>
+                        <h3>Acrylic Fatigue Analysis</h3>
+                        <p>Goodman Criterion analysis for mounting interfaces.</p>
+                    </div>
+                </a>
+                <a href="projects/systems_tmr.html" class="project-card" data-category="systems">
+                    <div class="card-image-container"><img src="assets/images/uttower.png" class="card-image"></div>
+                    <div class="card-content">
+                        <div class="tag-row"><span class="tag">Validation</span><span class="tag">Thermal</span></div>
+                        <h3>Systems & Thermal Validation</h3>
+                        <p>Operational protocols for robotic maritime vessels.</p>
+                    </div>
+                </a>
+            </div>
+        </div>
 
-            <a href="projects/tmr_baseplate.html" class="project-card" data-category="structural systems">
-                <div class="card-image-container"><img src="assets/images/fea_tmr.png" class="card-image"></div>
-                <div class="card-content">
-                    <span class="tag">Texas Marine Robotics</span>
-                    <h3>Acrylic Fatigue Analysis</h3>
-                    <p>Goodman Criterion lifecycle analysis on maritime mounting plates.</p>
-                </div>
-            </a>
+        <div class="category-group" data-category-group="Personal">
+            <div class="category-header">
+                <h2>Personal Exploration</h2>
+                <p>Independent design and control system builds.</p>
+            </div>
+            <div class="project-grid">
+                <a href="projects/shroud_pid.html" class="project-card" data-category="thermal systems">
+                    <div class="card-image-container"><img src="assets/images/shroud_2_cut_solidworks.png" class="card-image"></div>
+                    <div class="card-content">
+                        <div class="tag-row"><span class="tag">Controls</span><span class="tag">Thermal</span></div>
+                        <h3>PID Control System</h3>
+                        <p>Precision regulation with 3D-printed convective shrouds.</p>
+                    </div>
+                </a>
+                <a href="projects/windturbine.html" class="project-card" data-category="thermal systems">
+                    <div class="wip-badge">In Progress</div>
+                    <div class="card-image-container"><img src="assets/images/windturbine.png" class="card-image"></div>
+                    <div class="card-content">
+                        <div class="tag-row"><span class="tag">Aerospace</span><span class="tag">Energy</span></div>
+                        <h3>Wind Turbine Design</h3>
+                        <p>Optimizing small-scale urban power generation.</p>
+                    </div>
+                </a>
+            </div>
+        </div>
 
-            <a href="projects/systems_tmr.html" class="project-card" data-category="systems">
-                <div class="card-image-container"><img src="assets/images/uttower.png" class="card-image"></div>
-                <div class="card-content">
-                    <span class="tag">TMR Systems</span>
-                    <h3>Maritime Validation</h3>
-                    <p>Light tower and thermal validation protocols for autonomous surface vessels.</p>
-                </div>
-            </a>
+        <div class="category-group" data-category-group="Baja">
+            <div class="category-header">
+                <h2>Longhorn Baja Racing</h2>
+                <p>Off-road vehicle R&D and manufacturing.</p>
+            </div>
+            <div class="project-grid">
+                <a href="projects/rd.html" class="project-card" data-category="structural systems">
+                    <div class="card-image-container"><img src="assets/images/baja_rd.jpg" class="card-image"></div>
+                    <div class="card-content">
+                        <div class="tag-row"><span class="tag">R&D</span><span class="tag">Chassis</span></div>
+                        <h3>Baja R&D Lead</h3>
+                        <p>Chassis iterations and data acquisition for competition.</p>
+                    </div>
+                </a>
+                <a href="projects/pwt_lbr.html" class="project-card" data-category="structural systems">
+                    <div class="card-image-container"><img src="assets/images/system_lbr.png" class="card-image"></div>
+                    <div class="card-content">
+                        <div class="tag-row"><span class="tag">Mechanical</span><span class="tag">Drivetrain</span></div>
+                        <h3>Powertrain Integration</h3>
+                        <p>Reliability-focused design for extreme environments.</p>
+                    </div>
+                </a>
+            </div>
+        </div>
 
-            <a href="projects/shroud_pid.html" class="project-card" data-category="thermal systems">
-                <div class="card-image-container"><img src="assets/images/shroud_2_cut_solidworks.png" class="card-image"></div>
-                <div class="card-content">
-                    <span class="tag">Personal Project</span>
-                    <h3>PID Control System</h3>
-                    <p>Closed-loop thermal regulation using 3D-printed convective shrouds.</p>
-                </div>
-            </a>
-
-            <a href="projects/windturbine.html" class="project-card" data-category="aerospace thermal">
-                <div class="wip-badge">In Progress</div>
-                <div class="card-image-container"><img src="assets/images/windturbine.png" class="card-image"></div>
-                <div class="card-content">
-                    <span class="tag">Aero / Energy</span>
-                    <h3>Wind Turbine Design</h3>
-                    <p>Aerodynamic optimization for small-scale urban energy harvesting.</p>
-                </div>
-            </a>
-
-            <a href="projects/rd.html" class="project-card" data-category="systems structural">
-                <div class="card-image-container"><img src="assets/images/baja_rd.jpg" class="card-image"></div>
-                <div class="card-content">
-                    <span class="tag">Longhorn Baja</span>
-                    <h3>Research & Design Lead</h3>
-                    <p>Chassis iterations and data-driven development for off-road racing.</p>
-                </div>
-            </a>
-
-            <a href="projects/pwt_lbr.html" class="project-card" data-category="systems structural">
-                <div class="card-image-container"><img src="assets/images/system_lbr.png" class="card-image"></div>
-                <div class="card-content">
-                    <span class="tag">Mechanical Design</span>
-                    <h3>Powertrain Integration</h3>
-                    <p>Integration of drivetrain components for rugged reliability and performance.</p>
-                </div>
-            </a>
-
-            <a href="projects/ret.html" class="project-card" data-category="aerospace thermal">
-                <div class="wip-badge">In Progress</div>
-                <div class="card-image-container"><img src="assets/images/renewable.jpg" class="card-image"></div>
-                <div class="card-content">
-                    <span class="tag">Sustainability</span>
-                    <h3>Renewable Energy Tech</h3>
-                    <p>System-level analysis of large-scale energy conversion methods.</p>
-                </div>
-            </a>
-
-            <a href="projects/failureanalysis.html" class="project-card" data-category="structural">
-                <div class="wip-badge">In Progress</div>
-                <div class="card-image-container"><img src="assets/images/failureanalysis1.png" class="card-image"></div>
-                <div class="card-content">
-                    <span class="tag">Materials Science</span>
-                    <h3>Failure Analysis</h3>
-                    <p>Root cause investigation using SEM fractography and stress modeling.</p>
-                </div>
-            </a>
-
-            <a href="projects/coastingprofile.html" class="project-card" data-category="thermal systems">
-                <div class="card-image-container"><img src="assets/images/acc2.png" class="card-image"></div>
-                <div class="card-content">
-                    <span class="tag">ECOCAR V2X</span>
-                    <h3>Coasting Profile</h3>
-                    <p>Optimizing EV range via predictive trajectory and drag analysis.</p>
-                </div>
-            </a>
-
-            <a href="projects/lspace.html" class="project-card" data-category="aerospace thermal systems">
-                <div class="card-image-container"><img src="assets/images/systemslspace.png" class="card-image"></div>
-                <div class="card-content">
-                    <span class="tag">NASA L'SPACE</span>
-                    <h3>Mars Rover TCS</h3>
-                    <p>Thermal Control System design for autonomous Martian ice exploration.</p>
-                </div>
-            </a>
+        <div class="category-group" data-category-group="Aerospace">
+            <div class="category-header">
+                <h2>Aerospace & Academic</h2>
+                <p>Mission-critical systems and materials science.</p>
+            </div>
+            <div class="project-grid">
+                <a href="projects/lspace.html" class="project-card" data-category="thermal systems">
+                    <div class="card-image-container"><img src="assets/images/systemlspace.png" class="card-image"></div>
+                    <div class="card-content">
+                        <div class="tag-row"><span class="tag">NASA</span><span class="tag">Aerospace</span></div>
+                        <h3>Mars Rover TCS</h3>
+                        <p>Thermal Lead for planetary subsurface exploration.</p>
+                    </div>
+                </a>
+                <a href="projects/failureanalysis.html" class="project-card" data-category="structural">
+                    <div class="wip-badge">In Progress</div>
+                    <div class="card-image-container"><img src="assets/images/failureanalysis1.png" class="card-image"></div>
+                    <div class="card-content">
+                        <div class="tag-row"><span class="tag">Materials</span><span class="tag">Fractography</span></div>
+                        <h3>Failure Analysis</h3>
+                        <p>Root-cause investigation for structural components.</p>
+                    </div>
+                </a>
+            </div>
         </div>
     </main>
 </div>
@@ -302,34 +307,40 @@
         event.currentTarget.classList.add('active');
 
         const cards = document.querySelectorAll('.project-card');
+        const sections = document.querySelectorAll('.category-group');
+
         cards.forEach(card => {
             const categories = card.getAttribute('data-category');
             if (category === 'all' || categories.includes(category)) {
                 card.style.display = 'flex';
-                setTimeout(() => card.style.opacity = '1', 10);
+                card.style.opacity = '1';
             } else {
+                card.style.display = 'none';
                 card.style.opacity = '0';
-                setTimeout(() => card.style.display = 'none', 300);
             }
+        });
+
+        // Hide entire headers if no cards are visible in that category
+        sections.forEach(section => {
+            const visibleCards = section.querySelectorAll('.project-card[style*="display: flex"]');
+            section.style.display = visibleCards.length > 0 ? 'block' : 'none';
         });
     }
 
+    /* Smoke Trail Effect */
     const canvas = document.getElementById('smoke-canvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
     function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
     window.addEventListener('resize', resize); resize();
-
     class Particle {
         constructor(x, y) {
             this.x = x; this.y = y;
-            this.size = Math.random() * 4 + 1;
-            this.speedX = (Math.random() - 0.5) * 0.4;
-            this.speedY = (Math.random() - 0.5) * 0.4;
+            this.size = Math.random() * 3 + 1;
             this.alpha = 0.15;
         }
-        update() { this.x += this.speedX; this.y += this.speedY; if (this.size > 0.1) this.size -= 0.02; this.alpha -= 0.005; }
-        draw() { ctx.fillStyle = `rgba(0,0,0,${this.alpha})`; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
+        update() { this.x += (Math.random()-0.5)*0.4; this.y += (Math.random()-0.5)*0.4; this.alpha -= 0.005; }
+        draw() { ctx.fillStyle = `rgba(0,0,0,${this.alpha})`; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI*2); ctx.fill(); }
     }
     window.addEventListener('mousemove', (e) => { particles.push(new Particle(e.clientX, e.clientY)); });
     function animate() {
