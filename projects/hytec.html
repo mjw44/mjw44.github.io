@@ -75,7 +75,16 @@
     </style>
 </head>
 <body>
-
+<nav>
+     <a href="index.html" class="nav-logo">MJW</a>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="resume.html" style="color: black;">Resume</a>
+        <a href="contact.html">Contact</a>
+    </div>
+</nav>
 <div class="container">
     <header>
         <span class="hero-tag">ExxonMobil & Center for Electromechanics</span>
@@ -126,6 +135,43 @@
         <a href="../projects.html" style="text-decoration: none; color: black; font-weight: 800; font-size: 0.75rem; letter-spacing: 0.1em;">← BACK TO SELECTED WORK</a>
     </footer>
 </div>
-
+<script>
+     const canvas = document.getElementById('smoke-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    window.addEventListener('resize', resize);
+    resize();
+    class Particle {
+        constructor(x, y) {
+            this.x = x; this.y = y;
+            this.size = Math.random() * 5 + 2; 
+            this.speedX = (Math.random() - 0.5) * 0.8;
+            this.speedY = (Math.random() - 0.5) * 0.8;
+            this.color = 'rgba(0, 0, 0,'; 
+            this.alpha = 0.2; 
+            this.decay = Math.random() * 0.015 + 0.01; 
+        }
+        update() { 
+            this.x += this.speedX; this.y += this.speedY; 
+            if (this.size > 0.2) this.size -= 0.05;
+            this.alpha -= this.decay; 
+        }
+        draw() { 
+            ctx.fillStyle = this.color + this.alpha + ')'; 
+            ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); 
+        }
+    }
+    window.addEventListener('mousemove', (e) => { particles.push(new Particle(e.clientX, e.clientY)); });
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < particles.length; i++) {
+            particles[i].update(); particles[i].draw();
+            if (particles[i].alpha <= 0) { particles.splice(i, 1); i--; }
+        }
+        requestAnimationFrame(animate);
+    }
+    animate();
+</script>
 </body>
 </html>
