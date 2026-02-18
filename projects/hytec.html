@@ -107,19 +107,19 @@
 
     <div class="model-viewer">
         <div class="model-container">
-            <span class="img-label">Structural Skeleton</span>
+            <span class="img-label">Full System Integration</span>
             <img src="../assets/images/hytec2.png" alt="HyTec Skeleton">
         </div>
         <div class="model-container">
-            <span class="img-label">Full System Integration</span>
+            <span class="img-label">Structural Skeleton</span>
             <img src="../assets/images/hytec.png" alt="HyTec Full Integration">
         </div>
-        <div style="position: absolute; bottom: 20px; right: 20px; font-size: 0.55rem; color: #ccc; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 800;">CAD Validation Phase</div>
+        <div style="position: absolute; bottom: 20px; right: 20px; font-size: 0.55rem; color: #ccc; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 800;">Design to Integration</div>
     </div>
 
     <div class="specs-bar">
         <div class="spec-item"><label>Role</label><span>Lead Design & Integration</span></div>
-        <div class="spec-item"><label>Mentor</label><span>Neill G. (Director)</span></div>
+        <div class="spec-item"><label>Mentor</label><span>Neill, Austin, & Mike </span></div>
         <div class="spec-item"><label>Scale</label><span>30-Foot Vertical Span</span></div>
         <div class="spec-item"><label>Budget</label><span>Low-Cost Industrial Optimization</span></div>
     </div>
@@ -128,7 +128,7 @@
         <div>
             <h2>Technical Process</h2>
             <h3>Conceptualization to Design Review</h3>
-            <p>The project centered on creating a variable-height structure for testing hydrogen detection sensors. I managed the <strong>Bill of Materials (BOM)</strong> and coordinated with the electrical team to negotiate space for sensors and wiring within the structural footprint.</p>
+            <p>The project centered on creating a variable-height structure for testing hydrogen detection sensors. I managed the bill of materials and coordinated with the electrical team to ensure structural integrity.</p>
         </div>
         <div class="calc-box">
             <h2>Physics Validation</h2>
@@ -151,7 +151,7 @@
         <div>
             <h2>Structural Integrity</h2>
             <h3>Buckling Validation</h3>
-            <p>Ensuring the structure could withstand environmental and operational loads meant calculating the <strong>Critical Buckling Load</strong> for the single-beam members.</p>
+            <p>Ensuring the structure could withstand environmental and operational loads meant calculating the critical buckling load for the single-beam members.</p>
         </div>
     </section>
 
@@ -161,7 +161,31 @@
 </div>
 
 <script>
-    // Smoke script remains here
+      const canvas = document.getElementById('smoke-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    window.addEventListener('resize', resize); resize();
+    class Particle {
+        constructor(x, y) {
+            this.x = x; this.y = y;
+            this.size = Math.random() * 2 + 1;
+            this.alpha = 0.15;
+        }
+        update() { this.x += (Math.random()-0.5)*0.4; this.y += (Math.random()-0.5)*0.4; this.alpha -= 0.005; }
+        draw() { ctx.fillStyle = `rgba(0,0,0,${this.alpha})`; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI*2); ctx.fill(); }
+    }
+    window.addEventListener('mousemove', (e) => { particles.push(new Particle(e.clientX, e.clientY)); });
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < particles.length; i++) {
+            particles[i].update(); particles[i].draw();
+            if (particles[i].alpha <= 0) { particles.splice(i, 1); i--; }
+        }
+        requestAnimationFrame(animate);
+    }
+    animate();
+
 </script>
 </body>
 </html>
