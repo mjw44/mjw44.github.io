@@ -1,1 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hydrogen Mixing | Julian Whiteley</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #fdfdfd;
+            --text: #1a1a1a;
+            --muted: #999;
+            --studio: #f4f4f2;
+            --border: rgba(0,0,0,0.06);
+        }
 
+        body, html {
+            margin: 0; padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            scroll-behavior: smooth;
+        }
+
+        #smoke-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        nav {
+            padding: 30px 50px;
+            display: flex; justify-content: space-between; align-items: center;
+            position: sticky; top: 0; z-index: 100;
+            background: rgba(253, 253, 253, 0.9);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-logo { font-weight: 800; font-size: 1.1rem; text-decoration: none; color: #000; letter-spacing: -0.02em; }
+        .nav-links a { text-decoration: none; color: var(--muted); font-weight: 600; margin-left: 30px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; transition: 0.3s; }
+        .nav-links a:hover { color: #000; }
+
+        .container {
+            max-width: 1100px;
+            margin: 60px auto;
+            padding: 0 40px;
+            position: relative; z-index: 5;
+        }
+
+        h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -0.05em; margin-bottom: 80px; }
+
+        /* CATEGORY LABELS */
+        .category-section { margin-bottom: 100px; }
+        .category-label {
+            display: flex; align-items: center;
+            gap: 15px; margin-bottom: 40px;
+        }
+        .category-label h2 { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.25em; color: #ccc; margin: 0; }
+        .category-label .line { flex-grow: 1; height: 1px; background: #eee; }
+
+        /* THE PROJECT GRID */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+            gap: 60px 50px;
+        }
+
+        .project-card {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            transition: opacity 0.3s ease;
+        }
+
+        /* IMAGE: Constrained & Professional */
+        .image-box {
+            width: 100%;
+            height: 320px;
+            background-color: var(--studio);
+            background-image: radial-gradient(circle at center, #ffffff 0%, #f4f4f2 100%);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin-bottom: 25px;
+            border: 1px solid var(--border);
+            transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+        }
+
+        .card-image {
+            max-width: 65%; /* Keeps pictures small and sharp */
+            max-height: 65%;
+            object-fit: contain;
+            filter: drop-shadow(0 15px 30px rgba(0,0,0,0.07));
+            transition: transform 0.6s cubic-bezier(0.2, 1, 0.3, 1);
+        }
+
+        .project-card:hover .image-box { border-color: #ddd; transform: translateY(-5px); }
+        .project-card:hover .card-image { transform: scale(1.08); }
+
+        /* TEXT CONTENT */
+        .tag { font-size: 0.6rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.15em; color: #bbb; margin-bottom: 12px; display: block; }
+        .project-card h3 { font-size: 1.5rem; font-weight: 800; margin: 0 0 8px 0; letter-spacing: -0.02em; }
+        .project-card p { font-size: 0.9rem; color: #666; line-height: 1.6; margin-bottom: 18px; font-weight: 400; max-width: 90%; }
+
+        /* CALL TO ACTION */
+        .view-project {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #000;
+            transition: gap 0.3s ease;
+        }
+
+        .view-project svg {
+            width: 16px;
+            height: 16px;
+            stroke-width: 3;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover .view-project { gap: 14px; }
+        .project-card:hover .view-project svg { transform: translateX(4px); }
+
+        .wip-tag {
+            font-size: 0.55rem;
+            background: #eee;
+            color: #888;
+            padding: 2px 6px;
+            border-radius: 3px;
+            margin-left: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        @media (max-width: 800px) {
+            .project-grid { grid-template-columns: 1fr; }
+            h1 { font-size: 2.5rem; }
+            .image-box { height: 260px; }
+        }
+        /* UNIFIED NAVIGATION STYLE */
+        nav {
+            padding: 20px 40px; /* Matching your index/resume style */
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            background: white; 
+            border-bottom: 1px solid #eaeaea; 
+            position: sticky; 
+            top: 0; 
+            z-index: 100;
+        }
+
+        .nav-logo { 
+            font-weight: 800; 
+            font-size: 1.2rem; 
+            text-decoration: none; 
+            color: #1a1a1a; 
+            letter-spacing: -0.02em; 
+        }
+
+        .nav-links a { 
+            text-decoration: none; 
+            color: #666; /* Matching the muted grey from index */
+            font-weight: 600; 
+            margin-left: 25px; 
+            font-size: 0.85rem; 
+            text-transform: uppercase; 
+            letter-spacing: 0.05em; 
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover { 
+            color: #1a1a1a; /* Darkens on hover */
+        }
+
+        .nav-links a.active {
+            color: #1a1a1a; /* Highlight current page */
+        }
+        body, html { margin: 0; padding: 0; font-family: 'Inter', sans-serif; background-color: #fdfdfd; overflow-x: hidden; }
+        
+        #smoke-canvas { position: fixed; top: 0; left: 0; z-index: 0; pointer-events: none; opacity: 0.45; }
+
+        nav {
+            padding: 20px 40px; display: flex; justify-content: space-between; align-items: center;
+            background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(15px);
+            border-bottom: 1px solid #eaeaea; position: sticky; top: 0; z-index: 100;
+        }
+        .nav-logo { font-weight: 800; font-size: 1.2rem; text-decoration: none; color: #1a1a1a; }
+        .nav-links a { text-decoration: none; color: #666; font-weight: 600; margin-left: 25px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; transition: 0.3s; }
+        .nav-links a:hover { color: #000; }
+
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 40px; position: relative; z-index: 10; }
+        .project-tag { text-transform: uppercase; font-weight: 800; font-size: 0.75rem; letter-spacing: 0.1em; color: #bbb; margin-bottom: 10px; display: block; }
+        .stat-label { font-size: 0.7rem; text-transform: uppercase; color: #888; letter-spacing: 0.1em; display: block; margin-bottom: 5px; }
+        .back-link { display: inline-block; margin-top: 40px; text-decoration: none; font-weight: 800; color: #000; font-size: 0.8rem; text-transform: uppercase; border-bottom: 2px solid #000; padding-bottom: 4px; }
+    </style>
+</head>
+<body>
+
+    <canvas id="smoke-canvas"></canvas>
+
+    <nav>
+        <a href="../index.html" class="nav-logo">MJW</a>
+        <div class="nav-links">
+            <a href="../index.html">Home</a>
+            <a href="../about.html">About</a>
+            <a href="../projects.html">Projects</a>
+            <a href="../resume.html">Resume</a>
+            <a href="../contact.html">Contact</a>
+        </div>
+    </nav>
+
+    <div class="container" style="min-height: 80vh; display: flex; flex-direction: column; justify-content: center;">
+        <header style="margin-bottom: 40px;">
+            <span class="project-tag">Advanced Propulsion & Energy Systems</span>
+            <h1 style="font-size: 5rem; font-weight: 800; line-height: 1; margin: 0; letter-spacing: -0.05em;">Something big is coming.</h1>
+        </header>
+
+        <section style="max-width: 700px;">
+            <h2 style="font-size: 1.8rem; margin-bottom: 15px;">Hydrogen Mixing in Industrial Turbines</h2>
+            <p style="font-size: 1.1rem; color: #444; line-height: 1.7;">
+                I am currently conducting a <strong>Techno-Economical Analysis (TEA)</strong> focused on transitioning traditional gas turbines to hydrogen-blend fuels. This involves deep energy optimization and structural redundancy modeling, using integrated Python scripts and Excel engines to calculate system-wide efficiencies.
+            </p>
+            
+            <div style="display: flex; gap: 40px; margin-top: 40px;">
+                <div><span class="stat-label">Methodology</span><span style="font-weight: 800; font-size: 0.9rem;">Python & Excel Optimization</span></div>
+                <div><span class="stat-label">Core Objective</span><span style="font-weight: 800; font-size: 0.9rem;">Energy Redundancy</span></div>
+            </div>
+        </section>
+
+        <a href="../projects.html" class="back-link">← Back to Projects</a>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('smoke-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Particle {
+            constructor(x, y) {
+                this.x = x; this.y = y;
+                this.size = Math.random() * 30 + 15; // LARGER PARTICLES
+                this.speedX = (Math.random() - 0.5) * 0.8;
+                this.speedY = (Math.random() - 0.5) * 0.8;
+                this.color = 'rgba(0, 0, 0,'; 
+                this.alpha = 0.15; 
+                this.decay = Math.random() * 0.005 + 0.005; 
+            }
+            update() { 
+                this.x += this.speedX; this.y += this.speedY; 
+                if (this.size > 0.2) this.size -= 0.1;
+                this.alpha -= this.decay; 
+            }
+            draw() { 
+                ctx.fillStyle = this.color + this.alpha + ')'; 
+                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); 
+            }
+        }
+
+        window.addEventListener('mousemove', (e) => { particles.push(new Particle(e.clientX, e.clientY)); });
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update(); particles[i].draw();
+                if (particles[i].alpha <= 0) { particles.splice(i, 1); i--; }
+            }
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+</body>
+</html>
