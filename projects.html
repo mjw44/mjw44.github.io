@@ -139,6 +139,45 @@
             h1 { font-size: 2.5rem; }
             .image-box { height: 260px; }
         }
+        /* UNIFIED NAVIGATION STYLE */
+        nav {
+            padding: 20px 40px; /* Matching your index/resume style */
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            background: white; 
+            border-bottom: 1px solid #eaeaea; 
+            position: sticky; 
+            top: 0; 
+            z-index: 100;
+        }
+
+        .nav-logo { 
+            font-weight: 800; 
+            font-size: 1.2rem; 
+            text-decoration: none; 
+            color: #1a1a1a; 
+            letter-spacing: -0.02em; 
+        }
+
+        .nav-links a { 
+            text-decoration: none; 
+            color: #666; /* Matching the muted grey from index */
+            font-weight: 600; 
+            margin-left: 25px; 
+            font-size: 0.85rem; 
+            text-transform: uppercase; 
+            letter-spacing: 0.05em; 
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover { 
+            color: #1a1a1a; /* Darkens on hover */
+        }
+
+        .nav-links a.active {
+            color: #1a1a1a; /* Highlight current page */
+        }
     </style>
 </head>
 <body>
@@ -150,7 +189,7 @@
     <div class="nav-links">
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
-        <a href="projects.html" style="color: black;">Work</a>
+        <a href="projects.html" class="active">Projects</a>
         <a href="resume.html">Resume</a>
         <a href="contact.html">Contact</a>
     </div>
