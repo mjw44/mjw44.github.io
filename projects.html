@@ -22,7 +22,12 @@
             scroll-behavior: smooth;
         }
 
-        #smoke-canvas { position: fixed; top: 0; left: 0; z-index: 1; pointer-events: none; opacity: 0.4; }
+        #smoke-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
 
         nav {
             padding: 30px 50px;
@@ -178,20 +183,8 @@
         .nav-links a.active {
             color: #1a1a1a; /* Highlight current page */
         }
-        #smoke-canvas { 
-    position: fixed; 
-    top: 0; 
-    left: 0; 
-    z-index: 1; /* Sits behind the content */
-    pointer-events: none; /* Allows clicking on links/buttons behind the smoke */
-    opacity: 0.4; 
-}
+      
 
-/* IMPORTANT: Ensure your container has a higher z-index */
-.container { 
-    position: relative; 
-    z-index: 5; /* Sits in front of the smoke */
-}
     </style>
 </head>
 <body>
@@ -410,21 +403,33 @@
             </div>
     </div>
 </div>
-
 <script>
+    /* Smoke trail script remains the same to keep the ink effect */
     const canvas = document.getElementById('smoke-canvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
     function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-    window.addEventListener('resize', resize); resize();
+    window.addEventListener('resize', resize);
+    resize();
     class Particle {
         constructor(x, y) {
             this.x = x; this.y = y;
-            this.size = Math.random() * 2 + 1;
-            this.alpha = 0.15;
+            this.size = Math.random() * 5 + 2; 
+            this.speedX = (Math.random() - 0.5) * 0.8;
+            this.speedY = (Math.random() - 0.5) * 0.8;
+            this.color = 'rgba(0, 0, 0,'; 
+            this.alpha = 0.2; 
+            this.decay = Math.random() * 0.015 + 0.01; 
         }
-        update() { this.x += (Math.random()-0.5)*0.4; this.y += (Math.random()-0.5)*0.4; this.alpha -= 0.005; }
-        draw() { ctx.fillStyle = `rgba(0,0,0,${this.alpha})`; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI*2); ctx.fill(); }
+        update() { 
+            this.x += this.speedX; this.y += this.speedY; 
+            if (this.size > 0.2) this.size -= 0.05;
+            this.alpha -= this.decay; 
+        }
+        draw() { 
+            ctx.fillStyle = this.color + this.alpha + ')'; 
+            ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); 
+        }
     }
     window.addEventListener('mousemove', (e) => { particles.push(new Particle(e.clientX, e.clientY)); });
     function animate() {
