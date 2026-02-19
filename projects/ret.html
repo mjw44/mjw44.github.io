@@ -1,1 +1,280 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Renewable Energy Technology | Julian Whiteley</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+     body, html { 
+    margin: 0; 
+    padding: 0; 
+    font-family: 'Inter', sans-serif; 
+    background-color: #fcfcfc; 
+    color: #1a1a1a; 
+    line-height: 1.6; 
+    overflow-x: hidden;
+}
+
+/* --- BACKGROUND ANIMATION --- */
+#smoke-canvas { 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    z-index: 1; 
+    pointer-events: none; 
+    opacity: 0.45; 
+}
+
+/* --- NAVIGATION --- */
+nav { 
+    padding: 20px 40px; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    background: rgba(255, 255, 255, 0.9); 
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid #eaeaea; 
+    position: sticky; 
+    top: 0; 
+    z-index: 100; 
+}
+
+.nav-logo { 
+    font-weight: 800; 
+    font-size: 1.2rem; 
+    text-decoration: none; 
+    color: #1a1a1a; 
+}
+
+.nav-links a { 
+    text-decoration: none; 
+    color: #666; 
+    font-weight: 600; 
+    margin-left: 25px; 
+    font-size: 0.85rem; 
+    text-transform: uppercase; 
+    letter-spacing: 0.05em; 
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover { color: #000; }
+
+/* --- PAGE LAYOUT & CONTAINERS --- */
+.container { 
+    max-width: 1000px; 
+    margin: 80px auto; 
+    padding: 0 40px; 
+    position: relative; 
+    z-index: 5; 
+}
+
+header { margin-bottom: 60px; }
+
+.project-tag { 
+    text-transform: uppercase; 
+    font-weight: 800; 
+    font-size: 0.75rem; 
+    letter-spacing: 0.1em; 
+    color: #bbb; 
+    margin-bottom: 10px; 
+    display: block; 
+}
+
+h1 { 
+    font-size: 3.5rem; 
+    font-weight: 800; 
+    letter-spacing: -0.05em; 
+    margin: 0; 
+    line-height: 1.1; 
+}
+
+.subtitle { 
+    font-size: 1.2rem; 
+    color: #666; 
+    font-weight: 400; 
+    margin-top: 10px; 
+}
+
+section { margin-bottom: 80px; }
+
+h2 { 
+    font-size: 1.6rem; 
+    font-weight: 800; 
+    border-bottom: 1px solid #eee; 
+    padding-bottom: 10px; 
+    margin-bottom: 30px; 
+}
+
+/* --- TECHNICAL GRIDS & BOXES --- */
+.stat-grid { 
+    display: grid; 
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 20px; 
+    margin: 40px 0; 
+}
+
+.stat-card { 
+    background: #f8f8f8; 
+    padding: 20px; 
+    border-radius: 8px; 
+    text-align: center; 
+}
+
+.stat-value { display: block; font-size: 1.5rem; font-weight: 800; }
+.stat-label { font-size: 0.75rem; text-transform: uppercase; color: #888; letter-spacing: 0.1em; }
+
+.process-section { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 40px; 
+    align-items: start; 
+    margin-bottom: 100px; 
+}
+
+.wide-section { 
+    width: 100%; 
+    margin: 80px 0; 
+}
+
+.calc-box { 
+    background: #fff; 
+    border: 1px solid #eee; 
+    padding: 30px; 
+    border-radius: 8px; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.02); 
+    display: flex; 
+    flex-direction: column; 
+}
+
+.img-label { 
+    font-size: 0.65rem; 
+    text-transform: uppercase; 
+    font-weight: 800; 
+    color: #bbb; 
+    letter-spacing: 0.1em; 
+    margin-bottom: 15px; 
+    display: block; 
+}
+
+.calc-box img { 
+    width: 100%; 
+    height: auto; 
+    border-radius: 4px; 
+    margin-bottom: 30px; 
+}
+
+.drive-embed { 
+    width: 100%; 
+    height: 700px; 
+    border: none; 
+    border-radius: 4px; 
+}
+
+.back-link { 
+    display: inline-block; 
+    margin-top: 40px; 
+    text-decoration: none; 
+    font-weight: 800; 
+    color: #000; 
+    font-size: 0.8rem; 
+    text-transform: uppercase; 
+    border-bottom: 2px solid #000; 
+    padding-bottom: 4px; 
+}
+
+/* --- MOBILE RESPONSIVENESS --- */
+@media (max-width: 800px) {
+    .process-section { grid-template-columns: 1fr; }
+    .stat-grid { grid-template-columns: 1fr; }
+    h1 { font-size: 2.5rem; }
+}
+    </style>
+</head>
+<body>
+
+<canvas id="smoke-canvas"></canvas>
+
+<nav>
+    <a href="../index.html" class="nav-logo">MJW</a>
+    <div class="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="../about.html">About</a>
+        <a href="../projects.html">Projects</a>
+        <a href="../resume.html">Resume</a>
+        <a href="../contact.html">Contact</a>
+    </div>
+</nav>
+
+<div class="container" style="min-height: 80vh; display: flex; flex-direction: column; justify-content: center;">
+    
+    <header style="text-align: left; margin-bottom: 40px;">
+        <span class="project-tag">Renewable Energy Systems & Predictive Modeling</span>
+        <h1 style="font-size: 5rem; line-height: 1; margin-bottom: 20px; letter-spacing: -0.05em;">Something big is coming.</h1>
+    </header>
+
+    <section style="max-width: 750px;">
+        <h2 style="border-bottom: none; margin-bottom: 15px; color: #000;">Solar Yield Forecasting: Palmer Events Center</h2>
+        <p style="font-size: 1.15rem; color: #444; font-weight: 400; line-height: 1.7;">
+            I am developing a computational model to simulate and predict the energy harvest of the <strong>Palmer Events Center solar array</strong>. By analyzing historical irradiance data and system specifications, I am modeling several high-impact scenarios to optimize grid contribution and storage requirements.
+        </p>
+        
+        <p style="font-size: 1.05rem; color: #666; margin-bottom: 30px;">
+            This project involves calculating <strong>Photovoltaic (PV) Efficiency</strong> across varying weather profiles and shading conditions. The goal is to provide a high-accuracy prediction of kilowatt-hour (kWh) generation to evaluate the system's long-term sustainability and economic ROI.
+        </p>
+        
+        <div style="display: flex; gap: 30px; margin-top: 40px;">
+            <div>
+                <span class="stat-label">Model Scope</span>
+                <span style="display: block; font-weight: 800; font-size: 0.9rem; text-transform: uppercase;">Multi-Scenario Analysis</span>
+            </div>
+            <div style="width: 1px; background: #eee;"></div>
+            <div>
+                <span class="stat-label">Primary Metric</span>
+                <span style="display: block; font-weight: 800; font-size: 0.9rem; text-transform: uppercase;">Predicted Annual Yield (MWh)</span>
+            </div>
+        </div>
+    </section>
+
+    <div style="margin-top: 80px;">
+        <a href="../projects.html" class="back-link">← Back to Projects</a>
+    </div>
+</div>
+
+<script>
+    /* Smoke trail logic */
+   const canvas = document.getElementById('smoke-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    window.addEventListener('resize', resize);
+    resize();
+    class Particle {
+        constructor(x, y) {
+            this.x = x; this.y = y;
+            this.size = Math.random() * 5 + 2;
+            this.speedX = (Math.random() - 0.5) * 0.8;
+            this.speedY = (Math.random() - 0.5) * 0.8;
+            this.color = 'rgba(0, 0, 0,';
+            this.alpha = 0.2;
+            this.decay = Math.random() * 0.015 + 0.01;
+        }
+        update() { this.x += this.speedX; this.y += this.speedY; if (this.size > 0.2) this.size -= 0.05; this.alpha -= this.decay; }
+        draw() { ctx.fillStyle = this.color + this.alpha + ')'; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
+    }
+    window.addEventListener('mousemove', (e) => { particles.push(new Particle(e.clientX, e.clientY)); });
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < particles.length; i++) {
+            particles[i].update(); particles[i].draw();
+            if (particles[i].alpha <= 0) { particles.splice(i, 1); i--; }
+        }
+        requestAnimationFrame(animate);
+    }
+    animate();
+</script>
+
+</body>
+</html>
