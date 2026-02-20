@@ -66,77 +66,43 @@
     </div>
 </nav>
 
-<div class="container">
-    <header>
-        <span class="project-tag">Renewable Energy | Aero-Mechanical Design</span>
-        <h1>Wind Turbine Development</h1>
-        <p class="subtitle">A collaborative engineering effort in high-efficiency power generation.</p>
+<div class="container" style="min-height: 80vh; display: flex; flex-direction: column; justify-content: center;">
+    <header style="margin-bottom: 40px;">
+        <span class="project-tag">Energy Systems | Aero-Mechanical</span>
+        <h1 style="font-size: 5rem; font-weight: 800; line-height: 1; margin: 0; letter-spacing: -0.05em;">Something big is coming.</h1>
     </header>
 
-    <section style="background: linear-gradient(135deg, #1a1a1a 0%, #333 100%); color: #fff; padding: 60px; border-radius: 12px; text-align: center; position: relative; overflow: hidden;">
-        <div style="position: relative; z-index: 2;">
-            <h2 style="color: #fff; border: none; margin-bottom: 10px; font-size: 2.5rem;">Something Big is Coming.</h2>
-            <p style="font-size: 1.1rem; color: #bbb; max-width: 600px; margin: 0 auto 30px auto;">
-                Currently in the R&D phase, this project focuses on optimizing blade geometry and structural integrity for small-scale wind energy systems.
-            </p>
-            
-            <div style="display: inline-flex; align-items: center; gap: 15px; background: rgba(255,255,255,0.1); padding: 10px 25px; border-radius: 50px; border: 1px solid rgba(255,255,255,0.2);">
-                <span style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: #fff;">Lead Collaborators:</span>
-                <span style="font-weight: 800; font-size: 0.9rem;">Julian & Emilio</span>
-            </div>
-        </div>
+    <section style="max-width: 700px;">
+        <h2 style="font-size: 1.8rem; margin-bottom: 15px;">Wind Turbine Development</h2>
+        <p style="font-size: 1.1rem; color: #444; line-height: 1.7;">
+            In tandem with <strong>Emilio</strong>, I am developing a high-efficiency wind turbine prototype designed for optimized power coefficients at low tip-speed ratios. 
+            This project focuses on <strong>aerodynamic blade geometry</strong> and <strong>structural failure analysis</strong>, bridging the gap between fluid dynamics and material limits.
+        </p>
+
         
-        <div style="position: absolute; right: -50px; bottom: -50px; opacity: 0.1;">
-            <svg width="300" height="300" viewBox="0 0 100 100">
-                <path d="M50 50 L50 0 A50 50 0 0 1 100 50 Z" fill="white" />
-                <path d="M50 50 L0 50 A50 50 0 0 1 50 0 Z" fill="white" opacity="0.6"/>
-                <path d="M50 50 L50 100 A50 50 0 0 1 0 50 Z" fill="white" opacity="0.3"/>
-            </svg>
-        </div>
-    </section>
 
-    <section class="process-section">
-        <div>
-            <h2>Project Scope & Objectives</h2>
-            <p>
-                In tandem with Emilio, we are focusing on making a wind turbine from scratch, including the powertrain, hub, blades, and electronics. 
-            </p>
-            <ul style="color: var(--muted); margin-top: 20px;">
-                <li><strong>Aerodynamic Optimization: MATLAB analysis of airfoil profiles and pitch angles.</li>
-                <li><strong>Structural Analysis: Materials testing and failure-mode analysis of various structures under high-torque loads.</li>
-            </ul>
-        </div>
-        <div class="calc-box" style="justify-content: center; align-items: center; border-style: dashed; background: transparent;">
-            <div style="text-align: center; color: #ccc;">
-                <p style="font-weight: 800; font-size: 0.8rem; text-transform: uppercase;">CAD Rendering In Progress</p>
-                <p style="font-size: 0.75rem;">Aero-Structural Model Pending Completion</p>
+        <div style="display: flex; gap: 40px; margin-top: 40px;">
+            <div>
+                <span class="stat-label" style="display: block; font-size: 0.7rem; text-transform: uppercase; color: #999; letter-spacing: 0.05em;">Lead Collaborators</span>
+                <span style="font-weight: 800; font-size: 0.9rem;">Julian Whiteley & Emilio</span>
             </div>
-            
+            <div>
+                <span class="stat-label" style="display: block; font-size: 0.7rem; text-transform: uppercase; color: #999; letter-spacing: 0.05em;">Core Focus</span>
+                <span style="font-weight: 800; font-size: 0.9rem;">BEM Theory & FEA</span>
+            </div>
         </div>
     </section>
 
-    <div class="stat-grid">
-        <div class="stat-card">
-            <span class="stat-value">BEM</span>
-            <span class="stat-label">Blade Element Momentum Theory</span>
-        </div>
-  
-        <div class="stat-card">
-            <span class="stat-value">FEA</span>
-            <span class="stat-label">Stress Concentration Modeling</span>
-        </div>
-    </div>
     
 
-    <section style="border-top: 1px solid #eee; padding-top: 40px;">
+    <section style="border-top: 1px solid #eee; padding-top: 40px; margin-top: 60px;">
         <p style="font-style: italic; color: #888; text-align: center;">
-            Full technical breakdown and prototype testing data will be released in April 2026.
+            Full technical breakdown, CFD results, and prototype data will be released in April 2026.
         </p>
     </section>
 
-    <a href="../projects.html" class="back-link">← Back to Projects</a>
+    <a href="../projects.html" class="back-link" style="align-self: flex-start; margin-top: 40px;">← Back to Projects</a>
 </div>
-  
 <script>
     const canvas = document.getElementById('smoke-canvas');
     const ctx = canvas.getContext('2d');
