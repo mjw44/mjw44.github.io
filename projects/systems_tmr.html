@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Systems Validation| Julian Whiteley</title>
+    <title>Systems Validation | Julian Whiteley</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
@@ -32,17 +32,16 @@
         section { margin-bottom: 80px; }
         h2 { font-size: 1.6rem; font-weight: 800; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 30px; }
 
-        /* Grid for Calculations */
+        /* Grid for Layouts */
         .project-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; }
-        .calc-box { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 15px; display: flex; flex-direction: column; }
+        .calc-box { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 15px; display: flex; flex-direction: column; margin-bottom: 20px; }
         .calc-box img { width: 100%; height: auto; border-radius: 4px; object-fit: contain; flex-grow: 1; }
         .img-label { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: #999; margin-bottom: 10px; display: block; }
 
         /* Process Section (Split Layout) */
         .process-section { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: start; margin-top: 40px; }
 
-        .view-project { display: inline-flex; align-items: center; transition: transform 0.2s; }
-        .view-project:hover { transform: translateX(5px); }
+        .equation-box { background: #f9f9f9; padding: 25px; border-radius: 8px; text-align: center; margin: 20px 0; border: 1px solid var(--border); }
 
         .back-link { display: inline-block; margin-top: 40px; text-decoration: none; font-weight: 800; color: #000; font-size: 0.9rem; text-transform: uppercase; border-bottom: 2px solid #000; padding-bottom: 4px; }
 
@@ -68,76 +67,57 @@
 
 <div class="container">
     <header>
-        <span class="project-tag">Texas Marine Robotics | Systems & Thermal</span>
-        <h1>ASV Thermal Validation</h1>
-        <p class="subtitle">Transient thermal analysis and heat dissipation modeling for autonomous maritime electronics.</p>
+        <span class="project-tag">Texas Marine Robotics | Systems Engineering</span>
+        <h1>ASV Validation & Thermal Regulation</h1>
+        <p class="subtitle">Validating autonomous surface vessel performance through thermal modeling and environmental stress testing.</p>
     </header>
 
-    <div class="stat-grid">
-        <div class="stat-card"><span class="stat-value">Passive</span><span class="stat-label">Cooling Strategy</span></div>
-        <div class="stat-card"><span class="stat-value">Al 6061</span><span class="stat-label">Chassis Material</span></div>
-        <div class="stat-card"><span class="stat-value">Transient</span><span class="stat-label">Analysis Type</span></div>
-    </div>
-
     <section>
-        <h2>The Thermal Challenge</h2>
-        <p>
-            In a sealed, watertight aluminum chassis, internal heat generation from high-draw processors (Jetson/GPU) and power electronics creates a "heat soak" effect. Unlike open-air systems, maritime robots must balance <strong>IP-rated sealing</strong> with <strong>thermal regulation</strong>.
-        </p>
-        <p>
-            The objective of this analysis is to determine the <strong>Time to Critical Temperature</strong>—quantifying how long the system can operate at peak load before internal air temperatures exceed the thermal throttling limits of the hardware.
-        </p>
-    </section>
-
-    <section class="process-section">
-        <div>
-            <h2>Heat Transfer Fundamentals</h2>
-            <p>
-                The system is modeled as a transient heat power balance. I am analyzing the three-stage heat path:
-            </p>
-            <ul>
-                <li><strong>Internal Convection:</strong> Energy transfer from chips to the internal air volume ($q = h A \Delta T$).</li>
-                <li><strong>Chassis Conduction:</strong> Thermal resistance of the mounting interfaces and the aluminum walls.</li>
-                <li><strong>External Convection:</strong> The chassis acting as a heat exchanger with the surrounding water—a massive heat sink with high convective efficiency.</li>
-            </ul>
-        </div>
-        <div class="calc-box">
-            <span class="img-label">Thermal Resistance Circuit</span>
-            
-            <div style="background: #fdfdfd; padding: 10px; border: 1px solid #eee; font-family: monospace; font-size: 0.8rem; margin-top:10px;">
-                Q = \frac{T_{internal} - T_{water}}{\Sigma R_{thermal}}
+        <h2>1. Hull Evolution & Fluid-Structure Design</h2>
+        <p>Before achieving operational status, the vessel underwent several <strong>hull iterations</strong> to optimize for stability and internal volume. Early designs focused on displacement, while later iterations refined the <strong>aluminum chassis interface</strong> to improve the seal for sensitive electronics and maximize surface area contact with the water for cooling.</p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div class="calc-box">
+                <span class="img-label">Initial Design Iteration</span>
+                <img src="../assets/images/hull_v1.png" alt="Early hull design rendering">
+            </div>
+            <div class="calc-box">
+                <span class="img-label">Final Optimized Chassis</span>
+                <img src="../assets/images/hull_final.png" alt="Final aluminum chassis hull integration">
             </div>
         </div>
     </section>
 
     <section>
-        <h2>Transient Analysis Workflow</h2>
-        <p>
-            To predict the temperature rise over time, I am utilizing a lumped capacitance model (where applicable) or a 1D transient numerical method to solve:
-        </p>
-        <div class="equation-box" style="text-align: center; background: #f9f9f9; padding: 20px; border-radius: 8px;">
-            $$ \rho V C_p \frac{dT}{dt} = \dot{Q}_{gen} - \dot{Q}_{out} $$
+        <h2>2. Thermal Regulation & Heat Transfer</h2>
+        <p>Operating high-draw electronics (Jetson GPUs) in a sealed environment risks thermal runaway. I am conducting a transient thermal analysis to understand how the system approaches steady-state temperatures.</p>
+        
+        <div class="equation-box">
+            $$ \rho V C_p \frac{dT}{dt} = \dot{Q}_{gen} - h A (T_{int} - T_{ext}) $$
         </div>
-        <p>
-            This allows us to identify if the system reaches a <strong>steady-state temperature</strong> below the critical 80°C threshold, or if the mission duration is limited by a thermal "runway."
-        </p>
+
+        <div class="process-section">
+            <div>
+                <p><strong>Thermistor Integration:</strong> To validate the model, I integrated a network of thermistors at critical junctions (CPU, Battery, and Internal Air). This allows for real-time data acquisition to correlate the <strong>Convective Heat Transfer Coefficient ($h$)</strong> of the water-cooled aluminum walls with theoretical predictions.</p>
+                <p>The goal is to determine the <strong>Time to Critical Temperature</strong> to define mission duration limits.</p>
+            </div>
+            <div class="calc-box">
+                <span class="img-label">Thermal Resistance Circuit</span>
+                
+            </div>
+        </div>
     </section>
 
-    <section class="process-section">
-        <div class="calc-box">
-            <span class="img-label">Expected Temp vs. Time Curve</span>
-            
-        </div>
-        <div>
-            <h2>Validation Goals</h2>
-            <p>
-                Using onboard thermistors, the theoretical model will be validated against real-world mission data. This ensures that:
-            </p>
-            <ol>
-                <li>The <strong>Aluminum chassis</strong> provides enough surface area for passive dissipation.</li>
-                <li>The <strong>Internal air circulation</strong> (via fans) is sufficient to move heat to the chassis walls.</li>
-                <li>The system can support the 120+ minute mission profiles required for autonomous observation.</li>
-            </ol>
+    <section>
+        <h2>3. Environmental Stress: Waterproofing</h2>
+        <p>Integrity in a maritime environment is binary: it is either watertight or a failure. I led <strong>waterproofing testing</strong> across three scenarios:</p>
+        <ul style="color: var(--muted);">
+            <li><strong>Static Submersion:</strong> Validating gasket compression under constant hydrostatic pressure.</li>
+            <li><strong>Dynamic Splash/Washout:</strong> Simulating wave crashing and high-speed turns where water is forced against seams.</li>
+            <li><strong>Thermal Cycling:</strong> Testing if internal pressure changes (due to heat) compromise the seals.</li>
+        </ul>
+        <div class="calc-box" style="text-align: center;">
+            <span class="img-label">Operational Sea Trials</span>
+            <img src="../assets/images/asv_test.jpg" alt="ASV being tested in open water">
         </div>
     </section>
 
