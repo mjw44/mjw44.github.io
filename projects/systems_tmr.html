@@ -69,27 +69,18 @@
     <header>
         <span class="project-tag">Texas Marine Robotics | Systems Engineering</span>
         <h1>ASV Validation & Thermal Regulation</h1>
-        <p class="subtitle">Validating autonomous surface vessel performance through thermal modeling and environmental stress testing.</p>
+        <p class="subtitle">Characterizing transient thermal response and environmental reliability for autonomous maritime hardware.</p>
     </header>
 
-    <section>
-        <h2>1. Hull Evolution & Fluid-Structure Design</h2>
-        <p>Before achieving operational status, the vessel underwent several <strong>hull iterations</strong> to optimize for stability and internal volume. Early designs focused on displacement, while later iterations refined the <strong>aluminum chassis interface</strong> to improve the seal for sensitive electronics and maximize surface area contact with the water for cooling.</p>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-            <div class="calc-box">
-                <span class="img-label">Initial Design Iteration</span>
-                <img src="../assets/images/hull_v1.png" alt="Early hull design rendering">
-            </div>
-            <div class="calc-box">
-                <span class="img-label">Final Optimized Chassis</span>
-                <img src="../assets/images/hull_final.png" alt="Final aluminum chassis hull integration">
-            </div>
-        </div>
-    </section>
+    <div class="stat-grid">
+        <div class="stat-card"><span class="stat-value">Active</span><span class="stat-label">Transient Analysis</span></div>
+        <div class="stat-card"><span class="stat-value">NTC</span><span class="stat-label">Thermistor Network</span></div>
+        <div class="stat-card"><span class="stat-value">Ongoing</span><span class="stat-label">Structural Testing</span></div>
+    </div>
 
     <section>
-        <h2>2. Thermal Regulation & Heat Transfer</h2>
-        <p>Operating high-draw electronics (Jetson GPUs) in a sealed environment risks thermal runaway. I am conducting a transient thermal analysis to understand how the system approaches steady-state temperatures.</p>
+        <h2>Thermal Regulation & Transient Analysis</h2>
+        <p>Operating high-performance GPUs and power systems within a sealed aluminum chassis creates a significant thermal challenge. I have integrated a network of <strong>NTC thermistors</strong> to monitor internal air and component temperatures, providing the data necessary to validate our theoretical models.</p>
         
         <div class="equation-box">
             $$ \rho V C_p \frac{dT}{dt} = \dot{Q}_{gen} - h A (T_{int} - T_{ext}) $$
@@ -97,8 +88,9 @@
 
         <div class="process-section">
             <div>
-                <p><strong>Thermistor Integration:</strong> To validate the model, I integrated a network of thermistors at critical junctions (CPU, Battery, and Internal Air). This allows for real-time data acquisition to correlate the <strong>Convective Heat Transfer Coefficient ($h$)</strong> of the water-cooled aluminum walls with theoretical predictions.</p>
-                <p>The goal is to determine the <strong>Time to Critical Temperature</strong> to define mission duration limits.</p>
+                <h3>Current Work: Heat Transfer Modeling</h3>
+                <p>I am currently conducting a <strong>transient thermal analysis</strong> to identify the system's "time to critical temperature." By applying a lumped capacitance model, I am evaluating whether the convective coefficient ($h$) of the water-cooled chassis walls allows the system to reach a steady-state equilibrium before thermal throttling occurs.</p>
+                <p>This phase involves correlating live thermistor data with our energy balance equations to refine the thermal resistance values of the internal air volume.</p>
             </div>
             <div class="calc-box">
                 <span class="img-label">Thermal Resistance Circuit</span>
@@ -108,22 +100,49 @@
     </section>
 
     <section>
-        <h2>3. Environmental Stress: Waterproofing</h2>
-        <p>Integrity in a maritime environment is binary: it is either watertight or a failure. I led <strong>waterproofing testing</strong> across three scenarios:</p>
-        <ul style="color: var(--muted);">
-            <li><strong>Static Submersion:</strong> Validating gasket compression under constant hydrostatic pressure.</li>
-            <li><strong>Dynamic Splash/Washout:</strong> Simulating wave crashing and high-speed turns where water is forced against seams.</li>
-            <li><strong>Thermal Cycling:</strong> Testing if internal pressure changes (due to heat) compromise the seals.</li>
-        </ul>
-        <div class="calc-box" style="text-align: center;">
-            <span class="img-label">Operational Sea Trials</span>
-            <img src="../assets/images/asv_test.jpg" alt="ASV being tested in open water">
+        <h2>Hull Evolution & Mechanical Integration</h2>
+        <p>The ASV chassis has undergone several iterations to optimize the balance between buoyancy and effective heat dissipation. This ongoing structural development focuses on refining the interface between the <strong>internal electronics baseplate</strong> and the <strong>aluminum heat-sink chassis</strong>.</p>
+        
+        <div class="project-grid">
+            <div class="calc-box">
+                <span class="img-label">Alpha Iteration: Volume Study</span>
+                <img src="../assets/images/hull_v1.png" alt="Early hull design and volume study">
+            </div>
+            <div class="calc-box">
+                <span class="img-label">Final Chassis: Thermal Path Integration</span>
+                <img src="../assets/images/hull_final.png" alt="Final aluminum chassis design">
+            </div>
         </div>
+    </section>
+
+    <section>
+        <h2>Environmental Stress & Waterproofing</h2>
+        <p>Reliability in maritime robotics is binary. I am currently developing a validation suite to test the vessel's waterproofing under various high-risk scenarios. These tests ensure the structural integrity of the seals as the internal pressure fluctuates due to thermal cycling.</p>
+        
+        <div class="project-grid">
+            <div class="calc-box">
+                <span class="img-label">Validation Scenario: Static</span>
+                <p style="font-size: 0.85rem; color: #666;">Testing gasket compression under constant hydrostatic load to ensure zero-seepage during long-duration submersion.</p>
+            </div>
+            <div class="calc-box">
+                <span class="img-label">Validation Scenario: Dynamic</span>
+                <p style="font-size: 0.85rem; color: #666;">Simulating wave impact and centripetal forces that force high-velocity water against chassis seams during aggressive maneuvering.</p>
+            </div>
+        </div>
+
+        <div class="calc-box" style="margin-top: 25px;">
+            <span class="img-label">Field Deployment: Sea Trials</span>
+            <img src="../assets/images/uttower.png" alt="ASV operational testing at the UT Tower pond">
+        </div>
+    </section>
+
+    <section style="background: #1a1a1a; color: #fff; padding: 40px; border-radius: 8px;">
+        <h2 style="color: #fff; border-bottom-color: #333;">Future Work: Academic Extension</h2>
+        <p style="color: #bbb;">Upon completion of the thermal transient analysis, I plan to utilize <strong>Linear Elastic Fracture Mechanics (LEFM)</strong> to study how thermal expansion cycles might affect the long-term integrity of the acrylic-to-aluminum bolt interfaces, specifically looking at crack initiation at stress concentrations ($K_t$).</p>
     </section>
 
     <a href="../projects.html" class="back-link">← Back to Projects</a>
 </div>
-
 <script>
     const canvas = document.getElementById('smoke-canvas');
     const ctx = canvas.getContext('2d');
