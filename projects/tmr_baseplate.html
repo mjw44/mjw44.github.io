@@ -58,124 +58,125 @@
     <section>
         <h2>The Design Challenge</h2>
         <p>
-            The objective was to develop a baseplate for the TMR Autonomous Surface Vessel to house sensitive observation electronics. The design was governed by a strict set of industrial constraints:
+            The objective was to develop a baseplate for the TMR Autonomous Surface Vessel to house sensitive observation electronics. 
+            The design was governed by real-world constraints: <strong>low cost</strong>, <strong>simple geometry</strong> for quick manufacturing at Texas Inventionworks (TIW), and <strong>easy assembly</strong>.
         </p>
-        <ul style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; color: var(--muted); font-size: 0.95rem;">
-            <li><strong>Cost & Speed:</strong> Minimal budget with a need for immediate deployment.</li>
-            <li><strong>TIW Accessibility:</strong> Manufacturing limited to tools available at the Texas Inventionworks (Maker Space).</li>
-            <li><strong>Simple Geometry:</strong> Designed for rapid machining and easy field assembly.</li>
-            <li><strong>Performance:</strong> Absolute prevention of deflection to maintain sensor calibration under multi-modal loading.</li>
-        </ul>
+        <p>
+            <strong>Material Selection:</strong> We required materials available for immediate turnaround (Wood, PLA, or Acrylic). <strong>Acrylic (PMMA)</strong> was chosen for its high strength relative to wood and its isotropic, predictable behavior compared to 3D-printed polymers.
+        </p>
     </section>
 
     <section class="process-section">
         <div>
-            <h2>Material Selection & Logic</h2>
+            <h2>Static & Kinematic Modeling</h2>
             <p>
-                The choice of material was restricted to stock available for rapid turnaround: Wood, PLA/PETG, or Acrylic. 
+                I began by calculating the <strong>maximum forces</strong> acting on the system. This included the static load of the sensors and the 
+                high-force scenarios of <strong>centripetal acceleration</strong> during aggressive turns and wave impact.
             </p>
             <p>
-                <strong>Acrylic (PMMA)</strong> was selected over 3D-printed polymers or wood due to its superior tensile strength and more predictable cyclic life in maritime conditions. While brittle, its transparency offered the added benefit of visual status-checks for internal hardware without disassembly.
+                By modeling these as bending moments, I determined a <strong>reasonable thickness</strong> to prevent deflection, settling on a 1/4" specification to maintain sensor calibration.
             </p>
         </div>
         <div class="calc-box">
-            <span class="img-label">Material Decision Matrix</span>
-            <table style="width: 100%; font-size: 0.75rem; border-collapse: collapse; text-align: left;">
-                <tr style="border-bottom: 1px solid #eee;">
-                    <th style="padding: 8px;">Material</th>
-                    <th style="padding: 8px;">Strength</th>
-                    <th style="padding: 8px;">Predictability</th>
-                </tr>
-                <tr>
-                    <td style="padding: 8px;">Wood</td>
-                    <td style="padding: 8px;">Low</td>
-                    <td style="padding: 8px;">Poor (Anisotropic)</td>
-                </tr>
-                <tr>
-                    <td style="padding: 8px;">PLA/PETG</td>
-                    <td style="padding: 8px;">Medium</td>
-                    <td style="padding: 8px;">Low (Layer Adhesion)</td>
-                </tr>
-                <tr style="background: #f9f9f9; font-weight: 800;">
-                    <td style="padding: 8px;">Acrylic</td>
-                    <td style="padding: 8px;">High</td>
-                    <td style="padding: 8px;">High (Isotropic)</td>
-                </tr>
-            </table>
-        </div>
+            <span class="img-label"><div class="container">
+    <header>
+        <span class="project-tag">Texas Marine Robotics | Structural Analysis & Design</span>
+        <h1>Acrylic Interface: Fatigue & Failure Analysis</h1>
+        <p class="subtitle">Engineering a mission-critical sensor mount under strict manufacturing and environmental constraints.</p>
+    </header>
+
+    <div class="stat-grid">
+        <div class="stat-card"><span class="stat-value">Goodman</span><span class="stat-label">Failure Criterion</span></div>
+        <div class="stat-card"><span class="stat-value">TIW</span><span class="stat-label">Rapid Prototyping</span></div>
+        <div class="stat-card"><span class="stat-value">2.0</span><span class="stat-label">Calculated FoS</span></div>
+    </div>
+
+    <section>
+        <h2>Design Constraints & Material Selection</h2>
+        <p>
+            The objective was to develop a baseplate for the TMR Autonomous Surface Vessel to house sensitive observation electronics. The design was governed by real-world constraints: <strong>low cost</strong>, <strong>simple geometry</strong> for quick manufacturing at Texas Inventionworks (TIW), and <strong>easy assembly</strong>.
+        </p>
+        <p>
+            <strong>Material Logic:</strong> We required materials available for immediate turnaround. <strong>Acrylic (PMMA)</strong> was selected for its high strength relative to wood and its isotropic, predictable behavior compared to 3D-printed polymers.
+        </p>
     </section>
 
     <section>
-        <h2>Analytical Depth: Load Modeling</h2>
-        <p>
-            To ensure the plate could withstand more than just static weight, I modeled a comprehensive load profile:
-        </p>
+        <h2>Technical Workflow: Analytical Derivations</h2>
+        <p>The following sequence documents the transition from raw environmental data to finalized mechanical specifications.</p>
         
-        <div class="project-grid" style="margin-top: 20px;">
-            <div>
-                <h3>1. Static & Dynamic Loads</h3>
-                <p>Calculated forces from sensor weight, wave impact (crashing), and the maximum centripetal forces generated during high-speed turns.</p>
+        <div class="project-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+            <div class="calc-box">
+                <span class="img-label">1. Maximum Force Loads</span>
+                <img src="../assets/images/bp2.png" alt="Calculation of static and sensor loads">
             </div>
-            <div>
-                <h3>2. Thickness Optimization</h3>
-                <p>Using a custom spreadsheet, I iterated through thicknesses to find the minimum requirement that satisfied both deflection limits and the Factor of Safety.</p>
+            <div class="calc-box">
+                <span class="img-label">2. Thickness Determination</span>
+                <img src="../assets/images/bp1.png" alt="Bending moment and thickness derivation">
             </div>
-        </div>
-        <div class="calc-box" style="margin-top: 20px;">
-            <span class="img-label">Spreadsheet Excerpt & Bending Calcs</span>
-            <img src="../assets/images/tmr_calc_thickness.png" alt="Spreadsheet for calculating acrylic thickness">
+            <div class="calc-box">
+                <span class="img-label">3. Centripetal Acceleration</span>
+                <img src="../assets/images/bp7.png" alt="Forces during high-speed turns">
+            </div>
+            <div class="calc-box">
+                <span class="img-label">4. Dynamic Loading (Acceleration)</span>
+                <img src="../assets/images/bp4.png" alt="Dynamic force profiles">
+            </div>
+            <div class="calc-box">
+                <span class="img-label">5 & 6. Bearing Stress Analysis</span>
+                <img src="../assets/images/bp5.png" alt="Bearing stress at bolt holes">
+            </div>
+            <div class="calc-box">
+                <span class="img-label">7. Revised Torque Specs</span>
+                <img src="../assets/images/bp3.png" alt="Torque adjustment based on Goodman results">
+            </div>
         </div>
     </section>
 
-    <section class="process-section">
-        <div class="calc-box">
-            <span class="img-label">The Goodman Shift</span>
-            <img src="../assets/images/tmr_goodman_graph.png" alt="Goodman graph showing mean and alternating stress">
-            
+    <section style="background: #f9f9f9; padding: 30px; border-radius: 8px; border: 1px solid var(--border);">
+        <div class="process-section" style="grid-template-columns: 1fr 1fr;">
+            <div>
+                <h3>1/4" Bending & Minimum Thickness</h3>
+                <p>I developed an iterative model in Google Sheets to simulate the relationship between plate thickness, deflection, and stress. This allowed for rapid "What-if" analysis of material failure before moving to FEA.</p>
+                <a href="https://docs.google.com/spreadsheets/d/13b9bALlohJvCrJ3qnlQv9rFZ2Mr84es_EyTdaLLoGPc/edit?usp=sharing" target="_blank" class="view-project" style="color: #217346; font-weight: 800; text-decoration: none; border: 1px solid #217346; padding: 10px 15px; border-radius: 4px; display: inline-flex;">
+                    View Live Google Sheets Analysis →
+                </a>
+            </div>
+            <div class="calc-box" style="background: #fff;">
+                <span class="img-label">Artifact 8: Goodman Graph Output</span>
+                <img src="../assets/images/goodmanbp.png" alt="Goodman graph generated in Google Sheets">
+                
+            </div>
         </div>
+    </section>
+
+    <section class="process-section" style="margin-top: 60px;">
         <div>
-            <h2>Breadth of Failure Analysis</h2>
+            <h2>Verification & Prototyping</h2>
             <p>
-                The <strong>Goodman Criterion</strong> was applied to analyze the interaction between the constant bolt clamping force (Mean Stress) and the cyclic wave/turning loads (Alternating Stress).
+                I utilized <strong>SolidWorks FEA</strong> to identify stress concentrations (Kt) at the boundary conditions that hand-calculations might overlook. The final validation was a physical prototype using <strong>aluminum holds</strong> to reinforce the acrylic-to-hull interface.
             </p>
-            <p>
-                <strong>The Technical Pivot:</strong> My analysis revealed that the initial torque specification (8 N-m) pushed the mean stress dangerously high. By reducing the torque, I shifted the operational point on the Goodman graph, effectively trading a small amount of clamping force for a significant increase in fatigue life.
-            </p>
+            <div style="display: flex; gap: 10px; margin-top: 20px;">
+                 <img src="../assets/images/proto_tmr_bp.png" style="width: 50%; border-radius: 4px;" alt="Prototype photo 1">
+                 <img src="../assets/images/proto_tmr_irl_bp.png" style="width: 50%; border-radius: 4px;" alt="Prototype photo 2">
+            </div>
+        </div>
+        <div class="calc-box">
+            <span class="img-label">Artifact 9: FEA Heatmap</span>
+            <img src="../assets/images/fea_tmr.png" alt="FEA stress heatmap">
         </div>
     </section>
 
-    <section>
-        <h2>Prototyping & Hypothetical Iteration</h2>
-        <p>
-            The physical prototype utilized for testing was a smaller-scale version featuring <strong>aluminum holds</strong> to reinforce the acrylic-to-hull interface. This allowed for real-world validation of the bearing stresses calculated during the design phase.
-        </p>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0;">
-            <div class="calc-box">
-                <span class="img-label">Physical Prototype (Aluminum Holds)</span>
-                <img src="../assets/images/tmr_proto_1.jpg" alt="Smaller prototype with aluminum holds">
-            </div>
-            <div class="calc-box">
-                <span class="img-label">Final SolidWorks Iteration</span>
-                <img src="../assets/images/tmr_final_model.png" alt="Final hypothetical SolidWorks assembly">
-            </div>
-        </div>
-    </section>
-
-    <section style="background: #f4f4f4; padding: 40px; border-radius: 8px;">
-        <h2>Future Work: Fracture Mechanics</h2>
-        <p>
-            While the Goodman method ensures the part stays within the safe fatigue envelope, a more granular approach would involve <strong>Linear Elastic Fracture Mechanics (LEFM)</strong>. 
-        </p>
-        <p>
-            Future iterations would analyze <strong>crack initiation</strong> and <strong>propagation rates</strong> $(da/dN)$ at specific stress concentrations ($K_t$). By modeling the number of cycles required for a microscopic surface craze to reach critical crack length, we could develop a predictive maintenance schedule for the ASV.
+    <section style="background: var(--text); color: #fff; padding: 40px; border-radius: 8px;">
+        <h2 style="color: #fff; border-bottom-color: #444;">Academic Extension: Fracture Mechanics</h2>
+        <p style="color: #bbb;">
+            To expand the project's breadth, future iterations will focus on <strong>Linear Elastic Fracture Mechanics (LEFM)</strong>. While the current Goodman analysis ensures operation within a safe envelope, LEFM would allow us to quantify <strong>crack initiation</strong> and <strong>propagation ($da/dN$)</strong> at stress concentrations ($K_t$).
         </p>
         
     </section>
 
     <a href="../projects.html" class="back-link">← Back to Projects</a>
 </div>
-
-
 
 <script>
     /* Insert the same smoke trail script here as used in previous pages */
