@@ -1,1 +1,214 @@
 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baseplate Development | Julian Whiteley</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body, html { margin: 0; padding: 0; font-family: 'Inter', sans-serif; background-color: #fcfcfc; color: #1a1a1a; line-height: 1.6; }
+        #smoke-canvas { position: fixed; top: 0; left: 0; z-index: 1; pointer-events: none; }
+        nav { padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; background: white; border-bottom: 1px solid #eaeaea; position: sticky; top: 0; z-index: 100; }
+        .nav-logo { font-weight: 800; font-size: 1.2rem; text-decoration: none; color: #1a1a1a; }
+        .nav-links a { text-decoration: none; color: #666; font-weight: 600; margin-left: 25px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        .container { max-width: 850px; margin: 80px auto; padding: 0 20px; position: relative; z-index: 5; }
+        header { margin-bottom: 60px; }
+        .project-tag { text-transform: uppercase; font-weight: 800; font-size: 0.75rem; letter-spacing: 0.1em; color: #bbb; margin-bottom: 10px; display: block; }
+        h1 { font-size: 3rem; font-weight: 800; letter-spacing: -0.04em; margin: 0 0 20px 0; line-height: 1.1; }
+        .subtitle { font-size: 1.2rem; color: #666; font-weight: 400; }
+        section { margin-bottom: 80px; }
+        h2 { font-size: 1.6rem; font-weight: 800; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 30px; }
+        .equation-box { background: #f8f8f8; padding: 30px; border-radius: 8px; margin: 30px 0; }
+        .image-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 40px 0; }
+        .image-column img { width: 100%; height: auto; border-radius: 6px; border: 1px solid #eee; }
+        .caption { font-size: 0.85rem; color: #888; margin-top: 10px; text-align: center; font-style: italic; }
+        .back-link { display: inline-block; margin-top: 40px; text-decoration: none; font-weight: 800; color: #000; font-size: 0.9rem; text-transform: uppercase; border-bottom: 2px solid #000; padding-bottom: 4px; }
+    </style>
+</head>
+<body>
+
+<canvas id="smoke-canvas"></canvas>
+
+<nav>
+    <a href="../index.html" class="nav-logo">MJW</a>
+    <div class="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="../about.html">About</a>
+        <a href="../projects.html">Projects</a>
+        <a href="../resume.html">Resume</a>
+        <a href="../contact.html">Contact</a>
+    </div>
+</nav>
+<div class="container">
+    <header>
+        <span class="project-tag">Texas Marine Robotics | Structural Analysis & Design</span>
+        <h1>Acrylic Interface: Fatigue & Failure Analysis</h1>
+        <p class="subtitle">Engineering a mission-critical sensor mount under strict manufacturing and environmental constraints.</p>
+    </header>
+
+    <div class="stat-grid">
+        <div class="stat-card"><span class="stat-value">Goodman</span><span class="stat-label">Failure Criterion</span></div>
+        <div class="stat-card"><span class="stat-value">TIW</span><span class="stat-label">Rapid Prototyping</span></div>
+        <div class="stat-card"><span class="stat-value">2.0</span><span class="stat-label">Calculated FoS</span></div>
+    </div>
+
+    <section>
+        <h2>The Design Challenge</h2>
+        <p>
+            The objective was to develop a baseplate for the TMR Autonomous Surface Vessel to house sensitive observation electronics. The design was governed by a strict set of industrial constraints:
+        </p>
+        <ul style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; color: var(--muted); font-size: 0.95rem;">
+            <li><strong>Cost & Speed:</strong> Minimal budget with a need for immediate deployment.</li>
+            <li><strong>TIW Accessibility:</strong> Manufacturing limited to tools available at the Texas Inventionworks (Maker Space).</li>
+            <li><strong>Simple Geometry:</strong> Designed for rapid machining and easy field assembly.</li>
+            <li><strong>Performance:</strong> Absolute prevention of deflection to maintain sensor calibration under multi-modal loading.</li>
+        </ul>
+    </section>
+
+    <section class="process-section">
+        <div>
+            <h2>Material Selection & Logic</h2>
+            <p>
+                The choice of material was restricted to stock available for rapid turnaround: Wood, PLA/PETG, or Acrylic. 
+            </p>
+            <p>
+                <strong>Acrylic (PMMA)</strong> was selected over 3D-printed polymers or wood due to its superior tensile strength and more predictable cyclic life in maritime conditions. While brittle, its transparency offered the added benefit of visual status-checks for internal hardware without disassembly.
+            </p>
+        </div>
+        <div class="calc-box">
+            <span class="img-label">Material Decision Matrix</span>
+            <table style="width: 100%; font-size: 0.75rem; border-collapse: collapse; text-align: left;">
+                <tr style="border-bottom: 1px solid #eee;">
+                    <th style="padding: 8px;">Material</th>
+                    <th style="padding: 8px;">Strength</th>
+                    <th style="padding: 8px;">Predictability</th>
+                </tr>
+                <tr>
+                    <td style="padding: 8px;">Wood</td>
+                    <td style="padding: 8px;">Low</td>
+                    <td style="padding: 8px;">Poor (Anisotropic)</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px;">PLA/PETG</td>
+                    <td style="padding: 8px;">Medium</td>
+                    <td style="padding: 8px;">Low (Layer Adhesion)</td>
+                </tr>
+                <tr style="background: #f9f9f9; font-weight: 800;">
+                    <td style="padding: 8px;">Acrylic</td>
+                    <td style="padding: 8px;">High</td>
+                    <td style="padding: 8px;">High (Isotropic)</td>
+                </tr>
+            </table>
+        </div>
+    </section>
+
+    <section>
+        <h2>Analytical Depth: Load Modeling</h2>
+        <p>
+            To ensure the plate could withstand more than just static weight, I modeled a comprehensive load profile:
+        </p>
+        
+        <div class="project-grid" style="margin-top: 20px;">
+            <div>
+                <h3>1. Static & Dynamic Loads</h3>
+                <p>Calculated forces from sensor weight, wave impact (crashing), and the maximum centripetal forces generated during high-speed turns.</p>
+            </div>
+            <div>
+                <h3>2. Thickness Optimization</h3>
+                <p>Using a custom spreadsheet, I iterated through thicknesses to find the minimum requirement that satisfied both deflection limits and the Factor of Safety.</p>
+            </div>
+        </div>
+        <div class="calc-box" style="margin-top: 20px;">
+            <span class="img-label">Spreadsheet Excerpt & Bending Calcs</span>
+            <img src="../assets/images/tmr_calc_thickness.png" alt="Spreadsheet for calculating acrylic thickness">
+        </div>
+    </section>
+
+    <section class="process-section">
+        <div class="calc-box">
+            <span class="img-label">The Goodman Shift</span>
+            <img src="../assets/images/tmr_goodman_graph.png" alt="Goodman graph showing mean and alternating stress">
+            
+        </div>
+        <div>
+            <h2>Breadth of Failure Analysis</h2>
+            <p>
+                The <strong>Goodman Criterion</strong> was applied to analyze the interaction between the constant bolt clamping force (Mean Stress) and the cyclic wave/turning loads (Alternating Stress).
+            </p>
+            <p>
+                <strong>The Technical Pivot:</strong> My analysis revealed that the initial torque specification (8 N-m) pushed the mean stress dangerously high. By reducing the torque, I shifted the operational point on the Goodman graph, effectively trading a small amount of clamping force for a significant increase in fatigue life.
+            </p>
+        </div>
+    </section>
+
+    <section>
+        <h2>Prototyping & Hypothetical Iteration</h2>
+        <p>
+            The physical prototype utilized for testing was a smaller-scale version featuring <strong>aluminum holds</strong> to reinforce the acrylic-to-hull interface. This allowed for real-world validation of the bearing stresses calculated during the design phase.
+        </p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0;">
+            <div class="calc-box">
+                <span class="img-label">Physical Prototype (Aluminum Holds)</span>
+                <img src="../assets/images/tmr_proto_1.jpg" alt="Smaller prototype with aluminum holds">
+            </div>
+            <div class="calc-box">
+                <span class="img-label">Final SolidWorks Iteration</span>
+                <img src="../assets/images/tmr_final_model.png" alt="Final hypothetical SolidWorks assembly">
+            </div>
+        </div>
+    </section>
+
+    <section style="background: #f4f4f4; padding: 40px; border-radius: 8px;">
+        <h2>Future Work: Fracture Mechanics</h2>
+        <p>
+            While the Goodman method ensures the part stays within the safe fatigue envelope, a more granular approach would involve <strong>Linear Elastic Fracture Mechanics (LEFM)</strong>. 
+        </p>
+        <p>
+            Future iterations would analyze <strong>crack initiation</strong> and <strong>propagation rates</strong> $(da/dN)$ at specific stress concentrations ($K_t$). By modeling the number of cycles required for a microscopic surface craze to reach critical crack length, we could develop a predictive maintenance schedule for the ASV.
+        </p>
+        
+    </section>
+
+    <a href="../projects.html" class="back-link">← Back to Projects</a>
+</div>
+
+
+
+<script>
+    /* Insert the same smoke trail script here as used in previous pages */
+     const canvas = document.getElementById('smoke-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    window.addEventListener('resize', resize);
+    resize();
+    class Particle {
+        constructor(x, y) {
+            this.x = x; this.y = y;
+            this.size = Math.random() * 5 + 2;
+            this.speedX = (Math.random() - 0.5) * 0.8;
+            this.speedY = (Math.random() - 0.5) * 0.8;
+            this.color = 'rgba(0, 0, 0,';
+            this.alpha = 0.2;
+            this.decay = Math.random() * 0.015 + 0.01;
+        }
+        update() { this.x += this.speedX; this.y += this.speedY; if (this.size > 0.2) this.size -= 0.05; this.alpha -= this.decay; }
+        draw() { ctx.fillStyle = this.color + this.alpha + ')'; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
+    }
+    window.addEventListener('mousemove', (e) => { particles.push(new Particle(e.clientX, e.clientY)); });
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < particles.length; i++) {
+            particles[i].update(); particles[i].draw();
+            if (particles[i].alpha <= 0) { particles.splice(i, 1); i--; }
+        }
+        requestAnimationFrame(animate);
+    }
+    animate();
+</script>
+
+</body>
+</html>
