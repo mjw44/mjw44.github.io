@@ -7,168 +7,376 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-    --bg: #fdfdfd;
-    --text: #1a1a1a;
-    --muted: #999;
-    --studio: transparent; /* Changed to transparent */
-    --border: rgba(0,0,0,0.06);
-}
+            --bg: #fdfdfd;
+            --text: #1a1a1a;
+            --muted: #999;
+            --border: rgba(0,0,0,0.06);
+        }
 
-body, html {
-    margin: 0; padding: 0;
-    font-family: 'Inter', sans-serif;
-    background-color: var(--bg);
-    color: var(--text);
-    scroll-behavior: smooth;
-}
+        body, html {
+            margin: 0; padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            scroll-behavior: smooth;
+        }
 
-#smoke-canvas {
-    position: fixed;
-    top: 0; left: 0;
-    z-index: 1;
-    pointer-events: none;
-}
+        #smoke-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
 
-/* UNIFIED NAVIGATION STYLE */
-nav {
-    padding: 20px 40px;
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-    background: white; 
-    border-bottom: 1px solid #eaeaea; 
-    position: sticky; 
-    top: 0; 
-    z-index: 100;
-}
+        nav {
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            border-bottom: 1px solid #eaeaea;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
 
-.nav-logo { 
-    font-weight: 800; 
-    font-size: 1.2rem; 
-    text-decoration: none; 
-    color: #1a1a1a; 
-    letter-spacing: -0.02em; 
-}
+        .nav-logo {
+            font-weight: 800;
+            font-size: 1.2rem;
+            text-decoration: none;
+            color: #1a1a1a;
+            letter-spacing: -0.02em;
+        }
 
-.nav-links a { 
-    text-decoration: none; 
-    color: #666; 
-    font-weight: 600; 
-    margin-left: 25px; 
-    font-size: 0.85rem; 
-    text-transform: uppercase; 
-    letter-spacing: 0.05em; 
-    transition: color 0.3s ease;
-}
+        .nav-links a {
+            text-decoration: none;
+            color: #666;
+            font-weight: 600;
+            margin-left: 25px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: color 0.3s ease;
+        }
 
-.nav-links a:hover, .nav-links a.active { 
-    color: #1a1a1a; 
-}
+        .nav-links a:hover, .nav-links a.active { color: #1a1a1a; }
 
-.container {
-    max-width: 1100px;
-    margin: 60px auto;
-    padding: 0 40px;
-    position: relative; z-index: 5;
-}
+        /* HERO */
+        .hero {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 70px 40px 20px;
+            position: relative;
+            z-index: 5;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: end;
+        }
 
-h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -0.05em; margin-bottom: 80px; }
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -0.05em;
+            margin: 0;
+            line-height: 1.05;
+        }
 
-/* CATEGORY LABELS */
-.category-section { margin-bottom: 100px; }
-.category-label {
-    display: flex; align-items: center;
-    gap: 15px; margin-bottom: 40px;
-}
-.category-label h2 { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.25em; color: #ccc; margin: 0; }
-.category-label .line { flex-grow: 1; height: 1px; background: #eee; }
+        .hero-right {
+            padding-bottom: 6px;
+        }
 
-/* THE PROJECT GRID */
-.project-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
-    gap: 60px 50px;
-}
+        .hero-bio {
+            font-size: 0.9rem;
+            color: #555;
+            line-height: 1.75;
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
 
-.project-card {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-    transition: opacity 0.3s ease;
-}
+        .hero-bio strong { color: #1a1a1a; font-weight: 600; }
 
-/* IMAGE BOX: Now Borderless and Transparent */
-.image-box {
-    width: 100%;
-    height: 320px;
-    background-color: transparent; /* Removed gray background */
-    background-image: none; /* Removed radial gradient */
-    border-radius: 0px; /* Optional: set to 0 for sharp edges */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    margin-bottom: 25px;
-    border: none; /* Removed the gray border */
-    transition: transform 0.5s cubic-bezier(0.2, 1, 0.3, 1);
-}
+        .skills-strip {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+        }
 
-.card-image {
-    width: 100%; /* Changed to fill the container width */
-    height: 100%; /* Changed to fill the container height */
-    object-fit: cover; /* This makes the image fill the box edge-to-edge */
-    filter: none; /* Removed drop shadow for a cleaner borderless look */
-    transition: transform 0.6s cubic-bezier(0.2, 1, 0.3, 1);
-}
+        .skill-tag {
+            font-size: 0.6rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #888;
+            border: 1px solid #e0e0e0;
+            padding: 4px 9px;
+            border-radius: 3px;
+            background: #fafafa;
+        }
 
-.project-card:hover .image-box { transform: translateY(-8px); }
-.project-card:hover .card-image { transform: scale(1.03); }
+        /* DIVIDER */
+        .hero-divider {
+            max-width: 1100px;
+            margin: 50px auto 0;
+            padding: 0 40px;
+            height: 1px;
+            background: #eee;
+            position: relative;
+            z-index: 5;
+        }
 
-/* TEXT CONTENT */
-.tag { font-size: 0.6rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.15em; color: #bbb; margin-bottom: 12px; display: block; }
-.project-card h3 { font-size: 1.5rem; font-weight: 800; margin: 0 0 8px 0; letter-spacing: -0.02em; }
-.project-card p { font-size: 0.9rem; color: #666; line-height: 1.6; margin-bottom: 18px; font-weight: 400; max-width: 90%; }
+        /* CONTAINER */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 40px 80px;
+            position: relative;
+            z-index: 5;
+        }
 
-/* CALL TO ACTION */
-.view-project {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.7rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: #000;
-    transition: gap 0.3s ease;
-}
+        /* CATEGORY */
+        .category-section { margin-top: 80px; }
 
-.view-project svg {
-    width: 16px;
-    height: 16px;
-    stroke-width: 3;
-    transition: transform 0.3s ease;
-}
+        .category-label {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
 
-.project-card:hover .view-project { gap: 14px; }
-.project-card:hover .view-project svg { transform: translateX(4px); }
+        .category-label h2 {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            color: #ccc;
+            margin: 0;
+            white-space: nowrap;
+            font-weight: 600;
+        }
 
-.wip-tag {
-    font-size: 0.55rem;
-    background: #eee;
-    color: #888;
-    padding: 2px 6px;
-    border-radius: 3px;
-    margin-left: 8px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
+        .category-label .line { flex-grow: 1; height: 1px; background: #eee; }
 
-@media (max-width: 800px) {
-    .project-grid { grid-template-columns: 1fr; }
-    h1 { font-size: 2.5rem; }
-    .image-box { height: 260px; }
-}
+        /* GRIDS */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+            gap: 60px 50px;
+        }
 
+        /* FEATURED CARD */
+        .featured-card {
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 48px;
+            text-decoration: none;
+            color: inherit;
+            align-items: center;
+            padding: 36px;
+            border: 1px solid #eee;
+            border-radius: 4px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 50px;
+            background: #fff;
+        }
+
+        .featured-card:hover {
+            border-color: #ccc;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.06);
+        }
+
+        .featured-card:hover .card-image { transform: scale(1.03); }
+        .featured-card:hover .view-project { gap: 14px; }
+        .featured-card:hover .view-project svg { transform: translateX(4px); }
+
+        .featured-img {
+            width: 100%;
+            height: 280px;
+            overflow: hidden;
+            border-radius: 2px;
+        }
+
+        .featured-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.2, 1, 0.3, 1);
+        }
+
+        .featured-body { display: flex; flex-direction: column; gap: 10px; }
+
+        .featured-eyebrow {
+            font-size: 0.6rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: #bbb;
+        }
+
+        .featured-label {
+            display: inline-block;
+            font-size: 0.55rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #1a1a1a;
+            background: #f0f0f0;
+            padding: 3px 8px;
+            border-radius: 2px;
+            width: fit-content;
+        }
+
+        .featured-body h2 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin: 0;
+            line-height: 1.15;
+        }
+
+        .featured-body p {
+            font-size: 0.88rem;
+            color: #555;
+            line-height: 1.7;
+            font-weight: 400;
+            margin: 0;
+        }
+
+        .featured-body p strong { color: #1a1a1a; font-weight: 600; }
+
+        .card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 4px;
+        }
+
+        .card-tag {
+            font-size: 0.55rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #aaa;
+            border: 1px solid #e8e8e8;
+            padding: 3px 7px;
+            border-radius: 2px;
+        }
+
+        .result-line {
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: #888;
+            letter-spacing: 0.05em;
+            margin-top: 2px;
+        }
+
+        /* STANDARD CARD */
+        .project-card {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            transition: opacity 0.3s ease;
+        }
+
+        .image-box {
+            width: 100%;
+            height: 280px;
+            background-color: transparent;
+            overflow: hidden;
+            margin-bottom: 22px;
+            transition: transform 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.2, 1, 0.3, 1);
+        }
+
+        .project-card:hover .image-box { transform: translateY(-6px); }
+        .project-card:hover .card-image { transform: scale(1.03); }
+        .project-card:hover .view-project { gap: 14px; }
+        .project-card:hover .view-project svg { transform: translateX(4px); }
+
+        .tag {
+            font-size: 0.6rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: #bbb;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .project-card h3 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin: 0 0 8px 0;
+            letter-spacing: -0.02em;
+        }
+
+        .project-card p {
+            font-size: 0.875rem;
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 6px;
+            font-weight: 400;
+            max-width: 92%;
+        }
+
+        .project-card p strong { color: #1a1a1a; font-weight: 600; }
+
+        .project-card .card-tags { margin-bottom: 14px; }
+
+        .project-card .result-line { margin-bottom: 12px; }
+
+        .view-project {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #000;
+            transition: gap 0.3s ease;
+            margin-top: 8px;
+        }
+
+        .view-project svg {
+            width: 16px; height: 16px;
+            stroke-width: 3;
+            transition: transform 0.3s ease;
+        }
+
+        .wip-tag {
+            font-size: 0.55rem;
+            background: #f0f0f0;
+            color: #999;
+            padding: 2px 6px;
+            border-radius: 3px;
+            margin-left: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+        }
+
+        /* REVEAL */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.55s ease, transform 0.55s ease;
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 800px) {
+            .hero { grid-template-columns: 1fr; padding: 50px 20px 20px; }
+            .hero h1 { font-size: 2.5rem; }
+            .project-grid { grid-template-columns: 1fr; }
+            .featured-card { grid-template-columns: 1fr; padding: 24px; }
+            .featured-img { height: 220px; }
+            .container, .hero-divider { padding-left: 20px; padding-right: 20px; }
+        }
     </style>
 </head>
 <body>
@@ -186,224 +394,327 @@ h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -0.05em; margin-bottom
     </div>
 </nav>
 
-<div class="container">
-    <h1>Engineering Projects</h1>
+<!-- HERO -->
+<div class="hero reveal">
+    <div>
+        <h1>Engineering<br/>Projects</h1>
+    </div>
+    <div class="hero-right">
+        <p class="hero-bio">
+            Mechanical Engineering student at <strong>UT Austin</strong> with experience in
+            <strong>structural analysis, system integration, and mechanical design</strong>.
+            Industry partnerships with ExxonMobil and NASA L'SPACE, competitive racing R&D,
+            and autonomous marine robotics.
+        </p>
+        <div class="skills-strip">
+            <span class="skill-tag">SolidWorks</span>
+            <span class="skill-tag">FEA / ANSYS</span>
+            <span class="skill-tag">Simulink</span>
+            <span class="skill-tag">MATLAB</span>
+            <span class="skill-tag">Structural Analysis</span>
+            <span class="skill-tag">Goodman Criterion</span>
+            <span class="skill-tag">Thermal Systems</span>
+            <span class="skill-tag">Systems Integration</span>
+        </div>
+    </div>
+</div>
+<div class="hero-divider"></div>
 
-    <div class="category-section">
+<div class="container">
+
+    <!-- 01: CENTER FOR ELECTROMECHANICS -->
+    <div class="category-section reveal">
         <div class="category-label">
             <h2>01 — Center for Electromechanics</h2>
             <div class="line"></div>
         </div>
-        
-        <div class="project-grid">
-            <a href="projects/hytec.html" class="project-card">
-                <div class="image-box">
-                    <img src="assets/images/hytec2.png" class="card-image">
+
+        <!-- FEATURED -->
+        <a href="projects/hytec.html" class="featured-card">
+            <div class="featured-img">
+                <img src="assets/images/hytec2.png" alt="Hydrogen Release System"/>
+            </div>
+            <div class="featured-body">
+                <span class="featured-label">★ Featured Project</span>
+                <span class="featured-eyebrow">Structural Analysis · System Integration</span>
+                <h2>Hydrogen Release System</h2>
+                <p>Led design and full system integration of a <strong>30-foot variable-height structure</strong> for hydrogen sensor testing — an industry deliverable for ExxonMobil. Managed BOM, coordinated electrical integration, and validated structural integrity through <strong>buckling analysis and critical load calculations</strong>, confirming adequate factor of safety under wind and pressure discharge loading.</p>
+                <div class="card-tags">
+                    <span class="card-tag">Buckling Analysis</span>
+                    <span class="card-tag">BOM Management</span>
+                    <span class="card-tag">System Integration</span>
+                    <span class="card-tag">FBD / Momentum Analysis</span>
                 </div>
-                <span class="tag">Structural Analysis / System Integration</span>
-                <h3>Hydrogen Release System</h3>
-                <p>Structural analysis for variable height release structure in partnership with ExxonMobil.</p>
+                <p class="result-line">↗ Industry Deliverable · ExxonMobil Partnership</p>
                 <div class="view-project">
-                    View Project 
+                    View Project
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                 </div>
-            </a>
+            </div>
+        </a>
 
+        <div class="project-grid">
             <a href="projects/mcp.html" class="project-card">
                 <div class="image-box">
-                    <img src="assets/images/mcp1.png" class="card-image">
+                    <img src="assets/images/mcp1.png" class="card-image" alt="Hydrogen Mixing in NG Turbines"/>
                 </div>
-                <span class="tag">Renewable Energy <span class="wip-tag">WIP</span></span>
-                <h3>Hydrogen Mixing in NG Turbines</h3>
-                <p>Modeling and optimization of cost and energy under constraints provided by the customer.</p>
+                <span class="tag">Renewable Energy <span class="wip-tag">In Progress</span></span>
+                <h3>H₂ Mixing in Natural Gas Turbines</h3>
+                <p>Modeling cost and energy tradeoffs for hydrogen co-firing in natural gas turbines under <strong>real customer constraints</strong>. Developing an optimization framework to maximize renewable energy fraction while satisfying operational and safety limits.</p>
+                <div class="card-tags">
+                    <span class="card-tag">Energy Modeling</span>
+                    <span class="card-tag">Optimization</span>
+                    <span class="card-tag">Thermodynamics</span>
+                </div>
+                <p class="result-line">↗ Active Research · CEM</p>
                 <div class="view-project">
-                    View Project 
+                    View Project
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                 </div>
             </a>
         </div>
     </div>
 
-    <div class="category-section">
+    <!-- 02: TEXAS MARINE ROBOTICS -->
+    <div class="category-section reveal">
         <div class="category-label">
             <h2>02 — Texas Marine Robotics</h2>
             <div class="line"></div>
         </div>
-        
         <div class="project-grid">
             <a href="projects/tmr_baseplate.html" class="project-card">
                 <div class="image-box">
-                    <img src="assets/images/fea_tmr.png" class="card-image">
+                    <img src="assets/images/fea_tmr.png" class="card-image" alt="Acrylic Fatigue Analysis"/>
                 </div>
-                <span class="tag">FEA / Structural</span>
-                <h3>Acrylic Fatigue Analysis</h3>
-                <p>Mechanical failure prediction in maritime mounting interfaces using the Goodman Criterion.</p>
+                <span class="tag">FEA · Fatigue Analysis</span>
+                <h3>Acrylic Sensor Mount — Fatigue & Failure</h3>
+                <p>Designed a mission-critical sensor baseplate for an autonomous surface vessel under strict cost and manufacturing constraints. Applied the <strong>Goodman Criterion</strong> for fatigue life, built an iterative spreadsheet model for thickness-deflection-stress analysis, and verified with FEA — achieving a <strong>factor of safety of 2.0</strong>.</p>
+                <div class="card-tags">
+                    <span class="card-tag">Goodman Criterion</span>
+                    <span class="card-tag">FEA</span>
+                    <span class="card-tag">Bearing Stress</span>
+                    <span class="card-tag">PMMA / Acrylic</span>
+                </div>
+                <p class="result-line">↗ FoS 2.0 · Deployed on ASV</p>
                 <div class="view-project">
-                    View Project 
+                    View Project
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                 </div>
             </a>
 
             <a href="projects/systems_tmr.html" class="project-card">
                 <div class="image-box">
-                    <img src="assets/images/uttower.png" class="card-image">
+                    <img src="assets/images/uttower.png" class="card-image" alt="ASV Validation"/>
                 </div>
-                <span class="tag">Systems / Thermal</span>
-                <h3>ASV Validation</h3>
-                <p>Operational validation and thermal regulation for autonomous surface vessels.</p>
+                <span class="tag">Systems · Thermal</span>
+                <h3>ASV Operational Validation</h3>
+                <p>Conducted operational validation and thermal regulation analysis for an <strong>autonomous surface vessel</strong>. Characterized heat dissipation requirements for onboard electronics and validated systems performance under real field conditions.</p>
+                <div class="card-tags">
+                    <span class="card-tag">Thermal Management</span>
+                    <span class="card-tag">Systems Validation</span>
+                    <span class="card-tag">Autonomous Systems</span>
+                </div>
+                <p class="result-line">↗ Field Validated</p>
                 <div class="view-project">
-                    View Project 
+                    View Project
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                 </div>
             </a>
         </div>
     </div>
 
-    <div class="category-section">
+    <!-- 03: PERSONAL -->
+    <div class="category-section reveal">
         <div class="category-label">
             <h2>03 — Personal Exploration</h2>
             <div class="line"></div>
         </div>
-        
         <div class="project-grid">
             <a href="projects/shroud_pid.html" class="project-card">
                 <div class="image-box">
-                    <img src="assets/images/shroud_2_cut_solidworks.png" class="card-image">
+                    <img src="assets/images/shroud_2_cut_solidworks.png" class="card-image" alt="PID Shroud"/>
                 </div>
-                <span class="tag">Controls / Thermal</span>
-                <h3>PID Control Shroud</h3>
-                <p>Closed-loop regulation system using 3D-printed convective air shrouds.</p>
+                <span class="tag">Controls · Thermal</span>
+                <h3>PID Closed-Loop Convection Shroud</h3>
+                <p>Designed and 3D-printed custom convective air shrouds to implement a <strong>closed-loop PID temperature regulation system</strong>. Tuned proportional, integral, and derivative gains in hardware for stable thermal response.</p>
+                <div class="card-tags">
+                    <span class="card-tag">PID Control</span>
+                    <span class="card-tag">3D Printing</span>
+                    <span class="card-tag">SolidWorks</span>
+                </div>
+                <p class="result-line">↗ Hardware Implementation</p>
                 <div class="view-project">
-                    View Project 
+                    View Project
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                 </div>
             </a>
 
             <a href="projects/windturbine.html" class="project-card">
                 <div class="image-box">
-                    <img src="assets/images/windturbine.png" class="card-image">
+                    <img src="assets/images/windturbine.png" class="card-image" alt="Wind Turbine"/>
                 </div>
-                <span class="tag">Renewable Energy <span class="wip-tag">WIP</span></span>
-                <h3>Wind Turbine</h3>
-                <p>Structures and powertrain for a small-scale wind turbine.</p>
+                <span class="tag">Structures · Powertrain <span class="wip-tag">In Progress</span></span>
+                <h3>Small-Scale Wind Turbine</h3>
+                <p>Designing structures and powertrain for a small-scale wind turbine — covering blade aerodynamics, load-bearing analysis, and drivetrain efficiency for <strong>off-grid renewable energy generation</strong>.</p>
+                <div class="card-tags">
+                    <span class="card-tag">Structural Design</span>
+                    <span class="card-tag">Renewable Energy</span>
+                    <span class="card-tag">Drivetrain</span>
+                </div>
+                <p class="result-line">↗ Active Build</p>
                 <div class="view-project">
-                    View Project 
+                    View Project
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                 </div>
             </a>
         </div>
     </div>
 
-    <div class="category-section">
+    <!-- 04: BAJA RACING -->
+    <div class="category-section reveal">
         <div class="category-label">
             <h2>04 — Longhorn Baja Racing</h2>
             <div class="line"></div>
         </div>
-        
         <div class="project-grid">
-            
             <a href="projects/sv.html" class="project-card">
                 <div class="image-box">
-                    <img src="assets/images/sv_lbr.png" class="card-image">
+                    <img src="assets/images/sv_lbr.png" class="card-image" alt="Simulation and Validation"/>
                 </div>
-                <span class="tag">Simulation and Validation | Team Lead </span>
+                <span class="tag">Simulation · Validation · Team Lead</span>
                 <h3>Simulation & Validation</h3>
-                <p>Leading the validation of racing team and R&D parts using engineering first principles and simulation.</p>
+                <p>Leading validation of racing and R&D components using <strong>engineering first principles and simulation</strong>. Ensuring parts meet performance and safety requirements before fabrication — reducing risk and iteration cost for the UT Austin Baja team.</p>
+                <div class="card-tags">
+                    <span class="card-tag">FEA</span>
+                    <span class="card-tag">First Principles</span>
+                    <span class="card-tag">Design Validation</span>
+                </div>
+                <p class="result-line">↗ Active · Team Lead</p>
                 <div class="view-project">
-                    View Project 
+                    View Project
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                 </div>
             </a>
-            
+
             <a href="projects/rd.html" class="project-card">
                 <div class="image-box">
-                    <img src="assets/images/system_lbr.png" class="card-image">
+                    <img src="assets/images/system_lbr.png" class="card-image" alt="R&D Lead"/>
                 </div>
-                <span class="tag">Research / R&D Lead</span>
-                <h3>Research & Design</h3>
-                <p>Leading multiple R&D initiatives for the UT Austin Baja team to improve vehicle performance and data acquisition.</p>
+                <span class="tag">Research · R&D Lead</span>
+                <h3>Research & Design Initiatives</h3>
+                <p>Leading multiple R&D initiatives to improve <strong>vehicle performance and data acquisition</strong> for the UT Austin Baja team — spanning drivetrain efficiency, suspension geometry, and onboard sensor integration.</p>
+                <div class="card-tags">
+                    <span class="card-tag">R&D Leadership</span>
+                    <span class="card-tag">Data Acquisition</span>
+                    <span class="card-tag">Vehicle Dynamics</span>
+                </div>
+                <p class="result-line">↗ Active · R&D Lead</p>
                 <div class="view-project">
-                    View Project 
+                    View Project
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                 </div>
             </a>
         </div>
     </div>
 
-    <div class="category-section">
+    <!-- 05: AEROSPACE -->
+    <div class="category-section reveal">
         <div class="category-label">
             <h2>05 — Aerospace & Academic</h2>
             <div class="line"></div>
         </div>
-        
         <div class="project-grid">
             <a href="projects/lspace.html" class="project-card">
                 <div class="image-box">
-                    <img src="assets/images/systemslspace.png" class="card-image">
+                    <img src="assets/images/systemslspace.png" class="card-image" alt="Mars Rover"/>
                 </div>
-                <span class="tag">NASA L'SPACE / Systems</span>
-                <h3>Mars Rover Concept</h3>
-                <p>Thermal Control Systems lead for robotic subsurface ice exploration.</p>
+                <span class="tag">NASA L'SPACE · Thermal Systems</span>
+                <h3>Mars Rover — Thermal Control Lead</h3>
+                <p>Served as <strong>Thermal Control Systems lead</strong> for a NASA L'SPACE Mars rover concept for robotic subsurface ice exploration. Responsible for thermal architecture across extreme Martian temperature cycling and vacuum conditions.</p>
+                <div class="card-tags">
+                    <span class="card-tag">Thermal Control</span>
+                    <span class="card-tag">Systems Engineering</span>
+                    <span class="card-tag">NASA L'SPACE</span>
+                </div>
+                <p class="result-line">↗ NASA L'SPACE Program</p>
                 <div class="view-project">
-                    View Project 
+                    View Project
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                 </div>
             </a>
 
             <a href="projects/failureanalysis.html" class="project-card">
                 <div class="image-box">
-                    <img src="assets/images/failureanalysis1.png" class="card-image">
+                    <img src="assets/images/failureanalysis1.png" class="card-image" alt="Failure Analysis"/>
                 </div>
-                <span class="tag">Materials Science <span class="wip-tag">WIP</span></span>
-                <h3>Failure Analysis</h3>
-                <p>Root cause metallurgical failure analysis using SEM and EDS.</p>
+                <span class="tag">Materials Science <span class="wip-tag">In Progress</span></span>
+                <h3>Metallurgical Failure Analysis</h3>
+                <p>Performing root cause failure analysis using <strong>SEM and EDS</strong> to characterize fracture surfaces and identify failure mechanisms at the microstructural level — bridging materials science with structural engineering.</p>
+                <div class="card-tags">
+                    <span class="card-tag">SEM / EDS</span>
+                    <span class="card-tag">Fracture Mechanics</span>
+                    <span class="card-tag">Root Cause Analysis</span>
+                </div>
+                <p class="result-line">↗ Active Research</p>
                 <div class="view-project">
-                    View Project 
+                    View Project
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                 </div>
             </a>
         </div>
     </div>
 
-    <div class="category-section">
+    <!-- 06: MODELING -->
+    <div class="category-section reveal">
         <div class="category-label">
             <h2>06 — Modeling & Prediction</h2>
             <div class="line"></div>
         </div>
-        
         <div class="project-grid">
             <a href="projects/ret.html" class="project-card">
                 <div class="image-box">
-                    <img src="assets/images/pec.png" class="card-image">
+                    <img src="assets/images/pec.png" class="card-image" alt="Renewable Energy Technology"/>
                 </div>
-                <span class="tag">Academic / Sustainability</span>
-                <h3>Renewable Energy Technology</h3>
-                <p>Power analysis and energy harvest modeling for the Palmer Event Center.</p>
+                <span class="tag">Energy Modeling · Sustainability</span>
+                <h3>Palmer Event Center — Energy Harvest Model</h3>
+                <p>Developed a <strong>power analysis and energy harvest model</strong> for the Palmer Event Center, evaluating solar and renewable technology integration. Quantified energy potential and cost-benefit tradeoffs for real infrastructure.</p>
+                <div class="card-tags">
+                    <span class="card-tag">Power Analysis</span>
+                    <span class="card-tag">Energy Modeling</span>
+                    <span class="card-tag">Sustainability</span>
+                </div>
+                <p class="result-line">↗ Real Infrastructure Study</p>
                 <div class="view-project">
-                    View Project 
+                    View Project
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                 </div>
             </a>
+
             <a href="projects/coastingprofile.html" class="project-card">
-    <div class="image-box">
-        <img src="assets/images/acc1.png" class="card-image" alt="Simulink Model of Coasting Dynamics">
-    </div>
-    <span class="tag">Systems Modeling / Dynamics</span>
-    <h3>Coasting Profile Optimization</h3>
-    <p>High-fidelity Simulink model used to characterize parasitic losses and kinetic energy decay for drivetrain efficiency.</p>
-    <div class="view-project">
-        View Project 
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-            <polyline points="12 5 19 12 12 19"></polyline>
-        </svg>
-    </div>
-</a>
+                <div class="image-box">
+                    <img src="assets/images/acc1.png" class="card-image" alt="Simulink Model of Coasting Dynamics"/>
+                </div>
+                <span class="tag">Systems Modeling · Dynamics</span>
+                <h3>Coasting Profile Optimization</h3>
+                <p>Built a <strong>high-fidelity Simulink model</strong> to characterize parasitic losses and kinetic energy decay, mapping drivetrain efficiency across coasting scenarios. Used to inform gear selection and race strategy for the Baja team.</p>
+                <div class="card-tags">
+                    <span class="card-tag">Simulink</span>
+                    <span class="card-tag">Drivetrain Dynamics</span>
+                    <span class="card-tag">Parasitic Loss</span>
+                </div>
+                <p class="result-line">↗ Applied to Race Strategy</p>
+                <div class="view-project">
+                    View Project
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </div>
+            </a>
         </div>
     </div>
+
 </div>
+
 <script>
-    /* Smoke trail script remains the same to keep the ink effect */
+    /* Smoke trail — preserved from original */
     const canvas = document.getElementById('smoke-canvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
@@ -413,21 +724,21 @@ h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -0.05em; margin-bottom
     class Particle {
         constructor(x, y) {
             this.x = x; this.y = y;
-            this.size = Math.random() * 5 + 2; 
+            this.size = Math.random() * 5 + 2;
             this.speedX = (Math.random() - 0.5) * 0.8;
             this.speedY = (Math.random() - 0.5) * 0.8;
-            this.color = 'rgba(0, 0, 0,'; 
-            this.alpha = 0.2; 
-            this.decay = Math.random() * 0.015 + 0.01; 
+            this.color = 'rgba(0, 0, 0,';
+            this.alpha = 0.2;
+            this.decay = Math.random() * 0.015 + 0.01;
         }
-        update() { 
-            this.x += this.speedX; this.y += this.speedY; 
+        update() {
+            this.x += this.speedX; this.y += this.speedY;
             if (this.size > 0.2) this.size -= 0.05;
-            this.alpha -= this.decay; 
+            this.alpha -= this.decay;
         }
-        draw() { 
-            ctx.fillStyle = this.color + this.alpha + ')'; 
-            ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); 
+        draw() {
+            ctx.fillStyle = this.color + this.alpha + ')';
+            ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
         }
     }
     window.addEventListener('mousemove', (e) => { particles.push(new Particle(e.clientX, e.clientY)); });
@@ -440,6 +751,18 @@ h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -0.05em; margin-bottom
         requestAnimationFrame(animate);
     }
     animate();
+
+    /* Scroll reveal */
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.07 });
+    reveals.forEach(el => observer.observe(el));
 </script>
 
 </body>
