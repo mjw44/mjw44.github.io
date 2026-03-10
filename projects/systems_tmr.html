@@ -46,7 +46,7 @@
         .pipeline-card p { margin: 0; font-size: 0.88rem; color: #555; }
         .photo-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
         .photo-item { display: flex; flex-direction: column; }
-        .photo-item img { width: 100%; height: 220px; object-fit: cover; border-radius: 6px; border: 1px solid var(--border); }
+        .photo-item img { width: 100%; height: auto; max-height: 340px; object-fit: contain; border-radius: 6px; border: 1px solid var(--border); background: #f5f5f5; }
         .photo-caption { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: #aaa; margin-top: 8px; letter-spacing: 0.08em; }
         .project-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
         .method-tag { display: inline-block; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ut-orange); margin-bottom: 6px; }
@@ -146,11 +146,11 @@
             <div>
                 <h3>MATLAB Iterative Solver</h3>
                 <p>The MATLAB model steps forward in time, computing the temperature at each layer boundary per timestep using the resistance chain. Inputs are the known electronics wattage, layer geometry, and initial conditions. The solver tracks internal air temperature and flags the timestep at which it reaches the electronics' critical limit.</p>
-                <p>Because Layer 3 (the air gap) is the dominant resistance, the model is most sensitive to gap thickness. Sensitivity sweeps over gap thickness identify whether a design change  (tighter fit or partial fill with a higher-conductivity material) would meaningfully extend safe operating time.</p>
+                <p>Because Layer 3 (the air gap) is the dominant resistance, the model is most sensitive to gap thickness. Sensitivity sweeps over gap thickness identify whether a design change — tighter fit or partial fill with a higher-conductivity material — would meaningfully extend safe operating time.</p>
             </div>
             <div class="calc-box">
                 <span class="img-label">Thermal Resistance Circuit</span>
-                <img src="../assets/images/tmr_thermal_circuit.png" alt="Thermal Circuit">
+                <img src="../assets/images/thermal_circuit_tmr.png" alt="Thermal Circuit">
             </div>
         </div>
 
@@ -162,7 +162,7 @@
             </div>
             <div class="pipeline-card">
                 <span>Stage 02: ANSYS</span>
-                <p>Full transient thermal FEA resolves spatial gradients and hot spots the 1D resistance model cannot capture. This includes the conduction through fasteners, asymmetric heat source placement, and edge effects at layer interfaces.</p>
+                <p>Full transient thermal FEA resolves spatial gradients and hot spots the 1D resistance model cannot capture — conduction through fasteners, asymmetric heat source placement, and edge effects at layer interfaces.</p>
             </div>
             <div class="pipeline-card">
                 <span>Stage 03: Physical Test</span>
@@ -174,25 +174,24 @@
     <section>
         <h2>Hull Optimization: Flow Visualization</h2>
         <h3>Why This Matters for Thermal Performance Too</h3>
-        <p>Waterline geometry is not only a drag variable. It controls A_wet, the wetted area that sets R₅ᵦ which is the lowest resistance external path. A hull that rides higher or sits asymmetrically reduces the submerged surface available for water-side heat rejection, raising steady-state internal temperature. Hull iteration therefore has simultaneous hydrodynamic and thermal consequences, and both are tracked across iterations.</p>
+        <p>Waterline geometry is not only a drag variable. It controls A_wet, the wetted area that sets R₅ᵦ — the lowest resistance external path. A hull that rides higher or sits asymmetrically reduces the submerged surface available for water-side heat rejection, raising steady-state internal temperature. Hull iteration therefore has simultaneous hydrodynamic and thermal consequences, and both are tracked across iterations.</p>
 
         <h3>Testing Method</h3>
         <p>Two measurements are taken per hull iteration under identical payload and center-of-gravity conditions. A ruler records <strong>draft depth</strong>, confirming the buoyancy calculation and the A_wet estimate fed into the thermal model. The <strong>waterline trace</strong> on the hull surface exposes asymmetries and excess wetted area that increase drag.</p>
 
         <div class="photo-pair">
             <div class="photo-item">
-                <img src="../assets/images/water_level.png" alt="Water level displacement measurement">
-                <span class="photo-caption">Height of Water in Flow Channel</span>
+                <img src="../assets/images/water_level.jpg" alt="Water level displacement measurement">
+                <span class="photo-caption">Draft Measurement: Buoyancy Confirmation</span>
             </div>
             <div class="photo-item">
-                <img src="../assets/images/waterline.png" alt="Waterline trace on hull">
+                <img src="../assets/images/waterline.jpg" alt="Waterline trace on hull">
                 <span class="photo-caption">Waterline Trace: Wetted Area Profile</span>
             </div>
         </div>
 
-        <p style="margin-top: 24px;">A lower, more uniform waterline reduces wetted area and drag. 
-            It also reduces A_wet and raises R₅ᵦ, degrading water-side heat rejection. This tradeoff is tracked explicitly. The thermal model is re-run with the updated A_wet for each hull iteration. This is in progress.</p>
-<!--
+        <p style="margin-top: 24px;">A lower, more uniform waterline reduces wetted area and drag. It also reduces A_wet and raises R₅ᵦ, degrading water-side heat rejection. This tradeoff is tracked explicitly — the thermal model is re-run with the updated A_wet for each hull iteration.</p>
+
         <div class="project-grid" style="margin-top: 24px;">
             <div class="calc-box">
                 <span class="method-tag">Iteration A</span>
@@ -205,13 +204,11 @@
                 <img src="../assets/images/hull_final.png" alt="Final hull design">
             </div>
         </div>
-        -->
     </section>
 
     <section style="padding: 40px; background: #1a1a1a; border-radius: 12px;">
         <h2 style="color: #fff; border-bottom-color: #333;">Next Steps</h2>
-        <p style="color: #bbb;">Once the MATLAB model is validated against thermistor data, thermal expansion cycles will feed into a fracture mechanics study of the acrylic-to-aluminum bolt interfaces. Aluminum and acrylic have significantly different coefficients of thermal expansion. 
-            There is  repeated heating and cooling generates cyclic stress at the fastener holes beyond what the static Goodman analysis captured. <strong style="color: #fff;">LEFM</strong> will estimate crack initiation life at those concentrations and establish a maintenance inspection interval.</p>
+        <p style="color: #bbb;">Once the MATLAB model is validated against thermistor data, thermal expansion cycles will feed into a fracture mechanics study of the acrylic-to-aluminum bolt interfaces. Aluminum and acrylic have significantly different coefficients of thermal expansion — repeated heating and cooling generates cyclic stress at the fastener holes beyond what the static Goodman analysis captured. <strong style="color: #fff;">LEFM</strong> will estimate crack initiation life at those concentrations and establish a maintenance inspection interval.</p>
     </section>
 
     <a href="../projects.html" class="back-link">← Back to Projects</a>
