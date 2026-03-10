@@ -6,20 +6,17 @@
     <title>About | Julian Whiteley</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
+        :root { --border: #eaeaea; --text: #1a1a1a; --muted: #666; --ut-orange: #bf5700; }
+
         body, html {
             margin: 0; padding: 0;
             font-family: 'Inter', sans-serif;
             background-color: #fcfcfc;
-            color: #1a1a1a;
+            color: var(--text);
             overflow-x: hidden;
         }
 
-        #smoke-canvas {
-            position: fixed;
-            top: 0; left: 0;
-            z-index: 1;
-            pointer-events: none;
-        }
+        #smoke-canvas { position: fixed; top: 0; left: 0; z-index: 1; pointer-events: none; }
 
         nav {
             padding: 20px 40px;
@@ -27,47 +24,20 @@
             justify-content: space-between;
             align-items: center;
             background: white;
-            border-bottom: 1px solid #eaeaea;
+            border-bottom: 1px solid var(--border);
             position: sticky;
             top: 0;
             z-index: 100;
         }
-
-        .nav-logo { font-weight: 800; font-size: 1.2rem; text-decoration: none; color: #1a1a1a; }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #666;
-            font-weight: 600;
-            margin-left: 25px;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
+        .nav-logo { font-weight: 800; font-size: 1.2rem; text-decoration: none; color: var(--text); }
+        .nav-links a { text-decoration: none; color: #666; font-weight: 600; margin-left: 25px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; }
 
         .container {
-            max-width: 650px;
+            max-width: 680px;
             margin: 100px auto;
             padding: 0 20px;
             position: relative;
             z-index: 5;
-        }
-
-        h1 { 
-            font-size: 1.5rem; 
-            font-weight: 800; 
-            letter-spacing: -0.02em; 
-            margin-bottom: 25px; 
-            color: #1a1a1a;
-        }
-        
-        section { margin-bottom: 60px; }
-
-        p {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            color: #444;
-            margin-bottom: 20px;
         }
 
         .label {
@@ -76,30 +46,81 @@
             letter-spacing: 0.2em;
             color: #bbb;
             font-weight: 800;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             display: block;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            margin: 0 0 24px;
+            line-height: 1.05;
+            color: var(--text);
+        }
+
+        section { margin-bottom: 56px; }
+
+        p {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: #444;
+            margin-bottom: 16px;
+        }
+
+        .quote {
+            font-size: 2.6rem;
+            font-weight: 800;
+            color: #000;
+            margin: 48px 0;
+            letter-spacing: -0.04em;
+            line-height: 1.05;
+        }
+
+        hr { border: 0; border-top: 1px solid #eee; margin: 44px 0; }
+
+        .goal-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 14px;
+            margin-top: 20px;
+        }
+        .goal-card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 18px;
+        }
+        .goal-card strong {
+            display: block;
+            font-size: 0.78rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--ut-orange);
+            margin-bottom: 6px;
+        }
+        .goal-card p {
+            margin: 0;
+            font-size: 0.88rem;
+            color: #555;
+            line-height: 1.5;
         }
 
         .grid-simple {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            gap: 16px;
             margin-top: 20px;
         }
+        .item { font-size: 0.9rem; color: #555; }
+        .item strong { color: var(--text); display: block; margin-bottom: 2px; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em; }
 
-        .item { font-size: 0.95rem; color: #555; }
-        .item strong { color: #1a1a1a; display: block; margin-bottom: 2px; }
-
-        .quote {
-            font-size: 3.2rem;
-            font-weight: 800;
-            color: #000;
-            margin: 50px 0;
-            letter-spacing: -0.05em;
-            line-height: 1;
+        @media (max-width: 600px) {
+            h1 { font-size: 2.2rem; }
+            .goal-grid { grid-template-columns: 1fr; }
+            .grid-simple { grid-template-columns: 1fr; }
         }
-
-        hr { border: 0; border-top: 1px solid #eee; margin: 40px 0; }
     </style>
 </head>
 <body>
@@ -118,46 +139,89 @@
 </nav>
 
 <div class="container">
-    
+
     <section>
+        <span class="label">About</span>
         <h1>Julian Whiteley.</h1>
-        <p>Mechanical engineering at UT Austin. Currently earning a Bachelor's degree, but I want to earn a Master's or a PhD. 
-            I like building things that actually help people, staying curious, and spending my time tutoring through the fundamentals of engineering.</p>
-        
-        <div class="quote">Keep moving forward.</div>
+        <p>I am a mechanical engineering student at UT Austin with a focus on structural analysis, simulation, and systems integration. My work spans FEA, thermal systems, and dynamics, grounded in first-principles reasoning and validated against physical reality.</p>
+        <p>I want to pursue graduate research and contribute to energy systems and product development where the engineering problems are genuinely unsolved. In the meantime, I tutor mechanics of solids, statics, and dynamics because teaching something is the fastest way to find out whether you actually understand it.</p>
+
+    </section>
+
+    <hr>
+
+    <section>
+        <span class="label">Goals</span>
+        <div class="goal-grid">
+            <div class="goal-card">
+                <strong>Graduate Degree</strong>
+                <p>Pursuing an MS or PhD in mechanical engineering to work on problems that require more than an undergraduate toolkit.</p>
+            </div>
+            <div class="goal-card">
+                <strong>Energy</strong>
+                <p>Structural and thermal systems for energy infrastructure, from conventional to emerging technologies.</p>
+            </div>
+            <div class="goal-card">
+                <strong>Product Design</strong>
+                <p>Building physical products that work reliably in the real world, designed from first principles and validated through testing.</p>
+            </div>
+        </div>
     </section>
 
     <hr>
 
     <section>
         <span class="label">Mindset</span>
-        <p>Failure is the only way one can learn. My mindset has been influenced by David Laid and Stoic philosophers. </p>
+        <p>Failure is the only reliable teacher. I approach problems by deriving from first principles before reaching for a simulation, and I hold myself to the same standard I'd apply to a design: if it can't be justified, it gets revised.</p>
     </section>
 
+    <hr>
+
     <section>
-        <span class="label">Extras</span>
+        <span class="label">Guiding Quotes</span>
+        <div style="display: flex; flex-direction: column; gap: 28px; margin-top: 8px;">
+
+            <div style="border-left: 3px solid var(--ut-orange); padding-left: 20px;">
+                <p style="font-size: 1.15rem; font-weight: 600; color: #1a1a1a; margin-bottom: 6px; line-height: 1.4;">"The only place to go from failure is to win."</p>
+                <span style="font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: #bbb;">Tom Platz</span>
+            </div>
+
+            <div style="border-left: 3px solid var(--ut-orange); padding-left: 20px;">
+                <p style="font-size: 1.15rem; font-weight: 600; color: #1a1a1a; margin-bottom: 6px; line-height: 1.4;">"Keep moving forward."</p>
+                <span style="font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: #bbb;">Eren Yeager — Attack on Titan</span>
+            </div>
+
+            <div style="border-left: 3px solid var(--ut-orange); padding-left: 20px;">
+                <p style="font-size: 1.15rem; font-weight: 600; color: #1a1a1a; margin-bottom: 6px; line-height: 1.4;">"Discipline is doing what needs to be done, even when you don't want to do it."</p>
+                <span style="font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: #bbb;">David Laid</span>
+            </div>
+
+        </div>
+    </section>
+
+    <hr>
+
+    <section>
+        <span class="label">Outside the Lab</span>
         <div class="grid-simple">
-            <div class="item"><strong>Eagle Scout</strong> Rank attained.</div>
-            <div class="item"><strong>Tutoring</strong> Solids, Statics, Dynamics.</div>
-            <div class="item"><strong>Class</strong> Favorite: Mechanics of Solids.</div>
-            <div class="item"><strong>Hobbies</strong> Bodybuilding, cooking, outdoors.</div>
-            <div class="item"><strong>Music</strong> Pork Soda by Glass Animals.</div>
-            <div class="item"><strong>Film</strong> 10 Things I Hate About You.</div>
-            <div class="item"><strong>Fuel</strong> Cabo Bob's steak burritos.</div>
-            <div class="item"><strong>Media</strong> Marvel fan.</div>
+            <div class="item"><strong>Eagle Scout</strong>Rank attained.</div>
+            <div class="item"><strong>Tutoring</strong>Solids, Statics, Dynamics.</div>
+            <div class="item"><strong>Favorite Course</strong>Mechanics of Solids.</div>
+            <div class="item"><strong>Hobbies</strong>Bodybuilding, cooking, outdoors.</div>
+            <div class="item"><strong>Music</strong>Pork Soda — Glass Animals.</div>
+            <div class="item"><strong>Film</strong>10 Things I Hate About You.</div>
+            <div class="item"><strong>Fuel</strong>Cabo Bob's steak burrito.</div>
         </div>
     </section>
 
 </div>
 
 <script>
-    /* Smoke trail script logic */
     const canvas = document.getElementById('smoke-canvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
     function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-    window.addEventListener('resize', resize);
-    resize();
+    window.addEventListener('resize', resize); resize();
     class Particle {
         constructor(x, y) {
             this.x = x; this.y = y;
