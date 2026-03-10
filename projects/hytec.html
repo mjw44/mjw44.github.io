@@ -114,7 +114,7 @@
             <h2>Problem & Approach</h2>
             <h3>Design Requirements</h3>
             <p>ExxonMobil required a variable-height release structure to position hydrogen sensors at controlled elevations during leak detection testing. The structure had to reach 30 feet, survive wind loading and high-pressure discharge events, and remain cost-effective for industrial deployment.</p>
-            <p>I led the design from requirements to delivery — authoring the BOM, selecting structural profiles, and coordinating electrical team integration to ensure all mechanical and operational criteria were met.</p>
+            <p>I led the design from requirements to delivery. I co-authored the BOM, selecting structural profiles, and coordinating electrical team integration to ensure all mechanical and operational criteria were met.</p>
 
             <h3 style="margin-top: 28px;">Thrust Loading — First Principles</h3>
             <p>Before selecting profiles, I needed to determine whether escaping high-pressure hydrogen gas would impose meaningful lateral loads. Using conservation of momentum on a control volume around the nozzle exit, I computed the reaction thrust force and compared it against the section's bending stiffness. The thrust was negligible relative to wind and self-weight, so it was correctly excluded from the governing load case.</p>
@@ -137,7 +137,7 @@
             <h2>Structural Validation</h2>
             <h3>Euler Buckling — Critical Load</h3>
             <p>The governing failure mode for slender vertical members under axial load is Euler buckling. I applied the critical load formula to each beam segment at maximum extension, using the appropriate effective length factor for the end conditions at each joint.</p>
-            <p>The analysis confirmed that the critical buckling load exceeded the maximum expected axial demand — accounting for self-weight and wind-induced lateral reaction — with a factor of safety within accepted industrial standards across the full 30-foot span.</p>
+            <p>The analysis confirmed that the critical buckling load exceeded the maximum expected axial demand. This accounted for self-weight and wind-induced lateral reactions. However, back-to-back unistrut was evaluated and implemented due to it's incredible rigidity.</p>
         </div>
     </section>
 
@@ -151,7 +151,7 @@
             </div>
             <div>
                 <span style="display: block; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; color: var(--ut-orange); margin-bottom: 10px;">02. Material Volume</span>
-                <p style="margin: 0;">The initial BOM was conservatively specified. Iterating cross-section sizing against the validated load cases would reduce material cost while maintaining structural margins.</p>
+                <p style="margin: 0;">The initial BOM was conservatively specified. Iterating various cross-section sizing against the validated load cases would reduce material cost while maintaining structural margins.</p>
             </div>
         </div>
     </section>
