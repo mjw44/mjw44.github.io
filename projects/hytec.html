@@ -21,7 +21,6 @@
         .hero-tag { text-transform: uppercase; font-weight: 800; font-size: 0.75rem; letter-spacing: 0.1em; color: #bbb; margin-bottom: 10px; display: block; }
         h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -0.04em; margin: 0; line-height: 1.1; }
 
-        /* Model Viewer Styles */
         .model-viewer { 
             display: grid; 
             grid-template-columns: 1fr 1fr; 
@@ -36,7 +35,6 @@
         .model-container { display: flex; flex-direction: column; }
         .model-container img { width: 100%; border-radius: 6px; border: 1px solid #f0f0f0; }
 
-        /* Specs Bar */
         .specs-bar { 
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
@@ -52,22 +50,21 @@
         section { margin-bottom: 80px; }
         h2 { font-size: 1.6rem; font-weight: 800; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 25px; }
         h3 { font-size: 1.1rem; font-weight: 700; margin-top: 0; color: var(--ut-orange); }
+        p { color: #444; font-size: 0.95rem; margin-top: 0; }
 
-        /* Grid & Box Styles */
         .calc-box { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 25px; display: flex; flex-direction: column; }
         .calc-box img { width: 100%; height: auto; border-radius: 4px; margin-bottom: 15px; border: 1px solid #f9f9f9; }
         .img-label { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: #aaa; margin-bottom: 8px; display: block; }
 
-        .process-section { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+        .process-section { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; margin-bottom: 60px; }
 
-        /* Embed Style */
         .drive-embed { width: 100%; height: 400px; border: 1px solid var(--border); border-radius: 4px; }
 
         .back-link { display: inline-block; margin-top: 40px; text-decoration: none; font-weight: 800; color: #000; font-size: 0.9rem; text-transform: uppercase; border-bottom: 2px solid #000; padding-bottom: 4px; transition: 0.2s; }
         .back-link:hover { padding-left: 10px; }
 
         @media (max-width: 768px) {
-            .process-section, .model-viewer, .stat-grid { grid-template-columns: 1fr; }
+            .process-section, .model-viewer { grid-template-columns: 1fr; }
             h1 { font-size: 2.5rem; }
         }
     </style>
@@ -107,62 +104,54 @@
 
     <div class="specs-bar">
         <div class="spec-item"><label>Role</label><span>Lead Design & Integration</span></div>
-        <div class="spec-item"><label>Mentor</label><span>Neill, Austin, & Mike</span></div>
-        <div class="spec-item"><label>Scale</label><span>30-Foot Vertical Span</span></div>
-        <div class="spec-item"><label>Budget</label><span>Low-Cost Industrial Optimization</span></div>
+        <div class="spec-item"><label>Client</label><span>ExxonMobil / CEM</span></div>
+        <div class="spec-item"><label>Scale</label><span>30-ft Vertical Span</span></div>
+        <div class="spec-item"><label>Constraint</label><span>Low-Cost, Field-Deployable</span></div>
     </div>
 
     <section class="process-section">
         <div>
-            <h2>Technical Process</h2>
-            <h3>Conceptualization to Design Review</h3>
-            <p>The project centered on creating a variable-height structure for testing hydrogen detection sensors. I managed the bill of materials and coordinated with the electrical team to ensure structural integrity across a 30-foot vertical span.</p>
-            <p>Iterative design reviews were conducted regularly with Mike, Austin, and Neill to ensure the project scope, criteria, and timeline were on track for the ExxonMobil delivery.</p>
+            <h2>Problem & Approach</h2>
+            <h3>Design Requirements</h3>
+            <p>ExxonMobil required a variable-height release structure to position hydrogen sensors at controlled elevations during leak detection testing. The structure had to reach 30 feet, survive wind loading and high-pressure discharge events, and remain cost-effective for industrial deployment.</p>
+            <p>I led the design from requirements to delivery — authoring the BOM, selecting structural profiles, and coordinating electrical team integration to ensure all mechanical and operational criteria were met.</p>
+
+            <h3 style="margin-top: 28px;">Thrust Loading — First Principles</h3>
+            <p>Before selecting profiles, I needed to determine whether escaping high-pressure hydrogen gas would impose meaningful lateral loads. Using conservation of momentum on a control volume around the nozzle exit, I computed the reaction thrust force and compared it against the section's bending stiffness. The thrust was negligible relative to wind and self-weight, so it was correctly excluded from the governing load case.</p>
         </div>
         <div class="calc-box">
-            <h2>Physics Validation</h2>
-            <h3>Thrust & Control Volumes</h3>
-            <p>I proved that the force exerted by escaping high-pressure hydrogen gas was negligible relative to the structural rigidity of the chosen profiles.</p>
-            
-            <span class="img-label">Free Body Diagram Part I</span>
-            <img src="../assets/images/thrust2.png" alt="Thrust 1">
-            
-            <span class="img-label">Momentum Analysis Part II</span>
-            <img src="../assets/images/thrust1.png" alt="Thrust 2">
+            <h3 style="margin-top: 0;">Momentum Analysis</h3>
+            <span class="img-label">Free Body Diagram — Control Volume</span>
+            <img src="../assets/images/thrust2.png" alt="Thrust FBD">
+            <span class="img-label">Reaction Force Derivation</span>
+            <img src="../assets/images/thrust1.png" alt="Momentum Analysis">
         </div>
     </section>
 
     <section class="process-section">
         <div class="calc-box">
-            <span class="img-label">BOM & Mechanical Specs Sheet</span>
+            <span class="img-label">BOM & Mechanical Specifications</span>
             <iframe class="drive-embed" src="https://docs.google.com/spreadsheets/d/1K6oVTNjNhzGb5lsOnSByf6RhRiQGVNh3CQIiusCvfsA/edit?rm=minimal"></iframe>
         </div>
         <div>
-            <h2>Structural Integrity</h2>
-            <h3>Buckling Validation</h3>
-            <p>Ensuring the structure could withstand environmental and operational loads meant calculating the critical buckling load for the single-beam members.</p>
-            <p>The analysis verified that the factor of safety (FoS) remained within industrial standards even at the maximum 30-foot extension, preventing catastrophic failure from high-pressure discharge or wind loading.</p>
+            <h2>Structural Validation</h2>
+            <h3>Euler Buckling — Critical Load</h3>
+            <p>The governing failure mode for slender vertical members under axial load is Euler buckling. I applied the critical load formula to each beam segment at maximum extension, using the appropriate effective length factor for the end conditions at each joint.</p>
+            <p>The analysis confirmed that the critical buckling load exceeded the maximum expected axial demand — accounting for self-weight and wind-induced lateral reaction — with a factor of safety within accepted industrial standards across the full 30-foot span.</p>
         </div>
     </section>
-    
-    <section style="margin-top: 80px; padding: 40px; background: #f8f9fa; border-radius: 12px; border: 1px solid #eee;">
-        <h2 style="border: none; margin-bottom: 20px; font-size: 1.4rem;">Engineering Retrospective: Value Optimization</h2>
-        <p style="color: #444; margin-bottom: 25px;">
-            Reflecting on the initial design cycle, the primary area for growth lies in dimensional & fiscal optimization. While the prototype met all functional requirements, a secondary iteration would focus on two key engineering levers:
-        </p>
 
+    <section style="padding: 40px; background: #f8f9fa; border-radius: 12px; border: 1px solid #eee; margin-bottom: 40px;">
+        <h2 style="border: none; margin-bottom: 12px; font-size: 1.4rem;">Retrospective: What I Would Optimize</h2>
+        <p style="margin-bottom: 28px;">The prototype met all requirements and was delivered to ExxonMobil on schedule. A second iteration would target two specific levers:</p>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
             <div>
-                <span style="display: block; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; color: var(--ut-orange); margin-bottom: 10px;">01. Geometric Efficiency</span>
-                <p style="font-size: 0.95rem; color: #666; margin: 0;">
-                    By aggressively iterating on component configurations, the overall length could be reduced to minimize moment arms and improve the system's stiffness-to-weight ratio.
-                </p>
+                <span style="display: block; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; color: var(--ut-orange); margin-bottom: 10px;">01. Section Geometry</span>
+                <p style="margin: 0;">Shorter moment arms reduce base bending loads. Re-evaluating member layout could improve the stiffness-to-weight ratio and allow lighter profiles without compromising FoS.</p>
             </div>
             <div>
-                <span style="display: block; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; color: var(--ut-orange); margin-bottom: 10px;">02. Cost-Benefit Scaling</span>
-                <p style="font-size: 0.95rem; color: #666; margin: 0;">
-                    Further optimization of material volume would directly reduce manufacturing costs, moving toward a leaner industrial design.
-                </p>
+                <span style="display: block; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; color: var(--ut-orange); margin-bottom: 10px;">02. Material Volume</span>
+                <p style="margin: 0;">The initial BOM was conservatively specified. Iterating cross-section sizing against the validated load cases would reduce material cost while maintaining structural margins.</p>
             </div>
         </div>
     </section>
