@@ -6,13 +6,15 @@
     <title>Julian Whiteley | Mechanical Engineering</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
+        :root { --border: #eaeaea; --text: #1a1a1a; --ut-orange: #bf5700; }
+
         body, html {
             margin: 0; padding: 0;
             width: 100%; height: 100%;
             font-family: 'Inter', sans-serif;
             background-color: #fcfcfc;
             overflow-x: hidden;
-            color: #1a1a1a;
+            color: var(--text);
         }
 
         #smoke-canvas {
@@ -22,21 +24,19 @@
             pointer-events: none;
         }
 
-        /* Standardized Navigation from Projects.html */
         nav {
             padding: 20px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             background: white;
-            border-bottom: 1px solid #eaeaea;
+            border-bottom: 1px solid var(--border);
             position: sticky;
             top: 0;
             z-index: 100;
         }
 
-        .nav-logo { font-weight: 800; font-size: 1.2rem; text-decoration: none; color: #1a1a1a; }
-
+        .nav-logo { font-weight: 800; font-size: 1.2rem; text-decoration: none; color: var(--text); }
         .nav-links a {
             text-decoration: none;
             color: #666;
@@ -47,45 +47,99 @@
             letter-spacing: 0.05em;
             transition: color 0.2s;
         }
-
         .nav-links a:hover { color: #000; }
 
         .content {
             position: relative;
             z-index: 5;
             text-align: center;
-            margin-top: 15vh;
+            margin-top: 14vh;
+            padding: 0 20px;
         }
 
-        h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -0.04em; margin: 0; color: #1a1a1a; }
-        .subtitle { font-size: 1.1rem; color: #666; margin: 10px 0; font-weight: 500; }
+        .eyebrow {
+            font-size: 0.72rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: #bbb;
+            margin-bottom: 14px;
+            display: block;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            margin: 0 0 12px;
+            color: var(--text);
+            line-height: 1.05;
+        }
+
+        .subtitle {
+            font-size: 0.85rem;
+            color: #999;
+            margin: 0 0 6px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .tagline {
+            font-size: 1rem;
+            color: #666;
+            margin: 16px auto 0;
+            font-weight: 400;
+            max-width: 420px;
+            line-height: 1.6;
+        }
 
         .menu-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 15px;
+            gap: 14px;
             max-width: 460px;
-            margin: 40px auto;
+            margin: 36px auto 0;
         }
 
         .menu-box {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(5px);
-            border: 1px solid #e0e0e0;
+            background: #fff;
+            border: 1px solid var(--border);
             padding: 22px;
             border-radius: 8px;
             text-decoration: none;
-            transition: all 0.3s ease;
+            transition: all 0.25s ease;
             text-align: left;
         }
 
-        .menu-box:hover { 
-            background: #fff; transform: translateY(-2px); border-color: #000;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        .menu-box:hover {
+            border-color: var(--ut-orange);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
         }
 
-        .menu-box strong { display: block; color: #1a1a1a; font-size: 0.95rem; margin-bottom: 4px; }
-        .menu-box span { font-size: 0.7rem; color: #999; text-transform: uppercase; letter-spacing: 0.02em; }
+        .menu-box:hover strong { color: var(--ut-orange); }
+
+        .menu-box strong {
+            display: block;
+            color: var(--text);
+            font-size: 0.95rem;
+            margin-bottom: 5px;
+            transition: color 0.25s;
+        }
+
+        .menu-box span {
+            font-size: 0.68rem;
+            color: #aaa;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            font-weight: 600;
+        }
+
+        @media (max-width: 500px) {
+            h1 { font-size: 2.4rem; }
+            .menu-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
@@ -104,14 +158,28 @@
 </nav>
 
 <div class="content">
+    <span class="eyebrow">Mechanical Engineering · UT Austin</span>
     <h1>Julian Whiteley</h1>
-    <p class="subtitle">Mechanical Engineering @ UT Austin</p>
+    <p class="subtitle">Structural Analysis · FEA · Thermal Systems</p>
+    <p class="tagline">Building things that don't fail and understanding exactly why when they do.</p>
 
     <div class="menu-grid">
-        <a href="projects.html" class="menu-box"><strong>Projects</strong><span>Portfolio</span></a>
-        <a href="resume.html" class="menu-box"><strong>Resume</strong><span>Experience</span></a>
-        <a href="about.html" class="menu-box"><strong>About</strong><span>Bio & Philosophy</span></a>
-        <a href="contact.html" class="menu-box"><strong>Contact</strong><span>Get in Touch</span></a>
+        <a href="projects.html" class="menu-box">
+            <strong>Projects</strong>
+            <span>FEA, Thermal, Dynamics & more</span>
+        </a>
+        <a href="resume.html" class="menu-box">
+            <strong>Resume</strong>
+            <span>Experience & Skills</span>
+        </a>
+        <a href="about.html" class="menu-box">
+            <strong>About</strong>
+            <span>Goals & Mindset</span>
+        </a>
+        <a href="contact.html" class="menu-box">
+            <strong>Contact</strong>
+            <span>Open to opportunities</span>
+        </a>
     </div>
 </div>
 
@@ -120,9 +188,7 @@
     const ctx = canvas.getContext('2d');
     let particles = [];
     function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-    window.addEventListener('resize', resize);
-    resize();
-
+    window.addEventListener('resize', resize); resize();
     class Particle {
         constructor(x, y) {
             this.x = x; this.y = y;
