@@ -193,12 +193,17 @@
             height: 280px;
             overflow: hidden;
             border-radius: 2px;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .featured-img img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
+            padding: 16px;
             transition: transform 0.6s cubic-bezier(0.2, 1, 0.3, 1);
         }
 
@@ -280,16 +285,20 @@
         .image-box {
             width: 100%;
             height: 280px;
-            background-color: transparent;
+            background-color: #f5f5f5;
             overflow: hidden;
             margin-bottom: 22px;
             transition: transform 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .card-image {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
+            padding: 12px;
             transition: transform 0.6s cubic-bezier(0.2, 1, 0.3, 1);
         }
 
@@ -401,9 +410,8 @@
     </div>
     <div class="hero-right">
         <p class="hero-bio">
-            Mechanical Engineering student at UT Austin with experience in
-            structural analysis, system integration and validation, and mechanical design.
-            
+            Mechanical Engineering student at <strong>UT Austin</strong> with experience in
+            <strong>structural analysis, system integration and validation, and mechanical design</strong>.
         </p>
         <div class="skills-strip">
             <span class="skill-tag">SolidWorks</span>
@@ -437,7 +445,7 @@
                 <span class="featured-label">★ Featured Project</span>
                 <span class="featured-eyebrow">Structural Analysis · System Integration</span>
                 <h2>Hydrogen Release System</h2>
-                <p>Led design and full system integration of a 30-foot variable-height structure for hydrogen sensor testing for an industry deliverable for ExxonMobil. Managed BOM, coordinated electrical integration, and validated structural integrity through buckling analysis and critical load calculation.</p>
+                <p>Led design and full system integration of a <strong>30-foot variable-height structure</strong> for hydrogen sensor testing for an industry deliverable for ExxonMobil. Managed BOM, coordinated electrical integration, and validated structural integrity through <strong>buckling analysis and critical load calculations</strong>.</p>
                 <div class="card-tags">
                     <span class="card-tag">Buckling Analysis</span>
                     <span class="card-tag">BOM Management</span>
@@ -459,7 +467,7 @@
                 </div>
                 <span class="tag">Renewable Energy <span class="wip-tag">In Progress</span></span>
                 <h3>H₂ Mixing in Natural Gas Turbines</h3>
-                <p>Modeling cost and energy tradeoffs for hydrogen mixing in natural gas turbines under real constraints. Developing an optimization framework to maximize renewable energy fraction while satisfying operational and safety limits.</p>
+                <p>Modeling cost and energy tradeoffs for hydrogen mixing in natural gas turbines under <strong>real constraints</strong>. Developing an optimization framework to maximize renewable energy fraction while satisfying operational and safety limits.</p>
                 <div class="card-tags">
                     <span class="card-tag">Energy Modeling</span>
                     <span class="card-tag">Optimization</span>
@@ -486,8 +494,8 @@
                     <img src="assets/images/fea_tmr.png" class="card-image" alt="Acrylic Fatigue Analysis"/>
                 </div>
                 <span class="tag">FEA · Fatigue Analysis</span>
-                <h3>Acrylic Sensor Mount | Fatigue & Failure</h3>
-                <p>Designed a sensor baseplate for an autonomous surface vessel under cost and manufacturing constraints. Applied the Goodman Criterion for fatigue life, built an iterative spreadsheet model for thickness-deflection-stress analysis, and verified with FEA — achieving a factor of safety of 2.0.</p>
+                <h3>Acrylic Sensor Mount — Fatigue & Failure</h3>
+                <p>Designed a mission-critical sensor baseplate for an autonomous surface vessel under strict cost and manufacturing constraints. Applied the <strong>Goodman Criterion</strong> for fatigue life, built an iterative spreadsheet model for thickness-deflection-stress analysis, and verified with FEA — achieving a <strong>factor of safety of 2.0</strong>.</p>
                 <div class="card-tags">
                     <span class="card-tag">Goodman Criterion</span>
                     <span class="card-tag">FEA</span>
@@ -507,7 +515,7 @@
                 </div>
                 <span class="tag">Systems · Thermal & Mechanical</span>
                 <h3>ASV Operational Validation</h3>
-                <p>Conducted operational validation and thermal regulation analysis. Characterize heat dissipation and optimize hull with flow visualization.</p>
+                <p>Conducted operational validation and thermal regulation analysis. Characterized heat dissipation and optimized hull with flow visualization.</p>
                 <div class="card-tags">
                     <span class="card-tag">Thermal Management</span>
                     <span class="card-tag">Systems Validation</span>
@@ -533,9 +541,9 @@
                 <div class="image-box">
                     <img src="assets/images/shroud_2_cut_solidworks.png" class="card-image" alt="PID Shroud"/>
                 </div>
-                <span class="tag">Controls | Thermal</span>
+                <span class="tag">Controls · Thermal</span>
                 <h3>PID Closed-Loop Convection Shroud</h3>
-                <p>Designed and 3D-printed custom convective air shrouds to implement a closed-loop PID temperature regulation system. Tuned proportional, integral, and derivative gains in hardware for stable thermal response.</p>
+                <p>Designed and 3D-printed custom convective air shrouds to implement a <strong>closed-loop PID temperature regulation system</strong>. Tuned proportional, integral, and derivative gains in hardware for stable thermal response.</p>
                 <div class="card-tags">
                     <span class="card-tag">PID Control</span>
                     <span class="card-tag">3D Printing</span>
@@ -552,9 +560,9 @@
                 <div class="image-box">
                     <img src="assets/images/windturbine.png" class="card-image" alt="Wind Turbine"/>
                 </div>
-                <span class="tag">Structures | Powertrain <span class="wip-tag">In Progress</span></span>
+                <span class="tag">Structures · Powertrain <span class="wip-tag">In Progress</span></span>
                 <h3>Small-Scale Wind Turbine</h3>
-                <p>Designing structures and powertrain for a small-scale wind turbine. This covers blade aerodynamics, load-bearing analysis, and drivetrain efficiency.</p>
+                <p>Designing structures and powertrain for a small-scale wind turbine — covering blade aerodynamics, load-bearing analysis, and drivetrain efficiency for <strong>off-grid renewable energy generation</strong>.</p>
                 <div class="card-tags">
                     <span class="card-tag">Structural Design</span>
                     <span class="card-tag">Renewable Energy</span>
@@ -580,9 +588,9 @@
                 <div class="image-box">
                     <img src="assets/images/sv_lbr.png" class="card-image" alt="Simulation and Validation"/>
                 </div>
-                <span class="tag">Simulation & Validation | Team Lead</span>
+                <span class="tag">Simulation · Validation · Team Lead</span>
                 <h3>Simulation & Validation</h3>
-                <p>Leading validation of racing and R&D components using engineering first principles and simulation. Ensuring parts meet performance and safety requirements before fabrication.</p>
+                <p>Leading validation of racing and R&D components using <strong>engineering first principles and simulation</strong>. Ensuring parts meet performance and safety requirements before fabrication — reducing risk and iteration cost for the UT Austin Baja team.</p>
                 <div class="card-tags">
                     <span class="card-tag">FEA</span>
                     <span class="card-tag">First Principles</span>
@@ -599,9 +607,9 @@
                 <div class="image-box">
                     <img src="assets/images/system_lbr.png" class="card-image" alt="R&D Lead"/>
                 </div>
-                <span class="tag">Research | R&D Lead</span>
+                <span class="tag">Research · R&D Lead</span>
                 <h3>Research & Design Initiatives</h3>
-                <p>Lead multiple R&D initiatives to improve vehicle performance and data acquisition. </p>
+                <p>Leading multiple R&D initiatives to improve <strong>vehicle performance and data acquisition</strong> for the UT Austin Baja team.</p>
                 <div class="card-tags">
                     <span class="card-tag">R&D Leadership</span>
                     <span class="card-tag">Data Acquisition</span>
@@ -628,8 +636,8 @@
                     <img src="assets/images/systemslspace.png" class="card-image" alt="Mars Rover"/>
                 </div>
                 <span class="tag">NASA L'SPACE · Thermal Systems</span>
-                <h3>Mars Rover | Thermal Control Lead</h3>
-                <p>Served as Thermal Control Systems leadng for a NASA L'SPACE Mars rover concept for robotic subsurface ice exploration. Responsible for thermal architecture across extreme Martian temperature cycling and vacuum conditions.</p>
+                <h3>Mars Rover — Thermal Control Lead</h3>
+                <p>Served as <strong>Thermal Control Systems lead</strong> for a NASA L'SPACE Mars rover concept for robotic subsurface ice exploration. Responsible for thermal architecture across extreme Martian temperature cycling and vacuum conditions.</p>
                 <div class="card-tags">
                     <span class="card-tag">Thermal Control</span>
                     <span class="card-tag">Systems Engineering</span>
@@ -648,8 +656,9 @@
                 </div>
                 <span class="tag">Materials Science <span class="wip-tag">In Progress</span></span>
                 <h3>Metallurgical Failure Analysis</h3>
-                <p>Performing root cause failure analysis to bridge materials science with structural engineering.</p>
+                <p>Performing root cause failure analysis using <strong>SEM and EDS</strong> to characterize fracture surfaces and identify failure mechanisms — bridging materials science with structural engineering.</p>
                 <div class="card-tags">
+                    <span class="card-tag">SEM / EDS</span>
                     <span class="card-tag">Fracture Mechanics</span>
                     <span class="card-tag">Root Cause Analysis</span>
                 </div>
@@ -673,9 +682,9 @@
                 <div class="image-box">
                     <img src="assets/images/pec.png" class="card-image" alt="Renewable Energy Technology"/>
                 </div>
-                <span class="tag">Energy Modeling | Sustainability</span>
-                <h3>Palmer Event Center | Energy Harvest Model</h3>
-                <p>Developeding power analysis and energy harvest model for the Palmer Event Center, evaluating solar and renewable technology integration. </p>
+                <span class="tag">Energy Modeling · Sustainability</span>
+                <h3>Palmer Event Center — Energy Harvest Model</h3>
+                <p>Developed a <strong>power analysis and energy harvest model</strong> for the Palmer Event Center, evaluating solar and renewable technology integration. Quantified energy potential and cost-benefit tradeoffs for real infrastructure.</p>
                 <div class="card-tags">
                     <span class="card-tag">Power Analysis</span>
                     <span class="card-tag">Energy Modeling</span>
@@ -694,7 +703,7 @@
                 </div>
                 <span class="tag">Systems Modeling · Dynamics</span>
                 <h3>Coasting Profile Optimization</h3>
-                <p>Built a high-fidelity Simulink model to characterize parasitic losses and kinetic energy decay, mapping drivetrain efficiency across coasting scenarios. </p>
+                <p>Built a <strong>high-fidelity Simulink model</strong> to characterize parasitic losses and kinetic energy decay, mapping drivetrain efficiency across coasting scenarios. Used to inform gear selection and race strategy for the Baja team.</p>
                 <div class="card-tags">
                     <span class="card-tag">Simulink</span>
                     <span class="card-tag">Drivetrain Dynamics</span>
