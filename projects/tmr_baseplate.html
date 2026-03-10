@@ -79,7 +79,7 @@
     <header>
         <span class="project-tag">Texas Marine Robotics · Structural Analysis & Design</span>
         <h1>Acrylic Sensor Mount:<br/>Fatigue & Failure Analysis</h1>
-        <p class="subtitle">Designing a mission-critical electronics baseplate for an autonomous surface vessel under strict cost, geometry, and environmental constraints.</p>
+        <p class="subtitle">Designing an electronics baseplate for an autonomous surface vessel under cost, geometry, and environmental constraints.</p>
     </header>
 
     <div class="stat-grid">
@@ -92,10 +92,11 @@
     <section>
         <h2>Problem & Material Selection</h2>
         <h3>Design Constraints</h3>
-        <p>The TMR autonomous surface vessel needed a baseplate to house sensitive observation electronics — exposed to static sensor loads, dynamic wave-induced acceleration, and centripetal forces during high-speed turns. The design had to be manufacturable at Texas Inventionworks (TIW) using simple geometry and remain low-cost.</p>
+        <p>The TMR ASV needed a baseplate to place critical sensors that are exposed to static sensor loads, dynamic wave-induced acceleration, and centripetal forces during high-speed turns. The design had to be manufacturable at Texas Inventionworks (TIW) using simple geometry and remain low-cost.</p>
 
         <h3>Why Acrylic (PMMA)?</h3>
-        <p>Three materials were considered: wood, 3D-printed polymer, and acrylic. Wood was eliminated due to moisture sensitivity and anisotropic, unpredictable behavior. 3D-printed polymer was ruled out for the same anisotropy reasons — layer adhesion introduces directional weakness that's difficult to characterize analytically. <strong>PMMA was selected</strong> because it is isotropic, has well-documented fatigue properties, and its elastic modulus and tensile strength are consistent across stock — making it amenable to the Goodman analysis. ¼″ stock was chosen to maximize bending stiffness while keeping the profile low.</p>
+        <p>Three materials were considered: wood, 3D-printed polymer, and acrylic. Wood was eliminated due to moisture sensitivity and anisotropic, unpredictable behavior. 3D-printed polymer was ruled out for the same anisotropy reasons. <strong>PMMA was selected</strong> because it is isotropic, has well-documented fatigue properties, and its elastic modulus and tensile strength are consistent across stock making analysis relatively simple. 
+            ¼″ stock was chosen to maximize bending stiffness while keeping the profile low.</p>
     </section>
 
     <!-- ANALYTICAL WORKFLOW -->
@@ -116,12 +117,12 @@
             </div>
             <div class="calc-box">
                 <span class="step-label">Step 03</span>
-                <span class="img-label">Centripetal Acceleration — High-Speed Turns</span>
+                <span class="img-label">Centripetal Acceleration and High-Speed Turns</span>
                 <img src="../assets/images/bp7.png" alt="Centripetal forces">
             </div>
             <div class="calc-box">
                 <span class="step-label">Step 04</span>
-                <span class="img-label">Dynamic Loading — Wave-Induced Acceleration</span>
+                <span class="img-label">Dynamic Loading and Wave-Induced Acceleration</span>
                 <img src="../assets/images/bp4.png" alt="Dynamic force profiles">
             </div>
             <div class="calc-box">
@@ -131,7 +132,7 @@
             </div>
             <div class="calc-box">
                 <span class="step-label">Step 07</span>
-                <span class="img-label">Revised Torque Specs — Post-Goodman</span>
+                <span class="img-label">Revised Torque Specs and Post-Goodman</span>
                 <img src="../assets/images/bp3.png" alt="Revised torque">
             </div>
         </div>
@@ -143,8 +144,9 @@
             <div>
                 <h2 style="margin-top: 0;">Goodman Criterion & Iterative Model</h2>
                 <h3>Why Goodman?</h3>
-                <p>The baseplate experiences a non-zero mean stress from static sensor weight, with alternating stress from wave-induced dynamics. This is precisely the combined loading case the Goodman criterion addresses — plotting mean stress on the x-axis and alternating stress on the y-axis against the material's ultimate tensile strength and endurance limit.</p>
-                <p>Operating below the Goodman line guarantees infinite fatigue life under the applied load cycle. I built an iterative Google Sheets model to sweep plate thickness and check the Goodman condition at each increment — allowing rapid what-if analysis before committing to FEA.</p>
+                <p>The baseplate experiences a non-zero mean stress from static sensor weight, with alternating stress from wave-induced dynamics. This is precisely the combined loading case the Goodman criterion addresses. We plot mean stress 
+                    on the x-axis and alternating stress on the y-axis against the material's ultimate tensile strength and endurance limit.</p>
+                <p>Operating below the Goodman line somewhat guarantees infinite fatigue life under the applied load cycle. I built an iterative Google Sheets model to sweep plate thickness and check the Goodman condition at each increment. This allows rapid what-if analysis before committing to FEA.</p>
                 <a href="https://docs.google.com/spreadsheets/d/13b9bALlohJvCrJ3qnlQv9rFZ2Mr84es_EyTdaLLoGPc/edit?usp=sharing" target="_blank" style="color: var(--ut-orange); font-weight: 800; text-decoration: none; border: 1px solid var(--ut-orange); padding: 10px 15px; border-radius: 4px; display: inline-flex; margin-top: 15px; font-size: 0.85rem; letter-spacing: 0.05em; text-transform: uppercase;">
                     View Spreadsheet Model →
                 </a>
@@ -160,8 +162,8 @@
     <section class="process-section" style="margin-top: 60px;">
         <div>
             <h2>FEA Verification & Prototyping</h2>
-            <h3>Stress Concentrations — Beyond Hand Calc</h3>
-            <p>Hand calculations assume nominal stress distributions. FEA was used to capture stress concentrations (K<sub>t</sub>) at bolt holes and geometric discontinuities — locations where local stress can exceed the nominal value by a factor the Goodman analysis alone wouldn't catch.</p>
+            <h3>Stress Concentrations | Beyond Hand Calc</h3>
+            <p>Hand calculations assume nominal stress distributions. FEA was used to capture stress concentrations (K<sub>t</sub>) at bolt holes and geometric discontinuities. These are locations where local stress can exceed the nominal value by a factor the Goodman analysis alone wouldn't catch.</p>
             <p>The FEA heatmap confirmed that peak stresses occurred at the bolt interface, validating the decision to add aluminum reinforcement bars at that joint in the first prototype. Both analytical and FEA results agreed on the governing failure location.</p>
             <div style="display: flex; gap: 10px; margin-top: 20px;">
                 <img src="../assets/images/proto_tmr_bp.png" style="width: 50%; height: auto; border-radius: 4px; border: 1px solid #eee;" alt="Prototype — bench">
@@ -177,8 +179,9 @@
     <!-- NEXT STEPS -->
     <section style="margin-top: 20px; padding: 40px; background: #1a1a1a; border-radius: 12px;">
         <h2 style="color: #fff; border-bottom-color: #333;">Next Iteration: Fracture Mechanics</h2>
-        <p style="color: #bbb;">Goodman defines the safe operating envelope, but it doesn't tell you what happens when a crack initiates at a stress concentration. The next analytical layer is <strong style="color: #fff;">Linear Elastic Fracture Mechanics (LEFM)</strong> — specifically the Paris Law (da/dN = C·ΔK<sup>m</sup>), which characterizes crack growth rate as a function of stress intensity factor range.</p>
-        <p style="color: #bbb; margin-bottom: 0;">This would allow us to set a maintenance interval based on crack propagation rate — transitioning from "will it fail?" to "when does it need inspection?" — which is the standard used in aerospace and marine structural practice.</p>
+        <p style="color: #bbb;">Goodman defines the safe operating envelope, but it doesn't tell you what happens when a crack initiates at a stress concentration. The next analytical layer is <strong style="color: #fff;">Linear Elastic Fracture Mechanics (LEFM)</strong> using 
+            specifically the Paris Law (da/dN = C·ΔK<sup>m</sup>), which characterizes crack growth rate as a function of stress intensity factor range.</p>
+        <p style="color: #bbb; margin-bottom: 0;">This would allow us to set a maintenance interval based on crack propagation rate. This helps us transition from "will it fail?" to "when does it need inspection?" </p>
     </section>
 
     <a href="../projects.html" class="back-link">← Back to Projects</a>
