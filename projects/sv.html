@@ -1,1 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulation & Validation Lead | Julian Whiteley</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root { --border: #eaeaea; --text: #1a1a1a; --muted: #666; --ut-orange: #bf5700; }
+        body, html { margin: 0; padding: 0; font-family: 'Inter', sans-serif; background-color: #fcfcfc; color: var(--text); line-height: 1.6; }
 
+        #smoke-canvas { position: fixed; top: 0; left: 0; z-index: 1; pointer-events: none; }
+
+        nav { padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; background: white; border-bottom: 1px solid #eaeaea; position: sticky; top: 0; z-index: 100; }
+        .nav-logo { font-weight: 800; font-size: 1.2rem; text-decoration: none; color: #1a1a1a; }
+        .nav-links a { text-decoration: none; color: #666; font-weight: 600; margin-left: 25px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; }
+
+        .container { max-width: 900px; margin: 80px auto; padding: 0 20px; position: relative; z-index: 5; }
+
+        header { margin-bottom: 40px; }
+        .project-tag { text-transform: uppercase; font-weight: 800; font-size: 0.75rem; letter-spacing: 0.1em; color: #bbb; margin-bottom: 10px; display: block; }
+        h1 { font-size: 3rem; font-weight: 800; letter-spacing: -0.04em; margin: 0 0 16px 0; line-height: 1.1; }
+        .subtitle { font-size: 1.05rem; color: #666; font-weight: 400; margin: 0; }
+
+        .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 60px; }
+        .stat-card { padding: 20px; background: #fff; border: 1px solid var(--border); border-radius: 8px; text-align: center; }
+        .stat-value { display: block; font-weight: 800; font-size: 1.1rem; color: var(--ut-orange); }
+        .stat-label { font-size: 0.65rem; text-transform: uppercase; color: #999; letter-spacing: 0.05em; }
+
+        section { margin-bottom: 70px; }
+        h2 { font-size: 1.6rem; font-weight: 800; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 25px; }
+        h3 { font-size: 1.05rem; font-weight: 700; color: var(--ut-orange); margin-top: 0; margin-bottom: 10px; }
+        p { color: #444; font-size: 0.95rem; margin-top: 0; margin-bottom: 16px; }
+        strong { color: var(--text); }
+
+        .process-section { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: start; }
+
+        .calc-box { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 20px; display: flex; flex-direction: column; gap: 10px; }
+        .img-label { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: #aaa; margin-bottom: 2px; display: block; }
+        .calc-box img { width: 100%; height: auto; border-radius: 4px; object-fit: contain; }
+
+        .pipeline { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 8px; }
+        .pipeline-card { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 20px; }
+        .pipeline-card span { display: block; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ut-orange); margin-bottom: 8px; }
+        .pipeline-card p { margin: 0; font-size: 0.88rem; }
+
+        .deliverable-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .deliverable-card { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 20px; }
+        .deliverable-card span { display: block; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ut-orange); margin-bottom: 8px; }
+        .deliverable-card p { margin: 0; font-size: 0.88rem; color: #555; }
+
+        .case-study-box { background: #f9f9f9; border: 1px solid var(--border); border-radius: 10px; padding: 36px; }
+        .case-study-box h3 { font-size: 1.1rem; }
+
+        .back-link { display: inline-block; margin-top: 40px; text-decoration: none; font-weight: 800; color: #000; font-size: 0.9rem; text-transform: uppercase; border-bottom: 2px solid #000; padding-bottom: 4px; transition: 0.2s; }
+        .back-link:hover { padding-left: 10px; }
+
+        @media (max-width: 768px) {
+            .stat-grid, .pipeline, .deliverable-grid, .process-section { grid-template-columns: 1fr; }
+            .stat-grid { grid-template-columns: repeat(2, 1fr); }
+            h1 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="smoke-canvas"></canvas>
+
+<nav>
+    <a href="../index.html" class="nav-logo">MJW</a>
+    <div class="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="../about.html">About</a>
+        <a href="../projects.html">Projects</a>
+        <a href="../resume.html">Resume</a>
+        <a href="../contact.html">Contact</a>
+    </div>
+</nav>
+
+<div class="container">
+
+    <header>
+        <span class="project-tag">Longhorn Baja Racing · Simulation & Validation Lead · March 2026 – Present</span>
+        <h1>Simulation & Validation<br/>Team Lead</h1>
+        <p class="subtitle">Establishing and leading the S&V team, applying FEA, hand calculations, and first principles to validate parts before they reach the car.</p>
+    </header>
+
+    <div class="stat-grid">
+        <div class="stat-card"><span class="stat-value">FEA</span><span class="stat-label">Primary Tool</span></div>
+        <div class="stat-card"><span class="stat-value">New</span><span class="stat-label">Team Founded</span></div>
+        <div class="stat-card"><span class="stat-value">Hand Calc</span><span class="stat-label">First Principles</span></div>
+        <div class="stat-card"><span class="stat-value">Active</span><span class="stat-label">2025–26 Season</span></div>
+    </div>
+
+    <!-- ROLE -->
+    <section>
+        <h2>Role & Mission</h2>
+        <h3>Why This Team Exists</h3>
+        <p>LBR had no dedicated simulation and validation function before this role. The S&V team was founded to ensure every significant part goes through an analytical verification cycle before design freeze.</p>
+
+        <h3>Scope</h3>
+        <p>The team owns the full validation chain: identifying critical load cases, bounding the problem with hand calculations, executing FEA, and producing documentation that ties simulation to manufacturing and testing plans.</p>
+    </section>
+
+    <!-- VALIDATION PIPELINE -->
+    <section>
+        <h2>Validation Pipeline</h2>
+        <div class="pipeline">
+            <div class="pipeline-card">
+                <span>Stage 01: Hand Calculations</span>
+                <p>First-principles analysis establishes the governing load case, critical cross-section, and expected failure mode before FEA is set up.</p>
+            </div>
+            <div class="pipeline-card">
+                <span>Stage 02: FEA</span>
+                <p>FEA resolves stress concentrations and geometric effects the hand calculation cannot capture. Results are checked against the analytical baseline.</p>
+            </div>
+            <div class="pipeline-card">
+                <span>Stage 03: Test Correlation</span>
+                <p>Physical testing plans are developed to correlate simulation outputs with real-world performance. Discrepancies refine the model for future parts.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- DELIVERABLES -->
+    <section>
+        <h2>Team Deliverables</h2>
+        <div class="deliverable-grid">
+            <div class="deliverable-card">
+                <span>Force Analysis</span>
+                <p>FBDs and maximum force derivations under worst-case conditions: cornering, braking, and impact.</p>
+            </div>
+            <div class="deliverable-card">
+                <span>Material Selection</span>
+                <p>Candidates evaluated against yield strength, fatigue life, machinability, and cost. Rationale is documented, not just the final choice.</p>
+            </div>
+            <div class="deliverable-card">
+                <span>Manufacturing Process</span>
+                <p>Manufacturing method effects on microstructure and residual stress are identified and their impact on part performance is quantified.</p>
+            </div>
+            <div class="deliverable-card">
+                <span>FEA Report</span>
+                <p>Mesh convergence, boundary condition justification, and FoS against yield and ultimate failure under the validated load case.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CASE STUDY -->
+    <section>
+        <h2>Case Study: Wheel Hub Spline</h2>
+        <div class="case-study-box">
+            <h3>Laser Cutting and the Heat-Affected Zone</h3>
+            <p>The wheel hub spline is a candidate for laser cutting. The concern: laser cutting introduces a heat-affected zone (HAZ) along the cut edge, where rapid heating and quench cooling produce a martensitic microstructure. This raises hardness but reduces ductility at the spline tooth flanks.</p>
+            <p>Under static load, increased hardness is beneficial. Under cyclic drivetrain torque, reduced ductility at the tooth root raises the risk of brittle crack initiation, where K<sub>t</sub> is already highest.</p>
+
+            <h3>Validation Question</h3>
+            <p>The FEA applies maximum drivetrain torque and resolves stress at the tooth root. The check is whether K<sub>t</sub> · σ<sub>nom</sub> exceeds the fatigue limit of the hardened HAZ material, not the base material. If it does, the geometry is modified to reduce K<sub>t</sub> or laser cutting is replaced with a process that avoids HAZ formation.</p>
+        </div>
+    </section>
+
+    <a href="../projects.html" class="back-link">← Back to Projects</a>
+</div>
+
+<script>
+    const canvas = document.getElementById('smoke-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    window.addEventListener('resize', resize); resize();
+    class Particle {
+        constructor(x, y) {
+            this.x = x; this.y = y;
+            this.size = Math.random() * 5 + 2;
+            this.speedX = (Math.random() - 0.5) * 0.8;
+            this.speedY = (Math.random() - 0.5) * 0.8;
+            this.color = 'rgba(0, 0, 0,';
+            this.alpha = 0.2;
+            this.decay = Math.random() * 0.015 + 0.01;
+        }
+        update() { this.x += this.speedX; this.y += this.speedY; if (this.size > 0.2) this.size -= 0.05; this.alpha -= this.decay; }
+        draw() { ctx.fillStyle = this.color + this.alpha + ')'; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
+    }
+    window.addEventListener('mousemove', (e) => { particles.push(new Particle(e.clientX, e.clientY)); });
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < particles.length; i++) {
+            particles[i].update(); particles[i].draw();
+            if (particles[i].alpha <= 0) { particles.splice(i, 1); i--; }
+        }
+        requestAnimationFrame(animate);
+    }
+    animate();
+</script>
+
+</body>
+</html>
