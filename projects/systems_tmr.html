@@ -9,75 +9,72 @@
     <style>
         :root { --border: #eaeaea; --text: #1a1a1a; --muted: #666; --ut-orange: #bf5700; }
         body, html { margin: 0; padding: 0; font-family: 'Inter', sans-serif; background-color: #fcfcfc; color: var(--text); line-height: 1.6; }
-        
+
         #smoke-canvas { position: fixed; top: 0; left: 0; z-index: 1; pointer-events: none; }
-        
+
         nav { padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; background: white; border-bottom: 1px solid #eaeaea; position: sticky; top: 0; z-index: 100; }
         .nav-logo { font-weight: 800; font-size: 1.2rem; text-decoration: none; color: #1a1a1a; }
         .nav-links a { text-decoration: none; color: #666; font-weight: 600; margin-left: 25px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; }
 
         .container { max-width: 900px; margin: 80px auto; padding: 0 20px; position: relative; z-index: 5; }
-        
+
         header { margin-bottom: 40px; }
         .project-tag { text-transform: uppercase; font-weight: 800; font-size: 0.75rem; letter-spacing: 0.1em; color: #bbb; margin-bottom: 10px; display: block; }
         h1 { font-size: 3rem; font-weight: 800; letter-spacing: -0.04em; margin: 0 0 16px 0; line-height: 1.1; }
         .subtitle { font-size: 1.05rem; color: #666; font-weight: 400; margin: 0; }
 
-        .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 60px; }
+        .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 60px; }
         .stat-card { padding: 20px; background: #fff; border: 1px solid var(--border); border-radius: 8px; text-align: center; }
-        .stat-value { display: block; font-weight: 800; font-size: 1.2rem; color: var(--ut-orange); }
-        .stat-label { font-size: 0.7rem; text-transform: uppercase; color: #999; letter-spacing: 0.05em; }
+        .stat-value { display: block; font-weight: 800; font-size: 1.1rem; color: var(--ut-orange); }
+        .stat-label { font-size: 0.65rem; text-transform: uppercase; color: #999; letter-spacing: 0.05em; }
 
         section { margin-bottom: 70px; }
         h2 { font-size: 1.6rem; font-weight: 800; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 25px; }
         h3 { font-size: 1.05rem; font-weight: 700; color: var(--ut-orange); margin-top: 0; margin-bottom: 10px; }
-        p { color: #444; font-size: 0.95rem; margin-top: 0; }
+        p { color: #444; font-size: 0.95rem; margin-top: 0; margin-bottom: 16px; }
         strong { color: var(--text); }
 
-        .project-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-        .calc-box { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 15px; display: flex; flex-direction: column; }
-        .calc-box img { width: 100%; height: auto; border-radius: 4px; object-fit: contain; }
-        .img-label { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: #aaa; margin-bottom: 8px; display: block; }
-
         .process-section { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: start; }
+        .calc-box { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 15px; display: flex; flex-direction: column; gap: 8px; }
+        .calc-box img { width: 100%; height: auto; border-radius: 4px; object-fit: contain; }
+        .img-label { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: #aaa; display: block; }
 
-        .equation-box { 
-            background: #f9f9f9; 
-            padding: 25px; 
-            border-radius: 8px; 
-            text-align: center; 
-            margin: 20px 0; 
-            border: 1px solid var(--border);
-            font-size: 0.85rem;
-            color: #555;
-        }
+        .equation-box { background: #f9f9f9; padding: 25px; border-radius: 8px; text-align: center; margin: 20px 0; border: 1px solid var(--border); }
+        .equation-box .eq-label { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ut-orange); display: block; margin-bottom: 10px; }
+        .equation-box .eq-note { font-size: 0.78rem; color: #999; margin: 10px 0 0; }
 
-        .method-tag {
-            display: inline-block;
-            font-size: 0.65rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--ut-orange);
-            margin-bottom: 6px;
-        }
+        .layer-stack { border-radius: 10px; overflow: hidden; border: 1px solid var(--border); margin: 24px 0; }
+        .layer { padding: 18px 20px; display: grid; grid-template-columns: 160px 1fr 180px; gap: 16px; align-items: center; border-bottom: 1px solid var(--border); }
+        .layer:last-child { border-bottom: none; }
+        .layer-label { font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; }
+        .layer-desc { font-size: 0.85rem; color: #555; }
+        .layer-eq { font-size: 0.75rem; color: #aaa; text-align: right; font-family: monospace; }
+        .layer-1 { background: #fff8f5; }
+        .layer-2 { background: #f5f5f5; }
+        .layer-3 { background: #fafafa; }
+        .layer-4a { background: #f5f9ff; }
+        .layer-4b { background: #eef5ff; }
 
-        .photo-pair {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            margin-top: 24px;
-        }
+        .pipeline-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin: 24px 0; }
+        .pipeline-card { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 20px; }
+        .pipeline-card span { display: block; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ut-orange); margin-bottom: 8px; }
+        .pipeline-card p { margin: 0; font-size: 0.88rem; color: #555; }
 
+        .photo-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
         .photo-item { display: flex; flex-direction: column; }
         .photo-item img { width: 100%; height: 220px; object-fit: cover; border-radius: 6px; border: 1px solid var(--border); }
         .photo-caption { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: #aaa; margin-top: 8px; letter-spacing: 0.08em; }
+
+        .project-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        .method-tag { display: inline-block; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ut-orange); margin-bottom: 6px; }
 
         .back-link { display: inline-block; margin-top: 40px; text-decoration: none; font-weight: 800; color: #000; font-size: 0.9rem; text-transform: uppercase; border-bottom: 2px solid #000; padding-bottom: 4px; transition: 0.2s; }
         .back-link:hover { padding-left: 10px; }
 
         @media (max-width: 768px) {
-            .project-grid, .process-section, .stat-grid, .photo-pair { grid-template-columns: 1fr; }
+            .project-grid, .process-section, .stat-grid, .photo-pair, .pipeline-grid { grid-template-columns: 1fr; }
+            .layer { grid-template-columns: 1fr; }
+            .layer-eq { text-align: left; }
             h1 { font-size: 2.2rem; }
         }
     </style>
@@ -102,33 +99,75 @@
     <header>
         <span class="project-tag">Texas Marine Robotics · Systems Engineering</span>
         <h1>ASV Validation &<br/>Thermal Regulation</h1>
-        <p class="subtitle">Characterizing transient thermal response and optimizing hull drag through iterative flow visualization testing.</p>
+        <p class="subtitle">Layered thermal resistance modeling and hull drag optimization through iterative flow visualization testing.</p>
     </header>
 
     <div class="stat-grid">
-        <div class="stat-card"><span class="stat-value">Transient</span><span class="stat-label">Thermal Analysis</span></div>
+        <div class="stat-card"><span class="stat-value">4-Layer</span><span class="stat-label">Resistance Model</span></div>
         <div class="stat-card"><span class="stat-value">NTC</span><span class="stat-label">Thermistor Network</span></div>
+        <div class="stat-card"><span class="stat-value">MATLAB</span><span class="stat-label">Iterative Solver</span></div>
         <div class="stat-card"><span class="stat-value">Flow Viz</span><span class="stat-label">Hull Optimization</span></div>
     </div>
 
     <!-- THERMAL -->
     <section>
         <h2>Thermal Regulation</h2>
-        <h3>The Problem</h3>
-        <p>GPUs and power electronics sealed inside an aluminum chassis generate heat with no natural convection path. The core question: does the system reach thermal equilibrium before components throttle or fail?</p>
 
-        <h3>Energy Balance</h3>
-        <p>A network of <strong>NTC thermistors</strong> monitors internal air and component temperatures in real time. The governing lumped-capacitance equation (valid when Bi &lt; 0.1) balances heat generation against convective loss through the chassis walls:</p>
+        <h3>The Problem</h3>
+        <p>GPUs and power electronics with known wattage are sealed inside an aluminum chassis with no forced convection. Heat must conduct outward through four distinct layers before reaching the external environment. The core question is not simply whether the system reaches a critical temperature, but <strong>when</strong> — and which layer presents the binding thermal resistance.</p>
+        <p>A lumped-capacitance model is not valid here. Each layer has different material properties, thickness, and boundary conditions, and these change with time as temperatures evolve. The air gap between the aluminum and plastic hull is stagnant — velocity is negligible, convection is suppressed, and this layer must be treated as a conduction resistance, not a convective one.</p>
+
+        <h3>Layered Resistance Model</h3>
+        <p>Heat flows outward from the electronics through four layers in series. Each layer's resistance is evaluated at every timestep as temperatures evolve.</p>
+
+        <div class="layer-stack">
+            <div class="layer layer-1">
+                <span class="layer-label" style="color: var(--ut-orange);">Layer 1<br/>Internal Air</span>
+                <span class="layer-desc">Air sealed inside the aluminum chassis. Acts as the first thermal capacitor, absorbing heat from the electronics before conduction into the walls begins. This is where the NTC thermistors measure directly.</span>
+                <span class="layer-eq">R₁ = L / (k_air · A)</span>
+            </div>
+            <div class="layer layer-2">
+                <span class="layer-label" style="color: #555;">Layer 2<br/>Aluminum Wall</span>
+                <span class="layer-desc">High-conductivity aluminum chassis walls. Thermal resistance is low but the wall stores significant thermal mass. During the initial transient it absorbs heat; during cool-down it releases it back inward.</span>
+                <span class="layer-eq">R₂ = L_Al / (k_Al · A)</span>
+            </div>
+            <div class="layer layer-3">
+                <span class="layer-label" style="color: #555;">Layer 3<br/>Air Gap</span>
+                <span class="layer-desc">Stagnant air between the aluminum chassis and the plastic hull. No bulk velocity means convection is suppressed — modeled as pure conduction. This is likely the dominant resistance in the system and the primary driver of steady-state temperature.</span>
+                <span class="layer-eq">R₃ = L_gap / (k_air · A)</span>
+            </div>
+            <div class="layer layer-4a">
+                <span class="layer-label" style="color: #3a7abf;">Layer 4a<br/>Above Waterline</span>
+                <span class="layer-desc">Convection to ambient air at the outer hull surface. Low h for still air makes this a high-resistance path. Increases with vessel speed through forced convection.</span>
+                <span class="layer-eq">R₄ₐ = 1 / (h_air · A_dry)</span>
+            </div>
+            <div class="layer layer-4b">
+                <span class="layer-label" style="color: #1a6abf;">Layer 4b<br/>Below Waterline</span>
+                <span class="layer-desc">Convection to water at the submerged hull surface. Water has roughly 25× the thermal conductivity of air, making the wetted area a significantly lower resistance path. The waterline geometry directly controls how much of this path is available.</span>
+                <span class="layer-eq">R₄ᵦ = 1 / (h_water · A_wet)</span>
+            </div>
+        </div>
+
+        <h3>Governing Equations</h3>
+        <p>Layers 4a and 4b act in parallel — the external boundary splits between the dry and wetted hull area. The total resistance is the series sum of layers 1 through 3 plus the parallel combination of 4a and 4b. At each timestep, temperature at every layer boundary is updated:</p>
 
         <div class="equation-box">
-            $$ \rho V C_p \frac{dT}{dt} = \dot{Q}_{gen} - h A (T_{int} - T_{ext}) $$
-            <p style="margin: 10px 0 0; font-size: 0.8rem; color: #888;">Lumped-capacitance model, valid when Bi &lt; 0.1</p>
+            <span class="eq-label">Parallel External Boundary</span>
+            $$ R_4(t) = \left(\frac{1}{R_{4a}} + \frac{1}{R_{4b}(t)}\right)^{-1} $$
+            <p class="eq-note">A_wet changes with hull geometry and loading — links thermal model directly to hull optimization</p>
+        </div>
+
+        <div class="equation-box">
+            <span class="eq-label">Temperature at Each Layer Boundary</span>
+            $$ T_{i+1}(t) = T_i(t) - \dot{Q}_{gen} \cdot R_i(t) $$
+            <p class="eq-note">Iterated at each timestep; k_air updated with temperature, A_wet updated with hull iteration</p>
         </div>
 
         <div class="process-section" style="margin-top: 32px;">
             <div>
-                <h3>Current Work</h3>
-                <p>Live thermistor data is being correlated against the energy balance to extract the effective convective resistance of the chassis walls. If <strong>h·A is sufficient</strong> relative to Q̇<sub>gen</sub>, the system is passively safe. If not, active regulation is required.</p>
+                <h3>MATLAB Iterative Solver</h3>
+                <p>The MATLAB model steps forward in time, computing the temperature at each layer boundary per timestep using the resistance chain. Inputs are the known electronics wattage, layer geometry, and initial conditions. The solver tracks internal air temperature and flags the timestep at which it reaches the electronics' critical limit.</p>
+                <p>Because Layer 3 (the air gap) is the dominant resistance, the model is most sensitive to gap thickness. Sensitivity sweeps over gap thickness identify whether a design change — tighter fit or partial fill with a higher-conductivity material — would meaningfully extend safe operating time.</p>
             </div>
             <div class="calc-box">
                 <span class="img-label">Thermal Resistance Circuit</span>
@@ -136,20 +175,19 @@
             </div>
         </div>
 
-        <h3 style="margin-top: 40px;">Simulation Pipeline: MATLAB to ANSYS to Physical Test</h3>
-
-        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin: 24px 0;">
-            <div style="background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 20px;">
-                <span style="display: block; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ut-orange); margin-bottom: 8px;">Stage 01: MATLAB</span>
-                <p style="margin: 0; font-size: 0.88rem;">An iterative script sweeps <em>h</em> across flow regimes (laminar, transitional, turbulent) using the correct Nusselt correlation for each: Churchill-Chu for natural convection, Dittus-Boelter for forced. The lumped ODE is integrated at each <em>h</em> to find T<sub>steady</sub>, producing the minimum <em>h</em> needed to stay below the critical temperature limit.</p>
+        <h3 style="margin-top: 32px;">Validation Pipeline</h3>
+        <div class="pipeline-grid">
+            <div class="pipeline-card">
+                <span>Stage 01: MATLAB</span>
+                <p>Iterative solver steps through time, computing T at each layer boundary. Output is T vs. time at the internal air node, where NTC thermistors provide ground truth. Sensitivity sweeps over gap thickness and wetted area fraction are run here.</p>
             </div>
-            <div style="background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 20px;">
-                <span style="display: block; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ut-orange); margin-bottom: 8px;">Stage 02: ANSYS</span>
-                <p style="margin: 0; font-size: 0.88rem;">With the critical <em>h</em> range established, a full transient thermal FEA resolves spatial gradients, hot spots, and conduction paths through fasteners that the lumped model cannot capture. Results confirm the MATLAB threshold or flag conditions requiring design changes.</p>
+            <div class="pipeline-card">
+                <span>Stage 02: ANSYS</span>
+                <p>Full transient thermal FEA resolves spatial gradients and hot spots the 1D resistance model cannot capture — conduction through fasteners, asymmetric heat source placement, and edge effects at layer interfaces.</p>
             </div>
-            <div style="background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 20px;">
-                <span style="display: block; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ut-orange); margin-bottom: 8px;">Stage 03: Physical Test</span>
-                <p style="margin: 0; font-size: 0.88rem;">Thermistor time-temperature traces from field operation are compared against both the MATLAB curve and ANSYS output. Agreement validates the model; discrepancies drive refinement of the thermal resistance assumptions and feed back to Stage 01.</p>
+            <div class="pipeline-card">
+                <span>Stage 03: Physical Test</span>
+                <p>NTC thermistor traces from field operation are compared against MATLAB and ANSYS predictions. Discrepancies back-calculate effective layer resistances, refining assumptions for future hardware iterations.</p>
             </div>
         </div>
     </section>
@@ -157,16 +195,16 @@
     <!-- HULL + FLOW VIZ -->
     <section>
         <h2>Hull Optimization: Flow Visualization</h2>
-        <h3>Why Flow Visualization?</h3>
-        <p>Drag is governed by wave-making resistance and wetted area, both of which depend on displacement depth and waterline geometry. Physical flow visualization lets us observe these effects directly across hull iterations rather than relying on simulation alone.</p>
+        <h3>Why This Matters for Thermal Performance Too</h3>
+        <p>Waterline geometry is not only a drag variable. It controls A_wet, the wetted area that sets R₄ᵦ — the lowest resistance external path. A hull that rides higher or sits asymmetrically reduces the submerged surface available for water-side heat rejection, raising steady-state internal temperature. Hull iteration therefore has simultaneous hydrodynamic and thermal consequences, and both are tracked across iterations.</p>
 
         <h3>Testing Method</h3>
-        <p>Two measurements are taken per hull iteration. A ruler records <strong>water level displacement</strong>, quantifying draft under load and confirming the buoyancy calculation. The <strong>waterline trace</strong> on the hull surface shows where the air-water interface sits, exposing regions of excess wetted area and geometric asymmetries that increase drag.</p>
+        <p>Two measurements are taken per hull iteration under identical payload and center-of-gravity conditions. A ruler records <strong>draft depth</strong>, confirming the buoyancy calculation and the A_wet estimate fed into the thermal model. The <strong>waterline trace</strong> on the hull surface exposes asymmetries and excess wetted area that increase drag.</p>
 
         <div class="photo-pair">
             <div class="photo-item">
                 <img src="../assets/images/water_level.jpg" alt="Water level displacement measurement">
-                <span class="photo-caption">Water Level: Draft Measurement</span>
+                <span class="photo-caption">Draft Measurement: Buoyancy Confirmation</span>
             </div>
             <div class="photo-item">
                 <img src="../assets/images/waterline.jpg" alt="Waterline trace on hull">
@@ -174,7 +212,7 @@
             </div>
         </div>
 
-        <p style="margin-top: 24px;">Each iteration is tested under the same payload and center-of-gravity condition. A lower, more uniform waterline across iterations means reduced wetted area and less drag. This loop runs in parallel with the hull CAD iterations below.</p>
+        <p style="margin-top: 24px;">A lower, more uniform waterline reduces wetted area and drag. It also reduces A_wet and raises R₄ᵦ, degrading water-side heat rejection. This tradeoff is tracked explicitly — the thermal model is re-run with the updated A_wet for each hull iteration.</p>
 
         <div class="project-grid" style="margin-top: 24px;">
             <div class="calc-box">
@@ -184,16 +222,16 @@
             </div>
             <div class="calc-box">
                 <span class="method-tag">Iteration B</span>
-                <span class="img-label">Thermal Path Integration: Final Chassis</span>
+                <span class="img-label">Refined Geometry: Final Chassis</span>
                 <img src="../assets/images/hull_final.png" alt="Final hull design">
             </div>
         </div>
     </section>
 
-    <!-- FUTURE WORK -->
+    <!-- NEXT STEPS -->
     <section style="padding: 40px; background: #1a1a1a; border-radius: 12px;">
         <h2 style="color: #fff; border-bottom-color: #333;">Next Steps</h2>
-        <p style="color: #bbb;">Once the thermal transient analysis is complete, thermal expansion cycles from testing will feed into a fracture mechanics study of the acrylic-to-aluminum bolt interfaces. Repeated heating and cooling differentially stresses the two materials, generating cyclic load at the fastener holes not captured by the static Goodman analysis. <strong style="color: #fff;">LEFM</strong> will estimate crack initiation life at those concentrations and set a maintenance inspection interval.</p>
+        <p style="color: #bbb;">Once the MATLAB model is validated against thermistor data, thermal expansion cycles will feed into a fracture mechanics study of the acrylic-to-aluminum bolt interfaces. Aluminum and acrylic have significantly different coefficients of thermal expansion — repeated heating and cooling generates cyclic stress at the fastener holes beyond what the static Goodman analysis captured. <strong style="color: #fff;">LEFM</strong> will estimate crack initiation life at those concentrations and establish a maintenance inspection interval.</p>
     </section>
 
     <a href="../projects.html" class="back-link">← Back to Projects</a>
