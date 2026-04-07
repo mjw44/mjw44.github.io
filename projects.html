@@ -112,6 +112,46 @@
 
         .wip-tag { font-size: 0.55rem; background: #f0f0f0; color: #999; padding: 2px 6px; border-radius: 3px; margin-left: 6px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
 
+        /* SPACEX SECTION */
+        .spacex-banner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 28px 36px;
+            border: 1px solid #1a1a1a;
+            border-radius: 4px;
+            background: #fff;
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+            transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 0;
+        }
+        .spacex-banner:hover {
+            background: #1a1a1a;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+        }
+        .spacex-banner:hover .spacex-eyebrow { color: #888; }
+        .spacex-banner:hover .spacex-heading { color: #fff; }
+        .spacex-banner:hover .spacex-sub { color: #aaa; }
+        .spacex-banner:hover .spacex-arrow svg { stroke: #fff; transform: rotate(90deg); }
+        .spacex-banner.open { background: #1a1a1a; border-color: #1a1a1a; }
+        .spacex-banner.open .spacex-eyebrow { color: #888; }
+        .spacex-banner.open .spacex-heading { color: #fff; }
+        .spacex-banner.open .spacex-sub { color: #aaa; }
+        .spacex-banner.open .spacex-arrow svg { stroke: #fff; transform: rotate(90deg); }
+        .spacex-banner-left { display: flex; flex-direction: column; gap: 6px; }
+        .spacex-eyebrow { font-size: 0.6rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.2em; color: #bbb; transition: color 0.3s ease; }
+        .spacex-heading { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.03em; margin: 0; line-height: 1.1; transition: color 0.3s ease; }
+        .spacex-sub { font-size: 0.82rem; color: #777; max-width: 540px; line-height: 1.6; margin: 0; transition: color 0.3s ease; }
+        .spacex-arrow svg { stroke: #1a1a1a; transition: transform 0.35s ease, stroke 0.3s ease; }
+        .spacex-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 50px 40px;
+            margin-top: 50px;
+        }
+
         .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
         .reveal.visible { opacity: 1; transform: translateY(0); }
 
@@ -122,6 +162,9 @@
             .featured-card { grid-template-columns: 1fr; padding: 24px; }
             .featured-img { height: 220px; }
             .container, .hero-divider { padding-left: 20px; padding-right: 20px; }
+            .spacex-banner { padding: 20px 24px; }
+            .spacex-heading { font-size: 1.3rem; }
+            .spacex-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -307,9 +350,88 @@
         </div>
     </div>
 
+    <!-- SPACEX SECTION -->
+    <div class="category-section reveal">
+        <div class="category-label"><h2>SpaceX?</h2><div class="line"></div></div>
+        <a class="spacex-banner" id="spacex-banner" onclick="toggleSpaceX(event)" href="#spacex-banner">
+            <div class="spacex-banner-left">
+                <span class="spacex-eyebrow">Curated View</span>
+                <h2 class="spacex-heading">SpaceX? Click here.</h2>
+                <p class="spacex-sub">A focused look at the projects most relevant to SpaceX. Structural analysis, systems integration, thermal validation, and hardware implementation.</p>
+            </div>
+            <div class="spacex-arrow">
+                <svg id="spacex-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px;stroke-width:3;transition:transform 0.35s ease;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </div>
+        </a>
+        <div class="spacex-grid" id="spacex-grid" style="display:none; margin-top: 50px;">
+            <a href="projects/hytec.html" class="project-card">
+                <div class="image-box"><img src="assets/images/hytec2.png" class="card-image" alt="Hydrogen Release System"/></div>
+                <span class="tag">Structural Analysis | System Integration</span>
+                <h3>Hydrogen Release System</h3>
+                <p>Led design and full system integration of a <strong>30-foot variable-height structure</strong> for hydrogen sensor testing. Validated structural integrity through <strong>buckling analysis and critical load calculations</strong>.</p>
+                <div class="card-tags"><span class="card-tag">Buckling Analysis</span><span class="card-tag">BOM Management</span><span class="card-tag">System Integration</span><span class="card-tag">FBD / Momentum Analysis</span></div>
+                <p class="result-line">↗ Industry Deliverable · ExxonMobil Partnership</p>
+                <div class="view-project">View Project<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div>
+            </a>
+            <a href="projects/tmr_baseplate.html" class="project-card">
+                <div class="image-box"><img src="assets/images/fea_tmr.png" class="card-image" alt="Acrylic Sensor Mount"/></div>
+                <span class="tag">FEA | Fatigue Analysis</span>
+                <h3>Acrylic Sensor Mount | Fatigue & Failure</h3>
+                <p>Designed a sensor baseplate under cost and manufacturing constraints. Applied the <strong>Goodman Criterion</strong> for fatigue life and verified with FEA.</p>
+                <div class="card-tags"><span class="card-tag">Goodman Criterion</span><span class="card-tag">FEA</span><span class="card-tag">Bearing Stress</span><span class="card-tag">PMMA / Acrylic</span></div>
+                <p class="result-line">↗ FoS 2.0 · Deployed on ASV</p>
+                <div class="view-project">View Project<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div>
+            </a>
+            <a href="projects/systems_tmr.html" class="project-card">
+                <div class="image-box"><img src="assets/images/uttower.png" class="card-image" alt="ASV Validation"/></div>
+                <span class="tag">Systems | Thermal & Mechanical</span>
+                <h3>ASV Operational Validation</h3>
+                <p>Conducted operational validation and thermal regulation analysis. Characterized heat dissipation and optimized hull with flow visualization.</p>
+                <div class="card-tags"><span class="card-tag">Thermal Management</span><span class="card-tag">Systems Validation</span><span class="card-tag">Autonomous Systems</span></div>
+                <p class="result-line">↗ Field Validated</p>
+                <div class="view-project">View Project<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div>
+            </a>
+            <a href="projects/shroud_pid.html" class="project-card">
+                <div class="image-box"><img src="assets/images/shroud_2_cut_solidworks.png" class="card-image" alt="PID Shroud"/></div>
+                <span class="tag">Controls · Thermal</span>
+                <h3>PID Closed-Loop Convection Shroud</h3>
+                <p>Designed and 3D-printed convective air shrouds for a <strong>closed-loop PID temperature regulation system</strong>. Tuned gains in hardware for stable thermal response.</p>
+                <div class="card-tags"><span class="card-tag">PID Control</span><span class="card-tag">3D Printing</span><span class="card-tag">SolidWorks</span></div>
+                <p class="result-line">↗ Hardware Implementation</p>
+                <div class="view-project">View Project<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div>
+            </a>
+            <a href="projects/sv.html" class="project-card">
+                <div class="image-box"><img src="assets/images/spline.png" class="card-image" alt="Simulation and Validation"/></div>
+                <span class="tag">Simulation & Validation | Team Lead</span>
+                <h3>Simulation & Validation</h3>
+                <p>Leading validation of racing and R&D components using <strong>engineering first principles and simulation</strong>. Ensuring parts meet performance and safety requirements before fabrication.</p>
+                <div class="card-tags"><span class="card-tag">FEA</span><span class="card-tag">First Principles</span><span class="card-tag">Design Validation</span></div>
+                <p class="result-line">↗ Active · Team Lead</p>
+                <div class="view-project">View Project<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div>
+            </a>
+        </div>
+    </div>
+
 </div>
 
 <script>
+    function toggleSpaceX(e) {
+        e.preventDefault();
+        const grid = document.getElementById('spacex-grid');
+        const banner = document.getElementById('spacex-banner');
+        const chevron = document.getElementById('spacex-chevron');
+        const isOpen = grid.style.display !== 'none';
+        if (isOpen) {
+            grid.style.display = 'none';
+            banner.classList.remove('open');
+            chevron.style.transform = '';
+        } else {
+            grid.style.display = 'grid';
+            banner.classList.add('open');
+            chevron.style.transform = 'rotate(90deg)';
+        }
+    }
+
     const canvas = document.getElementById('smoke-canvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
