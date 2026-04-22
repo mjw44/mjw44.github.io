@@ -3,63 +3,423 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulation & Validation Lead | Julian Whiteley</title>
+    <title>Simulation &amp; Validation Lead | Julian Whiteley</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
-        :root { --border: #eaeaea; --text: #1a1a1a; --muted: #666; --ut-orange: #bf5700; }
-        body, html { margin: 0; padding: 0; font-family: 'Inter', sans-serif; background-color: #fcfcfc; color: var(--text); line-height: 1.6; }
+        :root {
+            --border: #e8e3dc;
+            --text: #1a1a1a;
+            --muted: #666;
+            --ut-orange: #bf5700;
+            --bg: #fcfaf7;
+            --surface: rgba(255, 255, 255, 0.88);
+            --shadow: 0 18px 44px rgba(0, 0, 0, 0.07);
+        }
 
-        #smoke-canvas { position: fixed; top: 0; left: 0; z-index: 1; pointer-events: none; }
+        * {
+            box-sizing: border-box;
+        }
 
-        nav { padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; background: white; border-bottom: 1px solid #eaeaea; position: sticky; top: 0; z-index: 100; }
-        .nav-logo { font-weight: 800; font-size: 1.2rem; text-decoration: none; color: #1a1a1a; }
-        .nav-links a { text-decoration: none; color: #666; font-weight: 600; margin-left: 25px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(191, 87, 0, 0.08), transparent 28%),
+                linear-gradient(180deg, #fdfbf8 0%, #f6f2ec 100%);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-        .container { max-width: 900px; margin: 80px auto; padding: 0 20px; position: relative; z-index: 5; }
+        a {
+            color: inherit;
+        }
 
-        header { margin-bottom: 40px; }
-        .project-tag { text-transform: uppercase; font-weight: 800; font-size: 0.75rem; letter-spacing: 0.1em; color: #bbb; margin-bottom: 10px; display: block; }
-        h1 { font-size: 3rem; font-weight: 800; letter-spacing: -0.04em; margin: 0 0 16px 0; line-height: 1.1; }
-        .subtitle { font-size: 1.05rem; color: #666; font-weight: 400; margin: 0; }
+        #smoke-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0.34;
+        }
 
-        .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 60px; }
-        .stat-card { padding: 20px; background: #fff; border: 1px solid var(--border); border-radius: 8px; text-align: center; }
-        .stat-value { display: block; font-weight: 800; font-size: 1.1rem; color: var(--ut-orange); }
-        .stat-label { font-size: 0.65rem; text-transform: uppercase; color: #999; letter-spacing: 0.05em; }
+        nav {
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
 
-        section { margin-bottom: 70px; }
-        h2 { font-size: 1.6rem; font-weight: 800; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 25px; }
-        h3 { font-size: 1.05rem; font-weight: 700; color: var(--ut-orange); margin-top: 0; margin-bottom: 10px; }
-        p { color: #444; font-size: 0.95rem; margin-top: 0; margin-bottom: 16px; }
-        strong { color: var(--text); }
+        .nav-logo {
+            font-weight: 800;
+            font-size: 1.2rem;
+            text-decoration: none;
+            color: var(--text);
+        }
 
-        .process-section { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: start; }
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 22px;
+        }
 
-        .calc-box { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 20px; display: flex; flex-direction: column; gap: 10px; }
-        .img-label { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: #aaa; margin-bottom: 2px; display: block; }
-        .calc-box img { width: 100%; height: auto; border-radius: 4px; object-fit: contain; }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--muted);
+            font-weight: 600;
+            font-size: 0.84rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
 
-        .pipeline { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 8px; }
-        .pipeline-card { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 20px; }
-        .pipeline-card span { display: block; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ut-orange); margin-bottom: 8px; }
-        .pipeline-card p { margin: 0; font-size: 0.88rem; }
+        .container {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 64px 24px 80px;
+            position: relative;
+            z-index: 5;
+        }
 
-        .deliverable-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-        .deliverable-card { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 20px; }
-        .deliverable-card span { display: block; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ut-orange); margin-bottom: 8px; }
-        .deliverable-card p { margin: 0; font-size: 0.88rem; color: #555; }
+        header {
+            display: grid;
+            grid-template-columns: 1.2fr 0.85fr;
+            gap: 28px;
+            align-items: start;
+            margin-bottom: 54px;
+        }
 
-        .case-study-box { background: #f9f9f9; border: 1px solid var(--border); border-radius: 10px; padding: 36px; }
-        .case-study-box h3 { font-size: 1.1rem; }
+        .hero-copy {
+            max-width: 720px;
+        }
 
-        .back-link { display: inline-block; margin-top: 40px; text-decoration: none; font-weight: 800; color: #000; font-size: 0.9rem; text-transform: uppercase; border-bottom: 2px solid #000; padding-bottom: 4px; transition: 0.2s; }
-        .back-link:hover { padding-left: 10px; }
+        .project-tag {
+            text-transform: uppercase;
+            font-weight: 800;
+            font-size: 0.75rem;
+            letter-spacing: 0.12em;
+            color: #a79484;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        h1 {
+            font-size: clamp(2.8rem, 5vw, 4.5rem);
+            font-weight: 800;
+            letter-spacing: -0.05em;
+            margin: 0 0 18px;
+            line-height: 1;
+        }
+
+        .subtitle {
+            font-size: 1.06rem;
+            color: var(--muted);
+            font-weight: 400;
+            margin: 0;
+            max-width: 640px;
+        }
+
+        .hero-panel {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            padding: 24px;
+            box-shadow: var(--shadow);
+        }
+
+        .hero-panel span {
+            display: block;
+            margin-bottom: 12px;
+            font-size: 0.74rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--ut-orange);
+        }
+
+        .hero-panel p {
+            margin: 0;
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 64px;
+        }
+
+        .stat-card {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.03);
+        }
+
+        .stat-value {
+            display: block;
+            font-weight: 800;
+            font-size: 1.06rem;
+            color: var(--ut-orange);
+        }
+
+        .stat-label {
+            font-size: 0.66rem;
+            text-transform: uppercase;
+            color: #888;
+            letter-spacing: 0.08em;
+        }
+
+        section {
+            margin-bottom: 74px;
+        }
+
+        h2 {
+            font-size: 1.65rem;
+            font-weight: 800;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 12px;
+            margin-bottom: 26px;
+            letter-spacing: -0.03em;
+        }
+
+        h3 {
+            font-size: 1.08rem;
+            font-weight: 700;
+            color: var(--ut-orange);
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #444;
+            font-size: 0.96rem;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+
+        strong {
+            color: var(--text);
+        }
+
+        .pipeline {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+            margin-top: 8px;
+        }
+
+        .pipeline-card,
+        .deliverable-card,
+        .study-copy,
+        .study-embed {
+            background: rgba(255, 255, 255, 0.86);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.03);
+        }
+
+        .pipeline-card {
+            padding: 22px;
+        }
+
+        .pipeline-card span,
+        .deliverable-card span,
+        .mini-label {
+            display: block;
+            font-size: 0.68rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--ut-orange);
+            margin-bottom: 8px;
+        }
+
+        .pipeline-card p,
+        .deliverable-card p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        .deliverable-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .deliverable-card {
+            padding: 22px;
+        }
+
+        .study-section {
+            display: grid;
+            gap: 22px;
+        }
+
+        .study-grid {
+            display: grid;
+            grid-template-columns: 0.92fr 1.38fr;
+            gap: 22px;
+            align-items: start;
+        }
+
+        .study-copy {
+            padding: 26px;
+        }
+
+        .study-copy p:last-of-type {
+            margin-bottom: 0;
+        }
+
+        .detail-list {
+            display: grid;
+            gap: 12px;
+            margin: 22px 0 0;
+        }
+
+        .detail-item {
+            padding: 14px 16px;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+        }
+
+        .detail-item strong {
+            display: block;
+            margin-bottom: 4px;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .detail-item span {
+            color: #5b5b5b;
+            font-size: 0.92rem;
+        }
+
+        .study-embed {
+            padding: 14px;
+        }
+
+        .embed-frame {
+            width: 100%;
+            height: 760px;
+            border: 0;
+            border-radius: 14px;
+            background: #f2f2f2;
+        }
+
+        .button-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 22px;
+        }
+
+        .button-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 44px;
+            padding: 0 18px;
+            border-radius: 999px;
+            border: 1px solid var(--ut-orange);
+            background: var(--ut-orange);
+            color: #fff;
+            font-size: 0.88rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        .button-link.secondary {
+            background: transparent;
+            color: var(--ut-orange);
+        }
+
+        .button-link:hover {
+            transform: translateY(-1px);
+            opacity: 0.94;
+        }
+
+        .section-intro {
+            max-width: 760px;
+            margin-bottom: 22px;
+            color: var(--muted);
+        }
+
+        .small-note {
+            margin: 12px 4px 0;
+            color: #6d6d6d;
+            font-size: 0.88rem;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 8px;
+            text-decoration: none;
+            font-weight: 800;
+            color: #000;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            border-bottom: 2px solid #000;
+            padding-bottom: 4px;
+            transition: 0.2s;
+        }
+
+        .back-link:hover {
+            padding-left: 10px;
+        }
+
+        @media (max-width: 960px) {
+            header,
+            .study-grid,
+            .pipeline,
+            .deliverable-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .embed-frame {
+                height: 560px;
+            }
+        }
 
         @media (max-width: 768px) {
-            .stat-grid, .pipeline, .deliverable-grid, .process-section { grid-template-columns: 1fr; }
-            .stat-grid { grid-template-columns: repeat(2, 1fr); }
-            h1 { font-size: 2.2rem; }
+            nav {
+                padding: 18px 20px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .container {
+                padding: 44px 16px 72px;
+            }
+
+            .stat-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            h1 {
+                font-size: 2.35rem;
+            }
+
+            .embed-frame {
+                height: 460px;
+            }
         }
     </style>
 </head>
@@ -81,80 +441,152 @@
 <div class="container">
 
     <header>
-        <span class="project-tag">Longhorn Baja Racing · Simulation & Validation Lead · March 2026 – Present</span>
-        <h1>Simulation & Validation<br/>Team Lead</h1>
-        <p class="subtitle">Establishing and leading the S&V team, applying FEA, hand calculations, and first principles to validate parts before they reach the car.</p>
+        <div class="hero-copy">
+            <span class="project-tag">Longhorn Baja Racing · Simulation &amp; Validation Lead · March 2026 – Present</span>
+            <h1>Simulation &amp; Validation<br>Team Lead</h1>
+            <p class="subtitle">Leading analytical validation for Baja components through first-principles calculations, FEA, and design studies that tie geometry decisions to real engineering constraints.</p>
+            <div class="button-row">
+                <a class="button-link" href="https://docs.google.com/document/d/1K-0i8Y6_jlc6-uUmw5ESWzMt2UljabKdiFcpKQVS8Vg/edit?usp=sharing" target="_blank" rel="noopener noreferrer">View Wheel Hub Study</a>
+                <a class="button-link secondary" href="https://docs.google.com/document/d/1NDN9eczzegr3WNt9oBuVs-Wy0zfriyD1txrdUwDQcOU/edit?usp=sharing" target="_blank" rel="noopener noreferrer">View CVT Cooling Study</a>
+            </div>
+        </div>
+
+        <aside class="hero-panel">
+            <span>Current Focus</span>
+            <p>Building a repeatable validation workflow for critical parts and systems, from initial load assumptions to documented design decisions. Current studies shown here cover a wheel hub validation package and a CVT cooling project centered on bilge fan geometry configuration.</p>
+        </aside>
     </header>
 
     <div class="stat-grid">
         <div class="stat-card"><span class="stat-value">FEA</span><span class="stat-label">Primary Tool</span></div>
-        <div class="stat-card"><span class="stat-value">New</span><span class="stat-label">Team Founded</span></div>
         <div class="stat-card"><span class="stat-value">Hand Calc</span><span class="stat-label">First Principles</span></div>
+        <div class="stat-card"><span class="stat-value">2 Studies</span><span class="stat-label">Featured Work</span></div>
         <div class="stat-card"><span class="stat-value">Active</span><span class="stat-label">2025–26 Season</span></div>
     </div>
 
-    <!-- ROLE -->
     <section>
-        <h2>Role & Mission</h2>
+        <h2>Role &amp; Mission</h2>
         <h3>Why This Team Exists</h3>
-        <p>LBR had no dedicated simulation and validation function before this role. The S&V team was founded to ensure every significant part goes through an analytical verification cycle before design freeze.</p>
+        <p>The Simulation &amp; Validation team was established to make analytical verification a standard part of the design cycle. Rather than relying on intuition alone, critical components are reviewed through bounded assumptions, first-principles analysis, simulation, and documented engineering judgment.</p>
 
         <h3>Scope</h3>
-        <p>The team owns the full validation chain: identifying critical load cases, bounding the problem with hand calculations, executing FEA, and producing documentation that ties simulation to manufacturing and testing plans.</p>
+        <p>The role spans the full validation chain: defining governing load cases, checking geometry against functional constraints, building FEA models, and translating results into decisions that support manufacturing, testing, and design iteration.</p>
     </section>
 
-    <!-- VALIDATION PIPELINE -->
     <section>
         <h2>Validation Pipeline</h2>
         <div class="pipeline">
             <div class="pipeline-card">
                 <span>Stage 01: Hand Calculations</span>
-                <p>First-principles analysis establishes the governing load case, critical cross-section, and expected failure mode before FEA is set up.</p>
+                <p>First-principles analysis establishes load paths, expected failure modes, and the baseline checks that frame the simulation work.</p>
             </div>
             <div class="pipeline-card">
-                <span>Stage 02: FEA</span>
-                <p>FEA resolves stress concentrations and geometric effects the hand calculation cannot capture. Results are checked against the analytical baseline.</p>
+                <span>Stage 02: Geometry &amp; FEA</span>
+                <p>Geometry-sensitive behavior is studied with simulation to capture stress concentrations, boundary-condition effects, and configuration tradeoffs.</p>
             </div>
             <div class="pipeline-card">
-                <span>Stage 03: Test Correlation</span>
-                <p>Physical testing plans are developed to correlate simulation outputs with real-world performance. Discrepancies refine the model for future parts.</p>
+                <span>Stage 03: Design Decisions</span>
+                <p>Results are compiled into clear technical documentation so design changes can be justified, communicated, and carried forward into testing.</p>
             </div>
         </div>
     </section>
 
-    <!-- DELIVERABLES -->
     <section>
         <h2>Team Deliverables</h2>
         <div class="deliverable-grid">
             <div class="deliverable-card">
                 <span>Force Analysis</span>
-                <p>FBDs and maximum force derivations under worst-case conditions: cornering, braking, and impact.</p>
+                <p>Free-body diagrams and bounding calculations that define the governing conditions for validation work.</p>
             </div>
             <div class="deliverable-card">
-                <span>Material Selection</span>
-                <p>Candidates evaluated against yield strength, fatigue life, machinability, and cost. Rationale is documented, not just the final choice.</p>
+                <span>Geometry Review</span>
+                <p>Evaluation of whether a proposed configuration supports the intended load path, packaging, and functional requirements.</p>
             </div>
             <div class="deliverable-card">
-                <span>Manufacturing Process</span>
-                <p>Manufacturing method effects on microstructure and residual stress are identified and their impact on part performance is quantified.</p>
+                <span>Simulation Reports</span>
+                <p>Documented assumptions, boundary conditions, and results that connect the model to the design decision being made.</p>
             </div>
             <div class="deliverable-card">
-                <span>FEA Report</span>
-                <p>Mesh convergence, boundary condition justification, and FoS against yield and ultimate failure under the validated load case.</p>
+                <span>Design Guidance</span>
+                <p>Engineering recommendations on material choice, geometry revision, and next-step testing priorities.</p>
             </div>
         </div>
     </section>
 
-    <!-- CASE STUDY -->
-    <section>
-        <h2>Case Study: Wheel Hub Spline</h2>
-        <div class="case-study-box">
-            <h3>Laser Cutting and the Heat-Affected Zone</h3>
-            <p>The wheel hub spline is a candidate for laser cutting. The concern: laser cutting introduces a heat-affected zone (HAZ) along the cut edge, where rapid heating and quench cooling produce a martensitic microstructure. This raises hardness but reduces ductility at the spline tooth flanks.</p>
-            <p>Under static load, increased hardness is beneficial. Under cyclic drivetrain torque, reduced ductility at the tooth root raises the risk of brittle crack initiation, where K<sub>t</sub> is already highest.</p>
+    <section class="study-section">
+        <div>
+            <h2>Featured Validation Studies</h2>
+            <p class="section-intro">These studies represent two different forms of validation work: a component-level wheel hub analysis and a system-level CVT cooling study focused on verifying the geometry configuration of a bilge fan.</p>
+        </div>
 
-            <h3>Validation Question</h3>
-            <p>The FEA applies maximum drivetrain torque and resolves stress at the tooth root. The check is whether K<sub>t</sub> · σ<sub>nom</sub> exceeds the fatigue limit of the hardened HAZ material, not the base material. If it does, the geometry is modified to reduce K<sub>t</sub> or laser cutting is replaced with a process that avoids HAZ formation.</p>
+        <div class="study-grid">
+            <article class="study-copy">
+                <span class="mini-label">Study 01</span>
+                <h3>Wheel Hub Validation</h3>
+                <p>This document presents the wheel hub study, centered on validating a critical drivetrain-adjacent component through structured engineering analysis.</p>
+                <p>The work is framed around geometry, loading assumptions, and the mechanical considerations that determine whether the hub design is suitable for competition use.</p>
+                <div class="detail-list">
+                    <div class="detail-item">
+                        <strong>Project Focus</strong>
+                        <span>Wheel hub geometry and component validation</span>
+                    </div>
+                    <div class="detail-item">
+                        <strong>Engineering Theme</strong>
+                        <span>Structural integrity, load transfer, and design robustness</span>
+                    </div>
+                    <div class="detail-item">
+                        <strong>Format</strong>
+                        <span>Technical design document</span>
+                    </div>
+                </div>
+                <div class="button-row">
+                    <a class="button-link" href="https://docs.google.com/document/d/1K-0i8Y6_jlc6-uUmw5ESWzMt2UljabKdiFcpKQVS8Vg/edit?usp=sharing" target="_blank" rel="noopener noreferrer">Open Wheel Hub Study</a>
+                </div>
+            </article>
+
+            <div class="study-embed">
+                <iframe
+                    class="embed-frame"
+                    src="https://docs.google.com/document/d/1K-0i8Y6_jlc6-uUmw5ESWzMt2UljabKdiFcpKQVS8Vg/preview"
+                    title="Wheel Hub Validation Study">
+                </iframe>
+                <p class="small-note">Wheel hub validation study documenting the analytical basis for the component design.</p>
+            </div>
+        </div>
+
+        <div class="study-grid">
+            <article class="study-copy">
+                <span class="mini-label">Study 02</span>
+                <h3>CVT Cooling Geometry Validation</h3>
+                <p>This study addresses a CVT cooling project and evaluates whether the selected bilge fan geometry configuration supports the cooling system objectives.</p>
+                <p>The document focuses on geometry validation and the engineering rationale behind the fan configuration, helping guide the design toward a practical and supportable solution.</p>
+                <div class="detail-list">
+                    <div class="detail-item">
+                        <strong>Project Focus</strong>
+                        <span>CVT cooling system and bilge fan geometry configuration</span>
+                    </div>
+                    <div class="detail-item">
+                        <strong>Engineering Theme</strong>
+                        <span>Configuration validation, packaging logic, and design suitability</span>
+                    </div>
+                    <div class="detail-item">
+                        <strong>Format</strong>
+                        <span>Technical design document</span>
+                    </div>
+                </div>
+                <div class="button-row">
+                    <a class="button-link" href="https://docs.google.com/document/d/1NDN9eczzegr3WNt9oBuVs-Wy0zfriyD1txrdUwDQcOU/edit?usp=sharing" target="_blank" rel="noopener noreferrer">Open CVT Cooling Study</a>
+                </div>
+            </article>
+
+            <div class="study-embed">
+                <iframe
+                    class="embed-frame"
+                    src="https://docs.google.com/document/d/1NDN9eczzegr3WNt9oBuVs-Wy0zfriyD1txrdUwDQcOU/preview"
+                    title="CVT Cooling Geometry Validation Study">
+                </iframe>
+                <p class="small-note">CVT cooling study validating the chosen bilge fan geometry configuration.</p>
+            </div>
         </div>
     </section>
 
@@ -164,31 +596,63 @@
 <script>
     const canvas = document.getElementById('smoke-canvas');
     const ctx = canvas.getContext('2d');
-    let particles = [];
-    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-    window.addEventListener('resize', resize); resize();
+    const particles = [];
+
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+
     class Particle {
         constructor(x, y) {
-            this.x = x; this.y = y;
+            this.x = x;
+            this.y = y;
             this.size = Math.random() * 5 + 2;
             this.speedX = (Math.random() - 0.5) * 0.8;
             this.speedY = (Math.random() - 0.5) * 0.8;
-            this.color = 'rgba(0, 0, 0,';
             this.alpha = 0.2;
             this.decay = Math.random() * 0.015 + 0.01;
         }
-        update() { this.x += this.speedX; this.y += this.speedY; if (this.size > 0.2) this.size -= 0.05; this.alpha -= this.decay; }
-        draw() { ctx.fillStyle = this.color + this.alpha + ')'; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
+
+        update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+            if (this.size > 0.2) {
+                this.size -= 0.05;
+            }
+            this.alpha -= this.decay;
+        }
+
+        draw() {
+            ctx.fillStyle = `rgba(0, 0, 0, ${this.alpha})`;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
     }
-    window.addEventListener('mousemove', (e) => { particles.push(new Particle(e.clientX, e.clientY)); });
+
+    window.addEventListener('resize', resize);
+    window.addEventListener('mousemove', (event) => {
+        particles.push(new Particle(event.clientX, event.clientY));
+    });
+
     function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        for (let i = 0; i < particles.length; i++) {
-            particles[i].update(); particles[i].draw();
-            if (particles[i].alpha <= 0) { particles.splice(i, 1); i--; }
+
+        for (let i = 0; i < particles.length; i += 1) {
+            particles[i].update();
+            particles[i].draw();
+
+            if (particles[i].alpha <= 0) {
+                particles.splice(i, 1);
+                i -= 1;
+            }
         }
+
         requestAnimationFrame(animate);
     }
+
+    resize();
     animate();
 </script>
 
