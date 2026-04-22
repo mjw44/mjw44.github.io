@@ -50,6 +50,13 @@
         .photo-caption { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: #aaa; margin-top: 8px; letter-spacing: 0.08em; }
         .project-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
         .method-tag { display: inline-block; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ut-orange); margin-bottom: 6px; }
+        .action-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
+        .button-link { display: inline-flex; align-items: center; justify-content: center; min-height: 42px; padding: 0 16px; border-radius: 8px; border: 1px solid var(--border); background: #fff; color: var(--text); font-size: 0.88rem; font-weight: 600; text-decoration: none; transition: color 0.2s ease, border-color 0.2s ease; }
+        .button-link:hover { color: var(--ut-orange); border-color: #d8c5b5; }
+        .embed-card { margin-top: 24px; background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
+        .embed-frame { width: 100%; height: 580px; border: 0; border-radius: 4px; background: #f5f5f5; }
+        .embed-note { font-size: 0.88rem; color: #666; margin: 12px 0 0; }
+        .social-card { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 20px; margin-top: 24px; }
         .back-link { display: inline-block; margin-top: 40px; text-decoration: none; font-weight: 800; color: #000; font-size: 0.9rem; text-transform: uppercase; border-bottom: 2px solid #000; padding-bottom: 4px; transition: 0.2s; }
         .back-link:hover { padding-left: 10px; }
         @media (max-width: 768px) {
@@ -57,6 +64,9 @@
             .layer { grid-template-columns: 1fr; }
             .layer-eq { text-align: left; }
             h1 { font-size: 2.2rem; }
+            .embed-frame { height: 420px; }
+            nav { padding: 18px 20px; flex-direction: column; align-items: flex-start; gap: 12px; }
+            .nav-links a { margin-left: 0; margin-right: 18px; }
         }
     </style>
 </head>
@@ -75,14 +85,18 @@
 <div class="container">
     <header>
         <span class="project-tag">Texas Marine Robotics · Systems Engineering</span>
-        <h1>ASV Validation &<br/>Thermal Regulation</h1>
-        <p class="subtitle">Layered thermal resistance modeling and hull drag optimization through iterative flow visualization testing.</p>
+        <h1>ASV Validation &amp;<br>Thermal Regulation</h1>
+        <p class="subtitle">Layered thermal resistance modeling and hull drag optimization through iterative flow visualization testing and CFD-supported hull studies.</p>
+        <div class="action-row">
+            <a class="button-link" href="https://drive.google.com/file/d/1yc9a_ZRqVfvXrajBBJEiLepI1HuKs1wd/view?usp=sharing" target="_blank" rel="noopener noreferrer">View CFD Simulation</a>
+            <a class="button-link" href="https://www.instagram.com/texasmarinerobotics/" target="_blank" rel="noopener noreferrer">Texas Marine Robotics Instagram</a>
+        </div>
     </header>
     <div class="stat-grid">
         <div class="stat-card"><span class="stat-value">5-Layer</span><span class="stat-label">Resistance Model</span></div>
         <div class="stat-card"><span class="stat-value">NTC</span><span class="stat-label">Thermistor Network</span></div>
         <div class="stat-card"><span class="stat-value">MATLAB</span><span class="stat-label">Iterative Solver</span></div>
-        <div class="stat-card"><span class="stat-value">Flow Viz</span><span class="stat-label">Hull Optimization</span></div>
+        <div class="stat-card"><span class="stat-value">CFD</span><span class="stat-label">Hull Optimization</span></div>
     </div>
 
     <section>
@@ -96,32 +110,32 @@
 
         <div class="layer-stack">
             <div class="layer" style="background: #fff8f5;">
-                <span class="layer-label" style="color: var(--ut-orange);">Layer 1<br/>Internal Air</span>
+                <span class="layer-label" style="color: var(--ut-orange);">Layer 1<br>Internal Air</span>
                 <span class="layer-desc">Air sealed inside the aluminum chassis. Acts as the first thermal capacitor, absorbing heat from the electronics before conduction into the walls begins. This is where the NTC thermistors measure directly.</span>
                 <span class="layer-eq">R&#x2081; = L / (k_air · A)</span>
             </div>
             <div class="layer" style="background: #f5f5f5;">
-                <span class="layer-label" style="color: #555;">Layer 2<br/>Aluminum Wall</span>
+                <span class="layer-label" style="color: #555;">Layer 2<br>Aluminum Wall</span>
                 <span class="layer-desc">High-conductivity aluminum chassis walls. Thermal resistance is low but the wall stores significant thermal mass.</span>
                 <span class="layer-eq">R&#x2082; = L_Al / (k_Al · A)</span>
             </div>
             <div class="layer" style="background: #fafafa;">
-                <span class="layer-label" style="color: #555;">Layer 3<br/>Air Gap</span>
+                <span class="layer-label" style="color: #555;">Layer 3<br>Air Gap</span>
                 <span class="layer-desc">Stagnant air between the aluminum chassis and the plastic hull. No bulk velocity means convection is suppressed and we can model as conduction. Likely the dominant resistance in the system.</span>
                 <span class="layer-eq">R&#x2083; = L_gap / (k_air · A)</span>
             </div>
             <div class="layer" style="background: #f5f5ee;">
-                <span class="layer-label" style="color: #666;">Layer 4<br/>HDPE Hull Wall</span>
+                <span class="layer-label" style="color: #666;">Layer 4<br>HDPE Hull Wall</span>
                 <span class="layer-desc">The plastic hull shell, fabricated from HDPE (k &#x2248; 0.45 W/m&#xB7;K). Substantially lower thermal conductivity than aluminum, adding meaningful conduction resistance in series. Thickness is uniform and well-defined, making this layer straightforward to characterize.</span>
                 <span class="layer-eq">R&#x2084; = L_HDPE / (k_HDPE · A)</span>
             </div>
             <div class="layer" style="background: #f5f9ff;">
-                <span class="layer-label" style="color: #3a7abf;">Layer 5a<br/>Above Waterline</span>
+                <span class="layer-label" style="color: #3a7abf;">Layer 5a<br>Above Waterline</span>
                 <span class="layer-desc">Convection to ambient air at the outer hull surface. Low h for still air makes this a high-resistance path. Increases with vessel speed through forced convection.</span>
                 <span class="layer-eq">R&#x2085;&#x2090; = 1 / (h_air · A_dry)</span>
             </div>
             <div class="layer" style="background: #eef5ff;">
-                <span class="layer-label" style="color: #1a6abf;">Layer 5b<br/>Below Waterline</span>
+                <span class="layer-label" style="color: #1a6abf;">Layer 5b<br>Below Waterline</span>
                 <span class="layer-desc">Convection to water at the submerged hull surface. Water has roughly 25&#xD7; the thermal conductivity of air, making the wetted area a significantly lower resistance path. The waterline geometry directly controls how much of this path is available.</span>
                 <span class="layer-eq">R&#x2085;&#x2071; = 1 / (h_water · A_wet)</span>
             </div>
@@ -146,7 +160,7 @@
             <div>
                 <h3>MATLAB Iterative Solver</h3>
                 <p>The MATLAB model steps forward in time, computing the temperature at each layer boundary per timestep using the resistance chain. Inputs are the known electronics wattage, layer geometry, and initial conditions. The solver tracks internal air temperature and flags the timestep at which it reaches the electronics' critical limit.</p>
-                <p>Because Layer 3 (the air gap) is the dominant resistance, the model is most sensitive to gap thickness. Sensitivity sweeps over gap thickness identify whether a design change  (tighter fit or partial fill with a higher-conductivity material) would meaningfully extend safe operating time.</p>
+                <p>Because Layer 3 (the air gap) is the dominant resistance, the model is most sensitive to gap thickness. Sensitivity sweeps over gap thickness identify whether a design change (tighter fit or partial fill with a higher-conductivity material) would meaningfully extend safe operating time.</p>
             </div>
             <div class="calc-box">
                 <span class="img-label">Thermal Resistance Circuit</span>
@@ -190,28 +204,39 @@
             </div>
         </div>
 
-        <p style="margin-top: 24px;">A lower, more uniform waterline reduces wetted area and drag. 
-            It also reduces A_wet and raises R&#x2085;&#x2071;, degrading water-side heat rejection. This tradeoff is tracked explicitly. The thermal model is re-run with the updated A_wet for each hull iteration. This is in progress.</p>
-<!--
-        <div class="project-grid" style="margin-top: 24px;">
-            <div class="calc-box">
-                <span class="method-tag">Iteration A</span>
-                <span class="img-label">Volume Study: Early Hull</span>
-                <img src="../assets/images/hull_v1.png" alt="Early hull design">
-            </div>
-            <div class="calc-box">
-                <span class="method-tag">Iteration B</span>
-                <span class="img-label">Refined Geometry: Final Chassis</span>
-                <img src="../assets/images/hull_final.png" alt="Final hull design">
+        <p style="margin-top: 24px;">A lower, more uniform waterline reduces wetted area and drag. It also reduces A_wet and raises R&#x2085;&#x2071;, degrading water-side heat rejection. This tradeoff is tracked explicitly. The thermal model is re-run with the updated A_wet for each hull iteration.</p>
+
+        <h3 style="margin-top: 32px;">CFD Simulation</h3>
+        <p>The CFD study extends the physical flow-visualization work by resolving how the hull shape influences local flow behavior, wake development, and drag-related performance. This simulation supports the hull optimization effort by giving a higher-resolution view of the hydrodynamic consequences of each geometry decision.</p>
+
+        <div class="action-row">
+            <a class="button-link" href="https://drive.google.com/file/d/1yc9a_ZRqVfvXrajBBJEiLepI1HuKs1wd/view?usp=sharing" target="_blank" rel="noopener noreferrer">Open CFD Simulation</a>
+            <a class="button-link" href="https://www.instagram.com/texasmarinerobotics/" target="_blank" rel="noopener noreferrer">Team Instagram</a>
+        </div>
+
+        <div class="embed-card">
+            <span class="img-label">Hull Optimization CFD Preview</span>
+            <iframe
+                class="embed-frame"
+                src="https://drive.google.com/file/d/1yc9a_ZRqVfvXrajBBJEiLepI1HuKs1wd/preview"
+                allow="autoplay"
+                title="Texas Marine Robotics Hull Optimization CFD Simulation">
+            </iframe>
+            <p class="embed-note">Embedded CFD simulation showing the flow behavior used to support hull optimization decisions.</p>
+        </div>
+
+        <div class="social-card">
+            <span class="img-label">Texas Marine Robotics</span>
+            <p>Project updates, testing footage, and competition work from the team are available on the Texas Marine Robotics Instagram.</p>
+            <div class="action-row">
+                <a class="button-link" href="https://www.instagram.com/texasmarinerobotics/" target="_blank" rel="noopener noreferrer">Visit Instagram</a>
             </div>
         </div>
-        -->
     </section>
 
     <section style="padding: 40px; background: #1a1a1a; border-radius: 12px;">
         <h2 style="color: #fff; border-bottom-color: #333;">Next Steps</h2>
-        <p style="color: #bbb;">Once the MATLAB model is validated against thermistor data, thermal expansion cycles will feed into a fracture mechanics study of the acrylic-to-aluminum bolt interfaces. Aluminum and acrylic have significantly different coefficients of thermal expansion. 
-            There is  repeated heating and cooling generates cyclic stress at the fastener holes beyond what the static Goodman analysis captured. <strong style="color: #fff;">LEFM</strong> will estimate crack initiation life at those concentrations and establish a maintenance inspection interval.</p>
+        <p style="color: #bbb;">Once the MATLAB model is validated against thermistor data, thermal expansion cycles will feed into a fracture mechanics study of the acrylic-to-aluminum bolt interfaces. Aluminum and acrylic have significantly different coefficients of thermal expansion. Repeated heating and cooling generates cyclic stress at the fastener holes beyond what the static Goodman analysis captured. <strong style="color: #fff;">LEFM</strong> will estimate crack initiation life at those concentrations and establish a maintenance inspection interval.</p>
     </section>
 
     <a href="../projects.html" class="back-link">&#x2190; Back to Projects</a>
