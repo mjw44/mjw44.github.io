@@ -1,879 +1,189 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Renewable Energy Technology | Julian Whiteley</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <title>Hydrogen Release System | Julian Whiteley</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg: #fcfcfc;
-            --border: #eaeaea;
-            --text: #1a1a1a;
-            --muted: #666;
-            --soft: #f8f8f8;
-            --line: #eee;
-            --subtle: #bbb;
-            --ut-orange: #bf5700;
-        }
+        :root { --border: #eaeaea; --text: #1a1a1a; --muted: #666; --ut-orange: #bf5700; }
+        body, html { margin: 0; padding: 0; font-family: 'Inter', sans-serif; background-color: #fcfcfc; color: var(--text); line-height: 1.6; }
+        
+        #smoke-canvas { position: fixed; top: 0; left: 0; z-index: 1; pointer-events: none; }
+        
+        nav { padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; background: white; border-bottom: 1px solid #eaeaea; position: sticky; top: 0; z-index: 100; }
+        .nav-logo { font-weight: 800; font-size: 1.2rem; text-decoration: none; color: #1a1a1a; }
+        .nav-links a { text-decoration: none; color: #666; font-weight: 600; margin-left: 25px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; }
 
-        * {
-            box-sizing: border-box;
-        }
+        .container { max-width: 900px; margin: 80px auto; padding: 0 20px; position: relative; z-index: 5; }
+        
+        header { margin-bottom: 40px; }
+        .hero-tag { text-transform: uppercase; font-weight: 800; font-size: 0.75rem; letter-spacing: 0.1em; color: #bbb; margin-bottom: 10px; display: block; }
+        h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -0.04em; margin: 0; line-height: 1.1; }
 
-        html,
-        body {
-        body,
-        html {
-            margin: 0;
-            padding: 0;
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg);
-            background-color: #fcfcfc;
-            color: var(--text);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        a {
-            color: inherit;
-        }
-
-        #smoke-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 1;
-            pointer-events: none;
-            opacity: 0.45;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(15px);
-            background: white;
-            border-bottom: 1px solid #eaeaea;
-            position: sticky;
-            top: 0;
-            font-weight: 800;
-            font-size: 1.2rem;
-            text-decoration: none;
-            color: var(--text);
-            color: #1a1a1a;
-        }
-
-        .nav-links {
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--muted);
-            color: #666;
-            font-weight: 600;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            transition: color 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: #000;
-        }
-
-        main {
-        .container {
-            max-width: 900px;
-            margin: 80px auto;
-            padding: 0 20px 80px;
-            position: relative;
-            z-index: 5;
-        }
-
-        .container {
-            max-width: 1040px;
-            margin: 0 auto;
-            padding: 0 32px 90px;
-        }
-
-        header {
-            display: grid;
-            grid-template-columns: 1.15fr 0.85fr;
-            gap: 30px;
-            align-items: start;
-            padding: 76px 0 42px;
-        }
-
-        .hero-copy {
-            max-width: 660px;
-            margin-bottom: 40px;
-        }
-
-        .project-tag {
-        .hero-tag {
-            text-transform: uppercase;
-            font-weight: 800;
-            font-size: 0.75rem;
-            letter-spacing: 0.1em;
-            color: var(--subtle);
-            margin-bottom: 12px;
-            color: #bbb;
-            margin-bottom: 10px;
-            display: block;
-        }
-
-        h1 {
-            font-size: clamp(3rem, 5vw, 5rem);
-            font-size: 3.5rem;
-            font-weight: 800;
-            letter-spacing: -0.05em;
-            margin: 0 0 18px;
-            line-height: 0.98;
-            letter-spacing: -0.04em;
-            margin: 0 0 14px;
-            line-height: 1.05;
-        }
-
-        .subtitle {
-            font-size: 1.12rem;
-            color: var(--muted);
-            font-weight: 400;
-            margin: 0 0 26px;
-            max-width: 620px;
-            max-width: 780px;
-            margin: 0;
-            font-size: 1rem;
-            color: #555;
-        }
-
-        .button-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
-        .button-link {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 42px;
-            padding: 0 16px;
-            border-radius: 8px;
-            border: 1px solid var(--line);
-        .model-viewer {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            background: #fff;
-            color: var(--text);
-            font-size: 0.88rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: border-color 0.2s ease, color 0.2s ease;
-        }
-
-        .button-link:hover {
-            border-color: #d7d7d7;
-            color: #000;
-            padding: 20px;
-            border: 1px solid var(--border);
-            border-radius: 12px;
+        .model-viewer { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 20px; 
+            background: #fff; 
+            padding: 20px; 
+            border: 1px solid var(--border); 
+            border-radius: 12px; 
             margin-bottom: 40px;
             position: relative;
         }
+        .model-container { display: flex; flex-direction: column; }
+        .model-container img { width: 100%; border-radius: 6px; border: 1px solid #f0f0f0; }
 
-        .hero-panel {
-            background: #fff;
-            border: 1px solid var(--line);
-        .model-container {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            min-height: 240px;
-            padding: 18px;
-            border: 1px solid #f0f0f0;
-            border-radius: 8px;
-            padding: 22px;
-            display: grid;
-            gap: 14px;
-            background: #fafafa;
+        .specs-bar { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
+            gap: 20px; 
+            padding: 25px 0; 
+            border-top: 1px solid var(--border); 
+            border-bottom: 1px solid var(--border); 
+            margin-bottom: 60px; 
         }
+        .spec-item label { display: block; font-size: 0.65rem; text-transform: uppercase; font-weight: 800; color: #999; letter-spacing: 0.1em; }
+        .spec-item span { font-weight: 600; font-size: 0.95rem; color: var(--text); }
 
-        .hero-panel .panel-label,
-        .eyebrow {
-            display: block;
-            font-size: 0.65rem;
-        .img-label {
-            font-size: 0.7rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: var(--subtle);
-            color: #aaa;
-            margin-bottom: 4px;
-            display: block;
-            letter-spacing: 0.08em;
-        }
+        section { margin-bottom: 80px; }
+        h2 { font-size: 1.6rem; font-weight: 800; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 25px; }
+        h3 { font-size: 1.1rem; font-weight: 700; margin-top: 0; color: var(--ut-orange); }
+        p { color: #444; font-size: 0.95rem; margin-top: 0; }
 
-        .hero-panel p {
-        .model-container h3 {
-            margin: 0;
-            font-size: 0.9rem;
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: var(--text);
-        }
+        .calc-box { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 25px; display: flex; flex-direction: column; }
+        .calc-box img { width: 100%; height: auto; border-radius: 4px; margin-bottom: 15px; border: 1px solid #f9f9f9; }
+        .img-label { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: #aaa; margin-bottom: 8px; display: block; }
 
-        .model-container p {
-            margin: 0;
-            color: #555;
-            font-size: 0.9rem;
-            line-height: 1.75;
-        }
+        .process-section { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; margin-bottom: 60px; }
 
-        .stat-grid {
-        .pathway-block {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-top: 6px;
-        }
+        .drive-embed { width: 100%; height: 400px; border: 1px solid var(--border); border-radius: 4px; }
 
-        .stat-card {
-            background: var(--soft);
-        .pathway {
-            padding: 12px 14px;
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 16px;
-        }
+        .back-link { display: inline-block; margin-top: 40px; text-decoration: none; font-weight: 800; color: #000; font-size: 0.9rem; text-transform: uppercase; border-bottom: 2px solid #000; padding-bottom: 4px; transition: 0.2s; }
+        .back-link:hover { padding-left: 10px; }
 
-        .stat-value {
-        .pathway strong {
-            display: block;
-            font-size: 0.98rem;
-            font-weight: 800;
-            line-height: 1.35;
-            margin-bottom: 6px;
-            font-size: 0.72rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--ut-orange);
-        }
-
-        .stat-label {
-            display: block;
-            margin-bottom: 6px;
-            font-size: 0.68rem;
-        .pathway span {
-            color: #444;
-            font-size: 0.88rem;
-        }
-
-        .model-note {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            font-size: 0.55rem;
-            color: #ccc;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: #888;
-            letter-spacing: 0.1em;
-            font-weight: 800;
-        }
-
-        .overview-grid {
-        .specs-bar {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-            margin-bottom: 74px;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 20px;
-            padding: 25px 0;
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-            margin-bottom: 60px;
-        }
-
-        .overview-card {
-            background: #fff;
-            border: 1px solid var(--line);
-            border-radius: 8px;
-            padding: 22px;
-        .spec-item label {
-            display: block;
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            font-weight: 800;
-            color: #999;
-            letter-spacing: 0.1em;
-        }
-
-        .overview-card p {
-            margin: 10px 0 0;
-            color: #555;
-            font-size: 0.92rem;
-        .spec-item span {
-            font-weight: 600;
-            font-size: 0.95rem;
-            color: var(--text);
-        }
-
-        section {
-            margin-bottom: 78px;
-        }
-
-        .section-heading {
-            display: flex;
-            justify-content: space-between;
-            align-items: end;
-            gap: 24px;
-            border-bottom: 1px solid var(--line);
-            padding-bottom: 14px;
-            margin-bottom: 28px;
-            margin-bottom: 80px;
-        }
-
-        .section-heading h2 {
-            margin: 0;
-        h2 {
-            font-size: 1.6rem;
-            font-weight: 800;
-            letter-spacing: -0.03em;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-            margin-bottom: 25px;
-        }
-
-        .section-heading p {
-            margin: 0;
-            max-width: 560px;
-            color: var(--muted);
-            font-size: 0.95rem;
-        h3 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-top: 0;
-            color: var(--ut-orange);
-        }
-
-        .content-grid {
-            display: grid;
-            grid-template-columns: 0.92fr 1.25fr;
-            gap: 22px;
-            align-items: start;
-        p {
-            color: #444;
-            font-size: 0.95rem;
-            margin-top: 0;
-        }
-
-        .content-card,
-        .doc-card {
-            background: #fff;
-            border: 1px solid var(--line);
-        .calc-box {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 25px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .content-card {
-            padding: 24px;
-        .process-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: start;
-            margin-bottom: 60px;
-        }
-
-        .content-card h3 {
-            margin: 10px 0 12px;
-            font-size: 1.12rem;
-            letter-spacing: -0.02em;
-        .equation-note,
-        .key-metric {
-            padding: 14px 16px;
-            border-radius: 8px;
-            background: #f8f8f8;
-            border: 1px solid var(--border);
-            margin-top: 14px;
-        }
-
-        .content-card p {
-            margin: 0 0 16px;
-            color: #555;
-            font-size: 0.94rem;
-        .equation-note strong,
-        .key-metric strong {
-            display: block;
-            margin-bottom: 6px;
-            font-size: 0.72rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--ut-orange);
-        }
-
-        .detail-list {
-        .mini-grid {
-            display: grid;
-            gap: 10px;
-            grid-template-columns: 1fr 1fr;
-            gap: 18px;
-            margin-top: 20px;
-        }
-
-        .detail-item {
-            padding: 14px 15px;
-            border: 1px solid var(--line);
-        .mini-card {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            background: var(--soft);
-            padding: 18px;
-        }
-
-        .detail-item strong {
-        .mini-card span {
-            display: block;
-            margin-bottom: 4px;
-            margin-bottom: 8px;
-            font-size: 0.7rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            color: var(--ut-orange);
-            letter-spacing: 0.08em;
-        }
-
-        .detail-item span {
-        .tag-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 18px;
-        }
-
-        .tag {
-            display: inline-flex;
-            align-items: center;
-            min-height: 28px;
-            padding: 0 10px;
-            border-radius: 6px;
-            background: #f3f3f3;
-            border: 1px solid var(--border);
-            color: #555;
-            font-size: 0.88rem;
-            font-size: 0.76rem;
-            font-weight: 600;
-        }
-
-        .doc-card {
-            padding: 16px;
-        .summary-section {
-            padding: 40px;
-            background: #f8f9fa;
-            border-radius: 12px;
-            border: 1px solid #eee;
-            margin-bottom: 40px;
-        }
-
-        .doc-frame {
-            width: 100%;
-            height: 760px;
-            border: 0;
-            border-radius: 4px;
-            background: var(--soft);
-        .summary-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-top: 24px;
-        }
-
-        .small-note {
-            margin: 12px 0 0;
-            font-size: 0.88rem;
-            color: #666;
-        .summary-grid span {
-            display: block;
-            font-weight: 800;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            color: var(--ut-orange);
-            margin-bottom: 10px;
-        }
-
-        .back-link {
-            display: inline-block;
-            margin-top: 10px;
-            margin-top: 40px;
-            text-decoration: none;
-            font-weight: 800;
-            color: #000;
-            font-size: 0.8rem;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            border-bottom: 2px solid #000;
-            padding-bottom: 4px;
-            transition: 0.2s;
-        }
-
-        @media (max-width: 900px) {
-            header,
-            .content-grid,
-            .overview-grid {
-                grid-template-columns: 1fr;
-            }
-        .back-link:hover {
-            padding-left: 10px;
-        }
-
-            .section-heading {
-                flex-direction: column;
-                align-items: start;
         @media (max-width: 768px) {
-            .process-section,
-            .model-viewer,
-            .mini-grid,
-            .summary-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 800px) {
-            nav {
-                padding: 18px 20px;
-                flex-direction: column;
-            }
-
-            .container {
-                padding: 0 18px 70px;
-            }
-
-            header {
-                padding-top: 52px;
-                margin: 50px auto;
-                padding: 0 16px 70px;
-            }
-
-            h1 {
-                font-size: 2.5rem;
-                line-height: 1.02;
-            }
-
-            .stat-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .doc-frame {
-                height: 500px;
-            .model-note {
-                position: static;
-                margin-top: 6px;
-            }
+            .process-section, .model-viewer { grid-template-columns: 1fr; }
+            h1 { font-size: 2.5rem; }
         }
     </style>
+</head>
+<body>
+
+<canvas id="smoke-canvas"></canvas>
+
+<nav>
+    <a href="../index.html" class="nav-logo">MJW</a>
     <div class="nav-links">
         <a href="../index.html">Home</a>
         <a href="../about.html">About</a>
-        <a href="../projects.html">Projects</a>
         <a href="../projects.html" class="active">Projects</a>
         <a href="../resume.html">Resume</a>
         <a href="../contact.html">Contact</a>
     </div>
 </nav>
 
-<main>
-    <div class="container">
-        <header>
-            <div class="hero-copy">
-                <span class="project-tag">Renewable Energy Systems &amp; Predictive Modeling</span>
-                <h1>Solar Yield Forecasting for Palmer Event Center</h1>
-                <p class="subtitle">A renewable energy modeling study focused on estimating solar generation, evaluating system performance across varying operating conditions, and supporting long-term infrastructure planning.</p>
-                <div class="button-row">
-                    <a class="button-link" href="https://docs.google.com/document/d/1xRUEkVNZEhfqlm5dq3TUUThu1voXWZmh/edit?usp=sharing&ouid=117573712504040258655&rtpof=true&sd=true" target="_blank" rel="noopener noreferrer">Open Full Document</a>
 <div class="container">
     <header>
-        <span class="hero-tag">Center for Electromechanics · UT Austin · Spring 2025</span>
-        <h1>Low-Carbon Backup Microgrid for the UT Medical Complex</h1>
-        <p class="subtitle">Engineering design study for a low-carbon backup power microgrid sized around a 40 MW reliability requirement, a fixed 30,000 sq ft land constraint, and hydrogen blending as the primary decarbonization lever.</p>
+        <span class="hero-tag">ExxonMobil & Center for Electromechanics</span>
+        <h1>Hydrogen Release System</h1>
     </header>
 
     <div class="model-viewer">
         <div class="model-container">
-            <span class="img-label">Project Scope & Boundary Conditions</span>
-            <h3>What the system had to do</h3>
-            <p>The project required a highly reliable backup microgrid for the UT Medical Complex near the Fiddle Research Campus. The design had to guarantee 40 MW of backup generation capacity, reduce greenhouse gas emissions relative to a conventional natural gas baseline, and fit within exactly 30,000 sq ft of available land for renewable infrastructure.</p>
-            <p>Those constraints were treated as fixed, not negotiable. Every major design choice had to balance physical feasibility, emissions benefit, and capital realism.</p>
+            <span class="img-label">Full System Integration</span>
+            <img src="../assets/images/hytec2.png" alt="HyTec Integration">
         </div>
-
         <div class="model-container">
-            <span class="img-label">System Design & Thermodynamic Pathway</span>
-            <h3>How the architecture works</h3>
-            <div class="pathway-block">
-                <div class="pathway">
-                    <strong>Daytime Production Pathway</strong>
-                    <span>Solar PV array → PEM electrolyzer → H₂ storage tanks → Gas turbine (SGT-600)</span>
-                </div>
-                <div class="pathway">
-                    <strong>Nighttime Production Pathway</strong>
-                    <span>ERCOT grid (off-peak) → PEM electrolyzers → H₂ storage tanks</span>
-                </div>
-            </div>
-            <p>The prime mover is a Siemens SGT-600 configured for hydrogen blending. The thermodynamic model tracks the full chain from energy input to turbine demand so each design decision is tied to a defensible mass and power balance.</p>
+            <span class="img-label">Structural Skeleton</span>
+            <img src="../assets/images/hytec.png" alt="HyTec Skeleton">
         </div>
-        <div class="model-note">Scope to Verdict</div>
+        <div style="position: absolute; bottom: 20px; right: 20px; font-size: 0.55rem; color: #ccc; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 800;">Design to Integration</div>
     </div>
 
     <div class="specs-bar">
-        <div class="spec-item"><label>Target Capacity</label><span>40 MW</span></div>
-        <div class="spec-item"><label>Land Constraint</label><span>30,000 sq ft</span></div>
-        <div class="spec-item"><label>H₂ Blend Ceiling</label><span>10%</span></div>
-        <div class="spec-item"><label>Design Outcome</label><span>Grid-Assisted Hybrid</span></div>
+        <div class="spec-item"><label>Role</label><span>Lead Design & Integration</span></div>
+        <div class="spec-item"><label>Client</label><span>ExxonMobil / CEM</span></div>
+        <div class="spec-item"><label>Scale</label><span>30-ft Vertical Span</span></div>
+        <div class="spec-item"><label>Constraint</label><span>Low-Cost, Field-Deployable</span></div>
     </div>
 
     <section class="process-section">
         <div>
-            <h2>Architecture & Approach</h2>
-            <h3>Ground-Up Modeling</h3>
-            <p>Rather than relying on vendor estimates or rule-of-thumb sizing, the design was built around a ground-up thermodynamic model that traced the energy cascade from solar irradiance to turbine exhaust. That framework made it possible to quantify intermediate losses and defend the final architecture with first-principles calculations.</p>
-            <p>The model evaluated the turbine heat rate across multiple hydrogen blend ratios, then back-calculated hourly hydrogen demand. From that requirement, the analysis sized electrolyzer power draw, water consumption, and hydrogen tank volume needed to sustain continuous blended operation.</p>
+            <h2>Problem & Approach</h2>
+            <h3>Design Requirements</h3>
+            <p>ExxonMobil required a variable-height release structure to position hydrogen sensors at controlled elevations during leak detection testing. The structure had to reach 30 feet, survive wind loading and high-pressure discharge events, and remain cost-effective for industrial deployment.</p>
+            <p>I led the design from requirements to delivery. I co-authored the BOM, selecting structural profiles, and coordinating electrical team integration to ensure all mechanical and operational criteria were met.</p>
 
-            <h3 style="margin-top: 28px;">Why Hydrogen Blend Was Central</h3>
-            <p>Hydrogen blending served as the primary pathway for reducing carbon intensity without abandoning the reliability and scale of a gas turbine backup system. The design question was not simply whether hydrogen could be added, but how far the blend could be pushed before land, storage, and capital constraints made the system impractical.</p>
+            <h3 style="margin-top: 28px;">Thrust Loading — First Principles</h3>
+            <p>Before selecting profiles, I needed to determine whether escaping high-pressure hydrogen gas would impose meaningful lateral loads. Using conservation of momentum on a control volume around the nozzle exit, I computed the reaction thrust force and compared it against the section's bending stiffness. The thrust was negligible relative to wind and self-weight, so it was correctly excluded from the governing load case.</p>
         </div>
         <div class="calc-box">
-            <h3 style="margin-top: 0;">Thermodynamic Modeling Logic</h3>
-            <span class="img-label">Core Analytical Chain</span>
-            <p>The model linked solar generation, electrolyzer conversion, hydrogen storage, and turbine demand into a single energy balance. This allowed every hydrogen blend scenario to be evaluated on both a technical and economic basis.</p>
-            <div class="equation-note">
-                <strong>Prime Analytical Output</strong>
-                <p style="margin: 0;">Hourly hydrogen mass requirement for each blend ratio, with downstream sizing of electrolyzer capacity, water demand, and storage volume required to maintain that operating point.</p>
-            </div>
-            <div class="equation-note">
-                <strong>System Logic</strong>
-                <p style="margin: 0;">Daylight solar production supports electrolysis directly, while off-peak grid electricity sustains hydrogen production overnight when solar output is unavailable.</p>
-            </div>
+            <h3 style="margin-top: 0;">Momentum Analysis</h3>
+            <span class="img-label">Free Body Diagram — Control Volume</span>
+            <img src="../assets/images/thrust2.png" alt="Thrust FBD">
+            <span class="img-label">Reaction Force Derivation</span>
+            <img src="../assets/images/thrust1.png" alt="Momentum Analysis">
         </div>
     </section>
 
     <section class="process-section">
         <div class="calc-box">
-            <span class="img-label">Economic Decision Framework</span>
-            <h3 style="margin-top: 0;">Marginal Abatement Cost Curve</h3>
-            <p>The financial backbone of the study was a Marginal Abatement Cost (MAC) curve. Total system CAPEX was aggregated across solar panels, PEM electrolyzers, and high-pressure steel storage tanks, then annualized over a 20-year project life using a Capital Recovery Factor.</p>
-            <div class="key-metric">
-                <strong>Key Metric</strong>
-                <p style="margin: 0;">The MAC curve compared annualized system cost against tonnes of CO₂ avoided at each hydrogen blend ratio. The optimization target was the lowest achievable cost per tonne of carbon removed before capital costs entered a regime of steeply diminishing returns.</p>
-            </div>
+            <span class="img-label">BOM & Mechanical Specifications</span>
+            <iframe class="drive-embed" src="https://docs.google.com/spreadsheets/d/1K6oVTNjNhzGb5lsOnSByf6RhRiQGVNh3CQIiusCvfsA/edit?rm=minimal"></iframe>
         </div>
         <div>
-            <h2>Economics & Tradeoffs</h2>
-            <h3>One Decision Axis for Cost and Carbon</h3>
-            <p>The MAC framework made it possible to compare emissions reduction and capital expenditure on a single economic axis rather than treating them as unrelated objectives. That made the tradeoffs at each hydrogen increment legible both technically and financially.</p>
-            <p>This mattered because the project was not simply about maximizing the hydrogen fraction. It was about identifying the highest-value blend under real physical and cost limits, then justifying that point with transparent calculations.</p>
+            <h2>Structural Validation</h2>
+            <h3>Euler Buckling — Critical Load</h3>
+            <p>The governing failure mode for slender vertical members under axial load is Euler buckling. I applied the critical load formula to each beam segment at maximum extension, using the appropriate effective length factor for the end conditions at each joint.</p>
+            <p>The analysis confirmed that the critical buckling load exceeded the maximum expected axial demand. This accounted for self-weight and wind-induced lateral reactions. However, back-to-back unistrut was evaluated and implemented due to it's incredible rigidity.</p>
         </div>
     </section>
 
-            <aside class="hero-panel">
-                <span class="panel-label">Project Snapshot</span>
-                <p>This project studies how the Palmer Event Center solar array performs under different irradiance, weather, and site conditions, with emphasis on annual yield and planning-level decision support.</p>
-                <div class="stat-grid">
-                    <div class="stat-card">
-                        <span class="stat-label">Study Type</span>
-                        <span class="stat-value">Energy Harvest Modeling</span>
-                    </div>
-                    <div class="stat-card">
-                        <span class="stat-label">Primary Output</span>
-                        <span class="stat-value">Predicted Annual Yield</span>
-                    </div>
-                    <div class="stat-card">
-                        <span class="stat-label">Focus</span>
-                        <span class="stat-value">Scenario-Based Forecasting</span>
-                    </div>
-                    <div class="stat-card">
-                        <span class="stat-label">Context</span>
-                        <span class="stat-value">Infrastructure Sustainability</span>
-                    </div>
-                </div>
-            </aside>
-        </header>
-    <section>
-        <h2>Engineering Bottlenecks & Design Pivots</h2>
-        <p>The most valuable output of the modeling phase was not a single optimum number, but the identification of the physical limits that forced the design away from initially promising ideas. Three constraints ultimately restructured the architecture.</p>
-
-        <section class="overview-grid">
-            <article class="overview-card">
-                <span class="eyebrow">01</span>
-                <p>The study evaluates how photovoltaic output changes across weather patterns, seasonal variation, and site-specific operating assumptions.</p>
-            </article>
-            <article class="overview-card">
-                <span class="eyebrow">02</span>
-                <p>The modeling effort is intended to improve visibility into expected energy generation and the role of storage or grid support over time.</p>
-            </article>
-            <article class="overview-card">
-                <span class="eyebrow">03</span>
-                <p>The full document below presents the technical framework, assumptions, and conclusions used to assess long-term renewable performance.</p>
-            </article>
-        </section>
-        <div class="mini-grid">
-            <div class="mini-card">
-                <span>01 · Footprint</span>
-                <p>Natural gas is extraordinarily energy-dense; solar power is not. The analysis showed that 30,000 sq ft of PV panels cannot generate enough electricity to sustain even a 10% hydrogen blend for a 40 MW turbine in isolation.</p>
-            </div>
-            <div class="mini-card">
-                <span>02 · CAPEX</span>
-                <p>High-pressure hydrogen storage is expensive at scale. Sizing tanks for long-duration autonomy drove costs into tens of millions of dollars, making extended off-grid storage economically indefensible for this use case.</p>
-            </div>
-        </div>
-
-        <section>
-            <div class="section-heading">
-                <div>
-                    <span class="eyebrow">Technical Report</span>
-                    <h2>Palmer Event Center Energy Harvest Model</h2>
-                </div>
-                <p>The embedded report documents the solar yield forecasting work and the modeling assumptions used to estimate system output under multiple operating scenarios.</p>
-        <div class="calc-box" style="margin-top: 20px;">
-            <span class="img-label">Technologies Eliminated</span>
-            <p>Multi-day lithium-ion batteries were ruled out because long-duration storage cost was too high. SMR / blue hydrogen was excluded because micro-scale carbon capture lacks the economies of scale needed for viability, and wind was removed from consideration because Austin's wind resource profile is weak.</p>
-            <div class="tag-row">
-                <span class="tag">Long-Duration Li-Ion</span>
-                <span class="tag">SMR / Blue H₂</span>
-                <span class="tag">Wind (Austin)</span>
-                <span class="tag">Extended Off-Grid Storage</span>
-            </div>
-        </div>
-    </section>
-
-    <section class="summary-section">
-        <h2 style="border: none; margin-bottom: 12px; font-size: 1.4rem;">Final System Configuration</h2>
-        <p style="margin-bottom: 0;">The 30,000 sq ft land constraint makes a purely off-grid solution physically impossible at the required power level. The final architecture is therefore a grid-assisted hybrid microgrid operating at a 10% hydrogen blend.</p>
-
-            <div class="content-grid">
-                <article class="content-card">
-                    <span class="eyebrow">Project Focus</span>
-                    <h3>Predictive renewable energy analysis</h3>
-                    <p>This work centers on forecasting solar generation performance for a real site and translating that forecast into a clearer picture of long-term energy contribution.</p>
-                    <p>The analysis considers how environmental conditions and system assumptions influence the resulting energy yield, making the document useful for both technical review and planning discussion.</p>
-        <div class="summary-grid">
+    <section style="padding: 40px; background: #f8f9fa; border-radius: 12px; border: 1px solid #eee; margin-bottom: 40px;">
+        <h2 style="border: none; margin-bottom: 12px; font-size: 1.4rem;">Retrospective: What I Would Optimize</h2>
+        <p style="margin-bottom: 28px;">The prototype met all requirements and was delivered to ExxonMobil on schedule. A second iteration would target two specific levers:</p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
             <div>
-                <span>01. Design Outcome</span>
-                <p style="margin: 0;">The solar array powers electrolysis during daylight hours, while off-peak ERCOT electricity runs the electrolyzers through the night to maintain hydrogen production. Storage is sized for short-term buffering rather than multi-day autonomy.</p>
+                <span style="display: block; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; color: var(--ut-orange); margin-bottom: 10px;">01. Section Geometry</span>
+                <p style="margin: 0;">Shorter moment arms reduce base bending loads. Re-evaluating member layout could improve the stiffness-to-weight ratio and allow lighter profiles without compromising FoS.</p>
             </div>
             <div>
-                <span>02. Why 10% Blend</span>
-                <p style="margin: 0;">The 10% hydrogen blend is the maximum achievable under the land constraint and the point on the MAC curve where cost per tonne of CO₂ abated is minimized. It preserves emissions benefit without letting storage cost dominate the architecture.</p>
+                <span style="display: block; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; color: var(--ut-orange); margin-bottom: 10px;">02. Material Volume</span>
+                <p style="margin: 0;">The initial BOM was conservatively specified. Iterating various cross-section sizing against the validated load cases would reduce material cost while maintaining structural margins.</p>
             </div>
         </div>
     </section>
 
-                    <div class="detail-list">
-                        <div class="detail-item">
-                            <strong>System</strong>
-                            <span>Palmer Event Center solar array</span>
-                        </div>
-                        <div class="detail-item">
-                            <strong>Metric</strong>
-                            <span>Annual and scenario-based energy generation</span>
-                        </div>
-                        <div class="detail-item">
-                            <strong>Purpose</strong>
-                            <span>Support sustainability and infrastructure decision making</span>
-                        </div>
-                    </div>
-                </article>
-    <section>
-        <h2>Future Work</h2>
-        <p>The model establishes a defensible baseline and identifies the highest-leverage open questions for the next design iteration.</p>
-
-                <div class="doc-card">
-                    <iframe
-                        class="doc-frame"
-                        src="https://docs.google.com/document/d/1xRUEkVNZEhfqlm5dq3TUUThu1voXWZmh/preview"
-                        title="Palmer Event Center Solar Yield Forecasting Report">
-                    </iframe>
-                    <p class="small-note">Embedded project document covering the renewable energy model, assumptions, and forecasted system performance.</p>
-                </div>
-        <div class="mini-grid">
-            <div class="mini-card">
-                <span>01 · Water Sourcing</span>
-                <p>Quantify the deionized water demand of PEM electrolyzers at scale and its full effect on operating cost and site permitting.</p>
-            </div>
-            <div class="mini-card">
-                <span>02 · Make vs. Buy Crossover</span>
-                <p>Determine the economic threshold where purchased hydrogen becomes more attractive than on-site green production.</p>
-            </div>
-            <div class="mini-card">
-                <span>03 · Black Start Capability</span>
-                <p>Define the equipment and strategy required to self-start the 40 MW turbine during a complete ERCOT grid failure.</p>
-            </div>
-        </section>
-            <div class="mini-card">
-                <span>04 · Degradation Modeling</span>
-                <p>Project electrolyzer membrane replacement costs under realistic solar intermittency cycling across the full project life.</p>
-            </div>
-        </div>
-    </section>
-
-        <a href="../projects.html" class="back-link">← Back to Projects</a>
-    </div>
-</main>
     <a href="../projects.html" class="back-link">← Back to Projects</a>
 </div>
 
 <script>
     const canvas = document.getElementById('smoke-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    window.addEventListener('resize', resize); resize();
+    class Particle {
         constructor(x, y) {
-            this.x = x;
-            this.y = y;
-            this.size = Math.random() * 5 + 2;
-            this.speedX = (Math.random() - 0.5) * 0.8;
-            this.speedY = (Math.random() - 0.5) * 0.8;
-            this.color = 'rgba(0, 0, 0,';
-            this.alpha = 0.2;
-            this.decay = Math.random() * 0.015 + 0.01;
+            this.x = x; this.y = y;
             this.size = Math.random() * 2 + 1;
             this.alpha = 0.15;
         }
-
-        update() {
-            this.x += this.speedX;
-            this.y += this.speedY;
-            if (this.size > 0.2) this.size -= 0.05;
-            this.alpha -= this.decay;
-            this.x += (Math.random() - 0.5) * 0.4;
-            this.y += (Math.random() - 0.5) * 0.4;
-            this.alpha -= 0.005;
-        }
-
-        draw() {
-            ctx.fillStyle = this.color + this.alpha + ')';
-            ctx.fillStyle = `rgba(0,0,0,${this.alpha})`;
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fill();
-            particles[i].draw();
-            if (particles[i].alpha <= 0) {
-                particles.splice(i, 1);
-                i--;
-                i -= 1;
-            }
+        update() { this.x += (Math.random()-0.5)*0.4; this.y += (Math.random()-0.5)*0.4; this.alpha -= 0.005; }
+        draw() { ctx.fillStyle = rgba(0,0,0,${this.alpha}); ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI*2); ctx.fill(); }
+    }
+    window.addEventListener('mousemove', (e) => { particles.push(new Particle(e.clientX, e.clientY)); });
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < particles.length; i++) {
+            particles[i].update(); particles[i].draw();
+            if (particles[i].alpha <= 0) { particles.splice(i, 1); i--; }
         }
         requestAnimationFrame(animate);
-
+    }
     animate();
 </script>
-
 </body>
 </html>
