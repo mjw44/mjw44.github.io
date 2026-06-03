@@ -1,100 +1,171 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About | Julian Whiteley</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-    <style>
-        :root { --border: #eaeaea; --text: #1a1a1a; --muted: #666; --ut-orange: #bf5700; }
 
-        body, html {
-            margin: 0; padding: 0;
-            font-family: 'Inter', sans-serif;
-            background-color: #fcfcfc;
-            color: var(--text);
-            overflow-x: hidden;
+            .hero,
+            .highlight-grid,
+            .goal-grid,
+            .grid-simple {
+                grid-template-columns: 1fr;
+            }
+
+            .portrait-card {
+                max-width: 340px;
+            }
+
+            h1 { font-size: 2.2rem; }
         }
+    </style>
+</head>
+<body>
 
-        #smoke-canvas { position: fixed; top: 0; left: 0; z-index: 1; pointer-events: none; }
+<canvas id="smoke-canvas"></canvas>
 
-        nav {
-            padding: 20px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: white;
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+<nav>
+    <a href="index.html" class="nav-logo">MJW</a>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html" style="color: black;">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="resume.html">Resume</a>
+        <a href="contact.html">Contact</a>
+    </div>
+</nav>
+
+<div class="container">
+
+    <section class="hero">
+        <div>
+            <span class="label">About</span>
+            <h1>Julian Whiteley.</h1>
+            <p>I am a mechanical engineering honors student at UT Austin focused on the places where hardware has to prove itself: structural analysis, thermal systems, simulation, validation, and system integration.</p>
+            <p>My work has moved between research, product engineering, and student-led design teams. I have designed and validated a 30-foot hydrogen release structure at the Center for Electromechanics, founded a simulation and validation team for Longhorn Baja Racing, led mechanical systems work for Texas Marine Robotics, and built thermal-control projects that connect models to measured behavior.</p>
+            <p>I like engineering that has consequences in the real world. Before I trust a model, I want to understand the load path, the heat flow, the assumptions, and the failure mode.</p>
+        </div>
+
+        <aside class="portrait-card">
+            <img src="assets/images/me_julian.png" alt="Portrait of Julian Whiteley">
+            <div class="portrait-caption">Mechanical Engineering &middot; UT Austin</div>
+        </aside>
+    </section>
+
+    <section>
+        <span class="label">Technical Focus</span>
+        <div class="highlight-grid">
+            <div class="highlight-card">
+                <strong>Analysis</strong>
+                <p>FEA, fatigue life, buckling, thermal-structural coupling, and simulation-to-test correlation.</p>
+            </div>
+            <div class="highlight-card">
+                <strong>Systems</strong>
+                <p>Mechanical integration, validation workflows, sensorized test setups, and cross-subsystem tradeoffs.</p>
+            </div>
+            <div class="highlight-card">
+                <strong>Design</strong>
+                <p>SolidWorks, DFM, tolerance thinking, rapid prototyping, BOM ownership, and design trade studies.</p>
+            </div>
+        </div>
+    </section>
+
+    <hr>
+
+    <section>
+        <span class="label">Current Work</span>
+        <p>At Integra, I am engineering a closed-loop fluid flow testing system and developing hydrostatic pressure testing protocols to validate structural integrity under operational loads. I also wrote a SolidWorks VBA macro that removed more than 100 hours of manual engineering overhead across 2,000+ legacy files.</p>
+        <p>In parallel, I lead simulation and validation work for Longhorn Baja Racing, where my team connects first-principles analysis, FEA, strain gauge data, and physical testing into one design workflow.</p>
+    </section>
+
+    <hr>
+
+    <section>
+        <span class="label">Goals</span>
+        <div class="goal-grid">
+            <div class="goal-card">
+                <strong>Graduate Degree</strong>
+                <p>Pursuing an MS or PhD in mechanical engineering to work on problems that require deeper analysis, testing, and modeling.</p>
+            </div>
+            <div class="goal-card">
+                <strong>Energy</strong>
+                <p>Structural and thermal systems for energy infrastructure, from hydrogen systems to emerging cooling and validation problems.</p>
+            </div>
+            <div class="goal-card">
+                <strong>Product Design</strong>
+                <p>Building physical products that work reliably in the real world, designed from first principles and validated through testing.</p>
+            </div>
+        </div>
+    </section>
+
+    <hr>
+
+    <section>
+        <span class="label">Mindset</span>
+        <p>Failure is the only reliable teacher. I approach problems by deriving from first principles before reaching for a simulation, and I hold myself to the same standard I would apply to a design: if it cannot be justified, it gets revised.</p>
+    </section>
+
+    <hr>
+
+    <section>
+        <span class="label">Guiding Quotes</span>
+        <div class="quote-list">
+            <div class="quote-item">
+                <p>"The only place to go from failure is to win."</p>
+                <span>Tom Platz</span>
+            </div>
+            <div class="quote-item">
+                <p>"Keep moving forward."</p>
+                <span>Eren Yeager, Attack on Titan</span>
+            </div>
+            <div class="quote-item">
+                <p>"Discipline is doing what needs to be done, even when you don't want to do it."</p>
+                <span>David Laid</span>
+            </div>
+        </div>
+    </section>
+
+    <hr>
+
+    <section>
+        <span class="label">Outside the Lab</span>
+        <div class="grid-simple">
+            <div class="item"><strong>Eagle Scout</strong>Rank attained.</div>
+            <div class="item"><strong>Tutoring</strong>Solids, statics, dynamics.</div>
+            <div class="item"><strong>Favorite Course</strong>Mechanics of solids.</div>
+            <div class="item"><strong>Hobbies</strong>Bodybuilding, cooking, outdoors.</div>
+            <div class="item"><strong>Music</strong>Pork Soda, Glass Animals.</div>
+            <div class="item"><strong>Film</strong>10 Things I Hate About You.</div>
+            <div class="item"><strong>Fuel</strong>Cabo Bob's steak burrito.</div>
+        </div>
+    </section>
+
+</div>
+
+<script>
+    const canvas = document.getElementById('smoke-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    window.addEventListener('resize', resize); resize();
+    class Particle {
+        constructor(x, y) {
+            this.x = x; this.y = y;
+            this.size = Math.random() * 5 + 2;
+            this.speedX = (Math.random() - 0.5) * 0.8;
+            this.speedY = (Math.random() - 0.5) * 0.8;
+            this.color = 'rgba(0, 0, 0,';
+            this.alpha = 0.2;
+            this.decay = Math.random() * 0.015 + 0.01;
         }
-        .nav-logo { font-weight: 800; font-size: 1.2rem; text-decoration: none; color: var(--text); }
-        .nav-links a { text-decoration: none; color: #666; font-weight: 600; margin-left: 25px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; }
-
-        .container {
-            max-width: 980px;
-            margin: 90px auto;
-            padding: 0 24px;
-            position: relative;
-            z-index: 5;
+        update() { this.x += this.speedX; this.y += this.speedY; if (this.size > 0.2) this.size -= 0.05; this.alpha -= this.decay; }
+        draw() { ctx.fillStyle = this.color + this.alpha + ')'; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
+    }
+    window.addEventListener('mousemove', (e) => { particles.push(new Particle(e.clientX, e.clientY)); });
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < particles.length; i++) {
+            particles[i].update(); particles[i].draw();
+            if (particles[i].alpha <= 0) { particles.splice(i, 1); i--; }
         }
+        requestAnimationFrame(animate);
+    }
+    animate();
+</script>
 
-        .label {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            color: #bbb;
-            font-weight: 800;
-            margin-bottom: 12px;
-            display: block;
-        }
-
-        .hero {
-            display: grid;
-            grid-template-columns: 1.25fr 0.75fr;
-            gap: 44px;
-            align-items: start;
-            margin-bottom: 58px;
-        }
-
-        h1 {
-            font-size: 3rem;
-            font-weight: 800;
-            letter-spacing: -0.04em;
-            margin: 0 0 24px;
-            line-height: 1.05;
-            color: var(--text);
-        }
-
-        section { margin-bottom: 56px; }
-
-        p {
-            font-size: 1.03rem;
-            line-height: 1.7;
-            color: #444;
-            margin: 0 0 16px;
-        }
-
-        .portrait-card {
-            background: #fff;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 14px;
-        }
-
-        .portrait-card img {
-            display: block;
-            width: 100%;
-            aspect-ratio: 4 / 5;
-            object-fit: cover;
-            border-radius: 6px;
-            background: #f5f5f5;
-        }
-
-        .portrait-caption {
-            margin: 12px 2px 0;
-            font-size: 0.72rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
+</body>
+</html>
