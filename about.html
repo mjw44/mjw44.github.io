@@ -33,9 +33,9 @@
         .nav-links a { text-decoration: none; color: #666; font-weight: 600; margin-left: 25px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; }
 
         .container {
-            max-width: 680px;
-            margin: 100px auto;
-            padding: 0 20px;
+            max-width: 980px;
+            margin: 90px auto;
+            padding: 0 24px;
             position: relative;
             z-index: 5;
         }
@@ -50,6 +50,14 @@
             display: block;
         }
 
+        .hero {
+            display: grid;
+            grid-template-columns: 1.25fr 0.75fr;
+            gap: 44px;
+            align-items: start;
+            margin-bottom: 58px;
+        }
+
         h1 {
             font-size: 3rem;
             font-weight: 800;
@@ -62,190 +70,31 @@
         section { margin-bottom: 56px; }
 
         p {
-            font-size: 1.05rem;
+            font-size: 1.03rem;
             line-height: 1.7;
             color: #444;
-            margin-bottom: 16px;
+            margin: 0 0 16px;
         }
 
-        .quote {
-            font-size: 2.6rem;
-            font-weight: 800;
-            color: #000;
-            margin: 48px 0;
-            letter-spacing: -0.04em;
-            line-height: 1.05;
-        }
-
-        hr { border: 0; border-top: 1px solid #eee; margin: 44px 0; }
-
-        .goal-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 14px;
-            margin-top: 20px;
-        }
-        .goal-card {
+        .portrait-card {
             background: #fff;
             border: 1px solid var(--border);
             border-radius: 8px;
-            padding: 18px;
+            padding: 14px;
         }
-        .goal-card strong {
+
+        .portrait-card img {
             display: block;
-            font-size: 0.78rem;
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            object-fit: cover;
+            border-radius: 6px;
+            background: #f5f5f5;
+        }
+
+        .portrait-caption {
+            margin: 12px 2px 0;
+            font-size: 0.72rem;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--ut-orange);
-            margin-bottom: 6px;
-        }
-        .goal-card p {
-            margin: 0;
-            font-size: 0.88rem;
-            color: #555;
-            line-height: 1.5;
-        }
-
-        .grid-simple {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            margin-top: 20px;
-        }
-        .item { font-size: 0.9rem; color: #555; }
-        .item strong { color: var(--text); display: block; margin-bottom: 2px; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em; }
-
-        @media (max-width: 600px) {
-            h1 { font-size: 2.2rem; }
-            .goal-grid { grid-template-columns: 1fr; }
-            .grid-simple { grid-template-columns: 1fr; }
-        }
-    </style>
-</head>
-<body>
-
-<canvas id="smoke-canvas"></canvas>
-
-<nav>
-    <a href="index.html" class="nav-logo">MJW</a>
-    <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="about.html" style="color: black;">About</a>
-        <a href="projects.html">Projects</a>
-        <a href="resume.html">Resume</a>
-        <a href="contact.html">Contact</a>
-    </div>
-</nav>
-
-<div class="container">
-
-    <section>
-        <span class="label">About</span>
-        <h1>Julian Whiteley.</h1>
-        <p>I am a mechanical engineering student at UT Austin with a focus on structural analysis, simulation, and systems integration. My work spans FEA, thermal systems, and dynamics, grounded in first-principles reasoning and validated against physical reality.</p>
-        <p>I want to pursue graduate research and contribute to energy systems and product development where the engineering problems are genuinely unsolved. In the meantime, I tutor mechanics of solids, statics, and dynamics because teaching something is the fastest way to find out whether you actually understand it.</p>
-
-    </section>
-
-    <hr>
-
-    <section>
-        <span class="label">Goals</span>
-        <div class="goal-grid">
-            <div class="goal-card">
-                <strong>Graduate Degree</strong>
-                <p>Pursuing an MS or PhD in mechanical engineering to work on problems that require more than an undergraduate toolkit.</p>
-            </div>
-            <div class="goal-card">
-                <strong>Energy</strong>
-                <p>Structural and thermal systems for energy infrastructure, from conventional to emerging technologies.</p>
-            </div>
-            <div class="goal-card">
-                <strong>Product Design</strong>
-                <p>Building physical products that work reliably in the real world, designed from first principles and validated through testing.</p>
-            </div>
-        </div>
-    </section>
-
-    <hr>
-
-    <section>
-        <span class="label">Mindset</span>
-        <p>Failure is the only reliable teacher. I approach problems by deriving from first principles before reaching for a simulation, and I hold myself to the same standard I'd apply to a design: if it can't be justified, it gets revised.</p>
-    </section>
-
-    <hr>
-
-    <section>
-        <span class="label">Guiding Quotes</span>
-        <div style="display: flex; flex-direction: column; gap: 28px; margin-top: 8px;">
-
-            <div style="border-left: 3px solid var(--ut-orange); padding-left: 20px;">
-                <p style="font-size: 1.15rem; font-weight: 600; color: #1a1a1a; margin-bottom: 6px; line-height: 1.4;">"The only place to go from failure is to win."</p>
-                <span style="font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: #bbb;">Tom Platz</span>
-            </div>
-
-            <div style="border-left: 3px solid var(--ut-orange); padding-left: 20px;">
-                <p style="font-size: 1.15rem; font-weight: 600; color: #1a1a1a; margin-bottom: 6px; line-height: 1.4;">"Keep moving forward."</p>
-                <span style="font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: #bbb;">Eren Yeager — Attack on Titan</span>
-            </div>
-
-            <div style="border-left: 3px solid var(--ut-orange); padding-left: 20px;">
-                <p style="font-size: 1.15rem; font-weight: 600; color: #1a1a1a; margin-bottom: 6px; line-height: 1.4;">"Discipline is doing what needs to be done, even when you don't want to do it."</p>
-                <span style="font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: #bbb;">David Laid</span>
-            </div>
-
-        </div>
-    </section>
-
-    <hr>
-
-    <section>
-        <span class="label">Outside the Lab</span>
-        <div class="grid-simple">
-            <div class="item"><strong>Eagle Scout</strong>Rank attained.</div>
-            <div class="item"><strong>Tutoring</strong>Solids, Statics, Dynamics.</div>
-            <div class="item"><strong>Favorite Course</strong>Mechanics of Solids.</div>
-            <div class="item"><strong>Hobbies</strong>Bodybuilding, cooking, outdoors.</div>
-            <div class="item"><strong>Music</strong>Pork Soda — Glass Animals.</div>
-            <div class="item"><strong>Film</strong>10 Things I Hate About You.</div>
-            <div class="item"><strong>Fuel</strong>Cabo Bob's steak burrito.</div>
-        </div>
-    </section>
-
-</div>
-
-<script>
-    const canvas = document.getElementById('smoke-canvas');
-    const ctx = canvas.getContext('2d');
-    let particles = [];
-    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-    window.addEventListener('resize', resize); resize();
-    class Particle {
-        constructor(x, y) {
-            this.x = x; this.y = y;
-            this.size = Math.random() * 5 + 2;
-            this.speedX = (Math.random() - 0.5) * 0.8;
-            this.speedY = (Math.random() - 0.5) * 0.8;
-            this.color = 'rgba(0, 0, 0,';
-            this.alpha = 0.2;
-            this.decay = Math.random() * 0.015 + 0.01;
-        }
-        update() { this.x += this.speedX; this.y += this.speedY; if (this.size > 0.2) this.size -= 0.05; this.alpha -= this.decay; }
-        draw() { ctx.fillStyle = this.color + this.alpha + ')'; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
-    }
-    window.addEventListener('mousemove', (e) => { particles.push(new Particle(e.clientX, e.clientY)); });
-    function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        for (let i = 0; i < particles.length; i++) {
-            particles[i].update(); particles[i].draw();
-            if (particles[i].alpha <= 0) { particles.splice(i, 1); i--; }
-        }
-        requestAnimationFrame(animate);
-    }
-    animate();
-</script>
-
-</body>
-</html>
+            letter-spacing: 0.12em;
