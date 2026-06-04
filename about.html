@@ -1,3 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Julian Whiteley</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --border: #eaeaea; --text: #1a1a1a; --muted: #666; --ut-orange: #bf5700; }
+
+        body, html {
+            margin: 0; padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #fcfcfc;
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        #smoke-canvas { position: fixed; top: 0; left: 0; z-index: 1; pointer-events: none; }
+
+        nav {
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .nav-logo { font-weight: 800; font-size: 1.2rem; text-decoration: none; color: var(--text); }
+        .nav-links a { text-decoration: none; color: #666; font-weight: 600; margin-left: 25px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; }
+
+        .container {
+            max-width: 980px;
+            margin: 90px auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: #bbb;
+            font-weight: 800;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1.25fr 0.75fr;
+            gap: 44px;
+            align-items: start;
+            margin-bottom: 58px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            margin: 0 0 24px;
+            line-height: 1.05;
+            color: var(--text);
+        }
+
+        section { margin-bottom: 56px; }
+
+        p {
+            font-size: 1.03rem;
+            line-height: 1.7;
+            color: #444;
+            margin: 0 0 16px;
+        }
+
+        .portrait-card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 14px;
+        }
+
+        .portrait-card img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            object-fit: cover;
+            border-radius: 6px;
+            background: #f5f5f5;
+        }
+
+        .portrait-caption {
+            margin: 12px 2px 0;
+            font-size: 0.72rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #bbb;
+        }
+
+        hr { border: 0; border-top: 1px solid #eee; margin: 44px 0; }
+
+        .highlight-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            margin-top: 20px;
+        }
+
+        .highlight-card,
+        .goal-card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 18px;
+        }
+
+        .highlight-card strong,
+        .goal-card strong {
+            display: block;
+            font-size: 0.78rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--ut-orange);
+            margin-bottom: 6px;
+        }
+
+        .highlight-card p,
+        .goal-card p {
+            margin: 0;
+            font-size: 0.88rem;
+            color: #555;
+            line-height: 1.55;
+        }
+
+        .goal-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 14px;
+            margin-top: 20px;
+        }
+
+        .grid-simple {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 20px;
+        }
+        .item { font-size: 0.9rem; color: #555; }
+        .item strong { color: var(--text); display: block; margin-bottom: 2px; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em; }
+
+        .quote-list {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+            margin-top: 8px;
+        }
+
+        .quote-item {
+            border-left: 3px solid var(--ut-orange);
+            padding-left: 20px;
+        }
+
+        .quote-item p {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+
+        .quote-item span {
+            font-size: 0.72rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #bbb;
+        }
+
+        @media (max-width: 760px) {
+            nav {
+                padding: 18px 20px;
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .nav-links a {
+                margin-left: 0;
+                margin-right: 18px;
+            }
+
+            .container {
+                margin: 56px auto;
+                padding: 0 18px;
+            }
 
             .hero,
             .highlight-grid,
@@ -28,8 +228,8 @@
         <a href="contact.html">Contact</a>
     </div>
 </nav>
-
 <div class="container">
+
 
     <section class="hero">
         <div>
