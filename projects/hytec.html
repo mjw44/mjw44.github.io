@@ -50,7 +50,7 @@
         section { margin-bottom: 80px; }
         h2 { font-size: 1.6rem; font-weight: 800; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 25px; }
         h3 { font-size: 1.1rem; font-weight: 700; margin-top: 0; color: var(--ut-orange); }
-        p { color: #444; font-size: 0.95rem; margin-top: 0; text-align: justify; }
+        p { color: #444; font-size: 0.95rem; margin-top: 0; margin-bottom: 15px; text-align: justify; }
 
         .calc-box { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 25px; display: flex; flex-direction: column; }
         .calc-box img { width: 100%; height: auto; border-radius: 4px; margin-bottom: 15px; border: 1px solid #f9f9f9; }
@@ -113,12 +113,12 @@
         <div>
             <h2>Problem & Approach</h2>
             <h3>Design Requirements</h3>
-            <p>ExxonMobil required a variable-height structural apparatus capable of positioning hydrogen point-sensors at dynamic elevations during continuous leak-detection field testing. The system was constrained to a 30-foot vertical span, necessitated survival metrics under transient environmental wind loading, and required rigid operational margins under localized high-pressure discharge events.</p>
-            <p>I owned the mechanical architecture from initial structural concept to hardware delivery. This involved co-authoring the dynamic Bill of Materials (BOM), selecting targeted structural framing profiles based on stiffness-to-weight metrics, and managing cross-functional spatial allocation with the electrical instrumentation team to route ruggedized sensor networks.</p>
+            <p>ExxonMobil required a variable-height structure to dynamically position hydrogen sensors up to 30 feet during field testing. The system demanded strict survival margins under transient wind loads and high-pressure discharges.</p>
+            <p>I led the mechanical architecture from concept to delivery. This included managing the BOM, selecting stiffness-optimized profiles, and coordinating with the electrical team to integrate ruggedized sensor networks.</p>
 
             <h3 style="margin-top: 28px;">Thrust Loading — First Principles</h3>
-            <p>Prior to FEA validation or profile selection, it was vital to quantify whether the transient high-pressure hydrogen jet generated deterministic thrust loads that would compromise structural stability. Applying conservation of linear momentum across an idealized 1D control volume localized at the nozzle exit boundary, I derived the net reaction force vector.</p> 
-            <p>Analytical calculations confirmed that the localized thrust magnitude was statistically negligible compared to ambient wind-induced drag and structure self-weight. Consequently, it was intentionally excluded from the governing load cases, streamlining computational efficiency during optimization.</p>
+            <p>Before selecting profiles, I evaluated if the high-pressure hydrogen jet generated thrust loads capable of compromising structural stability. Using 1D conservation of momentum at the nozzle exit, I derived the net reaction force.</p> 
+            <p>Calculations proved the localized thrust was statistically negligible compared to wind drag and self-weight. Consequently, it was excluded from governing load cases to streamline optimization.</p>
         </div>
         <div class="calc-box">
             <h3 style="margin-top: 0;">Momentum Analysis</h3>
@@ -137,22 +137,22 @@
         <div>
             <h2>Structural Validation</h2>
             <h3>Euler Buckling — Critical Load</h3>
-            <p>Given the slender, vertical profile of the structure at full 30-foot extension, elastic column buckling served as the primary, critical failure mode. I mapped classical Euler buckling formulations across each discrete telescopic segment, computing boundaries based on pinned-fixed and fixed-free boundary conditions relative to joint coupling interfaces.</p>
-            <p>While standard calculations indicated that nominal profiles technically maintained adequate margins against pure axial self-weight, dynamic lateral wind reactions introduced severe unmodeled bending stress. To drastically maximize the system's flexural rigidity and torsional resistance without swelling costs, I evaluated and implemented a back-to-back channel configuration, validating a system-wide structural Factor of Safety of 2.0 across four iterative design cycles.</p>
+            <p>At full 30-foot extension, elastic column buckling was the primary failure mode. I mapped Euler buckling formulations across each telescopic segment, accounting for pinned-fixed and fixed-free joint boundary conditions.</p>
+            <p>While nominal profiles survived static axial loads, dynamic wind reactions introduced severe bending stress. To maximize flexural rigidity affordably, I implemented a back-to-back channel configuration, achieving a Factor of Safety of 2.0 across four design iterations.</p>
         </div>
     </section>
 
     <section style="padding: 40px; background: #f8f9fa; border-radius: 12px; border: 1px solid #eee; margin-bottom: 40px;">
         <h2 style="border: none; margin-bottom: 12px; font-size: 1.4rem;">Retrospective: What I Would Optimize</h2>
-        <p style="margin-bottom: 28px;">The final physical prototype successfully met all functional validation protocols and was delivered to the client on schedule. A fast-follower engineering loop would target two optimization paths:</p>
+        <p style="margin-bottom: 28px;">The prototype met all functional requirements and was delivered on schedule. A second iteration would target two optimizations:</p>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
             <div>
                 <span style="display: block; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; color: var(--ut-orange); margin-bottom: 10px;">01. Geometric Section Optimization</span>
-                <p style="margin: 0;">Altering the cross-sectional geometry layout to reduce moment arms at the base connection would minimize peak bending moments, maximizing structural efficiency and allowing for reduced-mass profiles.</p>
+                <p style="margin: 0;">Reducing moment arms at the base connection would minimize peak bending moments, maximizing structural efficiency and allowing for lighter profiles.</p>
             </div>
             <div>
                 <span style="display: block; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; color: var(--ut-orange); margin-bottom: 10px;">02. Material Mass & Cost Reduction</span>
-                <p style="margin: 0;">While targeted trade studies successfully minimized costs by 15% within the allocation, parts of the base frame remained structurally over-engineered. Algorithmic gauge-thickness optimization would safely reduce mass while preserving strict safety bounds.</p>
+                <p style="margin: 0;">While initial trade studies reduced costs by 15%, parts of the frame remained over-engineered. Algorithmic gauge-thickness optimization would safely minimize mass while maintaining strict safety bounds.</p>
             </div>
         </div>
     </section>
