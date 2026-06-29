@@ -4,189 +4,196 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resume | Julian Whiteley</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        :root { --border: #eaeaea; --text: #1a1a1a; --ut-orange: #bf5700; }
+        :root {
+            --bg: #ffffff;
+            --text: #050505;
+            --muted: #8a8a8a;
+            --line: #dcdcdc;
+            --accent: #bf5700;
+        }
 
-        body, html {
-            margin: 0; padding: 0;
-            width: 100%;
+        * { box-sizing: border-box; }
+
+        html,
+        body {
+            margin: 0;
+            min-height: 100%;
             font-family: 'Inter', sans-serif;
-            background-color: #fcfcfc;
-            overflow-x: hidden;
+            font-weight: 400;
+            background: var(--bg);
             color: var(--text);
         }
 
-        #smoke-canvas {
-            position: fixed;
-            top: 0; left: 0;
-            z-index: 1;
-            pointer-events: none;
-        }
-
         nav {
-            padding: 20px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: white;
-            border-bottom: 1px solid var(--border);
             position: sticky;
             top: 0;
-            z-index: 100;
-        }
-
-        .nav-logo { font-weight: 800; font-size: 1.2rem; text-decoration: none; color: var(--text); }
-        .nav-links a {
-            text-decoration: none;
-            color: #666;
-            font-weight: 600;
-            margin-left: 25px;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .resume-container {
-            position: relative;
-            z-index: 5;
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-
-        .header-area {
+            z-index: 10;
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            margin-bottom: 20px;
+            align-items: center;
+            padding: 28px 48px;
+            background: rgba(255, 255, 255, 0.94);
         }
 
-        .header-left { text-align: left; }
-
-        .eyebrow {
-            font-size: 0.72rem;
-            font-weight: 800;
+        .nav-logo,
+        .nav-links a,
+        .label,
+        .download-link {
+            font-weight: 500;
             text-transform: uppercase;
-            letter-spacing: 0.18em;
-            color: #bbb;
+            letter-spacing: 0.16em;
+        }
+
+        .nav-logo {
+            color: var(--text);
+            font-size: 0.78rem;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            font-size: 0.72rem;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--text);
+        }
+
+        main {
+            width: min(1100px, calc(100% - 96px));
+            margin: 0 auto;
+            padding: 92px 0 120px;
+        }
+
+        .header {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            gap: 48px;
+            align-items: end;
+            margin-bottom: 56px;
+        }
+
+        .label {
             display: block;
-            margin-bottom: 6px;
+            margin-bottom: 24px;
+            color: var(--muted);
+            font-size: 0.72rem;
         }
 
         h1 {
-            font-size: 2.4rem;
-            font-weight: 800;
             margin: 0;
-            letter-spacing: -0.04em;
-            line-height: 1.05;
+            font-size: clamp(3rem, 7vw, 5rem);
+            font-weight: 500;
+            letter-spacing: -0.07em;
+            line-height: 0.9;
+        }
+
+        .download-link {
+            color: var(--accent);
+            font-size: 0.68rem;
+            text-decoration: none;
+        }
+
+        .download-link::after {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 1px;
+            margin-top: 10px;
+            background: var(--accent);
         }
 
         .fallback {
-            font-size: 0.78rem;
-            color: #bbb;
-            margin-top: 8px;
+            margin: 24px 0 0;
+            color: var(--muted);
+            font-size: 1rem;
+            line-height: 1.8;
         }
 
         .fallback a {
-            color: var(--ut-orange);
-            text-decoration: none;
-            font-weight: 600;
+            color: var(--text);
+            text-decoration: underline;
+            text-underline-offset: 4px;
         }
-
-        .cta-button {
-            display: inline-block;
-            padding: 11px 22px;
-            background: var(--ut-orange);
-            color: #fff;
-            text-decoration: none;
-            border-radius: 6px;
-            font-weight: 700;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            transition: opacity 0.2s;
-            white-space: nowrap;
-        }
-
-        .cta-button:hover { opacity: 0.85; }
 
         .resume-viewer {
             width: 100%;
             height: 82vh;
-            background: #fff;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            overflow: hidden;
+            min-height: 620px;
+            border: 1px solid var(--line);
         }
 
         iframe {
+            display: block;
             width: 100%;
             height: 100%;
-            border: none;
+            border: 0;
+        }
+
+        @media (max-width: 760px) {
+            nav {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 18px;
+                padding: 24px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                gap: 18px;
+            }
+
+            main {
+                width: calc(100% - 48px);
+                padding: 76px 0 88px;
+            }
+
+            .header {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .resume-viewer {
+                min-height: 520px;
+            }
         }
     </style>
 </head>
 <body>
-
-<canvas id="smoke-canvas"></canvas>
-
-<nav>
-    <a href="index.html" class="nav-logo">MJW</a>
-    <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="projects.html">Projects</a>
-        <a href="resume.html" style="color: black;">Resume</a>
-        <a href="contact.html">Contact</a>
-    </div>
-</nav>
-
-<div class="resume-container">
-    <div class="header-area">
-        <div class="header-left">
-            <span class="eyebrow">Julian Whiteley</span>
-            <h1>Resume</h1>
-            <p class="fallback">Preview not loading? <a href="https://docs.google.com/document/d/17PmqW3bWh0yHhcJy_bkhuZpTg7y4KTYsAd66SAEX-3Y/export?format=pdf">Download the PDF directly.</a></p>
+    <nav>
+        <a href="index.html" class="nav-logo">MJW</a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="projects.html">Projects</a>
+            <a href="resume.html" class="active">Resume</a>
+            <a href="contact.html">Contact</a>
         </div>
-        <a href="https://docs.google.com/document/d/17PmqW3bWh0yHhcJy_bkhuZpTg7y4KTYsAd66SAEX-3Y/export?format=pdf" class="cta-button">Download PDF</a>
-    </div>
+    </nav>
 
-    <div class="resume-viewer">
-        <iframe src="https://docs.google.com/document/d/17PmqW3bWh0yHhcJy_bkhuZpTg7y4KTYsAd66SAEX-3Y/preview"></iframe>
-    </div>
-</div>
+    <main>
+        <section class="header">
+            <div>
+                <span class="label">Julian Whiteley</span>
+                <h1>Resume</h1>
+                <p class="fallback">Preview not loading? <a href="https://docs.google.com/document/d/17PmqW3bWh0yHhcJy_bkhuZpTg7y4KTYsAd66SAEX-3Y/export?format=pdf">Open the PDF directly.</a></p>
+            </div>
+            <a class="download-link" href="https://docs.google.com/document/d/17PmqW3bWh0yHhcJy_bkhuZpTg7y4KTYsAd66SAEX-3Y/export?format=pdf">Download PDF</a>
+        </section>
 
-<script>
-    const canvas = document.getElementById('smoke-canvas');
-    const ctx = canvas.getContext('2d');
-    let particles = [];
-    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-    window.addEventListener('resize', resize); resize();
-    class Particle {
-        constructor(x, y) {
-            this.x = x; this.y = y;
-            this.size = Math.random() * 5 + 2;
-            this.speedX = (Math.random() - 0.5) * 0.8;
-            this.speedY = (Math.random() - 0.5) * 0.8;
-            this.color = 'rgba(0, 0, 0,';
-            this.alpha = 0.2;
-            this.decay = Math.random() * 0.015 + 0.01;
-        }
-        update() { this.x += this.speedX; this.y += this.speedY; if (this.size > 0.2) this.size -= 0.05; this.alpha -= this.decay; }
-        draw() { ctx.fillStyle = this.color + this.alpha + ')'; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
-    }
-    window.addEventListener('mousemove', (e) => { particles.push(new Particle(e.clientX, e.clientY)); });
-    function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        for (let i = 0; i < particles.length; i++) {
-            particles[i].update(); particles[i].draw();
-            if (particles[i].alpha <= 0) { particles.splice(i, 1); i--; }
-        }
-        requestAnimationFrame(animate);
-    }
-    animate();
-</script>
-
+        <div class="resume-viewer">
+            <iframe src="https://docs.google.com/document/d/17PmqW3bWh0yHhcJy_bkhuZpTg7y4KTYsAd66SAEX-3Y/preview" title="Julian Whiteley resume"></iframe>
+        </div>
+    </main>
 </body>
 </html>
