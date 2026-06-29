@@ -4,74 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hydrogen Release System | Julian Whiteley</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <style>
-        :root { --border: #eaeaea; --text: #1a1a1a; --muted: #666; --ut-orange: #bf5700; }
-        body, html { margin: 0; padding: 0; font-family: 'Inter', sans-serif; background-color: #fcfcfc; color: var(--text); line-height: 1.6; }
-        
-        #smoke-canvas { position: fixed; top: 0; left: 0; z-index: 1; pointer-events: none; }
-        
-        nav { padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; background: white; border-bottom: 1px solid #eaeaea; position: sticky; top: 0; z-index: 100; }
-        .nav-logo { font-weight: 800; font-size: 1.2rem; text-decoration: none; color: #1a1a1a; }
-        .nav-links a { text-decoration: none; color: #666; font-weight: 600; margin-left: 25px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; }
-
-        .container { max-width: 900px; margin: 80px auto; padding: 0 20px; position: relative; z-index: 5; }
-        
-        header { margin-bottom: 40px; }
-        .hero-tag { text-transform: uppercase; font-weight: 800; font-size: 0.75rem; letter-spacing: 0.1em; color: #bbb; margin-bottom: 10px; display: block; }
-        h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -0.04em; margin: 0; line-height: 1.1; }
-
-        .model-viewer { 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            gap: 20px; 
-            background: #fff; 
-            padding: 20px; 
-            border: 1px solid var(--border); 
-            border-radius: 12px; 
-            margin-bottom: 40px;
-            position: relative;
-        }
-        .model-container { display: flex; flex-direction: column; }
-        .model-container img { width: 100%; border-radius: 6px; border: 1px solid #f0f0f0; }
-
-        .specs-bar { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
-            gap: 20px; 
-            padding: 25px 0; 
-            border-top: 1px solid var(--border); 
-            border-bottom: 1px solid var(--border); 
-            margin-bottom: 60px; 
-        }
-        .spec-item label { display: block; font-size: 0.65rem; text-transform: uppercase; font-weight: 800; color: #999; letter-spacing: 0.1em; }
-        .spec-item span { font-weight: 600; font-size: 0.95rem; color: var(--text); }
-
-        section { margin-bottom: 80px; }
-        h2 { font-size: 1.6rem; font-weight: 800; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 25px; }
-        h3 { font-size: 1.1rem; font-weight: 700; margin-top: 0; color: var(--ut-orange); }
-        p { color: #444; font-size: 0.95rem; margin-top: 0; margin-bottom: 15px; text-align: justify; }
-
-        .calc-box { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 25px; display: flex; flex-direction: column; }
-        .calc-box img { width: 100%; height: auto; border-radius: 4px; margin-bottom: 15px; border: 1px solid #f9f9f9; }
-        .img-label { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: #aaa; margin-bottom: 8px; display: block; }
-
-        .process-section { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; margin-bottom: 60px; }
-
-        .drive-embed { width: 100%; height: 400px; border: 1px solid var(--border); border-radius: 4px; }
-
-        .back-link { display: inline-block; margin-top: 40px; text-decoration: none; font-weight: 800; color: #000; font-size: 0.9rem; text-transform: uppercase; border-bottom: 2px solid #000; padding-bottom: 4px; transition: 0.2s; }
-        .back-link:hover { padding-left: 10px; }
-
-        @media (max-width: 768px) {
-            .process-section, .model-viewer { grid-template-columns: 1fr; }
-            h1 { font-size: 2.5rem; }
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/project-page.css">
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
-<canvas id="smoke-canvas"></canvas>
+
+
 
 <nav>
     <a href="../index.html" class="nav-logo">MJW</a>
@@ -99,7 +39,7 @@
             <span class="img-label">Structural Skeleton</span>
             <img src="../assets/images/hytec.png" alt="HyTec Skeleton">
         </div>
-        <div style="position: absolute; bottom: 20px; right: 20px; font-size: 0.55rem; color: #ccc; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 800;">Design to Integration</div>
+        <div>Design to Integration</div>
     </div>
 
     <div class="specs-bar">
@@ -116,13 +56,13 @@
             <p>ExxonMobil required a variable-height structure to dynamically position hydrogen sensors up to 30 feet during field testing. The system demanded strict survival margins under transient wind loads and high-pressure discharges.</p>
             <p>I led the mechanical architecture from concept to delivery. This included managing the BOM, selecting stiffness-optimized profiles, and coordinating with the electrical team to integrate ruggedized sensor networks.</p>
 
-            <h3 style="margin-top: 28px;">Thrust Loading — First Principles</h3>
+            <h3>Thrust Loading &mdash; First Principles</h3>
             <p>Before selecting profiles, I evaluated if the high-pressure hydrogen jet generated thrust loads capable of compromising structural stability. Using 1D conservation of momentum at the nozzle exit, I derived the net reaction force.</p> 
             <p>Calculations proved the localized thrust was statistically negligible compared to wind drag and self-weight. Consequently, it was excluded from governing load cases to streamline optimization.</p>
         </div>
         <div class="calc-box">
-            <h3 style="margin-top: 0;">Momentum Analysis</h3>
-            <span class="img-label">Free Body Diagram — Control Volume</span>
+            <h3>Momentum Analysis</h3>
+            <span class="img-label">Free Body Diagram &mdash; Control Volume</span>
             <img src="../assets/images/thrust2.png" alt="Thrust FBD">
             <span class="img-label">Reaction Force Derivation</span>
             <img src="../assets/images/thrust1.png" alt="Momentum Analysis">
@@ -136,55 +76,33 @@
         </div>
         <div>
             <h2>Structural Validation</h2>
-            <h3>Euler Buckling — Critical Load</h3>
+            <h3>Euler Buckling &mdash; Critical Load</h3>
             <p>At full 30-foot extension, elastic column buckling was the primary failure mode. I mapped Euler buckling formulations across each telescopic segment, accounting for pinned-fixed and fixed-free joint boundary conditions.</p>
             <p>While nominal profiles survived static axial loads, dynamic wind reactions introduced severe bending stress. To maximize flexural rigidity affordably, I implemented a back-to-back channel configuration, achieving a Factor of Safety of 2.0 across four design iterations.</p>
         </div>
     </section>
 
-    <section style="padding: 40px; background: #f8f9fa; border-radius: 12px; border: 1px solid #eee; margin-bottom: 40px;">
-        <h2 style="border: none; margin-bottom: 12px; font-size: 1.4rem;">Retrospective: What I Would Optimize</h2>
-        <p style="margin-bottom: 28px;">The prototype met all functional requirements and was delivered on schedule. A second iteration would target two optimizations:</p>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+    <section>
+        <h2>Retrospective: What I Would Optimize</h2>
+        <p>The prototype met all functional requirements and was delivered on schedule. A second iteration would target two optimizations:</p>
+        <div>
             <div>
-                <span style="display: block; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; color: var(--ut-orange); margin-bottom: 10px;">01. Geometric Section Optimization</span>
-                <p style="margin: 0;">Reducing moment arms at the base connection would minimize peak bending moments, maximizing structural efficiency and allowing for lighter profiles.</p>
+                <span>01. Geometric Section Optimization</span>
+                <p>Reducing moment arms at the base connection would minimize peak bending moments, maximizing structural efficiency and allowing for lighter profiles.</p>
             </div>
             <div>
-                <span style="display: block; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; color: var(--ut-orange); margin-bottom: 10px;">02. Material Mass & Cost Reduction</span>
-                <p style="margin: 0;">While initial trade studies reduced costs by 15%, parts of the frame remained over-engineered. Algorithmic gauge-thickness optimization would safely minimize mass while maintaining strict safety bounds.</p>
+                <span>02. Material Mass & Cost Reduction</span>
+                <p>While initial trade studies reduced costs by 15%, parts of the frame remained over-engineered. Algorithmic gauge-thickness optimization would safely minimize mass while maintaining strict safety bounds.</p>
             </div>
         </div>
     </section>
 
-    <a href="../projects.html" class="back-link">← Back to Projects</a>
+    <a href="../projects.html" class="back-link">&larr; Back to Projects</a>
 </div>
 
-<script>
-    const canvas = document.getElementById('smoke-canvas');
-    const ctx = canvas.getContext('2d');
-    let particles = [];
-    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-    window.addEventListener('resize', resize); resize();
-    class Particle {
-        constructor(x, y) {
-            this.x = x; this.y = y;
-            this.size = Math.random() * 2 + 1;
-            this.alpha = 0.15;
-        }
-        update() { this.x += (Math.random()-0.5)*0.4; this.y += (Math.random()-0.5)*0.4; this.alpha -= 0.005; }
-        draw() { ctx.fillStyle = `rgba(0,0,0,${this.alpha})`; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI*2); ctx.fill(); }
-    }
-    window.addEventListener('mousemove', (e) => { particles.push(new Particle(e.clientX, e.clientY)); });
-    function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        for (let i = 0; i < particles.length; i++) {
-            particles[i].update(); particles[i].draw();
-            if (particles[i].alpha <= 0) { particles.splice(i, 1); i--; }
-        }
-        requestAnimationFrame(animate);
-    }
-    animate();
-</script>
+
+
 </body>
 </html>
+
+
