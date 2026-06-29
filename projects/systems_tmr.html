@@ -4,74 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ASV Validation | Julian Whiteley</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/project-page.css">
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <style>
-        :root { --border: #eaeaea; --text: #1a1a1a; --muted: #666; --ut-orange: #bf5700; }
-        body, html { margin: 0; padding: 0; font-family: 'Inter', sans-serif; background-color: #fcfcfc; color: var(--text); line-height: 1.6; }
-        #smoke-canvas { position: fixed; top: 0; left: 0; z-index: 1; pointer-events: none; }
-        nav { padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; background: white; border-bottom: 1px solid #eaeaea; position: sticky; top: 0; z-index: 100; }
-        .nav-logo { font-weight: 800; font-size: 1.2rem; text-decoration: none; color: #1a1a1a; }
-        .nav-links a { text-decoration: none; color: #666; font-weight: 600; margin-left: 25px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; }
-        .container { max-width: 900px; margin: 80px auto; padding: 0 20px; position: relative; z-index: 5; }
-        header { margin-bottom: 40px; }
-        .project-tag { text-transform: uppercase; font-weight: 800; font-size: 0.75rem; letter-spacing: 0.1em; color: #bbb; margin-bottom: 10px; display: block; }
-        h1 { font-size: 3rem; font-weight: 800; letter-spacing: -0.04em; margin: 0 0 16px 0; line-height: 1.1; }
-        .subtitle { font-size: 1.05rem; color: #666; font-weight: 400; margin: 0; }
-        .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 60px; }
-        .stat-card { padding: 20px; background: #fff; border: 1px solid var(--border); border-radius: 8px; text-align: center; }
-        .stat-value { display: block; font-weight: 800; font-size: 1.1rem; color: var(--ut-orange); }
-        .stat-label { font-size: 0.65rem; text-transform: uppercase; color: #999; letter-spacing: 0.05em; }
-        section { margin-bottom: 70px; }
-        h2 { font-size: 1.6rem; font-weight: 800; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 25px; }
-        h3 { font-size: 1.05rem; font-weight: 700; color: var(--ut-orange); margin-top: 0; margin-bottom: 10px; }
-        p { color: #444; font-size: 0.95rem; margin-top: 0; margin-bottom: 16px; }
-        strong { color: var(--text); }
-        .process-section { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: start; }
-        .calc-box { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 15px; display: flex; flex-direction: column; gap: 8px; }
-        .calc-box img { width: 100%; height: auto; border-radius: 4px; object-fit: contain; }
-        .img-label { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: #aaa; display: block; }
-        .equation-box { background: #f9f9f9; padding: 25px; border-radius: 8px; text-align: center; margin: 20px 0; border: 1px solid var(--border); }
-        .equation-box .eq-label { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ut-orange); display: block; margin-bottom: 10px; }
-        .equation-box .eq-note { font-size: 0.78rem; color: #999; margin: 10px 0 0; }
-        .layer-stack { border-radius: 10px; overflow: hidden; border: 1px solid var(--border); margin: 24px 0; }
-        .layer { padding: 18px 20px; display: grid; grid-template-columns: 160px 1fr 180px; gap: 16px; align-items: center; border-bottom: 1px solid var(--border); }
-        .layer:last-child { border-bottom: none; }
-        .layer-label { font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; }
-        .layer-desc { font-size: 0.85rem; color: #555; }
-        .layer-eq { font-size: 0.75rem; color: #aaa; text-align: right; font-family: monospace; }
-        .pipeline-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin: 24px 0; }
-        .pipeline-card { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 20px; }
-        .pipeline-card span { display: block; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ut-orange); margin-bottom: 8px; }
-        .pipeline-card p { margin: 0; font-size: 0.88rem; color: #555; }
-        .photo-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
-        .photo-item { display: flex; flex-direction: column; }
-        .photo-item img { width: 100%; height: auto; max-height: 360px; object-fit: contain; border-radius: 6px; border: 1px solid var(--border); background: #f5f5f5; }
-        .photo-caption { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: #aaa; margin-top: 8px; letter-spacing: 0.08em; }
-        .project-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-        .method-tag { display: inline-block; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ut-orange); margin-bottom: 6px; }
-        .action-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
-        .button-link { display: inline-flex; align-items: center; justify-content: center; min-height: 42px; padding: 0 16px; border-radius: 8px; border: 1px solid var(--border); background: #fff; color: var(--text); font-size: 0.88rem; font-weight: 600; text-decoration: none; transition: color 0.2s ease, border-color 0.2s ease; }
-        .button-link:hover { color: var(--ut-orange); border-color: #d8c5b5; }
-        .embed-card { margin-top: 24px; background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
-        .embed-frame { width: 100%; height: 580px; border: 0; border-radius: 4px; background: #f5f5f5; }
-        .embed-note { font-size: 0.88rem; color: #666; margin: 12px 0 0; }
-        .social-card { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 20px; margin-top: 24px; }
-        .back-link { display: inline-block; margin-top: 40px; text-decoration: none; font-weight: 800; color: #000; font-size: 0.9rem; text-transform: uppercase; border-bottom: 2px solid #000; padding-bottom: 4px; transition: 0.2s; }
-        .back-link:hover { padding-left: 10px; }
-        @media (max-width: 768px) {
-            .project-grid, .process-section, .stat-grid, .photo-pair, .pipeline-grid { grid-template-columns: 1fr; }
-            .layer { grid-template-columns: 1fr; }
-            .layer-eq { text-align: left; }
-            h1 { font-size: 2.2rem; }
-            .embed-frame { height: 420px; }
-            nav { padding: 18px 20px; flex-direction: column; align-items: flex-start; gap: 12px; }
-            .nav-links a { margin-left: 0; margin-right: 18px; }
-        }
-    </style>
 </head>
 <body>
-<canvas id="smoke-canvas"></canvas>
+
+
 <nav>
     <a href="../index.html" class="nav-logo">MJW</a>
     <div class="nav-links">
@@ -84,7 +23,7 @@
 </nav>
 <div class="container">
     <header>
-        <span class="project-tag">Texas Marine Robotics · Systems Engineering</span>
+        <span class="project-tag">Texas Marine Robotics &middot; Systems Engineering</span>
         <h1>ASV Validation &amp;<br>Thermal Regulation</h1>
         <p class="subtitle">Layered thermal resistance modeling and hull drag optimization through iterative flow visualization testing and CFD-supported hull studies.</p>
         <div class="action-row">
@@ -109,35 +48,35 @@
         <p>Heat flows outward from the electronics through five layers in series. Each layer's resistance is evaluated at every timestep as temperatures evolve.</p>
 
         <div class="layer-stack">
-            <div class="layer" style="background: #fff8f5;">
-                <span class="layer-label" style="color: var(--ut-orange);">Layer 1<br>Internal Air</span>
+            <div class="layer">
+                <span class="layer-label">Layer 1<br>Internal Air</span>
                 <span class="layer-desc">Air sealed inside the aluminum chassis. Acts as the first thermal capacitor, absorbing heat from the electronics before conduction into the walls begins. This is where the NTC thermistors measure directly.</span>
-                <span class="layer-eq">R&#x2081; = L / (k_air · A)</span>
+                <span class="layer-eq">R&#x2081; = L / (k_air &middot; A)</span>
             </div>
-            <div class="layer" style="background: #f5f5f5;">
-                <span class="layer-label" style="color: #555;">Layer 2<br>Aluminum Wall</span>
+            <div class="layer">
+                <span class="layer-label">Layer 2<br>Aluminum Wall</span>
                 <span class="layer-desc">High-conductivity aluminum chassis walls. Thermal resistance is low but the wall stores significant thermal mass.</span>
-                <span class="layer-eq">R&#x2082; = L_Al / (k_Al · A)</span>
+                <span class="layer-eq">R&#x2082; = L_Al / (k_Al &middot; A)</span>
             </div>
-            <div class="layer" style="background: #fafafa;">
-                <span class="layer-label" style="color: #555;">Layer 3<br>Air Gap</span>
+            <div class="layer">
+                <span class="layer-label">Layer 3<br>Air Gap</span>
                 <span class="layer-desc">Stagnant air between the aluminum chassis and the plastic hull. No bulk velocity means convection is suppressed and we can model as conduction. Likely the dominant resistance in the system.</span>
-                <span class="layer-eq">R&#x2083; = L_gap / (k_air · A)</span>
+                <span class="layer-eq">R&#x2083; = L_gap / (k_air &middot; A)</span>
             </div>
-            <div class="layer" style="background: #f5f5ee;">
-                <span class="layer-label" style="color: #666;">Layer 4<br>HDPE Hull Wall</span>
+            <div class="layer">
+                <span class="layer-label">Layer 4<br>HDPE Hull Wall</span>
                 <span class="layer-desc">The plastic hull shell, fabricated from HDPE (k &#x2248; 0.45 W/m&#xB7;K). Substantially lower thermal conductivity than aluminum, adding meaningful conduction resistance in series. Thickness is uniform and well-defined, making this layer straightforward to characterize.</span>
-                <span class="layer-eq">R&#x2084; = L_HDPE / (k_HDPE · A)</span>
+                <span class="layer-eq">R&#x2084; = L_HDPE / (k_HDPE &middot; A)</span>
             </div>
-            <div class="layer" style="background: #f5f9ff;">
-                <span class="layer-label" style="color: #3a7abf;">Layer 5a<br>Above Waterline</span>
+            <div class="layer">
+                <span class="layer-label">Layer 5a<br>Above Waterline</span>
                 <span class="layer-desc">Convection to ambient air at the outer hull surface. Low h for still air makes this a high-resistance path. Increases with vessel speed through forced convection.</span>
-                <span class="layer-eq">R&#x2085;&#x2090; = 1 / (h_air · A_dry)</span>
+                <span class="layer-eq">R&#x2085;&#x2090; = 1 / (h_air &middot; A_dry)</span>
             </div>
-            <div class="layer" style="background: #eef5ff;">
-                <span class="layer-label" style="color: #1a6abf;">Layer 5b<br>Below Waterline</span>
+            <div class="layer">
+                <span class="layer-label">Layer 5b<br>Below Waterline</span>
                 <span class="layer-desc">Convection to water at the submerged hull surface. Water has roughly 25&#xD7; the thermal conductivity of air, making the wetted area a significantly lower resistance path. The waterline geometry directly controls how much of this path is available.</span>
-                <span class="layer-eq">R&#x2085;&#x2071; = 1 / (h_water · A_wet)</span>
+                <span class="layer-eq">R&#x2085;&#x2071; = 1 / (h_water &middot; A_wet)</span>
             </div>
         </div>
 
@@ -156,7 +95,7 @@
             <p class="eq-note">Iterated at each timestep; k_air updated with temperature, A_wet updated with hull iteration</p>
         </div>
 
-        <div class="process-section" style="margin-top: 32px;">
+        <div class="process-section">
             <div>
                 <h3>MATLAB Iterative Solver</h3>
                 <p>The MATLAB model steps forward in time, computing the temperature at each layer boundary per timestep using the resistance chain. Inputs are the known electronics wattage, layer geometry, and initial conditions. The solver tracks internal air temperature and flags the timestep at which it reaches the electronics' critical limit.</p>
@@ -168,7 +107,7 @@
             </div>
         </div>
 
-        <h3 style="margin-top: 32px;">Validation Pipeline</h3>
+        <h3>Validation Pipeline</h3>
         <div class="pipeline-grid">
             <div class="pipeline-card">
                 <span>Stage 01: MATLAB</span>
@@ -204,9 +143,9 @@
             </div>
         </div>
 
-        <p style="margin-top: 24px;">A lower, more uniform waterline reduces wetted area and drag. It also reduces A_wet and raises R&#x2085;&#x2071;, degrading water-side heat rejection. This tradeoff is tracked explicitly. The thermal model is re-run with the updated A_wet for each hull iteration.</p>
+        <p>A lower, more uniform waterline reduces wetted area and drag. It also reduces A_wet and raises R&#x2085;&#x2071;, degrading water-side heat rejection. This tradeoff is tracked explicitly. The thermal model is re-run with the updated A_wet for each hull iteration.</p>
 
-        <h3 style="margin-top: 32px;">CFD Simulation</h3>
+        <h3>CFD Simulation</h3>
         <p>The CFD study extends the physical flow-visualization work by resolving how the hull shape influences local flow behavior, wake development, and drag-related performance. This simulation supports the hull optimization effort by giving a higher-resolution view of the hydrodynamic consequences of each geometry decision.</p>
 
         <div class="action-row">
@@ -234,43 +173,17 @@
         </div>
     </section>
 
-    <section style="padding: 40px; background: #1a1a1a; border-radius: 12px;">
-        <h2 style="color: #fff; border-bottom-color: #333;">Next Steps</h2>
-        <p style="color: #bbb;">Once the MATLAB model is validated against thermistor data, thermal expansion cycles will feed into a fracture mechanics study of the acrylic-to-aluminum bolt interfaces. Aluminum and acrylic have significantly different coefficients of thermal expansion. Repeated heating and cooling generates cyclic stress at the fastener holes beyond what the static Goodman analysis captured. <strong style="color: #fff;">LEFM</strong> will estimate crack initiation life at those concentrations and establish a maintenance inspection interval.</p>
+    <section>
+        <h2>Next Steps</h2>
+        <p>Once the MATLAB model is validated against thermistor data, thermal expansion cycles will feed into a fracture mechanics study of the acrylic-to-aluminum bolt interfaces. Aluminum and acrylic have significantly different coefficients of thermal expansion. Repeated heating and cooling generates cyclic stress at the fastener holes beyond what the static Goodman analysis captured. <strong>LEFM</strong> will estimate crack initiation life at those concentrations and establish a maintenance inspection interval.</p>
     </section>
 
-    <a href="../projects.html" class="back-link">&#x2190; Back to Projects</a>
+    <a href="../projects.html" class="back-link">&larr; Back to Projects</a>
 </div>
 
-<script>
-    const canvas = document.getElementById('smoke-canvas');
-    const ctx = canvas.getContext('2d');
-    let particles = [];
-    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-    window.addEventListener('resize', resize); resize();
-    class Particle {
-        constructor(x, y) {
-            this.x = x; this.y = y;
-            this.size = Math.random() * 5 + 2;
-            this.speedX = (Math.random() - 0.5) * 0.8;
-            this.speedY = (Math.random() - 0.5) * 0.8;
-            this.color = 'rgba(0, 0, 0,';
-            this.alpha = 0.2;
-            this.decay = Math.random() * 0.015 + 0.01;
-        }
-        update() { this.x += this.speedX; this.y += this.speedY; if (this.size > 0.2) this.size -= 0.05; this.alpha -= this.decay; }
-        draw() { ctx.fillStyle = this.color + this.alpha + ')'; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
-    }
-    window.addEventListener('mousemove', (e) => { particles.push(new Particle(e.clientX, e.clientY)); });
-    function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        for (let i = 0; i < particles.length; i++) {
-            particles[i].update(); particles[i].draw();
-            if (particles[i].alpha <= 0) { particles.splice(i, 1); i--; }
-        }
-        requestAnimationFrame(animate);
-    }
-    animate();
-</script>
+
+
 </body>
 </html>
+
+
