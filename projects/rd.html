@@ -4,78 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>R&D Team Lead | Julian Whiteley</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-    <style>
-        :root { --border: #eaeaea; --text: #1a1a1a; --muted: #666; --ut-orange: #bf5700; }
-        body, html { margin: 0; padding: 0; font-family: 'Inter', sans-serif; background-color: #fcfcfc; color: var(--text); line-height: 1.6; }
-
-        #smoke-canvas { position: fixed; top: 0; left: 0; z-index: 1; pointer-events: none; }
-
-        nav { padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; background: white; border-bottom: 1px solid #eaeaea; position: sticky; top: 0; z-index: 100; }
-        .nav-logo { font-weight: 800; font-size: 1.2rem; text-decoration: none; color: #1a1a1a; }
-        .nav-links a { text-decoration: none; color: #666; font-weight: 600; margin-left: 25px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; }
-
-        .container { max-width: 900px; margin: 80px auto; padding: 0 20px; position: relative; z-index: 5; }
-
-        header { margin-bottom: 40px; }
-        .project-tag { text-transform: uppercase; font-weight: 800; font-size: 0.75rem; letter-spacing: 0.1em; color: #bbb; margin-bottom: 10px; display: block; }
-        h1 { font-size: 3rem; font-weight: 800; letter-spacing: -0.04em; margin: 0 0 16px 0; line-height: 1.1; }
-        .subtitle { font-size: 1.05rem; color: #666; font-weight: 400; margin: 0; }
-
-        .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 60px; }
-        .stat-card { padding: 20px; background: #fff; border: 1px solid var(--border); border-radius: 8px; text-align: center; }
-        .stat-value { display: block; font-weight: 800; font-size: 1.1rem; color: var(--ut-orange); }
-        .stat-label { font-size: 0.65rem; text-transform: uppercase; color: #999; letter-spacing: 0.05em; }
-
-        section { margin-bottom: 70px; }
-        h2 { font-size: 1.6rem; font-weight: 800; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 25px; }
-        h3 { font-size: 1.05rem; font-weight: 700; color: var(--ut-orange); margin-top: 0; margin-bottom: 10px; }
-        p { color: #444; font-size: 0.95rem; margin-top: 0; margin-bottom: 16px; }
-        strong { color: var(--text); }
-
-        .process-section { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: start; }
-
-        .calc-box { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 20px; display: flex; flex-direction: column; }
-        .img-label { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: #aaa; margin-bottom: 8px; display: block; }
-
-        .doc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .doc-card { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 20px; }
-        .doc-card-label { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ut-orange); margin-bottom: 14px; display: block; border-bottom: 1px solid #f0f0f0; padding-bottom: 10px; }
-        .doc-card ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
-        .doc-card li a {
-            color: var(--text);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.88rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: color 0.2s;
-        }
-        .doc-card li a:hover { color: var(--ut-orange); }
-        .doc-card li a::before { content: "↗"; font-size: 0.75rem; color: var(--ut-orange); flex-shrink: 0; }
-
-        .timeline { display: flex; flex-direction: column; gap: 0; }
-        .timeline-item { display: grid; grid-template-columns: 120px 1fr; gap: 24px; padding: 24px 0; border-bottom: 1px solid #f0f0f0; }
-        .timeline-item:last-child { border-bottom: none; }
-        .timeline-date { font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: #bbb; padding-top: 3px; }
-        .timeline-content h4 { font-size: 0.95rem; font-weight: 800; margin: 0 0 6px; color: var(--text); }
-        .timeline-content p { margin: 0; font-size: 0.88rem; color: #666; }
-
-        .back-link { display: inline-block; margin-top: 40px; text-decoration: none; font-weight: 800; color: #000; font-size: 0.9rem; text-transform: uppercase; border-bottom: 2px solid #000; padding-bottom: 4px; transition: 0.2s; }
-        .back-link:hover { padding-left: 10px; }
-
-        @media (max-width: 768px) {
-            .stat-grid, .doc-grid, .process-section { grid-template-columns: 1fr; }
-            .stat-grid { grid-template-columns: repeat(2, 1fr); }
-            .timeline-item { grid-template-columns: 1fr; gap: 4px; }
-            h1 { font-size: 2.2rem; }
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/project-page.css">
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
-<canvas id="smoke-canvas"></canvas>
+
+
 
 <nav>
     <a href="../index.html" class="nav-logo">MJW</a>
@@ -91,15 +27,15 @@
 <div class="container">
 
     <header>
-        <span class="project-tag">Longhorn Baja Racing · R&D Lead · May 2025 – March 2026</span>
+        <span class="project-tag">Longhorn Baja Racing &middot; R&D Lead &middot; May 2025 &ndash; March 2026</span>
         <h1>R&D Leadership &<br/>Systems Research</h1>
-        <p class="subtitle">Directing cross-functional research and design initiatives across five engineering sub-teams for the 2025–26 competitive season.</p>
+        <p class="subtitle">Directing cross-functional research and design initiatives across five engineering sub-teams for the 2025&ndash;26 competitive season.</p>
     </header>
 
     <div class="stat-grid">
         <div class="stat-card"><span class="stat-value">5</span><span class="stat-label">Sub-Teams Led</span></div>
         <div class="stat-card"><span class="stat-value">10+</span><span class="stat-label">Research Docs</span></div>
-        <div class="stat-card"><span class="stat-value">2025–26</span><span class="stat-label">Season</span></div>
+        <div class="stat-card"><span class="stat-value">2025&ndash;26</span><span class="stat-label">Season</span></div>
     </div>
 
     <!-- ROLE -->
@@ -169,39 +105,13 @@
         </div>
     </section>
 
-    <a href="../projects.html" class="back-link">← Back to Projects</a>
+    <a href="../projects.html" class="back-link">&larr; Back to Projects</a>
 </div>
 
-<script>
-    const canvas = document.getElementById('smoke-canvas');
-    const ctx = canvas.getContext('2d');
-    let particles = [];
-    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-    window.addEventListener('resize', resize); resize();
-    class Particle {
-        constructor(x, y) {
-            this.x = x; this.y = y;
-            this.size = Math.random() * 5 + 2;
-            this.speedX = (Math.random() - 0.5) * 0.8;
-            this.speedY = (Math.random() - 0.5) * 0.8;
-            this.color = 'rgba(0, 0, 0,';
-            this.alpha = 0.2;
-            this.decay = Math.random() * 0.015 + 0.01;
-        }
-        update() { this.x += this.speedX; this.y += this.speedY; if (this.size > 0.2) this.size -= 0.05; this.alpha -= this.decay; }
-        draw() { ctx.fillStyle = this.color + this.alpha + ')'; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
-    }
-    window.addEventListener('mousemove', (e) => { particles.push(new Particle(e.clientX, e.clientY)); });
-    function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        for (let i = 0; i < particles.length; i++) {
-            particles[i].update(); particles[i].draw();
-            if (particles[i].alpha <= 0) { particles.splice(i, 1); i--; }
-        }
-        requestAnimationFrame(animate);
-    }
-    animate();
-</script>
+
+
 
 </body>
 </html>
+
+
