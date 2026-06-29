@@ -4,73 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EV Coasting Optimization | Julian Whiteley</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/project-page.css">
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <style>
-        :root { --border: #eaeaea; --text: #1a1a1a; --muted: #666; --ut-orange: #bf5700; }
-        body, html { margin: 0; padding: 0; font-family: 'Inter', sans-serif; background-color: #fcfcfc; color: var(--text); line-height: 1.6; }
-        #smoke-canvas { position: fixed; top: 0; left: 0; z-index: 1; pointer-events: none; }
-
-        nav { padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; background: white; border-bottom: 1px solid #eaeaea; position: sticky; top: 0; z-index: 100; }
-        .nav-logo { font-weight: 800; font-size: 1.2rem; text-decoration: none; color: #1a1a1a; }
-        .nav-links a { text-decoration: none; color: #666; font-weight: 600; margin-left: 25px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; }
-
-        .container { max-width: 900px; margin: 80px auto; padding: 0 20px; position: relative; z-index: 5; }
-
-        header { margin-bottom: 40px; }
-        .project-tag { text-transform: uppercase; font-weight: 800; font-size: 0.75rem; letter-spacing: 0.1em; color: #bbb; margin-bottom: 10px; display: block; }
-        h1 { font-size: 3rem; font-weight: 800; letter-spacing: -0.04em; margin: 0 0 16px 0; line-height: 1.1; }
-        .subtitle { font-size: 1.05rem; color: #666; font-weight: 400; margin: 0; }
-
-        .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 60px; }
-        .stat-card { padding: 20px; background: #fff; border: 1px solid var(--border); border-radius: 8px; text-align: center; }
-        .stat-value { display: block; font-weight: 800; font-size: 1.1rem; color: var(--ut-orange); }
-        .stat-label { font-size: 0.65rem; text-transform: uppercase; color: #999; letter-spacing: 0.05em; }
-
-        section { margin-bottom: 70px; }
-        h2 { font-size: 1.6rem; font-weight: 800; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 25px; }
-        h3 { font-size: 1.05rem; font-weight: 700; color: var(--ut-orange); margin-top: 0; margin-bottom: 10px; }
-        p { color: #444; font-size: 0.95rem; margin-top: 0; margin-bottom: 16px; }
-        strong { color: var(--text); }
-
-        .equation-box { background: #f9f9f9; border: 1px solid var(--border); border-radius: 8px; padding: 28px; margin: 20px 0; text-align: center; }
-        .equation-box .eq-label { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ut-orange); margin-bottom: 12px; display: block; }
-        .equation-box .eq-note { font-size: 0.8rem; color: #888; margin-top: 12px; margin-bottom: 0; }
-
-        .term-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 20px 0; }
-        .term-card { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
-        .term-card span { display: block; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ut-orange); margin-bottom: 6px; }
-        .term-card p { margin: 0; font-size: 0.85rem; color: #555; }
-
-        .process-section { display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; align-items: start; }
-
-        .image-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
-        .image-column img { width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--border); object-fit: contain; background: #f5f5f5; }
-        .caption { font-size: 0.75rem; color: #aaa; margin-top: 6px; text-align: center; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
-
-        .takeaway-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
-        .takeaway-card { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 20px; }
-        .takeaway-card span { display: block; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ut-orange); margin-bottom: 8px; }
-        .takeaway-card p { margin: 0; font-size: 0.88rem; color: #555; }
-
-        .retro-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
-        .retro-card { background: #f9f9f9; border: 1px solid var(--border); border-radius: 8px; padding: 20px; }
-        .retro-card span { display: block; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: #aaa; margin-bottom: 8px; }
-        .retro-card p { margin: 0; font-size: 0.88rem; color: #555; }
-
-        .back-link { display: inline-block; margin-top: 40px; text-decoration: none; font-weight: 800; color: #000; font-size: 0.9rem; text-transform: uppercase; border-bottom: 2px solid #000; padding-bottom: 4px; transition: 0.2s; }
-        .back-link:hover { padding-left: 10px; }
-
-        @media (max-width: 768px) {
-            .stat-grid, .term-grid, .takeaway-grid, .retro-grid, .image-row, .process-section { grid-template-columns: 1fr; }
-            .stat-grid { grid-template-columns: repeat(2, 1fr); }
-            h1 { font-size: 2.2rem; }
-        }
-    </style>
 </head>
 <body>
 
-<canvas id="smoke-canvas"></canvas>
+
+
 
 <nav>
     <a href="../index.html" class="nav-logo">MJW</a>
@@ -86,7 +27,7 @@
 <div class="container">
 
     <header>
-        <span class="project-tag">ECOCAR V2X · Simulink · Vehicle Dynamics</span>
+        <span class="project-tag">ECOCAR V2X &middot; Simulink &middot; Vehicle Dynamics</span>
         <h1>Cadillac LYRIQ<br/>Coasting Profile</h1>
         <p class="subtitle">Predictive kinematic model for V2X brake-timing optimization using Simulink ODE integration.</p>
     </header>
@@ -118,20 +59,20 @@
             <p class="eq-note">Integrated numerically in Simulink at each timestep using the current velocity state</p>
         </div>
 
-        <p>The drag term C<sub>d</sub>(v) · v² is velocity-dependent, making this a nonlinear ODE that cannot be solved analytically. Simulink integrates dv/dt at each timestep, feeding the updated velocity back into the drag computation for the next step.</p>
+        <p>The drag term C<sub>d</sub>(v) &middot; v² is velocity-dependent, making this a nonlinear ODE that cannot be solved analytically. Simulink integrates dv/dt at each timestep, feeding the updated velocity back into the drag computation for the next step.</p>
 
         <div class="term-grid">
             <div class="term-card">
                 <span>Aerodynamic Drag</span>
-                <p>C<sub>d</sub>(v) · v² — nonlinear, velocity-squared relationship. Dominant above ~45 mph. C<sub>d</sub> was treated as velocity-dependent to capture compressibility effects at higher speeds.</p>
+                <p>C<sub>d</sub>(v) &middot; v² &mdash; nonlinear, velocity-squared relationship. Dominant above ~45 mph. C<sub>d</sub> was treated as velocity-dependent to capture compressibility effects at higher speeds.</p>
             </div>
             <div class="term-card">
                 <span>Rolling Resistance</span>
-                <p>μ · mg · cosθ — linear in normal force. Tire-road contact friction modeled with constant μ as a first-order approximation. Nonlinearity from deformation is a known limitation.</p>
+                <p>Î¼ &middot; mg &middot; cosÎ¸ &mdash; linear in normal force. Tire-road contact friction modeled with constant Î¼ as a first-order approximation. Nonlinearity from deformation is a known limitation.</p>
             </div>
             <div class="term-card">
                 <span>Gravitational Component</span>
-                <p>mg · sinθ — road grade term. θ derived from GPS elevation data. Adds or subtracts from deceleration depending on slope direction.</p>
+                <p>mg &middot; sinÎ¸ &mdash; road grade term. Î¸ derived from GPS elevation data. Adds or subtracts from deceleration depending on slope direction.</p>
             </div>
         </div>
     </section>
@@ -193,11 +134,11 @@
         <div class="retro-grid">
             <div class="retro-card">
                 <span>Nonlinear Friction</span>
-                <p>Constant μ is a first-order approximation. Tire deformation and heat buildup under repeated braking events make friction load-dependent and temperature-dependent. </p>
+                <p>Constant Î¼ is a first-order approximation. Tire deformation and heat buildup under repeated braking events make friction load-dependent and temperature-dependent. </p>
             </div>
             <div class="retro-card">
                 <span>CAN Bus Correlation</span>
-                <p>Coefficient tuning relied on expected behavior rather than measured data. Cross-referencing Simulink outputs against actual LYRIQ CAN bus velocity and acceleration data would allow direct, empirical tuning of C<sub>d</sub> and μ.</p>
+                <p>Coefficient tuning relied on expected behavior rather than measured data. Cross-referencing Simulink outputs against actual LYRIQ CAN bus velocity and acceleration data would allow direct, empirical tuning of C<sub>d</sub> and Î¼.</p>
             </div>
             <div class="retro-card">
                 <span>Version Control</span>
@@ -206,39 +147,13 @@
         </div>
     </section>
 
-    <a href="../projects.html" class="back-link">← Back to Projects</a>
+    <a href="../projects.html" class="back-link">&larr; Back to Projects</a>
 </div>
 
-<script>
-    const canvas = document.getElementById('smoke-canvas');
-    const ctx = canvas.getContext('2d');
-    let particles = [];
-    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-    window.addEventListener('resize', resize); resize();
-    class Particle {
-        constructor(x, y) {
-            this.x = x; this.y = y;
-            this.size = Math.random() * 5 + 2;
-            this.speedX = (Math.random() - 0.5) * 0.8;
-            this.speedY = (Math.random() - 0.5) * 0.8;
-            this.color = 'rgba(0, 0, 0,';
-            this.alpha = 0.2;
-            this.decay = Math.random() * 0.015 + 0.01;
-        }
-        update() { this.x += this.speedX; this.y += this.speedY; if (this.size > 0.2) this.size -= 0.05; this.alpha -= this.decay; }
-        draw() { ctx.fillStyle = this.color + this.alpha + ')'; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
-    }
-    window.addEventListener('mousemove', (e) => { particles.push(new Particle(e.clientX, e.clientY)); });
-    function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        for (let i = 0; i < particles.length; i++) {
-            particles[i].update(); particles[i].draw();
-            if (particles[i].alpha <= 0) { particles.splice(i, 1); i--; }
-        }
-        requestAnimationFrame(animate);
-    }
-    animate();
-</script>
+
+
 
 </body>
 </html>
+
+
