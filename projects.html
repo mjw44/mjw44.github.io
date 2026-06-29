@@ -3,533 +3,447 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Work | Julian Whiteley</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <title>Projects | Julian Whiteley</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #fdfdfd;
-            --text: #1a1a1a;
-            --border: rgba(0, 0, 0, 0.06);
-            --ut-orange: #bf5700;
+            --bg: #ffffff;
+            --text: #050505;
+            --muted: #8a8a8a;
+            --line: #dcdcdc;
+            --accent: #bf5700;
         }
 
         * { box-sizing: border-box; }
 
-        body, html {
+        html,
+        body {
             margin: 0;
-            padding: 0;
+            min-height: 100%;
             font-family: 'Inter', sans-serif;
-            background-color: var(--bg);
+            font-weight: 400;
+            background: var(--bg);
             color: var(--text);
-            scroll-behavior: smooth;
-        }
-
-        #smoke-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 1;
-            pointer-events: none;
         }
 
         nav {
-            padding: 20px 40px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: white;
-            border-bottom: 1px solid #eaeaea;
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            padding: 28px 48px;
+            background: rgba(255, 255, 255, 0.94);
+        }
+
+        .nav-logo,
+        .nav-links a,
+        .label,
+        .project-meta,
+        .project-link,
+        .featured-label {
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
         }
 
         .nav-logo {
-            font-weight: 800;
-            font-size: 1.2rem;
+            color: var(--text);
+            font-size: 0.78rem;
             text-decoration: none;
-            color: #1a1a1a;
-            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
         }
 
         .nav-links a {
+            color: var(--muted);
+            font-size: 0.72rem;
             text-decoration: none;
-            color: #666;
-            font-weight: 600;
-            margin-left: 25px;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            transition: color 0.3s ease;
+            transition: color 0.2s ease;
         }
 
         .nav-links a:hover,
-        .nav-links a.active { color: #1a1a1a; }
-
-        .hero {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 70px 40px 24px;
-            position: relative;
-            z-index: 5;
+        .nav-links a.active {
+            color: var(--text);
         }
 
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            letter-spacing: -0.05em;
-            margin: 0 0 12px;
-            line-height: 1.05;
+        main {
+            width: min(1180px, calc(100% - 96px));
+            margin: 0 auto;
+            padding: 92px 0 120px;
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 320px;
+            gap: 64px;
+            align-items: end;
+            margin-bottom: 96px;
+        }
+
+        .label {
+            display: block;
+            margin-bottom: 24px;
+            color: var(--muted);
+            font-size: 0.72rem;
+        }
+
+        h1 {
+            max-width: 860px;
+            margin: 0;
+            font-size: clamp(3rem, 7vw, 5rem);
+            font-weight: 500;
+            letter-spacing: -0.07em;
+            line-height: 0.9;
         }
 
         .hero p {
+            margin: 0 0 8px;
+            color: var(--muted);
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .section {
+            margin-top: 110px;
+        }
+
+        .section-title {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 24px;
+            align-items: center;
+            margin-bottom: 34px;
+        }
+
+        .section-title h2 {
             margin: 0;
-            color: #666;
-            font-size: 0.95rem;
+            color: var(--muted);
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
         }
 
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 40px 90px;
-            position: relative;
-            z-index: 5;
+        .section-title::after {
+            content: "";
+            height: 1px;
+            background: var(--line);
         }
 
-        .category-section { margin-top: 66px; }
+        .featured-project {
+            display: grid;
+            grid-template-columns: minmax(0, 1.05fr) minmax(340px, 0.95fr);
+            gap: 64px;
+            align-items: center;
+            color: inherit;
+            text-decoration: none;
+        }
 
-        .category-label {
+        .featured-media,
+        .project-media {
             display: flex;
             align-items: center;
-            gap: 15px;
-            margin-bottom: 30px;
+            justify-content: center;
+            border-top: 1px solid var(--line);
+            padding-top: 18px;
         }
 
-        .category-label h2 {
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            letter-spacing: 0.22em;
-            color: #ccc;
+        .featured-media img,
+        .project-media img {
+            display: block;
+            width: 100%;
+            height: auto;
+            max-height: 320px;
+            object-fit: contain;
+            filter: grayscale(100%);
+            transition: filter 0.2s ease, transform 0.2s ease;
+        }
+
+        .featured-project:hover img,
+        .project-card:hover img {
+            filter: grayscale(0%);
+            transform: translateY(-2px);
+        }
+
+        .featured-label {
+            display: inline-block;
+            margin-bottom: 18px;
+            color: var(--accent);
+            font-size: 0.68rem;
+        }
+
+        h2,
+        h3 {
             margin: 0;
-            white-space: nowrap;
-            font-weight: 600;
+            font-weight: 500;
+            letter-spacing: -0.04em;
+            line-height: 1;
         }
 
-        .category-label .line {
-            flex-grow: 1;
-            height: 1px;
-            background: #eee;
+        .featured-project h2 {
+            max-width: 520px;
+            font-size: clamp(2.2rem, 4vw, 3.4rem);
+        }
+
+        .featured-project p,
+        .project-card p {
+            margin: 22px 0 0;
+            color: var(--muted);
+            font-size: 1rem;
+            line-height: 1.8;
         }
 
         .project-grid {
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 46px 40px;
+            gap: 64px 56px;
         }
 
-        .project-card,
-        .featured-card {
-            text-decoration: none;
-            color: inherit;
-            display: block;
-        }
-
-        .featured-card {
+        .project-card {
             display: grid;
-            grid-template-columns: 1.1fr 1fr;
-            gap: 42px;
-            align-items: center;
-            margin-bottom: 20px;
+            grid-template-columns: minmax(0, 1fr) 150px;
+            gap: 28px;
+            align-items: start;
+            min-height: 220px;
+            padding-top: 30px;
+            border-top: 1px solid var(--line);
+            color: inherit;
+            text-decoration: none;
         }
 
-        .image-box,
-        .featured-img {
-            width: 100%;
-            height: 280px;
-            background-color: #f5f5f5;
-            overflow: hidden;
-            margin-bottom: 22px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid #f0f0f0;
-            transition: transform 0.35s ease;
+        .project-media {
+            border-top: 0;
+            padding-top: 0;
         }
 
-        .featured-img {
-            height: 280px;
-            margin-bottom: 0;
+        .project-media img {
+            max-height: 160px;
         }
 
-        .card-image,
-        .featured-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            padding: 12px;
-            transition: transform 0.45s ease;
-        }
-
-        .featured-img img { padding: 16px; }
-
-        .project-card:hover .image-box,
-        .featured-card:hover .featured-img {
-            transform: translateY(-5px);
-        }
-
-        .project-card:hover .card-image,
-        .featured-card:hover .featured-img img {
-            transform: scale(1.03);
-        }
-
-        .project-card:hover h3,
-        .featured-card:hover h3,
-        .featured-card:hover h2,
-        .project-card:hover .view-project,
-        .featured-card:hover .view-project {
-            color: var(--ut-orange);
-        }
-
-        .tag,
-        .featured-eyebrow {
+        .project-meta {
             display: block;
-            margin-bottom: 10px;
-            color: #bbb;
-            font-size: 0.6rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
+            margin-bottom: 16px;
+            color: var(--muted);
+            font-size: 0.66rem;
         }
 
-        .featured-label {
+        .project-card h3 {
+            font-size: clamp(1.45rem, 2.3vw, 2rem);
+        }
+
+        .project-link {
             display: inline-block;
-            width: fit-content;
-            margin-bottom: 10px;
-            padding: 3px 8px;
-            border-radius: 2px;
-            background: #f0f0f0;
-            color: #1a1a1a;
-            font-size: 0.55rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
+            margin-top: 26px;
+            color: var(--text);
+            font-size: 0.68rem;
+            text-decoration: none;
         }
 
-        .project-card h3,
-        .featured-card h2 {
-            margin: 0 0 8px;
-            font-weight: 800;
-            letter-spacing: -0.02em;
-            transition: color 0.3s ease;
+        .featured-project:hover h2,
+        .project-card:hover h3,
+        .featured-project:hover .project-link,
+        .project-card:hover .project-link {
+            color: var(--accent);
         }
 
-        .project-card h3 { font-size: 1.35rem; }
-        .featured-card h2 { font-size: 1.75rem; line-height: 1.15; }
-
-        .project-card p,
-        .featured-card p {
-            margin: 0 0 12px;
-            max-width: 92%;
-            color: #555;
-            font-size: 0.88rem;
-            line-height: 1.65;
-        }
-
-        .card-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin: 12px 0;
-        }
-
-        .card-tag {
-            padding: 3px 7px;
-            border: 1px solid #e8e8e8;
-            border-radius: 2px;
-            color: #aaa;
-            font-size: 0.55rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-        }
-
-        .view-project {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 8px;
-            color: #000;
-            font-size: 0.7rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            transition: gap 0.3s ease, color 0.3s ease;
-        }
-
-        .view-project svg {
-            width: 16px;
-            height: 16px;
-            stroke-width: 3;
-            transition: transform 0.3s ease;
-        }
-
-        .project-card:hover .view-project,
-        .featured-card:hover .view-project { gap: 14px; }
-
-        .project-card:hover .view-project svg,
-        .featured-card:hover .view-project svg { transform: translateX(4px); }
-
-        .wip-tag {
-            margin-left: 6px;
-            padding: 2px 6px;
-            border-radius: 3px;
-            background: #f0f0f0;
-            color: #999;
-            font-size: 0.55rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .reveal {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.55s ease, transform 0.55s ease;
-        }
-
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        @media (max-width: 800px) {
-            .hero { padding: 50px 20px 20px; }
-            .hero h1 { font-size: 2.5rem; }
-            .project-grid,
-            .featured-card { grid-template-columns: 1fr; }
-            .featured-img { height: 220px; margin-bottom: 0; }
-            .container { padding-left: 20px; padding-right: 20px; }
+        @media (max-width: 860px) {
             nav {
-                padding: 18px 20px;
-                flex-direction: column;
                 align-items: flex-start;
-                gap: 12px;
+                flex-direction: column;
+                gap: 18px;
+                padding: 24px;
             }
-            .nav-links a {
-                margin-left: 0;
-                margin-right: 18px;
+
+            .nav-links {
+                flex-wrap: wrap;
+                gap: 18px;
+            }
+
+            main {
+                width: calc(100% - 48px);
+                padding: 76px 0 88px;
+            }
+
+            .hero,
+            .featured-project,
+            .project-grid,
+            .project-card {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                gap: 32px;
+                margin-bottom: 72px;
+            }
+
+            .section {
+                margin-top: 82px;
+            }
+
+            .project-card {
+                min-height: auto;
+            }
+
+            .project-media {
+                justify-content: flex-start;
+            }
+
+            .project-media img {
+                max-width: 260px;
             }
         }
     </style>
 </head>
 <body>
+    <nav>
+        <a href="index.html" class="nav-logo">MJW</a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="projects.html" class="active">Projects</a>
+            <a href="resume.html">Resume</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </nav>
 
-<canvas id="smoke-canvas"></canvas>
-
-<nav>
-    <a href="index.html" class="nav-logo">MJW</a>
-    <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="projects.html" class="active">Projects</a>
-        <a href="resume.html">Resume</a>
-        <a href="contact.html">Contact</a>
-    </div>
-</nav>
-
-<div class="hero reveal">
-    <h1>Projects</h1>
-    <p>Selected engineering work. </p>
-</div>
-
-<div class="container">
-    <div class="category-section reveal">
-        <div class="category-label"><h2>Featured</h2><div class="line"></div></div>
-        <a href="projects/hytec.html" class="featured-card">
-            <div class="featured-img"><img src="assets/images/hytec2.png" alt="Hydrogen Release System"></div>
+    <main>
+        <section class="hero">
             <div>
-                <span class="featured-label">Featured</span>
-                <span class="featured-eyebrow">CEM / ExxonMobil</span>
-                <h2>Hydrogen Release System</h2>
-                <p>Designed and helped integrate a 30-foot hydrogen release structure.</p>
-                <div class="card-tags"><span class="card-tag">Structures</span><span class="card-tag">BOM</span><span class="card-tag">Integration</span></div>
-                <div class="view-project">View Project<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div>
+                <span class="label">Selected Work</span>
+                <h1>Projects</h1>
             </div>
-        </a>
-    </div>
+            <p>Engineering work across structures, validation, thermal systems, robotics, and energy modeling.</p>
+        </section>
 
-    <div class="category-section reveal">
-        <div class="category-label"><h2>Build / Validate</h2><div class="line"></div></div>
-        <div class="project-grid">
-            <a href="projects/systems_tmr.html" class="project-card">
-                <div class="image-box"><img src="assets/images/uttower.png" class="card-image" alt="ASV Validation"></div>
-                <span class="tag">Texas Marine Robotics</span>
-                <h3>ASV Operational Validation</h3>
-                <p>Thermal work, hull testing, and field validation.</p>
-                <div class="card-tags"><span class="card-tag">Thermal</span><span class="card-tag">Testing</span><span class="card-tag">ASV</span></div>
-                <div class="view-project">View Project<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div>
+        <section class="section">
+            <div class="section-title"><h2>Featured</h2></div>
+            <a href="projects/hytec.html" class="featured-project">
+                <div class="featured-media">
+                    <img src="assets/images/hytec2.png" alt="Hydrogen Release System">
+                </div>
+                <div>
+                    <span class="featured-label">CEM / ExxonMobil</span>
+                    <h2>Hydrogen Release System</h2>
+                    <p>Designed and helped integrate a 30-foot hydrogen release structure.</p>
+                    <span class="project-link">View Project</span>
+                </div>
             </a>
+        </section>
 
-            <a href="projects/sv.html" class="project-card">
-                <div class="image-box"><img src="assets/images/spline.png" class="card-image" alt="Simulation and Validation"></div>
-                <span class="tag">Longhorn Baja Racing</span>
-                <h3>Simulation &amp; Validation</h3>
-                <p>FEA, hand calcs, and test planning for Baja parts.</p>
-                <div class="card-tags"><span class="card-tag">FEA</span><span class="card-tag">Validation</span><span class="card-tag">Baja</span></div>
-                <div class="view-project">View Project<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div>
-            </a>
+        <section class="section">
+            <div class="section-title"><h2>Build / Validate</h2></div>
+            <div class="project-grid">
+                <a href="projects/systems_tmr.html" class="project-card">
+                    <div>
+                        <span class="project-meta">Texas Marine Robotics</span>
+                        <h3>ASV Operational Validation</h3>
+                        <p>Thermal work, hull testing, and field validation.</p>
+                        <span class="project-link">View Project</span>
+                    </div>
+                    <div class="project-media"><img src="assets/images/uttower.png" alt="ASV Validation"></div>
+                </a>
 
-            <a href="projects/tmr_baseplate.html" class="project-card">
-                <div class="image-box"><img src="assets/images/fea_tmr.png" class="card-image" alt="Acrylic Fatigue Analysis"></div>
-                <span class="tag">Texas Marine Robotics</span>
-                <h3>Acrylic Sensor Mount</h3>
-                <p>Fatigue and FEA work for an ASV sensor plate.</p>
-                <div class="card-tags"><span class="card-tag">Fatigue</span><span class="card-tag">FEA</span><span class="card-tag">Acrylic</span></div>
-                <div class="view-project">View Project<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div>
-            </a>
+                <a href="projects/sv.html" class="project-card">
+                    <div>
+                        <span class="project-meta">Longhorn Baja Racing</span>
+                        <h3>Simulation &amp; Validation</h3>
+                        <p>FEA, hand calculations, and test planning for Baja parts.</p>
+                        <span class="project-link">View Project</span>
+                    </div>
+                    <div class="project-media"><img src="assets/images/spline.png" alt="Simulation and Validation"></div>
+                </a>
 
-            <a href="projects/failureanalysis.html" class="project-card">
-                <div class="image-box"><img src="assets/images/eye_mag.png" class="card-image" alt="Failure Analysis"></div>
-                <span class="tag">Materials</span>
-                <h3>Metallurgical Failure Analysis</h3>
-                <p>A closer look at failed parts and root cause.</p>
-                <div class="card-tags"><span class="card-tag">SEM</span><span class="card-tag">Fracture</span><span class="card-tag">Failure</span></div>
-                <div class="view-project">View Project<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div>
-            </a>
-        </div>
-    </div>
+                <a href="projects/tmr_baseplate.html" class="project-card">
+                    <div>
+                        <span class="project-meta">Texas Marine Robotics</span>
+                        <h3>Acrylic Sensor Mount</h3>
+                        <p>Fatigue and FEA work for an ASV sensor plate.</p>
+                        <span class="project-link">View Project</span>
+                    </div>
+                    <div class="project-media"><img src="assets/images/fea_tmr.png" alt="Acrylic Fatigue Analysis"></div>
+                </a>
 
-    <div class="category-section reveal">
-        <div class="category-label"><h2>Model / Research</h2><div class="line"></div></div>
-        <div class="project-grid">
-            <a href="projects/rd.html" class="project-card">
-                <div class="image-box"><img src="assets/images/system_lbr.png" class="card-image" alt="R&D Lead"></div>
-                <span class="tag">Longhorn Baja Racing</span>
-                <h3>Research &amp; Design</h3>
-                <p>Team research, subsystem planning, and design reviews.</p>
-                <div class="card-tags"><span class="card-tag">R&amp;D</span><span class="card-tag">Baja</span><span class="card-tag">Systems</span></div>
-                <div class="view-project">View Project<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div>
-            </a>
+                <a href="projects/failureanalysis.html" class="project-card">
+                    <div>
+                        <span class="project-meta">Materials</span>
+                        <h3>Metallurgical Failure Analysis</h3>
+                        <p>A closer look at failed parts and root cause.</p>
+                        <span class="project-link">View Project</span>
+                    </div>
+                    <div class="project-media"><img src="assets/images/eye_mag.png" alt="Failure Analysis"></div>
+                </a>
+            </div>
+        </section>
 
-            <a href="projects/lspace.html" class="project-card">
-                <div class="image-box"><img src="assets/images/systemslspace.png" class="card-image" alt="Mars Rover"></div>
-                <span class="tag">NASA L'SPACE</span>
-                <h3>Mars Rover Thermal Control</h3>
-                <p>Thermal concept work for a rover mission study.</p>
-                <div class="card-tags"><span class="card-tag">Thermal</span><span class="card-tag">Rover</span><span class="card-tag">Systems</span></div>
-                <div class="view-project">View Project<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div>
-            </a>
+        <section class="section">
+            <div class="section-title"><h2>Model / Research</h2></div>
+            <div class="project-grid">
+                <a href="projects/rd.html" class="project-card">
+                    <div>
+                        <span class="project-meta">Longhorn Baja Racing</span>
+                        <h3>Research &amp; Design</h3>
+                        <p>Team research, subsystem planning, and design reviews.</p>
+                        <span class="project-link">View Project</span>
+                    </div>
+                    <div class="project-media"><img src="assets/images/system_lbr.png" alt="R&D Lead"></div>
+                </a>
 
-            <a href="projects/mcp.html" class="project-card">
-                <div class="image-box"><img src="assets/images/mcp1.png" class="card-image" alt="Hydrogen Mixing in Natural Gas Turbines"></div>
-                <span class="tag">Energy</span>
-                <h3>H<sub>2</sub> Mixing in Gas Turbines</h3>
-                <p>Cost and energy tradeoffs for hydrogen blending.</p>
-                <div class="card-tags"><span class="card-tag">Energy</span><span class="card-tag">Hydrogen</span><span class="card-tag">Modeling</span></div>
-                <div class="view-project">View Project<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div>
-            </a>
+                <a href="projects/lspace.html" class="project-card">
+                    <div>
+                        <span class="project-meta">NASA L'SPACE</span>
+                        <h3>Mars Rover Thermal Control</h3>
+                        <p>Thermal concept work for a rover mission study.</p>
+                        <span class="project-link">View Project</span>
+                    </div>
+                    <div class="project-media"><img src="assets/images/systemslspace.png" alt="Mars Rover"></div>
+                </a>
 
-            <a href="projects/ret.html" class="project-card">
-                <div class="image-box"><img src="assets/images/pec.png" class="card-image" alt="Renewable Energy Technology"></div>
-                <span class="tag">Energy</span>
-                <h3>Palmer Event Center Model</h3>
-                <p>Solar and energy harvest modeling.</p>
-                <div class="card-tags"><span class="card-tag">Solar</span><span class="card-tag">Energy</span><span class="card-tag">Modeling</span></div>
-                <div class="view-project">View Project<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div>
-            </a>
+                <a href="projects/mcp.html" class="project-card">
+                    <div>
+                        <span class="project-meta">Energy</span>
+                        <h3>H<sub>2</sub> Mixing in Gas Turbines</h3>
+                        <p>Cost and energy tradeoffs for hydrogen blending.</p>
+                        <span class="project-link">View Project</span>
+                    </div>
+                    <div class="project-media"><img src="assets/images/mcp1.png" alt="Hydrogen Mixing in Natural Gas Turbines"></div>
+                </a>
 
-            <a href="projects/coastingprofile.html" class="project-card">
-                <div class="image-box"><img src="assets/images/acc1.png" class="card-image" alt="Simulink Model of Coasting Dynamics"></div>
-                <span class="tag">Dynamics</span>
-                <h3>Coasting Profile</h3>
-                <p>A Simulink model for drivetrain losses.</p>
-                <div class="card-tags"><span class="card-tag">Simulink</span><span class="card-tag">Dynamics</span><span class="card-tag">Cars</span></div>
-                <div class="view-project">View Project<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div>
-            </a>
+                <a href="projects/ret.html" class="project-card">
+                    <div>
+                        <span class="project-meta">Energy</span>
+                        <h3>Palmer Event Center Model</h3>
+                        <p>Solar and energy harvest modeling.</p>
+                        <span class="project-link">View Project</span>
+                    </div>
+                    <div class="project-media"><img src="assets/images/pec.png" alt="Renewable Energy Technology"></div>
+                </a>
 
-            <a href="projects/shroud_pid.html" class="project-card">
-                <div class="image-box"><img src="assets/images/shroud_2_cut_solidworks.png" class="card-image" alt="PID Shroud"></div>
-                <span class="tag">Controls</span>
-                <h3>PID Cooling Shroud</h3>
-                <p>A small thermal control project with printed hardware.</p>
-                <div class="card-tags"><span class="card-tag">PID</span><span class="card-tag">Thermal</span><span class="card-tag">SolidWorks</span></div>
-                <div class="view-project">View Project<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div>
-            </a>
-        </div>
-    </div>
-</div>
+                <a href="projects/coastingprofile.html" class="project-card">
+                    <div>
+                        <span class="project-meta">Dynamics</span>
+                        <h3>Coasting Profile</h3>
+                        <p>A Simulink model for drivetrain losses.</p>
+                        <span class="project-link">View Project</span>
+                    </div>
+                    <div class="project-media"><img src="assets/images/acc1.png" alt="Simulink Model of Coasting Dynamics"></div>
+                </a>
 
-<script>
-    const canvas = document.getElementById('smoke-canvas');
-    const ctx = canvas.getContext('2d');
-    let particles = [];
-
-    function resize() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    }
-
-    window.addEventListener('resize', resize);
-    resize();
-
-    class Particle {
-        constructor(x, y) {
-            this.x = x;
-            this.y = y;
-            this.size = Math.random() * 5 + 2;
-            this.speedX = (Math.random() - 0.5) * 0.8;
-            this.speedY = (Math.random() - 0.5) * 0.8;
-            this.color = 'rgba(0, 0, 0,';
-            this.alpha = 0.2;
-            this.decay = Math.random() * 0.015 + 0.01;
-        }
-
-        update() {
-            this.x += this.speedX;
-            this.y += this.speedY;
-            if (this.size > 0.2) this.size -= 0.05;
-            this.alpha -= this.decay;
-        }
-
-        draw() {
-            ctx.fillStyle = this.color + this.alpha + ')';
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fill();
-        }
-    }
-
-    window.addEventListener('mousemove', (e) => {
-        particles.push(new Particle(e.clientX, e.clientY));
-    });
-
-    function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        for (let i = 0; i < particles.length; i++) {
-            particles[i].update();
-            particles[i].draw();
-            if (particles[i].alpha <= 0) {
-                particles.splice(i, 1);
-                i--;
-            }
-        }
-        requestAnimationFrame(animate);
-    }
-
-    animate();
-
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.07 });
-
-    reveals.forEach((el) => observer.observe(el));
-</script>
-
+                <a href="projects/shroud_pid.html" class="project-card">
+                    <div>
+                        <span class="project-meta">Controls</span>
+                        <h3>PID Cooling Shroud</h3>
+                        <p>A small thermal control project with printed hardware.</p>
+                        <span class="project-link">View Project</span>
+                    </div>
+                    <div class="project-media"><img src="assets/images/shroud_2_cut_solidworks.png" alt="PID Shroud"></div>
+                </a>
+            </div>
+        </section>
+    </main>
 </body>
 </html>
