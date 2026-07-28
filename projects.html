@@ -160,13 +160,11 @@
             height: auto;
             max-height: 320px;
             object-fit: contain;
-            filter: grayscale(100%);
-            transition: filter 0.2s ease, transform 0.2s ease;
+            transition: transform 0.2s ease;
         }
 
         .featured-project:hover img,
         .project-card:hover img {
-            filter: grayscale(0%);
             transform: translateY(-2px);
         }
 
@@ -338,6 +336,16 @@
         <section class="section">
             <div class="section-title"><h2>Build / Validate</h2></div>
             <div class="project-grid">
+                <a href="projects/integra.html" class="project-card">
+                    <div>
+                        <span class="project-meta">Integra Technologies</span>
+                        <h3>Leak Detection System</h3>
+                        <p>Pneumatic and vacuum decay fixture for coolant line assembly validation.</p>
+                        <span class="project-link">View Project</span>
+                    </div>
+                    <div class="project-media"><img src="assets/images/fixture_assembly.jpg" alt="Integra leak detection fixture assembly"></div>
+                </a>
+
                 <a href="projects/temporarysummer.html" class="project-card">
                     <div>
                         <span class="project-meta">Summer Archive</span>
