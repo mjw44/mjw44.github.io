@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integra Leak Detection System | Julian Whiteley</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --border: #eaeaea; --text: #1a1a1a; --muted: #666; --ut-orange: #bf5700; }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #fcfcfc;
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        #smoke-canvas { position: fixed; top: 0; left: 0; z-index: 1; pointer-events: none; }
+
+        nav {
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            border-bottom: 1px solid #eaeaea;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-logo { font-weight: 800; font-size: 1.2rem; text-decoration: none; color: #1a1a1a; }
+        .nav-links a { text-decoration: none; color: #666; font-weight: 600; margin-left: 25px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        .nav-links a:hover, .nav-links a.active { color: #1a1a1a; }
+
+        .container { max-width: 900px; margin: 80px auto; padding: 0 20px; position: relative; z-index: 5; }
+
+        header { margin-bottom: 40px; }
+        .hero-tag { text-transform: uppercase; font-weight: 800; font-size: 0.75rem; letter-spacing: 0.1em; color: #bbb; margin-bottom: 10px; display: block; }
+        h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -0.04em; margin: 0; line-height: 1.1; }
+
+        .model-viewer {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            background: #fff;
+            padding: 20px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 40px;
+        }
+
+        .model-container { display: flex; flex-direction: column; }
+        .model-container img { width: 100%; height: 240px; object-fit: cover; border-radius: 6px; border: 1px solid #f0f0f0; background: #f5f5f5; }
+
+        .specs-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            padding: 25px 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 60px;
+        }
+
+        .spec-item label { display: block; font-size: 0.65rem; text-transform: uppercase; font-weight: 800; color: #999; letter-spacing: 0.1em; }
+        .spec-item span { font-weight: 600; font-size: 0.95rem; color: var(--text); }
+
+        section { margin-bottom: 80px; }
+        h2 { font-size: 1.6rem; font-weight: 800; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 25px; }
+        h3 { font-size: 1.1rem; font-weight: 700; margin-top: 0; color: var(--ut-orange); }
+        p { color: #444; font-size: 0.95rem; margin-top: 0; }
+
+        .calc-box { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 25px; display: flex; flex-direction: column; }
+        .calc-box img { width: 100%; height: auto; border-radius: 4px; margin-bottom: 15px; border: 1px solid #f9f9f9; background: #f5f5f5; }
+        .img-label { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: #aaa; margin-bottom: 8px; display: block; }
+
+        .process-section { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; margin-bottom: 60px; }
+
+        .retrospective {
+            padding: 40px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border: 1px solid #eee;
+            margin-bottom: 40px;
+        }
+
+        .retrospective h2 { border: none; margin-bottom: 12px; font-size: 1.4rem; }
+        .retro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 28px; }
+        .retro-heading { display: block; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; color: var(--ut-orange); margin-bottom: 10px; }
+
+        .back-link { display: inline-block; margin-top: 40px; text-decoration: none; font-weight: 800; color: #000; font-size: 0.9rem; text-transform: uppercase; border-bottom: 2px solid #000; padding-bottom: 4px; transition: 0.2s; }
+        .back-link:hover { padding-left: 10px; }
+
+        @media (max-width: 768px) {
+            .process-section, .model-viewer, .retro-grid { grid-template-columns: 1fr; }
+            h1 { font-size: 2.5rem; }
+            nav { padding: 18px 20px; align-items: flex-start; flex-direction: column; gap: 12px; }
+            .nav-links a { margin-left: 0; margin-right: 18px; }
+            .model-container img { height: auto; }
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="smoke-canvas"></canvas>
+
+<nav>
+    <a href="../index.html" class="nav-logo">MJW</a>
+    <div class="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="../about.html">About</a>
+        <a href="../projects.html" class="active">Projects</a>
+        <a href="../resume.html">Resume</a>
+        <a href="../contact.html">Contact</a>
+    </div>
+</nav>
+
+<div class="container">
+    <header>
+        <span class="hero-tag">Integra Technologies &middot; May&ndash;August 2026</span>
+        <h1>Pneumatic &amp; Vacuum Decay Leak Detection System</h1>
+    </header>
+
+    <div class="model-viewer">
+        <div class="model-container">
+            <span class="img-label">Fixture Assembly</span>
+            <img src="../assets/images/fixture_assembly.jpg" alt="Leak detection fixture assembly" data-fallbacks="fixtureassembly.jpg,integra_fixture.jpg,fixture.jpg">
+        </div>
+        <div class="model-container">
+            <span class="img-label">Sealing Interface</span>
+            <img src="../assets/images/sealing_interface.jpg" alt="PTFE sealing interface" data-fallbacks="sealinginterface.jpg,seal_interface.jpg,integra_seal.jpg">
+        </div>
+        <div class="model-container">
+            <span class="img-label">System Integration</span>
+            <img src="../assets/images/system_integration.jpg" alt="Integrated leak detection system" data-fallbacks="systemintegration.jpg,integra_system.jpg,system.jpg">
+        </div>
+    </div>
+
+    <div class="specs-bar">
+        <div class="spec-item"><label>Role</label><span>Mechanical Design Lead</span></div>
+        <div class="spec-item"><label>Pressure Range</label><span>&minus;15 inHg to +50 PSI</span></div>
+        <div class="spec-item"><label>Sealing Material</label><span>PTFE (Teflon)</span></div>
+        <div class="spec-item"><label>Frame Material</label><span>Steel</span></div>
+    </div>
+
+    <section class="process-section">
+        <div>
+            <h2>Problem &amp; Approach</h2>
+            <h3>Design Requirements</h3>
+            <p>Integra required a fixture capable of pressure-testing coolant line assemblies across two regimes &mdash; positive pneumatic pressure up to 50 PSI and vacuum decay down to &minus;15 inHg. The system had to seal reliably across both conditions while remaining manufacturable within a short lead time.</p>
+            <p>I owned the fixture from requirements through validation &mdash; conducting trade studies, selecting materials, generating drawings with full GD&amp;T, specifying fastener torque, and executing a two-stage validation protocol before handing off to the quality team for long-term use.</p>
+
+            <h3>Trade Studies &amp; Concept Selection</h3>
+            <p>I evaluated multiple sealing and frame configurations against seal integrity, manufacturing lead time, and operator ergonomics. PTFE was selected for its chemical compatibility, near-zero creep under sustained compression, and consistent performance across the full pressure range.</p>
+        </div>
+        <div class="calc-box">
+            <span class="img-label">Fixture Assembly</span>
+            <img src="../assets/images/fixture_assembly.jpg" alt="Fixture assembly detail" data-fallbacks="fixtureassembly.jpg,integra_fixture.jpg,fixture.jpg">
+        </div>
+    </section>
+
+    <section class="process-section">
+        <div class="calc-box">
+            <span class="img-label">Sealing Interface</span>
+            <img src="../assets/images/sealing_interface.jpg" alt="Sealing interface detail" data-fallbacks="sealinginterface.jpg,seal_interface.jpg,integra_seal.jpg">
+        </div>
+        <div>
+            <h2>Structural Validation</h2>
+            <h3>Fastener Torque Specification</h3>
+            <p>Fastener torque requirements were calculated from first principles using recommended friction factors for steel-on-steel interfaces and PTFE gasket compression targets &mdash; ensuring consistent seating force across all fasteners without thread stripping or joint relaxation under cyclic pressure loading.</p>
+
+            <h3>Physical Validation Protocol</h3>
+            <p>Validation followed a two-stage protocol to isolate fixture performance from assembly variables.</p>
+            <p>Stage 1 established a standalone baseline leak rate for the fixture itself before any coolant lines were introduced. Stage 2 integrated the coolant line assemblies and ran the full dual-regime test. The system isolated sub-surface fabrication defects undetectable by visual inspection &mdash; preventing an estimated $2M+ in reconstruction costs including site access, labor, and component replacement.</p>
+        </div>
+    </section>
+
+    <section>
+        <h2>Design Iteration</h2>
+        <p>Two iterations were completed. The first confirmed the sealing architecture and pressure protocol worked across both regimes. The second rationalized the BOM &mdash; reducing fastener counts, frame members, and sealing interface areas against the validated load cases to minimize material cost while maintaining all structural and sealing margins.</p>
+    </section>
+
+    <section class="retrospective">
+        <h2>Retrospective: What I Would Optimize</h2>
+        <p>The system met all requirements and was adopted by the quality engineering team for long-term use. Two optimizations would be targeted in a third iteration:</p>
+        <div class="retro-grid">
+            <div>
+                <span class="retro-heading">01. Automated Leak Rate Logging</span>
+                <p>Replace manual pressure gauge readings with a digital transducer and data logger for continuous monitoring, reduced operator variability, and permanent test records per assembly.</p>
+            </div>
+            <div>
+                <span class="retro-heading">02. Modular Sealing Interface</span>
+                <p>Replace fixed-diameter sealing plates with interchangeable inserts to extend fixture applicability across Integra's full product line without a new fixture build per geometry.</p>
+            </div>
+        </div>
+    </section>
+
+    <a href="../projects.html" class="back-link">&larr; Back to Projects</a>
+</div>
+
+<script>
+    document.querySelectorAll('img[data-fallbacks]').forEach((img) => {
+        const original = img.getAttribute('src');
+        const fallbacks = img.dataset.fallbacks.split(',').map((name) => `../assets/images/${name.trim()}`);
+        const paths = [original, ...fallbacks];
+        let index = 0;
+
+        img.addEventListener('error', () => {
+            index += 1;
+            if (index < paths.length) img.src = paths[index];
+        });
+    });
+
+    const canvas = document.getElementById('smoke-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+
+    class Particle {
+        constructor(x, y) {
+            this.x = x;
+            this.y = y;
+            this.size = Math.random() * 2 + 1;
+            this.alpha = 0.15;
+        }
+
+        update() {
+            this.x += (Math.random() - 0.5) * 0.4;
+            this.y += (Math.random() - 0.5) * 0.4;
+            this.alpha -= 0.005;
+        }
+
+        draw() {
+            ctx.fillStyle = `rgba(0,0,0,${this.alpha})`;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    }
+
+    window.addEventListener('mousemove', (e) => {
+        particles.push(new Particle(e.clientX, e.clientY));
+    });
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < particles.length; i++) {
+            particles[i].update();
+            particles[i].draw();
+            if (particles[i].alpha <= 0) {
+                particles.splice(i, 1);
+                i--;
+            }
+        }
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+</script>
+
+</body>
+</html>
