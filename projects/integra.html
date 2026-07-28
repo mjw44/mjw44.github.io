@@ -45,7 +45,7 @@
 
         .model-viewer {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: 1fr;
             gap: 20px;
             background: #fff;
             padding: 20px;
@@ -143,32 +143,24 @@
             <span class="img-label">Fixture Assembly</span>
             <img src="../assets/images/unit771.jpg" alt="Leak detection fixture assembly">
         </div>
-        <div class="model-container">
-            <span class="img-label">Sealing Interface</span>
-            <img src="../assets/images/sealing_interface.jpg" alt="PTFE sealing interface" data-fallbacks="sealinginterface.jpg,seal_interface.jpg,integra_seal.jpg">
-        </div>
-        <div class="model-container">
-            <span class="img-label">System Integration</span>
-            <img src="../assets/images/system_integration.jpg" alt="Integrated leak detection system" data-fallbacks="systemintegration.jpg,integra_system.jpg,system.jpg">
-        </div>
     </div>
 
     <div class="specs-bar">
         <div class="spec-item"><label>Role</label><span>Mechanical Design Lead</span></div>
         <div class="spec-item"><label>Pressure Range</label><span>&minus;15 inHg to +50 PSI</span></div>
-        <div class="spec-item"><label>Sealing Material</label><span>PTFE (Teflon)</span></div>
         <div class="spec-item"><label>Frame Material</label><span>Steel</span></div>
+        <div class="spec-item"><label>Validation</label><span>Pneumatic / Vacuum Decay</span></div>
     </div>
 
     <section class="process-section">
         <div>
             <h2>Problem &amp; Approach</h2>
             <h3>Design Requirements</h3>
-            <p>Integra required a fixture capable of pressure-testing coolant line assemblies across two regimes &mdash; positive pneumatic pressure up to 50 PSI and vacuum decay down to &minus;15 inHg. The system had to seal reliably across both conditions while remaining manufacturable within a short lead time.</p>
+            <p>Integra required a fixture capable of pressure-testing coolant line assemblies across two regimes &mdash; positive pneumatic pressure up to 50 PSI and vacuum decay down to &minus;15 inHg. The system had to hold repeatable test conditions while remaining manufacturable within a short lead time.</p>
             <p>I owned the fixture from requirements through validation &mdash; conducting trade studies, selecting materials, generating drawings with full GD&amp;T, specifying fastener torque, and executing a two-stage validation protocol before handing off to the quality team for long-term use.</p>
 
             <h3>Trade Studies &amp; Concept Selection</h3>
-            <p>I evaluated multiple sealing and frame configurations against seal integrity, manufacturing lead time, and operator ergonomics. PTFE was selected for its chemical compatibility, near-zero creep under sustained compression, and consistent performance across the full pressure range.</p>
+            <p>I evaluated multiple frame and fixture configurations against manufacturing lead time, operator ergonomics, and repeatable pressure response. The final concept prioritized simple setup, rigid support, and reliable isolation of the coolant line assembly during testing.</p>
         </div>
         <div class="calc-box">
             <span class="img-label">Fixture Assembly</span>
@@ -192,17 +184,17 @@
         <div>
             <h2>Structural Validation</h2>
             <h3>Fastener Torque Specification</h3>
-            <p>Fastener torque requirements were calculated from first principles using recommended friction factors for steel-on-steel interfaces and PTFE gasket compression targets &mdash; ensuring consistent seating force across all fasteners without thread stripping or joint relaxation under cyclic pressure loading.</p>
+            <p>Fastener torque requirements were calculated from first principles using recommended friction factors for steel-on-steel interfaces &mdash; ensuring consistent seating force across all fasteners without thread stripping or joint relaxation under cyclic pressure loading.</p>
 
             <h3>Physical Validation Protocol</h3>
             <p>Validation followed a two-stage protocol to isolate fixture performance from assembly variables.</p>
-            <p>Stage 1 established a standalone baseline leak rate for the fixture itself before any coolant lines were introduced. Stage 2 integrated the coolant line assemblies and ran the full dual-regime test. The system isolated sub-surface fabrication defects undetectable by visual inspection &mdash; preventing an estimated $2M+ in reconstruction costs including site access, labor, and component replacement.</p>
+            <p>Stage 1 established a standalone baseline leak rate for the fixture itself before any coolant lines were introduced. Stage 2 tested the coolant line assemblies under the full dual-regime protocol. The system isolated sub-surface fabrication defects undetectable by visual inspection &mdash; preventing an estimated $2M+ in reconstruction costs including site access, labor, and component replacement.</p>
         </div>
     </section>
 
     <section>
         <h2>Design Iteration</h2>
-        <p>Two iterations were completed. The first confirmed the sealing architecture and pressure protocol worked across both regimes. The second rationalized the BOM &mdash; reducing fastener counts, frame members, and sealing interface areas against the validated load cases to minimize material cost while maintaining all structural and sealing margins.</p>
+        <p>Two iterations were completed. The first confirmed the fixture architecture and pressure protocol worked across both regimes. The second rationalized the BOM &mdash; reducing fastener counts and frame members against the validated load cases to minimize material cost while maintaining structural and test margins.</p>
     </section>
 
     <section class="process-section">
@@ -226,8 +218,8 @@
                 <p>Replace manual pressure gauge readings with a digital transducer and data logger for continuous monitoring, reduced operator variability, and permanent test records per assembly.</p>
             </div>
             <div>
-                <span class="retro-heading">02. Modular Sealing Interface</span>
-                <p>Replace fixed-diameter sealing plates with interchangeable inserts to extend fixture applicability across Integra's full product line without a new fixture build per geometry.</p>
+                <span class="retro-heading">02. Modular Test Adapters</span>
+                <p>Replace fixed-diameter plates with interchangeable adapters to extend fixture applicability across Integra's full product line without a new fixture build per geometry.</p>
             </div>
         </div>
     </section>
