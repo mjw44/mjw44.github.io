@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Integra Leak Detection System | Julian Whiteley</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root { --border: #eaeaea; --text: #1a1a1a; --muted: #666; --ut-orange: #bf5700; }
 
@@ -12,6 +12,7 @@
             margin: 0;
             padding: 0;
             font-family: 'Inter', sans-serif;
+            font-weight: 400;
             background-color: #fcfcfc;
             color: var(--text);
             line-height: 1.6;
@@ -21,26 +22,26 @@
         #smoke-canvas { position: fixed; top: 0; left: 0; z-index: 1; pointer-events: none; }
 
         nav {
-            padding: 20px 40px;
+            padding: 28px 48px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: white;
-            border-bottom: 1px solid #eaeaea;
+            background: rgba(255, 255, 255, 0.94);
             position: sticky;
             top: 0;
             z-index: 100;
         }
 
-        .nav-logo { font-weight: 800; font-size: 1.2rem; text-decoration: none; color: #1a1a1a; }
-        .nav-links a { text-decoration: none; color: #666; font-weight: 600; margin-left: 25px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        .nav-logo { font-weight: 500; font-size: 0.78rem; text-decoration: none; color: #1a1a1a; text-transform: uppercase; letter-spacing: 0.16em; }
+        .nav-links { display: flex; gap: 28px; }
+        .nav-links a { text-decoration: none; color: #666; font-weight: 500; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.16em; }
         .nav-links a:hover, .nav-links a.active { color: #1a1a1a; }
 
         .container { max-width: 900px; margin: 80px auto; padding: 0 20px; position: relative; z-index: 5; }
 
         header { margin-bottom: 40px; }
-        .hero-tag { text-transform: uppercase; font-weight: 800; font-size: 0.75rem; letter-spacing: 0.1em; color: #bbb; margin-bottom: 10px; display: block; }
-        h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -0.04em; margin: 0; line-height: 1.1; }
+        .hero-tag { text-transform: uppercase; font-weight: 500; font-size: 0.75rem; letter-spacing: 0.1em; color: #bbb; margin-bottom: 10px; display: block; }
+        h1 { font-size: 3.5rem; font-weight: 500; letter-spacing: -0.04em; margin: 0; line-height: 1.1; }
 
         .model-viewer {
             display: grid;
@@ -54,7 +55,7 @@
         }
 
         .model-container { display: flex; flex-direction: column; }
-        .model-container img { width: 100%; height: 240px; object-fit: cover; border-radius: 6px; border: 1px solid #f0f0f0; background: #f5f5f5; }
+        .model-container img { width: 100%; height: 240px; object-fit: contain; border-radius: 6px; border: 1px solid #f0f0f0; background: #f5f5f5; }
         .model-container video { width: 100%; aspect-ratio: 16 / 9; object-fit: contain; border-radius: 6px; border: 1px solid #f0f0f0; background: #f5f5f5; }
 
         .specs-bar {
@@ -77,6 +78,7 @@
 
         .calc-box { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 25px; display: flex; flex-direction: column; }
         .calc-box img { width: 100%; height: auto; border-radius: 4px; margin-bottom: 15px; border: 1px solid #f9f9f9; background: #f5f5f5; }
+        .calc-box video { width: 100%; aspect-ratio: 16 / 9; object-fit: contain; border-radius: 4px; margin-bottom: 15px; border: 1px solid #f9f9f9; background: #f5f5f5; }
         .img-label { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: #aaa; margin-bottom: 8px; display: block; }
 
         .process-section { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; margin-bottom: 60px; }
@@ -139,7 +141,7 @@
     <div class="model-viewer">
         <div class="model-container">
             <span class="img-label">Fixture Assembly</span>
-            <img src="../assets/images/fixture_assembly.jpg" alt="Leak detection fixture assembly" data-fallbacks="fixtureassembly.jpg,integra_fixture.jpg,fixture.jpg">
+            <img src="../assets/images/unit771.jpg" alt="Leak detection fixture assembly">
         </div>
         <div class="model-container">
             <span class="img-label">Sealing Interface</span>
@@ -170,14 +172,22 @@
         </div>
         <div class="calc-box">
             <span class="img-label">Fixture Assembly</span>
-            <img src="../assets/images/fixture_assembly.jpg" alt="Fixture assembly detail" data-fallbacks="fixtureassembly.jpg,integra_fixture.jpg,fixture.jpg">
+            <img src="../assets/images/unit771.jpg" alt="Fixture assembly detail">
         </div>
     </section>
 
     <section class="process-section">
         <div class="calc-box">
-            <span class="img-label">Sealing Interface</span>
-            <img src="../assets/images/sealing_interface.jpg" alt="Sealing interface detail" data-fallbacks="sealinginterface.jpg,seal_interface.jpg,integra_seal.jpg">
+            <span class="img-label">Pneumatic Test</span>
+            <video controls preload="metadata">
+                <source src="../assets/images/air.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <span class="img-label">Vacuum Decay Test</span>
+            <video controls preload="metadata">
+                <source src="../assets/images/vacuum2.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
         </div>
         <div>
             <h2>Structural Validation</h2>
@@ -195,31 +205,15 @@
         <p>Two iterations were completed. The first confirmed the sealing architecture and pressure protocol worked across both regimes. The second rationalized the BOM &mdash; reducing fastener counts, frame members, and sealing interface areas against the validated load cases to minimize material cost while maintaining all structural and sealing margins.</p>
     </section>
 
-    <section>
-        <h2>Validation Media</h2>
-        <div class="media-grid">
-            <div class="model-container">
-                <span class="img-label">Unit 771</span>
-                <img src="../assets/images/unit771.jpg" alt="Integra unit 771 validation sample">
-            </div>
-            <div class="model-container">
-                <span class="img-label">Unit 772</span>
-                <img src="../assets/images/unit772.jpg" alt="Integra unit 772 validation sample">
-            </div>
-            <div class="model-container">
-                <span class="img-label">Air Pressure Test</span>
-                <video controls preload="metadata">
-                    <source src="../assets/images/air.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-            </div>
-            <div class="model-container">
-                <span class="img-label">Vacuum Decay Test</span>
-                <video controls preload="metadata">
-                    <source src="../assets/images/vacuum2.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-            </div>
+    <section class="process-section">
+        <div>
+            <h2>Root Cause</h2>
+            <h3>Leak Location</h3>
+            <p>After the fixture isolated a leak, soapy water was used to locate the failure path directly. Bubbles formed at the leak site, making the issue visible without cutting into the assembly or relying only on pressure gauge behavior.</p>
+            <p>This gave the quality team a simple confirmation step: the pressure and vacuum test identified that a leak existed, and the soapy water check showed where the leak was occurring.</p>
+        </div>
+        <div class="calc-box">
+            <img src="../assets/images/unit772.jpg" alt="Leak root cause inspection">
         </div>
     </section>
 
