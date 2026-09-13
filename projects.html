@@ -40,9 +40,8 @@
         .nav-logo,
         .nav-links a,
         .label,
-        .project-meta,
-        .project-link,
-        .featured-label {
+        .overview-meta,
+        .overview-link {
             font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 0.16em;
@@ -79,10 +78,10 @@
 
         .hero {
             display: grid;
-            grid-template-columns: minmax(0, 1fr) 320px;
-            gap: 64px;
+            grid-template-columns: minmax(0, 1fr) 340px;
+            gap: 72px;
             align-items: end;
-            margin-bottom: 96px;
+            margin-bottom: 88px;
         }
 
         .label {
@@ -95,10 +94,10 @@
         h1 {
             max-width: 860px;
             margin: 0;
-            font-size: clamp(3rem, 7vw, 5rem);
+            font-size: clamp(3.6rem, 8vw, 7.5rem);
             font-weight: 500;
-            letter-spacing: -0.07em;
-            line-height: 0.9;
+            letter-spacing: -0.08em;
+            line-height: 0.88;
         }
 
         .hero p {
@@ -108,148 +107,88 @@
             line-height: 1.8;
         }
 
-        .section {
-            margin-top: 110px;
-        }
-
-        .section-title {
+        .overview-grid {
             display: grid;
-            grid-template-columns: auto 1fr;
-            gap: 24px;
-            align-items: center;
-            margin-bottom: 34px;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 28px;
         }
 
-        .section-title h2 {
-            margin: 0;
-            color: var(--muted);
-            font-size: 0.72rem;
-            font-weight: 500;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-        }
-
-        .section-title::after {
-            content: "";
-            height: 1px;
-            background: var(--line);
-        }
-
-        .featured-project {
-            display: grid;
-            grid-template-columns: minmax(0, 1.05fr) minmax(340px, 0.95fr);
-            gap: 64px;
-            align-items: center;
+        .overview-card {
+            min-height: 315px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 34px;
+            padding: 30px;
+            border: 1px solid var(--line);
+            border-radius: 34px;
             color: inherit;
             text-decoration: none;
+            transition: border-color 0.2s ease, transform 0.2s ease;
         }
 
-        .featured-media,
-        .project-media {
+        .overview-card:hover {
+            border-color: var(--text);
+            transform: translateY(-3px);
+        }
+
+        .overview-logo {
+            width: 92px;
+            height: 92px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            border-top: 1px solid var(--line);
-            padding-top: 18px;
+            justify-content: flex-start;
         }
 
-        .featured-media img,
-        .project-media img {
-            display: block;
-            width: 100%;
-            height: auto;
-            max-height: 320px;
+        .overview-logo img {
+            max-width: 100%;
+            max-height: 100%;
             object-fit: contain;
-            transition: transform 0.2s ease;
+            filter: grayscale(1);
         }
 
-        .featured-project:hover img,
-        .project-card:hover img {
-            transform: translateY(-2px);
-        }
-
-        .featured-label {
-            display: inline-block;
-            margin-bottom: 18px;
-            color: var(--accent);
-            font-size: 0.68rem;
-        }
-
-        h2,
-        h3 {
-            margin: 0;
-            font-weight: 500;
-            letter-spacing: -0.04em;
-            line-height: 1;
-        }
-
-        .featured-project h2 {
-            max-width: 520px;
-            font-size: clamp(2.2rem, 4vw, 3.4rem);
-        }
-
-        .featured-project p,
-        .project-card p {
-            margin: 22px 0 0;
-            color: var(--muted);
-            font-size: 1rem;
-            line-height: 1.8;
-        }
-
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 64px 56px;
-        }
-
-        .project-card {
-            display: grid;
-            grid-template-columns: minmax(0, 1fr) 150px;
-            gap: 28px;
-            align-items: start;
-            min-height: 220px;
-            padding-top: 30px;
-            border-top: 1px solid var(--line);
-            color: inherit;
-            text-decoration: none;
-        }
-
-        .project-media {
-            border-top: 0;
-            padding-top: 0;
-        }
-
-        .project-media img {
-            max-height: 160px;
-        }
-
-        .project-meta {
+        .overview-meta {
             display: block;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
             color: var(--muted);
-            font-size: 0.66rem;
+            font-size: 0.62rem;
+            line-height: 1.7;
         }
 
-        .project-card h3 {
-            font-size: clamp(1.45rem, 2.3vw, 2rem);
+        .overview-card h2 {
+            margin: 0;
+            font-size: clamp(1.8rem, 3vw, 2.65rem);
+            font-weight: 500;
+            letter-spacing: -0.055em;
+            line-height: 0.98;
         }
 
-        .project-link {
+        .overview-card p {
+            max-width: 290px;
+            margin: 18px 0 0;
+            color: var(--muted);
+            font-size: 0.96rem;
+            line-height: 1.7;
+        }
+
+        .overview-link {
             display: inline-block;
-            margin-top: 26px;
+            margin-top: 30px;
             color: var(--text);
             font-size: 0.68rem;
-            text-decoration: none;
         }
 
-        .featured-project:hover h2,
-        .project-card:hover h3,
-        .featured-project:hover .project-link,
-        .project-card:hover .project-link {
+        .overview-card:first-child .overview-link {
             color: var(--accent);
         }
 
-        @media (max-width: 860px) {
+        @media (max-width: 980px) {
+            .overview-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 760px) {
             nav {
                 align-items: flex-start;
                 flex-direction: column;
@@ -268,31 +207,18 @@
             }
 
             .hero,
-            .featured-project,
-            .project-grid,
-            .project-card {
+            .overview-grid {
                 grid-template-columns: 1fr;
             }
 
             .hero {
-                gap: 32px;
-                margin-bottom: 72px;
+                gap: 30px;
+                margin-bottom: 64px;
             }
 
-            .section {
-                margin-top: 82px;
-            }
-
-            .project-card {
-                min-height: auto;
-            }
-
-            .project-media {
-                justify-content: flex-start;
-            }
-
-            .project-media img {
-                max-width: 260px;
+            .overview-card {
+                min-height: 280px;
+                border-radius: 28px;
             }
         }
     </style>
@@ -312,157 +238,73 @@
     <main>
         <section class="hero">
             <div>
-                <span class="label">Selected Work</span>
+                <span class="label">Project Groups</span>
                 <h1>Projects</h1>
             </div>
-            <p>Engineering work across structures, validation, thermal systems, robotics, and energy modeling.</p>
+            <p>Six focused sections for the engineering work, internships, teams, and class projects that make up this portfolio.</p>
         </section>
 
-        <section class="section">
-            <div class="section-title"><h2>Featured</h2></div>
-            <a href="projects/hytec.html" class="featured-project">
-                <div class="featured-media">
-                    <img src="assets/images/hytec2.png" alt="Hydrogen Release System">
-                </div>
+        <section class="overview-grid" aria-label="Project overview sections">
+            <a href="overviews/spacex.html" class="overview-card">
+                <div class="overview-logo"><img src="assets/images/spacexlogo.png" alt="SpaceX logo"></div>
                 <div>
-                    <span class="featured-label">CEM / ExxonMobil</span>
-                    <h2>Hydrogen Release System</h2>
-                    <p>Designed and helped integrate a 30-foot hydrogen release structure.</p>
-                    <span class="project-link">View Project</span>
+                    <span class="overview-meta">Aug 2026 - Dec 2026</span>
+                    <h2>SpaceX</h2>
+                    <p>Booster prop systems and ground support equipment work.</p>
+                    <span class="overview-link">Open Section</span>
+                </div>
+            </a>
+
+            <a href="overviews/integraoverview.html" class="overview-card">
+                <div class="overview-logo"><img src="assets/images/integralogo.png" alt="Integra Technologies logo"></div>
+                <div>
+                    <span class="overview-meta">May 2026 - Aug 2026</span>
+                    <h2>Integra</h2>
+                    <p>Mechanical design and validation from a product engineering internship.</p>
+                    <span class="overview-link">Open Section</span>
+                </div>
+            </a>
+
+            <a href="overviews/cem.html" class="overview-card">
+                <div class="overview-logo"><img src="assets/images/hytec2.png" alt="CEM project image"></div>
+                <div>
+                    <span class="overview-meta">May 2025 - May 2026</span>
+                    <h2>CEM</h2>
+                    <p>Center for Electromechanics research and industry-facing hardware.</p>
+                    <span class="overview-link">Open Section</span>
+                </div>
+            </a>
+
+            <a href="overviews/TMR.html" class="overview-card">
+                <div class="overview-logo"><img src="assets/images/TMR.png" alt="Texas Marine Robotics logo"></div>
+                <div>
+                    <span class="overview-meta">June 2025 - Present</span>
+                    <h2>Texas Marine Robotics</h2>
+                    <p>Mechanical systems, ASV validation, and thermal work.</p>
+                    <span class="overview-link">Open Section</span>
+                </div>
+            </a>
+
+            <a href="overviews/LBR.html" class="overview-card">
+                <div class="overview-logo"><img src="assets/images/bajalogo.png" alt="Longhorn Baja Racing logo"></div>
+                <div>
+                    <span class="overview-meta">March 2026 - Present</span>
+                    <h2>Longhorn Baja Racing</h2>
+                    <p>Simulation, validation, and R&amp;D for off-road vehicle systems.</p>
+                    <span class="overview-link">Open Section</span>
+                </div>
+            </a>
+
+            <a href="overviews/MISC.html" class="overview-card">
+                <div class="overview-logo"><img src="assets/images/systemslspace.png" alt="Personal and class project image"></div>
+                <div>
+                    <span class="overview-meta">Coursework + independent builds</span>
+                    <h2>Personal + Classes</h2>
+                    <p>Selected modeling, controls, materials, and energy projects.</p>
+                    <span class="overview-link">Open Section</span>
                 </div>
             </a>
         </section>
-
-        <section class="section">
-            <div class="section-title"><h2>Build / Validate</h2></div>
-            <div class="project-grid">
-                <a href="projects/integra.html" class="project-card">
-                    <div>
-                        <span class="project-meta">Integra Internship</span>
-                        <h3>Leak Detection System</h3>
-                        <p>Pneumatic and vacuum decay fixture for coolant line assembly validation.</p>
-                        <span class="project-link">View Project</span>
-                    </div>
-                    <div class="project-media"><img src="assets/images/integra_front.jpg" alt="Integra leak detection fixture"></div>
-                </a>
-
-                <a href="projects/phonealarm.html" class="project-card">
-                    <div>
-                        <span class="project-meta">Arduino / Controls</span>
-                        <h3>Phone Alarm</h3>
-                        <p>A physical phone stand and ultrasonic detector built to reduce screen time.</p>
-                        <span class="project-link">View Project</span>
-                    </div>
-                    <div class="project-media"><img src="assets/images/arduino1.jpg" alt="Arduino phone alarm project"></div>
-                </a>
-
-                <a href="projects/systems_tmr.html" class="project-card">
-                    <div>
-                        <span class="project-meta">Texas Marine Robotics</span>
-                        <h3>ASV Operational Validation</h3>
-                        <p>Thermal work, hull testing, and field validation.</p>
-                        <span class="project-link">View Project</span>
-                    </div>
-                    <div class="project-media"><img src="assets/images/uttower.png" alt="ASV Validation"></div>
-                </a>
-
-                <a href="projects/sv.html" class="project-card">
-                    <div>
-                        <span class="project-meta">Longhorn Baja Racing</span>
-                        <h3>Simulation &amp; Validation</h3>
-                        <p>FEA, hand calculations, and test planning for Baja parts.</p>
-                        <span class="project-link">View Project</span>
-                    </div>
-                    <div class="project-media"><img src="assets/images/spline.png" alt="Simulation and Validation"></div>
-                </a>
-
-                <a href="projects/tmr_baseplate.html" class="project-card">
-                    <div>
-                        <span class="project-meta">Texas Marine Robotics</span>
-                        <h3>Acrylic Sensor Mount</h3>
-                        <p>Fatigue and FEA work for an ASV sensor plate.</p>
-                        <span class="project-link">View Project</span>
-                    </div>
-                    <div class="project-media"><img src="assets/images/fea_tmr.png" alt="Acrylic Fatigue Analysis"></div>
-                </a>
-
-                <a href="projects/failureanalysis.html" class="project-card">
-                    <div>
-                        <span class="project-meta">Materials</span>
-                        <h3>Metallurgical Failure Analysis</h3>
-                        <p>A closer look at failed parts and root cause.</p>
-                        <span class="project-link">View Project</span>
-                    </div>
-                    <div class="project-media"><img src="assets/images/eye_mag.png" alt="Failure Analysis"></div>
-                </a>
-            </div>
-        </section>
-
-        <section class="section">
-            <div class="section-title"><h2>Model / Research</h2></div>
-            <div class="project-grid">
-                <a href="projects/rd.html" class="project-card">
-                    <div>
-                        <span class="project-meta">Longhorn Baja Racing</span>
-                        <h3>Research &amp; Design</h3>
-                        <p>Team research, subsystem planning, and design reviews.</p>
-                        <span class="project-link">View Project</span>
-                    </div>
-                    <div class="project-media"><img src="assets/images/system_lbr.png" alt="R&D Lead"></div>
-                </a>
-
-                <a href="projects/lspace.html" class="project-card">
-                    <div>
-                        <span class="project-meta">NASA L'SPACE</span>
-                        <h3>Mars Rover Thermal Control</h3>
-                        <p>Thermal concept work for a rover mission study.</p>
-                        <span class="project-link">View Project</span>
-                    </div>
-                    <div class="project-media"><img src="assets/images/systemslspace.png" alt="Mars Rover"></div>
-                </a>
-
-                <a href="projects/mcp.html" class="project-card">
-                    <div>
-                        <span class="project-meta">Energy</span>
-                        <h3>H<sub>2</sub> Mixing in Gas Turbines</h3>
-                        <p>Cost and energy tradeoffs for hydrogen blending.</p>
-                        <span class="project-link">View Project</span>
-                    </div>
-                    <div class="project-media"><img src="assets/images/mcp1.png" alt="Hydrogen Mixing in Natural Gas Turbines"></div>
-                </a>
-
-                <a href="projects/ret.html" class="project-card">
-                    <div>
-                        <span class="project-meta">Energy</span>
-                        <h3>Palmer Event Center Model</h3>
-                        <p>Solar and energy harvest modeling.</p>
-                        <span class="project-link">View Project</span>
-                    </div>
-                    <div class="project-media"><img src="assets/images/pec.png" alt="Renewable Energy Technology"></div>
-                </a>
-
-                <a href="projects/coastingprofile.html" class="project-card">
-                    <div>
-                        <span class="project-meta">Dynamics</span>
-                        <h3>Coasting Profile</h3>
-                        <p>A Simulink model for drivetrain losses.</p>
-                        <span class="project-link">View Project</span>
-                    </div>
-                    <div class="project-media"><img src="assets/images/acc1.png" alt="Simulink Model of Coasting Dynamics"></div>
-                </a>
-
-                <a href="projects/shroud_pid.html" class="project-card">
-                    <div>
-                        <span class="project-meta">Controls</span>
-                        <h3>PID Cooling Shroud</h3>
-                        <p>A small thermal control project with printed hardware.</p>
-                        <span class="project-link">View Project</span>
-                    </div>
-                    <div class="project-media"><img src="assets/images/shroud_2_cut_solidworks.png" alt="PID Shroud"></div>
-                </a>
-            </div>
-        </section>
-
     </main>
 </body>
 </html>
