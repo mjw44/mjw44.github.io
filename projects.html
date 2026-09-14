@@ -144,7 +144,11 @@
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
-            filter: grayscale(1);
+            border-radius: 18px;
+        }
+
+        .overview-logo img.logo-clean {
+            border-radius: 0;
         }
 
         .overview-meta {
@@ -239,38 +243,38 @@
         <section class="hero">
             <div>
                 <span class="label">Project Groups</span>
-                <h1>Projects</h1>
+                <h1>Work I&rsquo;ve done</h1>
             </div>
             <p>Six focused sections for the engineering work, internships, teams, and class projects that make up this portfolio.</p>
         </section>
 
         <section class="overview-grid" aria-label="Project overview sections">
             <a href="overviews/spacex.html" class="overview-card">
-                <div class="overview-logo"><img src="assets/images/spacexlogo.png" alt="SpaceX logo"></div>
+                <div class="overview-logo"><img src="assets/images/spacexlogo.png" class="logo-clean" alt="SpaceX logo"></div>
                 <div>
                     <span class="overview-meta">Aug 2026 - Dec 2026</span>
                     <h2>SpaceX</h2>
-                    <p>Booster prop systems and ground support equipment work.</p>
+                    <p>Booster Hardware</p>
                     <span class="overview-link">Open Section</span>
                 </div>
             </a>
 
             <a href="overviews/integraoverview.html" class="overview-card">
-                <div class="overview-logo"><img src="assets/images/integralogo.png" alt="Integra Technologies logo"></div>
+                <div class="overview-logo"><img src="assets/images/integralogo.png" class="logo-clean" alt="Integra logo"></div>
                 <div>
                     <span class="overview-meta">May 2026 - Aug 2026</span>
                     <h2>Integra</h2>
-                    <p>Mechanical design and validation from a product engineering internship.</p>
+                    <p>Test Fixtures</p>
                     <span class="overview-link">Open Section</span>
                 </div>
             </a>
 
             <a href="overviews/cem.html" class="overview-card">
-                <div class="overview-logo"><img src="assets/images/hytec2.png" alt="CEM project image"></div>
+                <div class="overview-logo"><img src="assets/images/cemlogo.png" alt="CEM logo"></div>
                 <div>
                     <span class="overview-meta">May 2025 - May 2026</span>
                     <h2>CEM</h2>
-                    <p>Center for Electromechanics research and industry-facing hardware.</p>
+                    <p>Structures and System Integration</p>
                     <span class="overview-link">Open Section</span>
                 </div>
             </a>
@@ -290,7 +294,7 @@
                 <div>
                     <span class="overview-meta">March 2026 - Present</span>
                     <h2>Longhorn Baja Racing</h2>
-                    <p>Simulation, validation, and R&amp;D for off-road vehicle systems.</p>
+                    <p>Simulation, validation, testing, and trade studies.</p>
                     <span class="overview-link">Open Section</span>
                 </div>
             </a>
@@ -300,11 +304,7 @@
                 <div>
                     <span class="overview-meta">Coursework + independent builds</span>
                     <h2>Personal + Classes</h2>
-                    <p>Selected modeling, controls, materials, and energy projects.</p>
+                    <p>Thermals, Controls, Materials, and Energy.</p>
                     <span class="overview-link">Open Section</span>
                 </div>
             </a>
-        </section>
-    </main>
-</body>
-</html>
